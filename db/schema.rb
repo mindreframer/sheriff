@@ -18,8 +18,7 @@ ActiveRecord::Schema.define(:version => 20100527100331) do
     t.datetime "updated_at"
   end
 
-  add_index "groups", ["group_id"], :name => "index_groups_on_group_id"
-  add_index "groups", ["name"], :name => "index_groups_on_name", :unique => true
+  add_index "groups", ["group_id", "name"], :name => "index_groups_on_group_id_and_name", :unique => true
 
   create_table "reporters", :force => true do |t|
     t.string   "name",       :null => false

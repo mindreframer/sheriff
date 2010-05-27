@@ -5,8 +5,7 @@ class AddBaseModels < ActiveRecord::Migration
       t.integer :group_id
       t.timestamps
     end
-    add_index :groups, :name, :unique => true
-    add_index :groups, :group_id
+    add_index :groups, [:group_id, :name], :unique => true
 
     create_table :reports do |t|
       t.integer :group_id, :reporter_id, :null => false
@@ -26,5 +25,8 @@ class AddBaseModels < ActiveRecord::Migration
   end
 
   def self.down
+    drop_table :groups
+    drop_table :reports
+    drop_table :reporters
   end
 end
