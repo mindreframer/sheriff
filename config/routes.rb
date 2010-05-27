@@ -1,4 +1,11 @@
-Sheriff::Application.routes.draw do |map|
+Sheriff::Application.routes.draw do
+  match '/', :to => redirect('/groups')
+
+  resources :groups
+  resources :reports
+
+  match "report/:level1|:level2|:level3/:value", :to => "reports#create"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

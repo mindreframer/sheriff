@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+env = if File.exist?('env')
+  File.read('env').strip
+else
+  'development'
+end
+
+exec "./script/rails c #{ARGV[0] || env}"

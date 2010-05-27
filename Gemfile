@@ -4,6 +4,7 @@ gem 'rails', '3.0.0.beta3'
 gem 'mysql'
 
 group :test do
-  gem "rspec-rails", ">= 2.0.0.beta.8"
-  gem "factory_girl", ">= 1.2.4"
+  gem 'factory_girl', :git => 'git://github.com/thoughtbot/factory_girl.git', :branch => 'rails3'
+  gem 'rspec', '2.0.0.beta.8'
+  gem 'rspec-rails', '2.0.0.beta.8'
 end
