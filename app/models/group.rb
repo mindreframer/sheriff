@@ -6,4 +6,8 @@ class Group < ActiveRecord::Base
   def self.find_or_create_for_level1(name)
     find_or_create_by_name_and_group_id(name, nil)
   end
+
+  def find_or_create_child(name)
+    self.class.find_or_create_by_name_and_group_id(name, id)
+  end
 end
