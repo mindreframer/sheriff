@@ -1,0 +1,17 @@
+development:
+  adapter: mysql
+  database: sheriff_development
+  pool: 5
+  timeout: 5000
+
+test:
+  adapter: mysql
+  database: sheriff_test
+  pool: 5
+  timeout: 5000
+
+production:
+  adapter: mysql
+  database: sheriff_production
+  pool: 5
+  timeout: 5000
