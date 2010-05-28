@@ -1,4 +1,8 @@
 class Reporter < ActiveRecord::Base
   has_many :reports
   validates_uniqueness_of :name, :address
+
+  def self.find_or_create_by_address_or_name(address, name)
+    first(:conditions => ["address = ? OR name = ?", address, name]) || create!(:address => address, :name => name)
+  end
 end

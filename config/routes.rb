@@ -4,7 +4,7 @@ Sheriff::Application.routes.draw do
   resources :groups
   resources :reports
 
-  match "report/:level1|:level2|:level3/:value", :to => "reports#create"
+  match "report/:level1/:level2(/:level3)/:value", :to => "reports#create"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

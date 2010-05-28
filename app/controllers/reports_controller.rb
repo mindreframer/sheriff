@@ -1,9 +1,6 @@
 class ReportsController < RestController
   def create
-    group = Group.find_or_create_for_level1(params[:level1])
-    group = group.find_or_create_child(params[:level2])
-    group = group.find_or_create_child(params[:level3])
-    
+    Report.report!(params[:value], [params[:level1], params[:level2]], :address => request.ip, :name => request.remote_host)
     render :text => 'OK'
   end
 end
