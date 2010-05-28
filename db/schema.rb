@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100527100331) do
+ActiveRecord::Schema.define(:version => 20100528120238) do
 
   create_table "groups", :force => true do |t|
     t.string   "name",       :null => false
@@ -31,12 +31,13 @@ ActiveRecord::Schema.define(:version => 20100527100331) do
   add_index "reporters", ["name"], :name => "index_reporters_on_name", :unique => true
 
   create_table "reports", :force => true do |t|
-    t.integer  "group_id",    :null => false
-    t.integer  "reporter_id", :null => false
-    t.string   "value",       :null => false
+    t.integer  "group_id",                          :null => false
+    t.integer  "reporter_id",                       :null => false
+    t.string   "value",                             :null => false
     t.string   "config"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "reporting_interval", :default => 0, :null => false
   end
 
   add_index "reports", ["group_id", "reporter_id"], :name => "index_reports_on_group_id_and_reporter_id", :unique => true

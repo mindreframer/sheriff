@@ -8,6 +8,15 @@ class Report < ActiveRecord::Base
     "#{group.full_name} - #{reporter.full_name}"
   end
 
+  def reporting_value
+    reporting_interval / reporting_unit
+  end
+
+  def reporting_unit
+    return 1.day if reporting_interval == 0
+    [1.day, 1.hour, 1.minute, 1.second].detect{|unit| reporting_interval.to_f % unit == 0 }
+  end
+
   def self.report!(value, groups, options={})
     raise if groups.size != 2
     group = Group.find_or_create_for_level1(groups.first)
