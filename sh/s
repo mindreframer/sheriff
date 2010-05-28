@@ -1,2 +1,2 @@
 #!/usr/bin/env ruby
-exec "bundle exec rspec #{ARGV * ' '}"
+exec "bundle exec rspec #{(ARGV.empty? ? ['spec'] : ARGV) * ' '}"
