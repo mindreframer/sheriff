@@ -1,6 +1,7 @@
 class Report < ActiveRecord::Base
   belongs_to :group
   belongs_to :reporter
+
   validates_uniqueness_of :group_id, :scope => :reporter_id
 
   def self.report!(value, groups, options={})

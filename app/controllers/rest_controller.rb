@@ -1,6 +1,6 @@
 class RestController < ApplicationController
   make_resourceful do
-    actions :all
+    actions :show, :edit, :update, :index, :create, :destroy
 
     #fixed "No item found" bug, http://groups.google.com/group/make_resourceful/browse_thread/thread/053e65eaf72d2cf2#
     response_for :show_fails do

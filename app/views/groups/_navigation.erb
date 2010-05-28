@@ -1,0 +1,15 @@
+<h1>Groups</h1>
+<ul>
+  <% Group.level1.each do |group| %>
+    <li>
+      <%= group.name %>
+      <ul>
+        <% group.children.each do |child| %>
+          <li>
+            <%= link_to child.name, child, :class => (child == @group ? 'bold' : '') %>
+          </li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+</ul>

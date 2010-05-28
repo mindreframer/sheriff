@@ -1,0 +1,16 @@
+<% form_tag '/reports' do %>
+  Group: <%= text_field_tag :level1, '' %>/<%= text_field_tag :level2, '' %>
+  Value: <%= text_field_tag :value, '' %>
+  <%= submit_tag 'report' %>
+<% end %>
+
+<table>
+  <% @reports.each do |report| %>
+    <tr>
+      <td><%= link_to_object report.group %></td>
+      <td><%= link_to_object report.reporter %></td>
+      <td><%= report.value %></td>
+      <td><%= report.updated_at.to_s(:db) %></td>
+    </tr>
+  <% end %>
+</table>
