@@ -3,6 +3,10 @@ module LinkHelper
     link_to name_for_object(object), object, options
   end
 
+  def link_to_edit(object, options={})
+    link_to 'edit', edit_polymorphic_path(object), options
+  end
+
   def name_for_object(object)
     case object
     when Group then object.full_name

@@ -4,6 +4,10 @@ class Report < ActiveRecord::Base
 
   validates_uniqueness_of :group_id, :scope => :reporter_id
 
+  def full_name
+    "#{group.full_name} - #{reporter.full_name}"
+  end
+
   def self.report!(value, groups, options={})
     raise if groups.size != 2
     group = Group.find_or_create_for_level1(groups.first)

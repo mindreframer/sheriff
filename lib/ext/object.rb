@@ -10,9 +10,3 @@ class Object
   end
   alias_method_chain :raise, :helpfulness
 end
-
-class Object
-  def blank_to_nil
-    blank? ? nil : self
-  end
-end

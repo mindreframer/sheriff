@@ -1,0 +1,9 @@
+<% content_for :content do %>
+  <div class=sidebar>
+    <%= render :partial => 'groups/navigation' %>
+  </div>
+  <div class=main>
+    <%= yield(:group_sidebar_content).presence || yield %>
+  </div>
+<% end %>
+<%= render :file => 'layouts/application' %>
