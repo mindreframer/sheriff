@@ -73,4 +73,18 @@ describe ValueValidation do
       end
     end
   end
+
+  describe :value_as_text do
+    [
+    [1, "1"], ["1", '"1"'], [[1], "[1]"], [1..3, "1..3"], [/1/, "/1/"]
+    ].each do |ruby, string|
+      it "shows #{ruby.class}" do
+        ValueValidation.new(:value => ruby).value_as_text.should == string
+      end
+
+      it "converts #{ruby.class}" do
+        ValueValidation.new(:value_as_text => string).value.should == ruby
+      end
+    end
+  end
 end
