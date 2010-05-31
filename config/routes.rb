@@ -1,6 +1,7 @@
 Sheriff::Application.routes.draw do
-  match '/', :to => redirect('/groups')
+  match '/', :to => redirect('/alerts')
 
+  resources :alerts
   resources :groups
   resources :reports
   resources :reporters

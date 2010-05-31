@@ -31,6 +31,10 @@ class RunEveryValidation < ActiveRecord::Base
     end
   end
 
+  def self.check_all!
+    all.each(&:check!)
+  end
+
   # 1 minutes ... 5% of interval ... 30.minutes
   def buffer
     [[1.minute, interval/20].max, 30.minutes].min

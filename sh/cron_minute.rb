@@ -1,3 +1,3 @@
 #!/usr/bin/env ruby
 require 'config/environment'
-puts Time.now
+RunEveryValidation.check_all!

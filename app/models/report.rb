@@ -31,6 +31,8 @@ class Report < ActiveRecord::Base
       create!(:value => value, :group => group, :reporter => reporter, :reported_at => Time.now)
     end
 
+    report.validations.each(&:check!)
+
     report
   end
 end
