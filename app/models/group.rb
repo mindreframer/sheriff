@@ -1,7 +1,7 @@
 class Group < ActiveRecord::Base
   belongs_to :group
-  has_many :children, :class_name => 'Group', :order => 'name asc'
-  has_many :reports
+  has_many :children, :class_name => 'Group', :order => 'name asc', :dependent => :destroy
+  has_many :reports, :dependent => :destroy
 
   validates_uniqueness_of :name, :scope => :group_id
 

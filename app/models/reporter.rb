@@ -1,5 +1,5 @@
 class Reporter < ActiveRecord::Base
-  has_many :reports
+  has_many :reports, :dependent => :destroy
   validates_uniqueness_of :name, :address
 
   def full_name

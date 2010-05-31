@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100531091519) do
+ActiveRecord::Schema.define(:version => 20100531095552) do
 
   create_table "alerts", :force => true do |t|
     t.integer  "severity",        :null => false
@@ -29,6 +29,14 @@ ActiveRecord::Schema.define(:version => 20100531091519) do
   end
 
   add_index "groups", ["group_id", "name"], :name => "index_groups_on_group_id_and_name", :unique => true
+
+  create_table "historic_values", :force => true do |t|
+    t.integer  "report_id",   :null => false
+    t.string   "value",       :null => false
+    t.datetime "reported_at", :null => false
+  end
+
+  add_index "historic_values", ["report_id"], :name => "index_historic_values_on_report_id"
 
   create_table "reporters", :force => true do |t|
     t.string   "name",       :null => false
