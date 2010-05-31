@@ -13,13 +13,13 @@ class ReportsController < RestController
   def add_or_remove_validations
     Report::NESTED_VALIDATIONS.each do |validation_name|
       next unless params[:report][validation_name]
-      validation = current_object.send(validation_name)
+      validation = resource.send(validation_name)
       
       if params[:report][validation_name].delete(:active)
         if validation
           validation.attributes = params[:report][validation_name]
         else
-          current_object.send("build_#{validation_name}", params[:report][validation_name])
+          resource.send("build_#{validation_name}", params[:report][validation_name])
         end
       else
         validation.try(:destroy)
@@ -37,7 +37,7 @@ class ReportsController < RestController
     validation.delete :interval_unit
   end
 
-  def current_objects
-    @reports ||= Report.paginate(:page => params[:page], :per_page => 50, :include => [{:group => :group}, :reporter])
+  def collection
+    @collection ||= Report.paginate(:page => params[:page], :per_page => 50, :include => [{:group => :group}, :reporter])
   end
 end

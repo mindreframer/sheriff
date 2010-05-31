@@ -4,12 +4,14 @@ class Report < ActiveRecord::Base
 
   has_many :historic_values, :dependent => :destroy, :order => 'reported_at desc'
   
-  has_many :validations
-
   NESTED_VALIDATIONS = [:run_every_validation, :run_between_validation, :value_validation]
-
   NESTED_VALIDATIONS.each{|v| has_one v}
   accepts_nested_attributes_for *NESTED_VALIDATIONS
+
+  # TODO STI?
+  def validations
+    NESTED_VALIDATIONS.map{|x| send(x)}.compact
+  end
 
   validates_uniqueness_of :group_id, :scope => :reporter_id
 
@@ -28,7 +30,7 @@ class Report < ActiveRecord::Base
       report.historic_values.create!(:value => report.value, :reported_at => report.reported_at)
       report.update_attributes!(:value => value, :reported_at => Time.now)
     else
-      create!(:value => value, :group => group, :reporter => reporter, :reported_at => Time.now)
+      report = create!(:value => value, :group => group, :reporter => reporter, :reported_at => Time.now)
     end
 
     report.validations.each(&:check!)

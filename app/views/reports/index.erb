@@ -5,7 +5,7 @@
 <% end %>
 
 <table>
-  <% @reports.each do |report| %>
+  <% collection.each do |report| %>
     <tr>
       <td><%= link_to_object report.group %></td>
       <td><%= link_to_object report.reporter %></td>

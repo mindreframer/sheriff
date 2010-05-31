@@ -1,18 +1,14 @@
 class RestController < ApplicationController
-  make_resourceful do
-    actions :show, :edit, :update, :index, :create, :destroy
+  inherit_resources
+  include InheritedResources::DSL
 
-    response_for :show, :new do
-      render :action=>:edit
-    end
-
-    #fixed "No item found" bug, http://groups.google.com/group/make_resourceful/browse_thread/thread/053e65eaf72d2cf2#
-    response_for :show_fails do
-      raise $!
-    end
+  show! do |success|
+    success.html{render :action=>:edit}
   end
 
-  def current_objects
-    @current_objects = current_model.paginate(:per_page => 20, :page => params[:page])
+  protected
+
+  def collection
+    @collection ||= resource_class.paginate(:per_page => 20, :page => params[:page])
   end
 end
