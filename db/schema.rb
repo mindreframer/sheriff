@@ -9,13 +9,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100528122837) do
+ActiveRecord::Schema.define(:version => 20100531091519) do
 
   create_table "alerts", :force => true do |t|
-    t.integer "severity",        :null => false
-    t.string  "message",         :null => false
-    t.integer "validation_id",   :null => false
-    t.string  "validation_type", :null => false
+    t.integer  "severity",        :null => false
+    t.string   "message",         :null => false
+    t.integer  "validation_id",   :null => false
+    t.string   "validation_type", :null => false
+    t.integer  "report_id",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "groups", :force => true do |t|
@@ -44,25 +47,35 @@ ActiveRecord::Schema.define(:version => 20100528122837) do
     t.string   "config"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "reported_at", :null => false
   end
 
   add_index "reports", ["group_id", "reporter_id"], :name => "index_reports_on_group_id_and_reporter_id", :unique => true
   add_index "reports", ["reporter_id"], :name => "index_reports_on_reporter_id"
 
   create_table "run_between_validations", :force => true do |t|
-    t.integer "start_seconds", :null => false
-    t.integer "end_seconds",   :null => false
-    t.integer "severity",      :null => false
+    t.integer  "start_seconds", :null => false
+    t.integer  "end_seconds",   :null => false
+    t.integer  "severity",      :null => false
+    t.integer  "report_id",     :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "run_every_validations", :force => true do |t|
-    t.integer "interval", :null => false
-    t.integer "severity", :null => false
+    t.integer  "interval",   :null => false
+    t.integer  "severity",   :null => false
+    t.integer  "report_id",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "value_validations", :force => true do |t|
-    t.string  "value",    :null => false
-    t.integer "severity", :null => false
+    t.string   "value",      :null => false
+    t.integer  "severity",   :null => false
+    t.integer  "report_id",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

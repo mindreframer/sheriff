@@ -18,7 +18,9 @@ describe Report do
       lambda{
         Report.report!('12', [group.group.name, group.name], :address => reporter.address, :name => 'something')
       }.should change(Report, :count).by(+1)
-      Report.last.value.should == '12'
+      report = Report.last
+      report.value.should == '12'
+      report.reported_at.should be_close(Time.current, 3)
     end
 
     it "creates a reporter if none exists" do

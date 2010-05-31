@@ -25,9 +25,9 @@ class Report < ActiveRecord::Base
     reporter = Reporter.find_or_create_by_address_or_name(options[:address], options[:name])
 
     if report = first(:conditions => {:group_id => group.id, :reporter_id => reporter.id})
-      report.update_attributes!(:value => value)
+      report.update_attributes!(:value => value, :reported_at => Time.now)
     else
-      create!(:value => value, :group => group, :reporter => reporter)
+      create!(:value => value, :group => group, :reporter => reporter, :reported_at => Time.now)
     end
   end
 end
