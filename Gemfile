@@ -6,6 +6,6 @@ gem "will_paginate", :git => "http://github.com/mislav/will_paginate.git", :bran
 
 group :test do
   gem 'factory_girl', :git => 'git://github.com/thoughtbot/factory_girl.git', :branch => 'rails3'
-  gem 'rspec', '2.0.0.beta.8'
-  gem 'rspec-rails', '2.0.0.beta.8'
+  gem 'rspec', '2.0.0.beta.9'
+  gem 'rspec-rails', '2.0.0.beta.9.1'
 end

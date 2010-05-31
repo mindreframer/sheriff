@@ -2,7 +2,7 @@ class RunBetweenValidation < ActiveRecord::Base
   belongs_to :report
 
   def start_hms
-    start_seconds.to_hms
+    start_seconds.try(:to_hms)
   end
 
   def start_hms=(x)
@@ -10,7 +10,7 @@ class RunBetweenValidation < ActiveRecord::Base
   end
 
   def end_hms
-    end_seconds.to_hms
+    end_seconds.try(:to_hms)
   end
 
   def end_hms=(x)

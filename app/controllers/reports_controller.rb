@@ -1,6 +1,6 @@
 class ReportsController < RestController
   layout 'group_sidebar'
-  before_filter :convert_reporting_interval, :add_or_remove_validations, :only => :update
+  before_filter :convert_validation_interval, :add_or_remove_validations, :only => :update
 
   def create
     remote_host = request.remote_host.presence || "unknown_host_#{rand(1000000)}"
@@ -11,22 +11,30 @@ class ReportsController < RestController
   private
 
   def add_or_remove_validations
-    Report::NESTED_VALIDATIONS.each do |validation|
-      next unless params[:report][validation]
-      if not params[:report][validation].delete(:active)
-        raise
-        current_object.send(validation).try(:destroy)
+    Report::NESTED_VALIDATIONS.each do |validation_name|
+      next unless params[:report][validation_name]
+      validation = current_object.send(validation_name)
+      
+      if params[:report][validation_name].delete(:active)
+        if validation
+          validation.attributes = params[:report][validation_name]
+        else
+          current_object.send("build_#{validation_name}", params[:report][validation_name])
+        end
+      else
+        validation.try(:destroy)
       end
+      params[:report].delete(validation_name)
     end
   end
 
-  def convert_reporting_interval
-    report = params[:report]
-    if report[:reporting_unit].present?
-      report[:reporting_interval] = report[:reporting_value].to_i * report[:reporting_unit].to_i
+  def convert_validation_interval
+    validation = params[:report][:run_every_validation] || return
+    if validation[:interval_unit].present?
+      validation[:interval] = validation[:interval_value].to_i * validation[:interval_unit].to_i
     end
-    report.delete :reporting_value
-    report.delete :reporting_unit
+    validation.delete :interval_value
+    validation.delete :interval_unit
   end
 
   def current_objects

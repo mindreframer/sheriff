@@ -1,6 +1,6 @@
 module ApplicationHelper
-  def nested_layout(layout, &block)
-    @content_for_layout = capture(&block)
-    concat(render(:file => layout))
+  def check_box_with_label(name, value, checked, label, options={})
+    label_for = options[:id] || name
+    check_box_tag(name, value, checked, options) + label_tag(label_for, label)
   end
 end

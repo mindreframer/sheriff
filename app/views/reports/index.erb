@@ -11,6 +11,7 @@
       <td><%= link_to_object report.reporter %></td>
       <td><%= report.value %></td>
       <td><%= report.updated_at.to_s(:db) %></td>
+      <td><%= link_to_edit report %></td>
     </tr>
   <% end %>
 </table>

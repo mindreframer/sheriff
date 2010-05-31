@@ -5,8 +5,16 @@ class ValueValidation < ActiveRecord::Base
     YAML.load(read_attribute(:value))
   end
 
-  def value=x
+  def value=(x)
     write_attribute(:value, x.to_yaml)
+  end
+
+  def value_as_text
+    value.inspect
+  end
+
+  def value_as_text=(x)
+    self.value = eval(x) # this is evil, but dont tell anyone ok ?
   end
 
   def check!

@@ -22,7 +22,7 @@ end
 Factory.define(:value_validation) do |f|
   f.association :report
   f.severity 1
-  f.value 
+  f.value 22
 end
 
 Factory.define(:run_between_validation) do |f|

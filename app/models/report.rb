@@ -8,7 +8,7 @@ class Report < ActiveRecord::Base
 
   NESTED_VALIDATIONS = [:run_every_validation, :run_between_validation, :value_validation]
 
-  has_one *NESTED_VALIDATIONS
+  NESTED_VALIDATIONS.each{|v| has_one v}
   accepts_nested_attributes_for *NESTED_VALIDATIONS
 
   validates_uniqueness_of :group_id, :scope => :reporter_id
