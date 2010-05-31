@@ -1,6 +1,6 @@
 class ReportsController < RestController
   layout 'group_sidebar'
-  before_filter :convert_reporting_interval, :only => :update
+  before_filter :convert_reporting_interval, :add_or_remove_validations, :only => :update
 
   def create
     remote_host = request.remote_host.presence || "unknown_host_#{rand(1000000)}"
@@ -9,6 +9,16 @@ class ReportsController < RestController
   end
 
   private
+
+  def add_or_remove_validations
+    Report::NESTED_VALIDATIONS.each do |validation|
+      next unless params[:report][validation]
+      if not params[:report][validation].delete(:active)
+        raise
+        current_object.send(validation).try(:destroy)
+      end
+    end
+  end
 
   def convert_reporting_interval
     report = params[:report]

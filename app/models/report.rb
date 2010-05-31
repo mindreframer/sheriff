@@ -3,6 +3,13 @@ class Report < ActiveRecord::Base
   belongs_to :reporter
 
   has_many :historic_values, :dependent => :destroy, :order => 'reported_at desc'
+  
+  has_many :validations
+
+  NESTED_VALIDATIONS = [:run_every_validation, :run_between_validation, :value_validation]
+
+  has_one *NESTED_VALIDATIONS
+  accepts_nested_attributes_for *NESTED_VALIDATIONS
 
   validates_uniqueness_of :group_id, :scope => :reporter_id
 

@@ -1,8 +1,29 @@
 <h1><%= @report.full_name %></h1>
 <% form_for @report do |f| %>
   <table>
-    <%= f.text_field :reporting_value %>
-    <%= f.select :reporting_unit, [['Seconds', 1],['Minutes', 1.minute],['Hours', 1.hour],['Days', 1.day]] %>
+    <tr>
+      <% f.fields_for :run_between_validation do |rf| %>
+        <td><%= rf.check_box_tag :activate %></td>
+        <td>Run between</td>
+        <td><%= rf.start_hms %></td>
+        <td><%= rf.end_hms %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <% f.fields_for :run_every_validation do |rf| %>
+        <td><%= rf.check_box_tag :activate %></td>
+        <td>Run every</td>
+        <td><%= rf.interval_value %></td>
+        <td><%= rf.interval_unit %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <% f.fields_for :value_validation do |rf| %>
+        <td><%= rf.check_box_tag :activate %></td>
+        <td colspan=2>Value matches (String/Array/Range/Regexp)</td>
+        <td><%= rf.value %></td>
+      <% end %>
+    </tr>
     <%= f.submit %>
   </table>
 <% end %>
