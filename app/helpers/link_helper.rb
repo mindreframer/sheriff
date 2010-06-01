@@ -11,6 +11,11 @@ module LinkHelper
     case object
     when Group then object.full_name
     when Deputy then object.full_name
+    when Plugin then object.name
     end
+  end
+
+  def link_to_new
+    link_to 'New', new_resource_path
   end
 end

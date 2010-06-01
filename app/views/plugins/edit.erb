@@ -1,0 +1,15 @@
+<h1><%= @plugin.new_record? ? 'New Plugin' : @plugin.name %></h1>
+<% form_for @plugin do |f| %>
+  <table>
+    <tr>
+      <td>Name</td><td><%= f.text_field :name %></td>
+    </tr>
+    <tr>
+      <td>Url</td><td><%= f.text_field :url, :size => '80' %></td>
+    </tr>
+    <tr>
+      <td>Code</td><td><%= f.text_area :code, :size => '80x30' %></td>
+    </tr>
+  </table>
+  <%= f.submit %>
+<% end %>

@@ -1,0 +1,7 @@
+<%= link_to_new %>
+<table>
+  <% collection.each do |plugin| %>
+    <td><%= link_to_object plugin %></td>
+    <td><%= plugin.created_at.to_s(:db) %></td>
+  <% end %>
+</table>

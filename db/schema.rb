@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100531095552) do
+ActiveRecord::Schema.define(:version => 20100601132844) do
 
   create_table "alerts", :force => true do |t|
     t.integer  "severity",        :null => false
@@ -31,6 +31,13 @@ ActiveRecord::Schema.define(:version => 20100531095552) do
   add_index "deputies", ["address"], :name => "index_deputies_on_address", :unique => true
   add_index "deputies", ["name"], :name => "index_deputies_on_name", :unique => true
 
+  create_table "deputy_plugins", :force => true do |t|
+    t.integer  "plugin_id",  :null => false
+    t.integer  "deputy_id",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "groups", :force => true do |t|
     t.string   "name",       :null => false
     t.integer  "group_id"
@@ -47,6 +54,16 @@ ActiveRecord::Schema.define(:version => 20100531095552) do
   end
 
   add_index "historic_values", ["report_id"], :name => "index_historic_values_on_report_id"
+
+  create_table "plugins", :force => true do |t|
+    t.string   "name",       :null => false
+    t.string   "url"
+    t.text     "code",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "plugins", ["name"], :name => "index_plugins_on_name", :unique => true
 
   create_table "reports", :force => true do |t|
     t.integer  "group_id",    :null => false

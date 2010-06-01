@@ -1,5 +1,8 @@
 class Deputy < ActiveRecord::Base
   has_many :reports, :dependent => :destroy
+  has_many :deputy_plugins, :dependent => :destroy
+  accepts_nested_attributes_for :deputy_plugins
+
   validates_uniqueness_of :name, :address
 
   def full_name
