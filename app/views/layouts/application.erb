@@ -8,7 +8,7 @@
   </head>
   <body>
     <ul>
-      <% [Group, Report, Reporter, Alert].each do |type| %>
+      <% [Group, Report, Deputy, Alert].each do |type| %>
         <li>
           <%= link_to type.to_s.pluralize, type %>
         </li>

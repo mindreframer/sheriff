@@ -8,25 +8,25 @@ class AddBaseModels < ActiveRecord::Migration
     add_index :groups, [:group_id, :name], :unique => true
 
     create_table :reports do |t|
-      t.integer :group_id, :reporter_id, :null => false
+      t.integer :group_id, :deputy_id, :null => false
       t.string :value, :null => false
       t.string :config
       t.timestamps
     end
-    add_index :reports, [:group_id, :reporter_id], :unique => true
-    add_index :reports, :reporter_id
+    add_index :reports, [:group_id, :deputy_id], :unique => true
+    add_index :reports, :deputy_id
 
-    create_table :reporters do |t|
+    create_table :deputies do |t|
       t.string :name, :address, :null => false
       t.timestamps
     end
-    add_index :reporters, :name, :unique => true
-    add_index :reporters, :address, :unique => true
+    add_index :deputies, :name, :unique => true
+    add_index :deputies, :address, :unique => true
   end
 
   def self.down
     drop_table :groups
     drop_table :reports
-    drop_table :reporters
+    drop_table :deputies
   end
 end

@@ -1,1 +1,1 @@
-Reporters report via /report/#{name}/#{value} e.g. `curl myhost/report/Cron.count_users/123`
+Deputies report via /report/#{name}/#{value} e.g. `curl myhost/report/Cron.count_users/123`

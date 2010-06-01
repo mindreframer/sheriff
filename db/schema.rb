@@ -21,6 +21,16 @@ ActiveRecord::Schema.define(:version => 20100531095552) do
     t.datetime "updated_at"
   end
 
+  create_table "deputies", :force => true do |t|
+    t.string   "name",       :null => false
+    t.string   "address",    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "deputies", ["address"], :name => "index_deputies_on_address", :unique => true
+  add_index "deputies", ["name"], :name => "index_deputies_on_name", :unique => true
+
   create_table "groups", :force => true do |t|
     t.string   "name",       :null => false
     t.integer  "group_id"
@@ -38,19 +48,9 @@ ActiveRecord::Schema.define(:version => 20100531095552) do
 
   add_index "historic_values", ["report_id"], :name => "index_historic_values_on_report_id"
 
-  create_table "reporters", :force => true do |t|
-    t.string   "name",       :null => false
-    t.string   "address",    :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "reporters", ["address"], :name => "index_reporters_on_address", :unique => true
-  add_index "reporters", ["name"], :name => "index_reporters_on_name", :unique => true
-
   create_table "reports", :force => true do |t|
     t.integer  "group_id",    :null => false
-    t.integer  "reporter_id", :null => false
+    t.integer  "deputy_id",   :null => false
     t.string   "value",       :null => false
     t.string   "config"
     t.datetime "created_at"
@@ -58,8 +58,8 @@ ActiveRecord::Schema.define(:version => 20100531095552) do
     t.datetime "reported_at", :null => false
   end
 
-  add_index "reports", ["group_id", "reporter_id"], :name => "index_reports_on_group_id_and_reporter_id", :unique => true
-  add_index "reports", ["reporter_id"], :name => "index_reports_on_reporter_id"
+  add_index "reports", ["deputy_id"], :name => "index_reports_on_deputy_id"
+  add_index "reports", ["group_id", "deputy_id"], :name => "index_reports_on_group_id_and_deputy_id", :unique => true
 
   create_table "run_between_validations", :force => true do |t|
     t.integer  "start_seconds", :null => false

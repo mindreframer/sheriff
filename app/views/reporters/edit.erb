@@ -1,6 +1,6 @@
-<h1><%= @reporter.full_name %></h1>
+<h1><%= @deputy.full_name %></h1>
 <table>
-  <% @reporter.reports(:include => :group).each do |report| %>
+  <% @deputy.reports(:include => :group).each do |report| %>
     <tr>
       <td><%= link_to_object report.group %></td>
       <td><%= report.value %></td>

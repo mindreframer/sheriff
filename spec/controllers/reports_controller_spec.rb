@@ -5,7 +5,7 @@ describe ReportsController do
     before do
       Group.delete_all
       Report.delete_all
-      Reporter.delete_all
+      Deputy.delete_all
     end
 
     def get_it
@@ -16,8 +16,8 @@ describe ReportsController do
       lambda{get_it}.should change(Report, :count).by(+1)
     end
 
-    it "creates a reporter if none exists" do
-      lambda{get_it}.should change(Reporter, :count).by(+1)
+    it "creates a deputy if none exists" do
+      lambda{get_it}.should change(Deputy, :count).by(+1)
     end
 
     it "creates groups if none exists" do
@@ -26,8 +26,8 @@ describe ReportsController do
 
     it "collects ip and address" do
       get_it
-      Reporter.last.address.should == '0.0.0.0'
-      Reporter.last.name.should =~ /unknown_host/
+      Deputy.last.address.should == '0.0.0.0'
+      Deputy.last.name.should =~ /unknown_host/
     end
   end
 

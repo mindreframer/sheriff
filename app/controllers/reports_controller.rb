@@ -38,6 +38,6 @@ class ReportsController < RestController
   end
 
   def collection
-    @collection ||= Report.paginate(:page => params[:page], :per_page => 50, :include => [{:group => :group}, :reporter])
+    @collection ||= Report.paginate(:page => params[:page], :per_page => 50, :include => [{:group => :group}, :deputy])
   end
 end

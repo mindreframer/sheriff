@@ -10,7 +10,7 @@ module LinkHelper
   def name_for_object(object)
     case object
     when Group then object.full_name
-    when Reporter then object.full_name
+    when Deputy then object.full_name
     end
   end
 end

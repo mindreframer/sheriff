@@ -4,7 +4,7 @@ Sheriff::Application.routes.draw do
   resources :alerts
   resources :groups
   resources :reports
-  resources :reporters
+  resources :deputies
 
   match "report/:level1.:level2/:value", :to => "reports#create"
 

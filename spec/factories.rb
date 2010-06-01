@@ -9,12 +9,12 @@ end
 
 Factory.define(:report) do |f|
   f.association :group, :factory => :group_l2
-  f.association :reporter
+  f.association :deputy
   f.reported_at Time.current
   f.value '123'
 end
 
-Factory.define(:reporter) do |f|
+Factory.define(:deputy) do |f|
   f.name 'c3.dawanda.com'
   f.address '192.168.2.23'
 end

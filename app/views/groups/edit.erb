@@ -1,8 +1,8 @@
 <h1><%= @group.name %></h1>
 <table>
-  <% @group.reports(:join => :reporter, :include => :reporter, :sort => 'reporters.name').each do |report| %>
+  <% @group.reports(:join => :deputy, :include => :deputy, :sort => 'deputies.name').each do |report| %>
     <tr>
-      <td><%= link_to_object report.reporter %></td>
+      <td><%= link_to_object report.deputy %></td>
       <td><%= report.value %></td>
       <td><%= report.updated_at.to_s(:db) %></td>
       <td><%= link_to_edit report %></td>

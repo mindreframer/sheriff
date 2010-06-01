@@ -1,2 +1,2 @@
-class ReportersController < RestController
+class DeputiesController < RestController
 end
