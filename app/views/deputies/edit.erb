@@ -25,6 +25,7 @@
       <td><%= report.value %></td>
       <td><%= report.updated_at.to_s(:db) %></td>
       <td><%= link_to_delete report, :text => 'x' %></td>
+      <td><%= link_to_edit report %></td>
     </tr>
   <% end %>
 </table>
