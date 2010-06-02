@@ -3,6 +3,7 @@
     <%= render :partial => 'groups/navigation' %>
   </div>
   <div class=main>
+    <h1><%= heading %></h1>
     <%= yield(:group_sidebar_content).presence || yield %>
   </div>
 <% end %>

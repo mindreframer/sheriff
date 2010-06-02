@@ -6,7 +6,7 @@ class RunBetweenValidation < ActiveRecord::Base
   end
 
   def start_hms=(x)
-    self.start_time = Time.parse(x).seconds_after_midnight
+    self.start_seconds = Time.parse(x).seconds_after_midnight
   end
 
   def end_hms
@@ -14,7 +14,7 @@ class RunBetweenValidation < ActiveRecord::Base
   end
 
   def end_hms=(x)
-    self.end_time = Time.parse(x).seconds_after_midnight
+    self.end_seconds = Time.parse(x).seconds_after_midnight
   end
 
   def check!

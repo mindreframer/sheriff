@@ -1,23 +1,25 @@
-<h1><%= @deputy.full_name %></h1>
-
 <% form_for @deputy do |f| %>
-  <% @deputy.deputy_plugins.build; @deputy.deputy_plugins.build %>
-
-    <%= f.fields_for :deputy_plugins do |child| %>
-      <%= child.hidden_field :deputy_id %>
-      <%= child.select :plugin_name, [nil] + Plugin.names %>
-      <br />
-    <% end %>
-  <%= f.submit %>
+  <% @deputy.deputy_plugins.build %>
+  <h3>Plugins</h3>
+  <%= f.fields_for :deputy_plugins do |child| %>
+    <%= child.hidden_field :deputy_id %>
+    Run <%= child.select :plugin_name, [nil] + Plugin.names %>
+    every
+    <%= child.text_field :interval_value, :size => 5 %>
+    <%= child.select :interval_unit, [['Minutes', 1.minute], ['Hours', 1.hour], ['Days', 1.day]] %>.
+    <br />
+  <% end %>
+  <%= f.submit 'Save' %>
 <% end %>
 
-
+<h3>Reports</h3>
 <table>
   <% @deputy.reports(:include => :group).each do |report| %>
     <tr>
       <td><%= link_to_object report.group %></td>
       <td><%= report.value %></td>
       <td><%= report.updated_at.to_s(:db) %></td>
+      <td><%= link_to_delete report, :text => 'x' %></td>
     </tr>
   <% end %>
 </table>

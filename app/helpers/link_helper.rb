@@ -18,4 +18,9 @@ module LinkHelper
   def link_to_new
     link_to 'New', new_resource_path
   end
+
+  def link_to_delete(object, options={})
+    text = options.delete(:text) || 'delete'
+    link_to text, object, options.merge(:method => :delete, :confirm => 'delete ?')
+  end
 end

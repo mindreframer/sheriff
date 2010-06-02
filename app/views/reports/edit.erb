@@ -1,18 +1,18 @@
-<h1><%= @report.full_name %></h1>
-<% form_for @report do |f| %>
+<%= form_for @report do |f| %>
   <table>
     <% Report::NESTED_VALIDATIONS.each do |validation_name| %>
       <tr>
-        <% validation = @report.send(validation_name) || @report.send("build_#{validation_name}") %>
-        <%= f.fields_for validation do |validation_form| %>
-          <td><%= check_box_with_label "report[#{validation_name}][active]", false, !validation.new_record?, validation_name.to_s.camelcase.sub('Validation','') %></td>
+        <% @report.send(validation_name) or @report.send("build_#{validation_name}") %>
+        <%= f.fields_for validation_name.to_sym do |validation_form| %>
+          <% validation = validation_form.object %>
+          <td><%= check_box_with_label "report[#{validation_name}_attributes][active]", false, !validation.new_record?, validation_name.to_s.camelcase.sub('Validation','') %></td>
           <td>
             <% case validation
                when ValueValidation %>
               <%= validation_form.text_field :value_as_text %>
             <% when RunEveryValidation %>
               <%= validation_form.text_field :interval_value %>
-              <%= validation_form.select :interval_unit, [['Seconds', 1],['Minutes', 1.minute],['Hours', 1.hour],['Days', 1.day]] %>
+              <%= validation_form.select :interval_unit, [['Seconds', 1], ['Minutes', 1.minute], ['Hours', 1.hour], ['Days', 1.day]] %>
             <% when RunBetweenValidation %>
               <%= validation_form.text_field :start_hms %>
               <%= validation_form.text_field :end_hms %>
