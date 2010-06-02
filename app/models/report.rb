@@ -25,6 +25,7 @@ class Report < ActiveRecord::Base
     group = group.find_or_create_child(groups[1])
 
     deputy = Deputy.find_or_create_by_address_or_name(options[:address], options[:name])
+    deputy.update_last_report_at!
 
     if report = first(:conditions => {:group_id => group.id, :deputy_id => deputy.id})
       report.historic_values.create!(:value => report.value, :reported_at => report.reported_at)

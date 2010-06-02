@@ -2,6 +2,8 @@
   <% collection.each do |deputy| %>
     <tr>
       <td><%= link_to_object deputy %></td>
+      <td>Last report <%= time_ago deputy.last_report_at %></td>
+      <td><%= link_to_delete deputy, :text => 'x' %></td>
     </tr>
   <% end %>
 </table>

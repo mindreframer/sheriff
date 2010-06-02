@@ -12,6 +12,11 @@ class Deputy < ActiveRecord::Base
     "#{name} (#{address})"
   end
 
+  def update_last_report_at!
+    return if not last_report_at? or last_report_at > 1.minute.ago
+    update_attribute(:last_report_at, Time.current)
+  end
+
   def self.find_by_address_or_name(address, name)
     if name == UNKNOWN
       first(:conditions => {:address => address})

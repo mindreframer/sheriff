@@ -1,4 +1,9 @@
 <table>
+  <tr>
+    <th>Deputy</th>
+    <th>Value</th>
+    <th>at</th>
+  </tr>
   <% @group.reports(:join => :deputy, :include => :deputy, :sort => 'deputies.name').each do |report| %>
     <tr>
       <td><%= link_to_object report.deputy %></td>

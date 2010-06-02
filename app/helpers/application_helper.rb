@@ -1,4 +1,9 @@
 module ApplicationHelper
+  def time_ago(time)
+    return unless time
+    time_ago_in_words time
+  end
+
   def title
     strip_tags "#{heading} - Sheriff"
   end

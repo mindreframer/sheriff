@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100602115900) do
+ActiveRecord::Schema.define(:version => 20100602153214) do
 
   create_table "alerts", :force => true do |t|
     t.integer  "severity",        :null => false
@@ -22,10 +22,11 @@ ActiveRecord::Schema.define(:version => 20100602115900) do
   end
 
   create_table "deputies", :force => true do |t|
-    t.string   "name",       :null => false
-    t.string   "address",    :null => false
+    t.string   "name",           :null => false
+    t.string   "address",        :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "last_report_at"
   end
 
   add_index "deputies", ["address"], :name => "index_deputies_on_address", :unique => true

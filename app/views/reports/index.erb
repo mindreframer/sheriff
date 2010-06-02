@@ -1,9 +1,3 @@
-<% form_tag '/reports' do %>
-  Group: <%= text_field_tag :level1, '' %>/<%= text_field_tag :level2, '' %>
-  Value: <%= text_field_tag :value, '' %>
-  <%= submit_tag 'report' %>
-<% end %>
-
 <table>
   <% collection.each do |report| %>
     <tr>
@@ -16,3 +10,12 @@
     </tr>
   <% end %>
 </table>
+
+<br />
+<br />
+
+<% form_tag '/reports' do %>
+  Group: <%= text_field_tag :level1, '' %>.<%= text_field_tag :level2, '' %>
+  Value: <%= text_field_tag :value, '' %>
+  <%= submit_tag 'Test-report' %>
+<% end %>

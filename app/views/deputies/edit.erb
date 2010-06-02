@@ -12,8 +12,13 @@
   <%= f.submit 'Save' %>
 <% end %>
 
-<h3>Reports</h3>
+<h3>Reports (Last report <%= time_ago @deputy.last_report_at %>)</h3>
 <table>
+  <tr>
+    <th>Group</th>
+    <th>Value</th>
+    <th>Reported at</th>
+  </tr>
   <% @deputy.reports(:include => :group).each do |report| %>
     <tr>
       <td><%= link_to_object report.group %></td>
