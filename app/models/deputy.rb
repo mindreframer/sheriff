@@ -3,14 +3,21 @@ class Deputy < ActiveRecord::Base
   has_many :deputy_plugins, :dependent => :destroy
   accepts_nested_attributes_for :deputy_plugins
 
-  validates_uniqueness_of :name, :address
+  validates_uniqueness_of :address
+  validates_uniqueness_of :name, :if => lambda{|d| d.name != UNKNOWN }
+
+  UNKNOWN = 'unknown_host'
 
   def full_name
     "#{name} (#{address})"
   end
 
   def self.find_by_address_or_name(address, name)
-    first(:conditions => ["address = ? OR name = ?", address, name])
+    if name == UNKNOWN
+      first(:conditions => {:address => address})
+    else
+      first(:conditions => ["address = ? OR name = ?", address, name])
+    end
   end
 
   def self.find_or_create_by_address_or_name(address, name)
@@ -18,7 +25,7 @@ class Deputy < ActiveRecord::Base
   end
 
   def self.extract_address_and_name(request)
-    remote_host = request.remote_host.presence || "unknown_host_#{rand(1000000)}"
+    remote_host = request.remote_host.presence || UNKNOWN
     [request.ip, remote_host]
   end
 end

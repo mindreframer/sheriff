@@ -3,7 +3,7 @@ class ReportsController < RestController
   before_filter :convert_validation_interval, :add_or_remove_validations, :only => :update
 
   def create
-    name, address = Reporter.extract_address_and_name(request)
+    address, name = Deputy.extract_address_and_name(request)
     Report.report!(params[:value], [params[:level1], params[:level2]], :name => name, :address => address)
     render :text => 'OK'
   end

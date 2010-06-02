@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100601132844) do
+ActiveRecord::Schema.define(:version => 20100602080608) do
 
   create_table "alerts", :force => true do |t|
     t.integer  "severity",        :null => false
@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(:version => 20100601132844) do
   end
 
   add_index "deputies", ["address"], :name => "index_deputies_on_address", :unique => true
-  add_index "deputies", ["name"], :name => "index_deputies_on_name", :unique => true
 
   create_table "deputy_plugins", :force => true do |t|
     t.integer  "plugin_id",  :null => false
