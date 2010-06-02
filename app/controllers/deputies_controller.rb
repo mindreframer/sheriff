@@ -4,9 +4,13 @@ class DeputiesController < RestController
 
   def convert_plugin_interval
     values = params[:deputy][:deputy_plugins_attributes]
-    values.reject! do |_, value|
-      value[:plugin_name].blank? or value[:interval_value].blank?
+    values.each do |key, value|
+      if value[:plugin_name].blank? or value[:interval_value].to_i == 0
+        DeputyPlugin.find(value[:id]).destroy if value[:id]
+        values.delete key
+      else
+        convert_interval value
+      end
     end
-    convert_interval values
   end
 end
