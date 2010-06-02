@@ -5,6 +5,10 @@
 # PUBLIC  REPO,  DO  NOT  ADD  PASSWORDS
 load 'deploy'
 
+set :default_stage, "staging"
+set :stages, %w(production staging)
+require 'capistrano/ext/multistage'
+
 set :application, "Sheriff"
 set :scm, :git
 set :repository, "git@github.com:dawanda/sheriff.git"
@@ -13,12 +17,7 @@ set :branch, "master"
 set :deploy_to, '/srv/sheriff'
 
 set :user, "deploy"
-ssh_options[:keys] = "~/.ssh/deploy_id_rsa"
 set :use_sudo, false
-
-role :app, "192.168.2.35"
-role :web, "192.168.2.35"
-role :db, "192.168.2.35", :primary=>true
 
 namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
@@ -30,6 +29,12 @@ namespace :deploy do
     run "cp #{deploy_to}/shared/config/*.yml #{current_release}/config/"
   end
   after 'deploy:update_code', 'deploy:copy_config_files'
+
+  desc "add a file that tells us which env we are on"
+  task :add_env do
+    run "echo #{stage} > #{current_release}/env"
+  end
+  after 'deploy:update_code', 'deploy:add_env'
 end
 
 namespace :gems do
