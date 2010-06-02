@@ -3,7 +3,7 @@
   <% @plugin.deputy_plugins.each do |deputy_plugin| %>
     <tr>
       <td><%= link_to_object deputy_plugin.deputy %></td>
-      <td>every <%= link_to_object deputy_plugin.humanized_interval %></td>
+      <td>every <%= deputy_plugin.humanized_interval %></td>
     </tr>
   <% end %>
 </table>

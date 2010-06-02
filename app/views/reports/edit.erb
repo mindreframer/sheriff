@@ -12,7 +12,7 @@
               <%= validation_form.text_field :value_as_text %>
             <% when RunEveryValidation %>
               <%= validation_form.text_field :interval_value %>
-              <%= validation_form.select :interval_unit, [['Seconds', 1], ['Minutes', 1.minute], ['Hours', 1.hour], ['Days', 1.day]] %>
+              <%= validation_form.select :interval_unit, time_units_for_select %>
             <% when RunBetweenValidation %>
               <%= validation_form.text_field :start_hms %>
               <%= validation_form.text_field :end_hms %>

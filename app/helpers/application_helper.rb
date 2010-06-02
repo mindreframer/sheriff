@@ -20,4 +20,8 @@ module ApplicationHelper
     label_for = options[:id] || name
     check_box_tag(name, value, checked, options) + label_tag(label_for, label)
   end
+
+  def time_units_for_select(options={})
+    IntervalAccessors::UNITS.map(&:reverse).reject{|x,y| (options[:without]||[]).include?(x) }
+  end
 end

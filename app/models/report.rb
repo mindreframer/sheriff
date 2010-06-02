@@ -16,7 +16,7 @@ class Report < ActiveRecord::Base
   validates_uniqueness_of :group_id, :scope => :deputy_id
 
   def full_name
-    "#{group.full_name} - #{deputy.full_name}"
+    "#{group.full_name} @ #{deputy.full_name}"
   end
 
   def self.report!(value, groups, options={})
