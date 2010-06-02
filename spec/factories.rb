@@ -44,6 +44,7 @@ Factory.define(:plugin) do |f|
 end
 
 Factory.define(:deputy_plugin) do |f|
+  f.interval 5*60
   f.association :plugin
   f.association :deputy
 end

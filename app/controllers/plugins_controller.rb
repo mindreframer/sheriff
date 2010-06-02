@@ -13,7 +13,7 @@ class PluginsController < RestController
           "# there are not plugins for you #{info}"
         else
           "# your plugins #{info}\n" +
-          deputy.deputy_plugins(:include => :plugin).map{|dp| "##{dp.plugin.name}\n#{dp.plugin.code}" }.join('')
+          deputy.deputy_plugins(:include => :plugin).map{|dp| "##{dp.plugin.name}\n#{dp.plugin.code}" }.join("\n")
         end
       else
         "# you are not registered #{info}"
