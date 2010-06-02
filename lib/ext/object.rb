@@ -6,7 +6,7 @@ class Object
     raise_without_helpfulness(*args)
   rescue TypeError => e
     raise_without_helpfulness args.first.inspect if ['exception class/object expected', 'exception object expected'].include?(e.to_s)
-    raise e.message
+    raise_without_helpfulness e
   end
   alias_method_chain :raise, :helpfulness
 end

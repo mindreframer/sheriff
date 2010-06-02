@@ -37,3 +37,13 @@ Factory.define(:run_every_validation) do |f|
   f.severity 1
   f.interval 60*60
 end
+
+Factory.define(:plugin) do |f|
+  f.code "class Bla < Scout::Plugin;def build_report;puts 'fooo';end;end"
+  f.name{ "useless plugin #{rand(111111111)}" }
+end
+
+Factory.define(:deputy_plugin) do |f|
+  f.association :plugin
+  f.association :deputy
+end

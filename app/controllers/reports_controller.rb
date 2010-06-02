@@ -3,8 +3,8 @@ class ReportsController < RestController
   before_filter :convert_validation_interval, :add_or_remove_validations, :only => :update
 
   def create
-    remote_host = request.remote_host.presence || "unknown_host_#{rand(1000000)}"
-    Report.report!(params[:value], [params[:level1], params[:level2]], :address => request.ip, :name => remote_host)
+    name, address = Reporter.extract_address_and_name(request)
+    Report.report!(params[:value], [params[:level1], params[:level2]], :name => name, :address => address)
     render :text => 'OK'
   end
 
