@@ -25,3 +25,17 @@
   </table>
   <%= f.submit %>
 <% end %>
+
+<h3>Historic Values</h3>
+<table>
+  <tr>
+    <th>Value</th>
+    <th>Reported at</th>
+  </tr>
+  <% @report.historic_values.each do |historic_value| %>
+    <tr>
+      <td><%= historic_value.value %></td>
+      <td><%= historic_value.reported_at.to_s(:db) %></td>
+    </tr>
+  <% end %>
+</table>
