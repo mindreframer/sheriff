@@ -87,4 +87,10 @@ describe ValueValidation do
       end
     end
   end
+
+  describe :value do
+    it "is nil when nil" do
+      ValueValidation.new.value.should == nil
+    end
+  end
 end

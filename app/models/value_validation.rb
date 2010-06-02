@@ -2,7 +2,8 @@ class ValueValidation < ActiveRecord::Base
   belongs_to :report
 
   def value
-    YAML.load(read_attribute(:value))
+    real_value = read_attribute(:value)
+    real_value ? YAML.load(real_value) : nil
   end
 
   def value=(x)
