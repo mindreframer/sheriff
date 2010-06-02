@@ -14,4 +14,14 @@ class DeputyPlugin < ActiveRecord::Base
   def plugin_name=(x)
     self.plugin = Plugin.find_by_name(x)
   end
+
+  def code_for_deputy
+    code = <<-CODE.unindent
+      module TEMP_#{rand(1111111111111111)}
+        def self.interval;#{interval};end
+        _CODE_
+      end
+    CODE
+    code.sub('_CODE_', plugin.code.gsub(/\r?\n/,"\n  "))
+  end
 end
