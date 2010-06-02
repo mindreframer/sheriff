@@ -37,27 +37,33 @@ describe ReportsController do
     end
 
     it "update" do
-      put :update, :id => @report.id, :report => {:value => 'xxx'}
+      put :update, :id => @report.id, :report => {:value => 'xxx'} 
       @report.reload.value.should == 'xxx'
     end
 
     it "creates a validation" do
-      put :update, :id => @report.id, :report => {:value_validation => {:active => 'true', :value_as_text => '1', :severity => 1}}
+      put :update, :id => @report.id, :report => {:value_validation_attributes => {:active => true, :value_as_text => '1', :severity => '1'}}
       @report.reload.value_validation.value.should == 1
     end
 
     it "destroys a validation" do
       Factory(:value_validation, :report => @report)
-      put :update, :id => @report.id, :report => {:value_validation => {:value_as_text => '1', :severity => 1}}
+      put :update, :id => @report.id, :report => {:value_validation_attributes => {:value_as_text => '1', :severity => '1'}}
       @report.reload.value_validation.should == nil
     end
 
     it "updates a validation" do
       old = Factory(:value_validation, :report => @report)
-      put :update, :id => @report.id, :report => {:value_validation => {:active => 'true', :value_as_text => '1', :severity => 1}}
+      put :update, :id => @report.id, :report => {:value_validation_attributes => {:active => true, :value_as_text => '1', :severity => '1', :id => old.id.to_s}}
       validation = @report.reload.value_validation
       validation.value.should == 1
       validation.id.should == old.id
+    end
+
+    it "converts an interval" do
+      put :update, :id => @report.id, :report => {:run_every_validation_attributes => {:active => true, :interval_value => '3', :interval_unit => 1.day.to_s, :severity => '1'}}
+      validation = @report.reload.run_every_validation
+      validation.interval.should == 3.days
     end
   end
 end

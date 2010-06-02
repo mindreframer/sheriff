@@ -3,11 +3,12 @@ class ApplicationController < ActionController::Base
   layout 'application'
   helper :all
 
-  def convert_interval(h)
-    if h[:interval_unit].present?
-      h[:interval] = h[:interval_value].to_i * h[:interval_unit].to_i
+  def convert_interval(hash)
+    return unless hash
+    if hash[:interval_unit].present?
+      hash[:interval] = hash[:interval_value].to_i * hash[:interval_unit].to_i
     end
-    h.delete :interval_value
-    h.delete :interval_unit
+    hash.delete :interval_value
+    hash.delete :interval_unit
   end
 end
