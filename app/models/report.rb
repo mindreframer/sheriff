@@ -1,4 +1,7 @@
 class Report < ActiveRecord::Base
+  include ErrorLevelPropagation
+  include SerializedValue
+
   belongs_to :group
   belongs_to :deputy
 

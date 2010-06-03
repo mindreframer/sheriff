@@ -4,7 +4,8 @@ class ReportsController < RestController
 
   def create
     address, name = Deputy.extract_address_and_name(request)
-    Report.report!(params[:value], [params[:level1], params[:level2]], :name => name, :address => address)
+    value = self.class.convert_value_from_params(params[:value])
+    Report.report!(value, [params[:level1], params[:level2]], :name => name, :address => address)
     render :text => 'OK'
   end
 
@@ -28,5 +29,14 @@ class ReportsController < RestController
 
   def collection
     @collection ||= Report.paginate(:page => params[:page], :per_page => 50, :include => [{:group => :group}, :deputy])
+  end
+
+  def self.convert_value_from_params(value)
+    case value.to_s.strip
+    when /^\d+$/ then value.to_i
+    when /^\d+\.\d+$/ then value.to_f
+    when /^['"](.+)['"]/ then $1
+    else value
+    end
   end
 end

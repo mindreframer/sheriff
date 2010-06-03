@@ -1,4 +1,6 @@
 class Group < ActiveRecord::Base
+  include ErrorLevelPropagation
+
   belongs_to :group
   has_many :children, :class_name => 'Group', :order => 'name asc', :dependent => :destroy
   has_many :reports, :dependent => :destroy

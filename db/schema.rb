@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100603075409) do
+ActiveRecord::Schema.define(:version => 20100603091824) do
 
   create_table "alerts", :force => true do |t|
     t.integer  "error_level",     :null => false
@@ -40,10 +40,11 @@ ActiveRecord::Schema.define(:version => 20100603075409) do
   end
 
   create_table "groups", :force => true do |t|
-    t.string   "name",       :null => false
+    t.string   "name",                               :null => false
     t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "current_error_level", :default => 0, :null => false
   end
 
   add_index "groups", ["group_id", "name"], :name => "index_groups_on_group_id_and_name", :unique => true
@@ -67,13 +68,14 @@ ActiveRecord::Schema.define(:version => 20100603075409) do
   add_index "plugins", ["name"], :name => "index_plugins_on_name", :unique => true
 
   create_table "reports", :force => true do |t|
-    t.integer  "group_id",    :null => false
-    t.integer  "deputy_id",   :null => false
-    t.string   "value",       :null => false
+    t.integer  "group_id",                           :null => false
+    t.integer  "deputy_id",                          :null => false
+    t.string   "value",                              :null => false
     t.string   "config"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "reported_at", :null => false
+    t.datetime "reported_at",                        :null => false
+    t.integer  "current_error_level", :default => 0, :null => false
   end
 
   add_index "reports", ["deputy_id"], :name => "index_reports_on_deputy_id"

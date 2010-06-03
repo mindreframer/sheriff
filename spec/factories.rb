@@ -1,9 +1,9 @@
 Factory.define(:group) do |f|
-  f.name rand(1000000)
+  f.name{rand(1000000)}
 end
 
 Factory.define(:group_l2, :class => 'Group') do |f|
-  f.name rand(1000000)
+  f.name{rand(1000000)}
   f.association :group
 end
 
@@ -15,8 +15,8 @@ Factory.define(:report) do |f|
 end
 
 Factory.define(:deputy) do |f|
-  f.name 'c3.dawanda.com'
-  f.address '192.168.2.23'
+  f.name{"c#{rand(1111111)}.dawanda.com"}
+  f.address{"192.#{rand(255)}.#{rand(255)}.#{rand(255)}"}
 end
 
 Factory.define(:value_validation) do |f|
