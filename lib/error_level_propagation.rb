@@ -6,20 +6,22 @@ module ErrorLevelPropagation
   end
 
   def propagate_error_level_to_parent
-    parent = case self
-    when Validation then report
-    when Report then group
-    when Group then group
+    parents = case self
+    when Validation then [report]
+    when Report then [group, deputy]
+    when Group then [group]
+    when Deputy then []    
     else raise
     end
-    return unless parent
-    parent.aggregate_error_level!
+    return if parents.compact.empty?
+    parents.each(&:aggregate_error_level!)
   end
 
   def aggregate_error_level!
     children = case self
     when Report then validations
     when Group then reports.presence || self.children
+    when Deputy then reports
     else raise
     end
     max = (children.map(&:current_error_level).max || 0)

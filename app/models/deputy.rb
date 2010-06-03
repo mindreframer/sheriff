@@ -1,4 +1,6 @@
 class Deputy < ActiveRecord::Base
+  include ErrorLevelPropagation
+
   has_many :reports, :dependent => :destroy
   has_many :deputy_plugins, :dependent => :destroy
   accepts_nested_attributes_for :deputy_plugins

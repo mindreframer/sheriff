@@ -12,7 +12,7 @@ class Report < ActiveRecord::Base
   NESTED_VALIDATIONS.each{|v| has_one v}
   accepts_nested_attributes_for *NESTED_VALIDATIONS
 
-  has_many :validations
+  has_many :validations, :dependent => :destroy
 
   validates_uniqueness_of :group_id, :scope => :deputy_id
 

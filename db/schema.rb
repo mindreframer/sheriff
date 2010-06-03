@@ -22,11 +22,12 @@ ActiveRecord::Schema.define(:version => 20100603091824) do
   end
 
   create_table "deputies", :force => true do |t|
-    t.string   "name",           :null => false
-    t.string   "address",        :null => false
+    t.string   "name",                               :null => false
+    t.string   "address",                            :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "last_report_at"
+    t.integer  "current_error_level", :default => 0, :null => false
   end
 
   add_index "deputies", ["address"], :name => "index_deputies_on_address", :unique => true
