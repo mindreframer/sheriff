@@ -11,13 +11,13 @@
           <%= check_box_with_label key, true, !validation.new_record?, validation.type.to_s.sub('Validation','') %>
         </td>
         <td>
-          <% case validation.type
-             when 'ValueValidation' %>
+          <% case validation
+             when ValueValidation %>
             <%= vf.text_field :value_as_text %>
-          <% when 'RunEveryValidation' %>
+          <% when RunEveryValidation %>
             <%= vf.text_field :interval_value %>
             <%= vf.select :interval_unit, time_units_for_select %>
-          <% when 'RunBetweenValidation' %>
+          <% when RunBetweenValidation %>
             <%= vf.text_field :start_hms %>
             <%= vf.text_field :end_hms %>
           <% end %>
