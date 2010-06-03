@@ -1,4 +1,11 @@
 <table>
+  <tr>
+    <th></th>
+    <th>Group</th>
+    <th>Reporter</th>
+    <th>Value</th>
+    <th>at</th>
+  </tr>
   <% collection.each do |report| %>
     <%= render :partial => 'report_row', :locals => {:report => report} %>
   <% end %>

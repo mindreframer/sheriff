@@ -4,7 +4,8 @@ module ApplicationHelper
   end
 
   def error_level(object)
-    "error_level_#{object.current_error_level}"
+    level = (object.is_a?(Alert) ? object.error_level : object.current_error_level)
+    "error_level_#{level}"
   end
 
   def detailed_time(time)
@@ -26,7 +27,7 @@ module ApplicationHelper
       if @resource.new_record?
         "New #{@resource.class}"
       else
-        "#{name_for_object @resource} #{link_to_delete @resource, :text => 'x'}"
+        "<span #{error_attribute @resource}>#{name_for_object @resource}</span> #{link_to_delete @resource, :text => 'x'}"
       end
     elsif @collection
       "#{resource_class.to_s.pluralize}"

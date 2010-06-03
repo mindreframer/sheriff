@@ -1,10 +1,9 @@
 <table>
   <% collection.each do |deputy| %>
-    <% error_attribute = error_attribute(deputy) %>
-    <tr>
-      <td <%=error_attribute%>><%= link_to_object deputy %></td>
-      <td <%=error_attribute%>>Last report <%= time_ago deputy.last_report_at %></td>
-      <td <%=error_attribute%>><%= link_to_delete deputy, :text => 'x' %></td>
+    <tr <%= error_attribute(deputy) %>>
+      <td><%= link_to_object deputy %></td>
+      <td>Last report <%= time_ago deputy.last_report_at %></td>
+      <td><%= link_to_delete deputy, :text => 'x' %></td>
     </tr>
   <% end %>
 </table>

@@ -1,13 +1,12 @@
 <%= form_for @report do |f| %>
   <table>
     <% Report::NESTED_VALIDATIONS.each do |validation_name| %>
-      <% error_attribute = error_attribute(@report) %>
-      <tr>
+      <tr <%= error_attribute(@report) %>>
         <% @report.send(validation_name) or @report.send("build_#{validation_name}") %>
         <%= f.fields_for validation_name.to_sym do |validation_form| %>
           <% validation = validation_form.object %>
-          <td <%=error_attribute%>><%= check_box_with_label "report[#{validation_name}_attributes][active]", false, !validation.new_record?, validation_name.to_s.camelcase.sub('Validation','') %></td>
-          <td <%=error_attribute%>>
+          <td><%= check_box_with_label "report[#{validation_name}_attributes][active]", false, !validation.new_record?, validation_name.to_s.camelcase.sub('Validation','') %></td>
+          <td>
             <% case validation
                when ValueValidation %>
               <%= validation_form.text_field :value_as_text %>
@@ -34,10 +33,9 @@
     <th>Reported at</th>
   </tr>
   <% @report.historic_values_including_current.each do |historic_value| %>
-    <% error_attribute = error_attribute(historic_value) %>
-    <tr>
-      <td <%= error_attribute %>><%= historic_value.value %></td>
-      <td <%= error_attribute %>><%= detailed_time historic_value.reported_at %></td>
+    <tr <%= error_attribute(historic_value) %>>
+      <td><%= historic_value.value %></td>
+      <td><%= detailed_time historic_value.reported_at %></td>
     </tr>
   <% end %>
 </table>

@@ -1,15 +1,14 @@
 <% hide_group ||= false %>
 <% hide_deputy ||= false %>
-<% error_attribute = error_attribute(report) %>
-<tr>
-  <td <%= error_attribute %>><%= link_to_edit report, :text => 'Details' %></td>
+<tr <%= error_attribute(report) %>>
+  <td><%= link_to_edit report, :text => 'Details' %></td>
   <% unless hide_group %>
-    <td <%= error_attribute %>><%= link_to_object report.group %></td>
+    <td><%= link_to_object report.group %></td>
   <% end %>
   <% unless hide_deputy %>
-    <td <%= error_attribute %>><%= link_to_object report.deputy %></td>
+    <td><%= link_to_object report.deputy %></td>
   <% end %>
-  <td <%= error_attribute %>><%= report.value %></td>
-  <td <%= error_attribute %>><%= detailed_time report.updated_at %></td>
-  <td <%= error_attribute %>><%= link_to_delete report, :text => 'X' %></td>
+  <td><%= report.value %></td>
+  <td><%= detailed_time report.updated_at %></td>
+  <td><%= link_to_delete report, :text => 'X' %></td>
 </tr>
