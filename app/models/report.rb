@@ -8,12 +8,8 @@ class Report < ActiveRecord::Base
   has_many :historic_values, :dependent => :destroy, :order => 'reported_at desc'
   has_many :alerts, :dependent => :destroy, :order => 'id desc'
 
-  # TODO use validations <-> controller
-  NESTED_VALIDATIONS = [:run_every_validation, :run_between_validation, :value_validation]
-  NESTED_VALIDATIONS.each{|v| has_one v}
-  accepts_nested_attributes_for *NESTED_VALIDATIONS
-
   has_many :validations, :dependent => :destroy
+  accepts_nested_attributes_for :validations, :allow_destroy => true
 
   validates_uniqueness_of :group_id, :scope => :deputy_id
 

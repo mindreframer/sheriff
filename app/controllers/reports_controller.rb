@@ -12,14 +12,18 @@ class ReportsController < RestController
   private
 
   def remove_inactive_validations
-    Report::NESTED_VALIDATIONS.each do |validation_name|
-      attributes_name = "#{validation_name}_attributes"
-      attributes = params[:report][attributes_name]
-
-      next if not attributes or attributes.delete(:active)
-
-      resource.send(validation_name).try(:destroy)
-      params[:report].delete(attributes_name)
+    params[:report][:validations_attributes].each do |index, attributes|
+      if attributes.delete(:active)
+        type = attributes[:type].constantize
+        if attributes[:id]
+          type.find(params[:id]).update_attributes!(attributes)
+        else
+          type.create!(attributes.merge(:report => resource))
+        end
+      elsif attributes[:id]
+        Validation.find(attributes[:id]).destroy
+      end
+      params[:report][:validations_attributes].delete(index)
     end
   end
 

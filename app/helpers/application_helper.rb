@@ -49,4 +49,18 @@ module ApplicationHelper
   def clearer
     content_tag :div, '', :class => 'clearer'
   end
+
+  # building for sti does not work (even with correct type set in build() )
+  # so we hack araound...
+  def fields_for_sti(form, many, add)
+    object = form.object
+    add.each{ object.send(many).build }
+
+    index = -1
+    form.fields_for many do |vf|
+      index += 1
+      vf.object = add.pop.new if not vf.object.type
+      yield vf, index
+    end
+  end
 end
