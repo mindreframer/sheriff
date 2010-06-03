@@ -9,7 +9,8 @@
 </table>
 
 <h3>Code</h3>
-<% form_for @plugin do |f| %>
+<%= form_for @plugin do |f| %>
+  <%= f.error_messages %>
   <table>
     <tr>
       <td>Name</td><td><%= f.text_field :name %></td>

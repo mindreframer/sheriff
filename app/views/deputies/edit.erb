@@ -1,4 +1,5 @@
 <% form_for @deputy do |f| %>
+  <%= f.error_messages %>
   <% @deputy.deputy_plugins.build %>
   <h3>Plugins</h3>
   <%= f.fields_for :deputy_plugins do |child| %>

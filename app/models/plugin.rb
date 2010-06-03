@@ -2,7 +2,7 @@ class Plugin < ActiveRecord::Base
   has_many :deputies, :class_name => 'DeputyPlugin'
   has_many :deputy_plugins, :dependent => :destroy
 
-  validates_presence_of :code
+  validates_presence_of :code, :name
   validates_uniqueness_of :name
   validate do
     if error = self.class.syntax_error(code)

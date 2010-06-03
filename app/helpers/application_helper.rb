@@ -1,11 +1,13 @@
 module ApplicationHelper
   def error_attribute(object)
-    raw(%{class="#{error_level object}"})
+    raw %{class="error_level_#{error_level object}"}
   end
 
   def error_level(object)
-    level = (object.is_a?(Alert) ? object.error_level : object.current_error_level)
-    "error_level_#{level}"
+    case object
+    when Deputy, Group, Report then object.current_error_level
+    when Alert then object.error_level
+    end
   end
 
   def detailed_time(time)
