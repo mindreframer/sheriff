@@ -1,0 +1,21 @@
+common: &common
+  email_recipients: adsasd@asdas.ccc
+  sms_recipients: 1111111111
+  sms_user: my_user
+  sms_password: my_password
+
+test:
+  <<: *common
+  send_sms: false
+
+development:
+  <<: *common
+  send_sms: true
+
+staging:
+  <<: *common
+  send_sms: true
+
+production:
+  <<: *common
+  send_sms: true

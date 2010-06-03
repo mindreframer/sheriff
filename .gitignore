@@ -4,3 +4,4 @@ tmp/**/*
 config/deploy/staging.rb
 env
 config/database.yml
+config/config.yml
