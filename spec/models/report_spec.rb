@@ -40,6 +40,13 @@ describe Report do
       }.should change(Deputy, :count).by(0)
     end
 
+    it "updates deputies last_report_at" do
+      group = Factory(:group_l2)
+      deputy = Factory(:deputy, :last_report_at =>10.minutes.ago)
+      Report.report!('12', [group.group.name, group.name], :address => '123.123.123.123', :name => deputy.name)
+      deputy.reload.last_report_at.should be_close(Time.current, 3)
+    end
+
     it "creates a groups if none exist" do
       deputy = Factory(:deputy)
       lambda{

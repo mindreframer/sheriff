@@ -15,7 +15,7 @@ class Deputy < ActiveRecord::Base
   end
 
   def update_last_report_at!
-    return if not last_report_at? or last_report_at > 1.minute.ago
+    return if last_report_at and last_report_at > 1.minute.ago
     update_attribute(:last_report_at, Time.current)
   end
 
