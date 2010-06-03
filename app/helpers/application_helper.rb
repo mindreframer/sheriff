@@ -1,7 +1,16 @@
 module ApplicationHelper
+  def color(object)
+    {0 => 'white', 1 => 'yellow', 2 => 'orange', 3 => 'red'}[object.current_error_level]
+  end
+
+  def detailed_time(time)
+    return unless time
+    "#{time.to_s(:db)} : #{time_ago time}"
+  end
+
   def time_ago(time)
     return unless time
-    time_ago_in_words time
+    "#{time_ago_in_words time} ago"
   end
 
   def title

@@ -1,11 +1,11 @@
 <h1>Groups</h1>
 <ul>
   <% Group.level1.each do |group| %>
-    <li>
+    <li style="background: <%= color group %>">
       <%= group.name %>
       <ul>
         <% group.children.each do |child| %>
-          <li>
+          <li  style="background: <%= color child %>">
             <%= link_to child.name, child, :class => (child == @group ? 'bold' : '') %>
           </li>
         <% end %>

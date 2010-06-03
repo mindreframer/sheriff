@@ -50,9 +50,10 @@ ActiveRecord::Schema.define(:version => 20100603091824) do
   add_index "groups", ["group_id", "name"], :name => "index_groups_on_group_id_and_name", :unique => true
 
   create_table "historic_values", :force => true do |t|
-    t.integer  "report_id",   :null => false
-    t.string   "value",       :null => false
-    t.datetime "reported_at", :null => false
+    t.integer  "report_id",                          :null => false
+    t.string   "value",                              :null => false
+    t.datetime "reported_at",                        :null => false
+    t.integer  "current_error_level", :default => 0, :null => false
   end
 
   add_index "historic_values", ["report_id"], :name => "index_historic_values_on_report_id"

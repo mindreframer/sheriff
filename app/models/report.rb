@@ -20,6 +20,10 @@ class Report < ActiveRecord::Base
     "#{group.full_name} @ #{deputy.full_name}"
   end
 
+  def historic_values_including_current
+    [self] + historic_values
+  end
+
   def self.report!(value, groups, options={})
     raise if groups.size != 2
     group = Group.find_or_create_for_level1(groups.first)
@@ -29,7 +33,7 @@ class Report < ActiveRecord::Base
     deputy.update_last_report_at!
 
     if report = first(:conditions => {:group_id => group.id, :deputy_id => deputy.id})
-      report.historic_values.create!(:value => report.value, :reported_at => report.reported_at)
+      report.historic_values.create!(report.attributes.slice('reported_at', 'value', 'current_error_level'))
       report.update_attributes!(:value => value, :reported_at => Time.now)
     else
       report = create!(:value => value, :group => group, :deputy => deputy, :reported_at => Time.now)
