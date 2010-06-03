@@ -4,6 +4,11 @@ class Plugin < ActiveRecord::Base
 
   validates_presence_of :code
   validates_uniqueness_of :name
+  validate do
+    if error = self.class.syntax_error(code)
+      errors.add(:code, error)
+    end
+  end
   before_validation :download_code, :on => :create
 
   def self.names
@@ -15,5 +20,11 @@ class Plugin < ActiveRecord::Base
   def download_code
     return unless url.present?
     self.code = open(url).read
+  end
+
+  def self.syntax_error(code)
+    eval("BEGIN {return false}\n#{code}", nil, 'Plugin code', 0) 
+  rescue Exception
+    $!.message
   end
 end
