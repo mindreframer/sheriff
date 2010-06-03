@@ -7,13 +7,12 @@
     <%= csrf_meta_tag %>
   </head>
   <body>
-    <ul>
-      <% [Group, Report, Deputy, Alert, Plugin].each do |type| %>
-        <li>
-          <%= link_to type.to_s.pluralize, type %>
-        </li>
+    <div>
+      <% [Report, Deputy, Alert, Plugin].each do |type| %>
+        <div class="left" style="padding-right: 20px"><%= link_to type.to_s.pluralize, type %></div>
       <% end %>
-    </ul>
+    </div>
+    <%= clearer %>
 
     <%= yield(:content).presence || yield %>
   </body>

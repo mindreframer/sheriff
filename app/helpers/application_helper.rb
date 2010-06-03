@@ -5,7 +5,7 @@ module ApplicationHelper
 
   def error_level(object)
     case object
-    when Deputy, Group, Report then object.current_error_level
+    when Deputy, Group, Report, Validation then object.current_error_level
     when Alert then object.error_level
     end
   end
@@ -44,5 +44,9 @@ module ApplicationHelper
 
   def time_units_for_select(options={})
     IntervalAccessors::UNITS.map(&:reverse).reject{|x,y| (options[:without]||[]).include?(x) }
+  end
+
+  def clearer
+    content_tag :div, '', :class => 'clearer'
   end
 end

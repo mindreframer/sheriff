@@ -8,6 +8,10 @@
 .bold{
   font-weight: bold;
 }
+.left{
+  float:left;
+}
+.clearer{clear: both}
 
 .error_level_0, .error_level_0 td{
   background: white;

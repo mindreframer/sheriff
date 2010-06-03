@@ -6,6 +6,7 @@ class Report < ActiveRecord::Base
   belongs_to :deputy
 
   has_many :historic_values, :dependent => :destroy, :order => 'reported_at desc'
+  has_many :alerts, :dependent => :destroy, :order => 'id desc'
 
   # TODO use validations <-> controller
   NESTED_VALIDATIONS = [:run_every_validation, :run_between_validation, :value_validation]
