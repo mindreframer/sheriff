@@ -3,15 +3,13 @@ class Report < ActiveRecord::Base
   belongs_to :deputy
 
   has_many :historic_values, :dependent => :destroy, :order => 'reported_at desc'
-  
+
+  # TODO use validations <-> controller
   NESTED_VALIDATIONS = [:run_every_validation, :run_between_validation, :value_validation]
   NESTED_VALIDATIONS.each{|v| has_one v}
   accepts_nested_attributes_for *NESTED_VALIDATIONS
 
-  # TODO STI?
-  def validations
-    NESTED_VALIDATIONS.map{|x| send(x)}.compact
-  end
+  has_many :validations
 
   validates_uniqueness_of :group_id, :scope => :deputy_id
 
