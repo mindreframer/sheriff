@@ -1,6 +1,10 @@
 module ApplicationHelper
-  def color(object)
-    {0 => 'white', 1 => 'yellow', 2 => 'orange', 3 => 'red'}[object.current_error_level]
+  def error_attribute(object)
+    raw(%{class="#{error_level object}"})
+  end
+
+  def error_level(object)
+    "error_level_#{object.current_error_level}"
   end
 
   def detailed_time(time)

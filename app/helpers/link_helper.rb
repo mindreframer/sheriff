@@ -4,7 +4,8 @@ module LinkHelper
   end
 
   def link_to_edit(object, options={})
-    link_to 'edit', edit_polymorphic_path(object), options
+    text = options.delete(:text)||'edit'
+    link_to text, edit_polymorphic_path(object), options
   end
 
   def name_for_object(object)

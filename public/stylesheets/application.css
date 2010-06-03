@@ -8,3 +8,16 @@
 .bold{
   font-weight: bold;
 }
+
+.error_level_0{
+  background: white;
+}
+.error_level_1{
+  background: yellow;
+}
+.error_level_2{
+  background: orange;
+}
+.error_level_3{
+  background: red;
+}
