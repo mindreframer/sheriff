@@ -26,7 +26,7 @@ describe RunEveryValidation do
       alert = Alert.last
       alert.validation.should == @validation
       alert.report.should == @validation.report
-      alert.severity.should == @validation.severity
+      alert.error_level.should == @validation.error_level
     end
 
     it "warns if multiple values where reported" do
@@ -39,7 +39,7 @@ describe RunEveryValidation do
       alert = Alert.last
       alert.validation.should == @validation
       alert.report.should == @validation.report
-      alert.severity.should == @validation.severity
+      alert.error_level.should == @validation.error_level
     end
 
     it "does not warn if 1 value was reported" do

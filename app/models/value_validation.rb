@@ -1,4 +1,4 @@
-class ValueValidation < ActiveRecord::Base
+class ValueValidation < Validation
   belongs_to :report
 
   def value
@@ -26,6 +26,6 @@ class ValueValidation < ActiveRecord::Base
     end
     return if matches
 
-    Alert.create(:message => "Value did not match #{report.value.inspect} <-> #{value.inspect}", :severity => severity, :validation => self, :report => report)
+    Alert.create(:message => "Value did not match #{report.value.inspect} <-> #{value.inspect}", :error_level => error_level, :validation => self, :report => report)
   end
 end

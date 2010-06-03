@@ -18,7 +18,7 @@
               <%= validation_form.text_field :end_hms %>
             <% end %>
           </td>
-          <td>warn via <%= validation_form.select :severity, [['Log', 0], ['Email', 1], ['Sms',2]] %></td>
+          <td>warn via <%= validation_form.select :error_level, [['Log', 0], ['Email', 1], ['Sms',2]] %></td>
         <% end %>
       </tr>
     <% end %>

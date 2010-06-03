@@ -9,10 +9,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100602153214) do
+ActiveRecord::Schema.define(:version => 20100603075409) do
 
   create_table "alerts", :force => true do |t|
-    t.integer  "severity",        :null => false
+    t.integer  "error_level",     :null => false
     t.string   "message",         :null => false
     t.integer  "validation_id",   :null => false
     t.string   "validation_type", :null => false
@@ -79,27 +79,15 @@ ActiveRecord::Schema.define(:version => 20100602153214) do
   add_index "reports", ["deputy_id"], :name => "index_reports_on_deputy_id"
   add_index "reports", ["group_id", "deputy_id"], :name => "index_reports_on_group_id_and_deputy_id", :unique => true
 
-  create_table "run_between_validations", :force => true do |t|
-    t.integer  "start_seconds", :null => false
-    t.integer  "end_seconds",   :null => false
-    t.integer  "severity",      :null => false
-    t.integer  "report_id",     :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "run_every_validations", :force => true do |t|
-    t.integer  "interval",   :null => false
-    t.integer  "severity",   :null => false
-    t.integer  "report_id",  :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "value_validations", :force => true do |t|
-    t.string   "value",      :null => false
-    t.integer  "severity",   :null => false
-    t.integer  "report_id",  :null => false
+  create_table "validations", :force => true do |t|
+    t.integer  "start_seconds",       :default => 0, :null => false
+    t.integer  "end_seconds",         :default => 0, :null => false
+    t.integer  "error_level",                        :null => false
+    t.integer  "current_error_level", :default => 0, :null => false
+    t.integer  "report_id",                          :null => false
+    t.integer  "interval",            :default => 0, :null => false
+    t.string   "type",                               :null => false
+    t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -21,20 +21,20 @@ end
 
 Factory.define(:value_validation) do |f|
   f.association :report
-  f.severity 1
+  f.error_level 1
   f.value 22
 end
 
 Factory.define(:run_between_validation) do |f|
   f.association :report
-  f.severity 1
+  f.error_level 1
   f.start_seconds 60*60
   f.end_seconds 2*60*60
 end
 
 Factory.define(:run_every_validation) do |f|
   f.association :report
-  f.severity 1
+  f.error_level 1
   f.interval 60*60
 end
 

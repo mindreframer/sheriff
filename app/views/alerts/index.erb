@@ -2,7 +2,7 @@
   <% collection.each do |alert| %>
     <tr>
       <td><%= alert.created_at.to_s(:db) %></td>
-      <td><b><%= alert.severity %></b></td>
+      <td><b><%= alert.error_level %></b></td>
       <td><%= alert.message %></td>
       <td><%= link_to_object alert.report %></td>
     </tr>

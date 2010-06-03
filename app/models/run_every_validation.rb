@@ -1,9 +1,9 @@
-class RunEveryValidation < ActiveRecord::Base
+class RunEveryValidation < Validation
   include IntervalAccessors
   belongs_to :report
 
   def check!
-    alert_options = {:severity => severity, :validation => self, :report => report}
+    alert_options = {:error_level => error_level, :validation => self, :report => report}
     interval_as_text = "#{(Time.current - interval).to_s(:db)}..#{Time.current.to_s(:db)}"
 
     if (report.reported_at + buffer) < interval.seconds.ago
