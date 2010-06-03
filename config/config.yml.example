@@ -3,18 +3,17 @@ common: &common
   sms_recipients: 1111111111
   sms_user: my_user
   sms_password: my_password
+  send_sms: false
 
 test:
   <<: *common
-  send_sms: false
 
 development:
   <<: *common
-  send_sms: true
 
 staging:
   <<: *common
-  send_sms: true
+  email_recipients: asda@asdsad.com
 
 production:
   <<: *common
