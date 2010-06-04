@@ -1,6 +1,7 @@
 .bundle
 log/*.log
 tmp/**/*
+.rvmrc
 config/deploy/staging.rb
 env
 config/database.yml
