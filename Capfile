@@ -53,7 +53,7 @@ namespace :fix do
 
   desc "update code without restart"
   task :update_without_restart do
-    run "cd #{current_path} && git fetch origin #{branch} && git pull origin #{branch}"
+    run "cd #{current_path} && git checkout . && git fetch origin #{branch} && git pull origin #{branch}"
   end
   after 'fix:update', 'deploy:copy_config_files'
 
