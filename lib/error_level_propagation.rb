@@ -2,6 +2,7 @@ module ErrorLevelPropagation
   def self.included(base)
     base.class_eval do
       after_update :propagate_error_level_to_parent, :if => :current_error_level_changed?
+      after_destroy :propagate_error_level_to_parent
     end
   end
 

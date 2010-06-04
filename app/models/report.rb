@@ -30,7 +30,7 @@ class Report < ActiveRecord::Base
     deputy.update_last_report_at!
 
     if report = first(:conditions => {:group_id => group.id, :deputy_id => deputy.id})
-      report.historic_values.create!(report.attributes.slice('reported_at', 'value', 'current_error_level'))
+      report.store_state_as_historic_value
       report.update_attributes!(:value => value, :reported_at => Time.now)
     else
       report = create!(:value => value, :group => group, :deputy => deputy, :reported_at => Time.now)
@@ -39,5 +39,11 @@ class Report < ActiveRecord::Base
     report.validations.each(&:check!)
 
     report
+  end
+
+  def store_state_as_historic_value
+    historic_values.create!(report.attributes.slice('reported_at', 'value', 'current_error_level'))
+    # keep last 30 values
+    (historic_values.sort_by(&:reported_at).revert[30..-1]||[]).each(&:destroy)
   end
 end

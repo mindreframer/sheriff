@@ -93,4 +93,18 @@ describe ValueValidation do
       ValueValidation.new.value.should == nil
     end
   end
+
+  describe :adjust_current_error_level do
+    it "adjusts to new error level when in error state" do
+      validation = Factory(:value_validation, :error_level => 2, :current_error_level => 2)
+      validation.update_attribute(:error_level, 1)
+      validation.current_error_level.should == 1
+    end
+
+    it "stays the same when not in error state" do
+      validation = Factory(:value_validation, :error_level => 2, :current_error_level => 0)
+      validation.update_attribute(:error_level, 1)
+      validation.current_error_level.should == 0
+    end
+  end
 end
