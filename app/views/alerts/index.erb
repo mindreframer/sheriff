@@ -1,3 +1,4 @@
+<%= will_paginate collection %>
 <table>
   <% collection.each do |alert| %>
     <tr <%= error_attribute(alert) %>>
@@ -7,3 +8,4 @@
     </tr>
   <% end %>
 </table>
+<%= will_paginate collection %>

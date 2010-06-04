@@ -1,4 +1,5 @@
 <%= link_to_new %>
+<%= will_paginate collection %>
 <table>
   <% collection.each do |plugin| %>
     <tr>
@@ -7,3 +8,4 @@
     </tr>
   <% end %>
 </table>
+<%= will_paginate collection %>
