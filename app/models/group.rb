@@ -1,4 +1,6 @@
 class Group < ActiveRecord::Base
+  include ErrorLevelPropagation
+
   belongs_to :group
   has_many :children, :class_name => 'Group', :order => 'name asc', :dependent => :destroy
   has_many :reports, :dependent => :destroy
@@ -8,7 +10,7 @@ class Group < ActiveRecord::Base
   scope :level1, :conditions => {:group_id => nil}, :order => 'name asc'
 
   def full_name
-    "#{group.name}.#{name}"
+    group ? "#{group.name}.#{name}" : name
   end
 
   def self.find_or_create_for_level1(name)

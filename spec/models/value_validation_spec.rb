@@ -15,7 +15,7 @@ describe ValueValidation do
       alert = Alert.last
       alert.validation.should == @validation
       alert.report.should == @validation.report
-      alert.severity.should == @validation.severity
+      alert.error_level.should == @validation.error_level
     end
 
     it "does warns when value matches" do
@@ -85,6 +85,26 @@ describe ValueValidation do
       it "converts #{ruby.class}" do
         ValueValidation.new(:value_as_text => string).value.should == ruby
       end
+    end
+  end
+
+  describe :value do
+    it "is nil when nil" do
+      ValueValidation.new.value.should == nil
+    end
+  end
+
+  describe :adjust_current_error_level do
+    it "adjusts to new error level when in error state" do
+      validation = Factory(:value_validation, :error_level => 2, :current_error_level => 2)
+      validation.update_attribute(:error_level, 1)
+      validation.current_error_level.should == 1
+    end
+
+    it "stays the same when not in error state" do
+      validation = Factory(:value_validation, :error_level => 2, :current_error_level => 0)
+      validation.update_attribute(:error_level, 1)
+      validation.current_error_level.should == 0
     end
   end
 end

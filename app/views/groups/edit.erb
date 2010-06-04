@@ -1,11 +1,11 @@
-<h1><%= @group.name %></h1>
 <table>
+  <tr>
+    <th></th>
+    <th>Deputy</th>
+    <th>Value</th>
+    <th>time</th>
+  </tr>
   <% @group.reports(:join => :deputy, :include => :deputy, :sort => 'deputies.name').each do |report| %>
-    <tr>
-      <td><%= link_to_object report.deputy %></td>
-      <td><%= report.value %></td>
-      <td><%= report.updated_at.to_s(:db) %></td>
-      <td><%= link_to_edit report %></td>
-    </tr>
+    <%= render :partial => 'reports/report_row', :locals => {:report => report, :hide_group => true} %>
   <% end %>
 </table>

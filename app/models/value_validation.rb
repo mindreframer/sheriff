@@ -1,13 +1,7 @@
-class ValueValidation < ActiveRecord::Base
+class ValueValidation < Validation
+  include SerializedValue
+  
   belongs_to :report
-
-  def value
-    YAML.load(read_attribute(:value))
-  end
-
-  def value=(x)
-    write_attribute(:value, x.to_yaml)
-  end
 
   def value_as_text
     value.inspect
@@ -23,8 +17,12 @@ class ValueValidation < ActiveRecord::Base
     when Array, Range then value.include?(report.value)
     else report.value == value
     end
-    return if matches
 
-    Alert.create(:message => "Value did not match #{report.value.inspect} <-> #{value.inspect}", :severity => severity, :validation => self, :report => report)
+    if matches
+      update_attributes!(:current_error_level => 0)
+    else
+      update_attributes!(:current_error_level => error_level)
+      Alert.create(:message => "Value did not match #{report.value.inspect} <-> #{value.inspect}", :error_level => error_level, :validation => self, :report => report)
+    end
   end
 end

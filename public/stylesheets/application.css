@@ -8,3 +8,20 @@
 .bold{
   font-weight: bold;
 }
+.left{
+  float:left;
+}
+.clearer{clear: both}
+
+.error_level_0, .error_level_0 td{
+  background: white;
+}
+.error_level_1, .error_level_1 td{
+  background: yellow;
+}
+.error_level_2, .error_level_2 td{
+  background: orange;
+}
+.error_level_3, .error_level_3 td{
+  background: red;
+}

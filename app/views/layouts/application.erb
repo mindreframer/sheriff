@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Sheriff</title>
+    <title><%= title %></title>
     <%= stylesheet_link_tag :all %>
     <%= javascript_include_tag :jquery %>
     <%= csrf_meta_tag %>
   </head>
   <body>
-    <ul>
+    <div>
       <% [Group, Report, Deputy, Alert, Plugin].each do |type| %>
-        <li>
-          <%= link_to type.to_s.pluralize, type %>
-        </li>
+        <div class="left" style="padding-right: 20px"><%= link_to type.to_s.pluralize, type %></div>
       <% end %>
-    </ul>
+    </div>
+    <%= clearer %>
 
     <%= yield(:content).presence || yield %>
   </body>

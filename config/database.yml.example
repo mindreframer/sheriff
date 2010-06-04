@@ -15,3 +15,9 @@ production:
   database: sheriff_production
   pool: 5
   timeout: 5000
+
+staging:
+  adapter: mysql
+  database: sheriff_staging
+  pool: 5
+  timeout: 5000

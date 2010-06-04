@@ -50,5 +50,7 @@ module Sheriff
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    config.consider_all_requests_local = true
   end
 end

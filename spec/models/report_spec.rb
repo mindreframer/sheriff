@@ -3,7 +3,7 @@ require 'spec/spec_helper'
 describe Report do
   describe :report! do
     before do
-      [Group, Report, Deputy].each(&:delete_all)
+      [Group, Report, Deputy, Validation].each(&:delete_all)
     end
 
     it "updates an existing report" do
@@ -40,6 +40,13 @@ describe Report do
       }.should change(Deputy, :count).by(0)
     end
 
+    it "updates deputies last_report_at" do
+      group = Factory(:group_l2)
+      deputy = Factory(:deputy, :last_report_at =>10.minutes.ago)
+      Report.report!('12', [group.group.name, group.name], :address => '123.123.123.123', :name => deputy.name)
+      deputy.reload.last_report_at.should be_close(Time.current, 3)
+    end
+
     it "creates a groups if none exist" do
       deputy = Factory(:deputy)
       lambda{
@@ -48,6 +55,63 @@ describe Report do
       groups = Group.all(:limit => 2, :order => 'id desc').reverse
       groups.map(&:name).should == ['parent', 'child']
       groups[1].group.should == groups[0]
+    end
+
+    it "propagates error level" do
+      report = Factory(:report)
+      Factory(:value_validation, :value => 1, :error_level => 2, :report => report)
+      Report.report!(111, [report.group.group.name, report.group.name], :address => report.deputy.address, :name => 'something')
+
+      report.reload
+      report.current_error_level.should == 2
+      report.group.reload.current_error_level.should == 2
+      report.group.group.reload.current_error_level.should == 2
+    end
+
+    it "removes error levels" do
+      # failed validation
+      group = Factory(:group_l2, :current_error_level => 3)
+      report = Factory(:report, :group => group, :current_error_level => 3)
+      validation = Factory(:value_validation, :value => 1, :current_error_level => 3, :error_level => 3, :report => report)
+
+      # now ok again ...
+      Report.report!(1, [report.group.group.name, report.group.name], :address => report.deputy.address, :name => 'something')
+      report.reload
+
+      report.validations.map(&:current_error_level).should == [0]
+      report.current_error_level.should == 0
+      report.group.reload.current_error_level.should == 0
+      report.group.group.reload.current_error_level.should == 0
+    end
+
+    it "removes not all error levels" do
+      # failed validation, one with 3, one with 2
+      group = Factory(:group_l2, :current_error_level => 3)
+      report = Factory(:report, :current_error_level => 3, :group => group)
+      validation = Factory(:value_validation, :value => 1, :current_error_level => 3, :error_level => 3, :report => report)
+      Factory(:report, :current_error_level => 2, :group => group)
+
+      # report with 3 goes green againg ...
+      Report.report!(1, [report.group.group.name, report.group.name], :address => report.deputy.address, :name => 'something')
+      report.reload
+
+      # group stays at 2
+      report.validations.map(&:current_error_level).should == [0]
+      report.current_error_level.should == 0
+      report.group.reload.current_error_level.should == 2
+      report.group.group.reload.current_error_level.should == 2
+    end
+
+    it "does not propage unchanged error levels" do
+      report = Factory(:report, :current_error_level => 3)
+      validation = Factory(:value_validation, :value => 1, :error_level => 2, :report => report)
+      Report.report!(1, [report.group.group.name, report.group.name], :address => report.deputy.address, :name => 'something')
+
+      report.reload
+      validation.current_error_level.should == 0
+      report.current_error_level.should == 3
+      report.group.reload.current_error_level.should == 0
+      report.group.group.reload.current_error_level.should == 0
     end
   end
 end

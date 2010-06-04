@@ -26,7 +26,7 @@ describe RunBetweenValidation do
       alert = Alert.last
       alert.validation.should == @validation
       alert.report.should == @validation.report
-      alert.severity.should == @validation.severity
+      alert.error_level.should == @validation.error_level
     end
 
     it "warns when value is before" do
@@ -38,7 +38,7 @@ describe RunBetweenValidation do
       alert = Alert.last
       alert.validation.should == @validation
       alert.report.should == @validation.report
-      alert.severity.should == @validation.severity
+      alert.error_level.should == @validation.error_level
     end
   end
 end

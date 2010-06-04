@@ -1,4 +1,4 @@
-class RunBetweenValidation < ActiveRecord::Base
+class RunBetweenValidation < Validation
   belongs_to :report
 
   def start_hms
@@ -6,7 +6,7 @@ class RunBetweenValidation < ActiveRecord::Base
   end
 
   def start_hms=(x)
-    self.start_time = Time.parse(x).seconds_after_midnight
+    self.start_seconds = Time.parse(x).seconds_after_midnight
   end
 
   def end_hms
@@ -14,7 +14,7 @@ class RunBetweenValidation < ActiveRecord::Base
   end
 
   def end_hms=(x)
-    self.end_time = Time.parse(x).seconds_after_midnight
+    self.end_seconds = Time.parse(x).seconds_after_midnight
   end
 
   def check!
@@ -22,7 +22,7 @@ class RunBetweenValidation < ActiveRecord::Base
 
     Alert.create(
       :message => "Did not run in expected interval #{Time.seconds_after_midnight.to_hms} <-> #{start_hms}..#{end_hms}",
-      :severity => severity, :validation => self, :report => report
+      :error_level => error_level, :validation => self, :report => report
     )
   end
 end

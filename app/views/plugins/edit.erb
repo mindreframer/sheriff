@@ -1,5 +1,16 @@
-<h1><%= @plugin.new_record? ? 'New Plugin' : @plugin.name %></h1>
-<% form_for @plugin do |f| %>
+<h3>Run by</h3>
+<table>
+  <% @plugin.deputy_plugins.each do |deputy_plugin| %>
+    <tr>
+      <td><%= link_to_object deputy_plugin.deputy %></td>
+      <td>every <%= deputy_plugin.humanized_interval %></td>
+    </tr>
+  <% end %>
+</table>
+
+<h3>Code</h3>
+<%= form_for @plugin do |f| %>
+  <%= f.error_messages %>
   <table>
     <tr>
       <td>Name</td><td><%= f.text_field :name %></td>
@@ -8,7 +19,7 @@
       <td>Url</td><td><%= f.text_field :url, :size => '80' %></td>
     </tr>
     <tr>
-      <td>Code</td><td><%= f.text_area :code, :size => '80x30' %></td>
+      <td>Code</td><td><%= f.text_area :code, :size => '80x20' %></td>
     </tr>
   </table>
   <%= f.submit %>

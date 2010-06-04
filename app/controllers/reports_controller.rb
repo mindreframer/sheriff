@@ -1,43 +1,39 @@
 class ReportsController < RestController
   layout 'group_sidebar'
-  before_filter :convert_validation_interval, :add_or_remove_validations, :only => :update
+  before_filter :convert_validation_interval, :remove_inactive_validations, :only => :update
 
   def create
-    remote_host = request.remote_host.presence || "unknown_host_#{rand(1000000)}"
-    Report.report!(params[:value], [params[:level1], params[:level2]], :address => request.ip, :name => remote_host)
+    address, name = Deputy.extract_address_and_name(request)
+    value = self.class.convert_value_from_params(params[:value])
+    Report.report!(value, [params[:level1], params[:level2]], :name => name, :address => address)
     render :text => 'OK'
   end
 
   private
 
-  def add_or_remove_validations
-    Report::NESTED_VALIDATIONS.each do |validation_name|
-      next unless params[:report][validation_name]
-      validation = resource.send(validation_name)
-      
-      if params[:report][validation_name].delete(:active)
-        if validation
-          validation.attributes = params[:report][validation_name]
-        else
-          resource.send("build_#{validation_name}", params[:report][validation_name])
-        end
-      else
-        validation.try(:destroy)
-      end
-      params[:report].delete(validation_name)
+  def remove_inactive_validations
+    (params[:report][:validations_attributes]||{}).each do |index, attributes|
+      next if attributes.delete(:active)
+      attributes[:_destroy] = true
     end
   end
 
   def convert_validation_interval
-    validation = params[:report][:run_every_validation] || return
-    if validation[:interval_unit].present?
-      validation[:interval] = validation[:interval_value].to_i * validation[:interval_unit].to_i
+    (params[:report][:validations_attributes]||{}).each do |index, attributes|
+      convert_interval attributes if attributes[:type] == 'RunEveryValidation'
     end
-    validation.delete :interval_value
-    validation.delete :interval_unit
   end
 
   def collection
     @collection ||= Report.paginate(:page => params[:page], :per_page => 50, :include => [{:group => :group}, :deputy])
+  end
+
+  def self.convert_value_from_params(value)
+    case value.to_s.strip
+    when /^\d+$/ then value.to_i
+    when /^\d+\.\d+$/ then value.to_f
+    when /^['"](.+)['"]/ then $1
+    else value
+    end
   end
 end

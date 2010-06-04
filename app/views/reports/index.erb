@@ -1,17 +1,21 @@
-<% form_tag '/reports' do %>
-  Group: <%= text_field_tag :level1, '' %>/<%= text_field_tag :level2, '' %>
-  Value: <%= text_field_tag :value, '' %>
-  <%= submit_tag 'report' %>
-<% end %>
-
 <table>
+  <tr>
+    <th></th>
+    <th>Group</th>
+    <th>Reporter</th>
+    <th>Value</th>
+    <th>at</th>
+  </tr>
   <% collection.each do |report| %>
-    <tr>
-      <td><%= link_to_object report.group %></td>
-      <td><%= link_to_object report.deputy %></td>
-      <td><%= report.value %></td>
-      <td><%= report.updated_at.to_s(:db) %></td>
-      <td><%= link_to_edit report %></td>
-    </tr>
+    <%= render :partial => 'report_row', :locals => {:report => report} %>
   <% end %>
 </table>
+
+<br />
+<br />
+
+<% form_tag '/reports' do %>
+  Group: <%= text_field_tag :level1, '' %>.<%= text_field_tag :level2, '' %>
+  Value: <%= text_field_tag :value, '' %>
+  <%= submit_tag 'Test-report' %>
+<% end %>
