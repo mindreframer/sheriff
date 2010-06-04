@@ -1,7 +1,10 @@
 <% hide_group ||= false %>
 <% hide_deputy ||= false %>
 <tr <%= error_attribute(report) %>>
-  <td><%= link_to_edit report, :text => 'Details' %></td>
+  <td>
+    <%= short_validations report %>
+    <%= link_to_edit report, :text => 'Details' %>
+  </td>
   <% unless hide_group %>
     <td><%= link_to_object report.group %></td>
   <% end %>

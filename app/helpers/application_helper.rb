@@ -15,6 +15,27 @@ module ApplicationHelper
     "#{time.to_s(:db)} : #{time_ago time}"
   end
 
+  def short_validations(report)
+    report.validations.map do |v|
+      uppercase_letters(v.type) +
+      validation_value_info(v) +
+      ":<span title='error level #{v.error_level}'>#{v.error_level}</span>"
+    end.sort.join(' ').html_safe
+  end
+
+  def uppercase_letters(name)
+    letters = name.split('').select{|c|c =~ /[A-Z]/}[0..-2].join('')
+    "<span title='#{name}'>#{letters}</span>"
+  end
+
+  def validation_value_info(validation)
+    case validation
+    when ValueValidation then "<span title='#{validation.value_as_text}'>:#{validation.value_as_text.first(10)}</span>"
+    when RunEveryValidation then "<span title='#{validation.humanized_interval}'>:#{validation.interval_value}#{validation.interval_unit_as_text.first.downcase}</span>"
+    when RunEveryValidation then ""
+    end
+  end
+
   def time_ago(time)
     return unless time
     "#{time_ago_in_words time} ago"
