@@ -1,5 +1,21 @@
 <% form_for @deputy do |f| %>
   <%= f.error_messages %>
+
+  <table>
+    <tr>
+      <td>Human Name</td>
+      <td><%= f.text_field :human_name %></td>
+    </tr>
+    <tr>
+      <td>Name (Used for recognition!)</td>
+      <td><%= f.text_field :name %></td>
+    </tr>
+    <tr>
+      <td>Address (Used for recognition!)</td>
+      <td><%= f.text_field :address %></td>
+    </tr>
+  </table>
+
   <% @deputy.deputy_plugins.build %>
   <h3>Plugins</h3>
   <%= f.fields_for :deputy_plugins do |child| %>

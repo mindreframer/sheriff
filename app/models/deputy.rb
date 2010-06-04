@@ -7,11 +7,12 @@ class Deputy < ActiveRecord::Base
 
   validates_uniqueness_of :address
   validates_uniqueness_of :name, :if => lambda{|d| d.name != UNKNOWN }
+  validates_uniqueness_of :human_name, :allow_blank => true
 
   UNKNOWN = 'unknown_host'
 
   def full_name
-    "#{name} (#{address})"
+    "#{human_name.presence || name} (#{address})"
   end
 
   def update_last_report_at!
