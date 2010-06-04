@@ -12,23 +12,16 @@ class ReportsController < RestController
   private
 
   def remove_inactive_validations
-    params[:report][:validations_attributes].each do |index, attributes|
-      if attributes.delete(:active)
-        type = attributes[:type].constantize
-        if attributes[:id]
-          type.find(params[:id]).update_attributes!(attributes)
-        else
-          type.create!(attributes.merge(:report => resource))
-        end
-      elsif attributes[:id]
-        Validation.find(attributes[:id]).destroy
-      end
-      params[:report][:validations_attributes].delete(index)
+    (params[:report][:validations_attributes]||{}).each do |index, attributes|
+      next if attributes.delete(:active)
+      attributes[:_destroy] = true
     end
   end
 
   def convert_validation_interval
-    convert_interval params[:report][:run_every_validation_attributes]
+    (params[:report][:validations_attributes]||{}).each do |index, attributes|
+      convert_interval attributes if attributes[:type] == 'RunEveryValidation'
+    end
   end
 
   def collection
