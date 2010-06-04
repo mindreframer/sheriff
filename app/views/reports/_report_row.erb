@@ -3,6 +3,8 @@
 <tr <%= error_attribute(report) %>>
   <td>
     <%= short_validations report %>
+  </td>
+  <td>
     <%= link_to_edit report, :text => 'Details' %>
   </td>
   <% unless hide_group %>

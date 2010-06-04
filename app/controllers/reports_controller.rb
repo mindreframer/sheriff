@@ -25,7 +25,7 @@ class ReportsController < RestController
   end
 
   def collection
-    @collection ||= Report.paginate(:page => params[:page], :per_page => 50, :order => 'id desc', :include => [{:group => :group}, :deputy])
+    @collection ||= Report.paginate(:page => params[:page], :per_page => 50, :order => 'id desc', :include => [{:group => :group}, :deputy, :validations])
   end
 
   def self.convert_value_from_params(value)
