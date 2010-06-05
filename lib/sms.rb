@@ -3,9 +3,8 @@ require 'open-uri'
 require 'cgi'
 
 class Sms
-  def self.send(message)
+  def self.send(message, recipients)
     message = CGI.escape(message)
-    recipients = CFG[:sms_recipients].split(',')
     user = CFG[:sms_user]
     password = CFG[:sms_password]
 
@@ -24,4 +23,6 @@ class Sms
 end
 
 # whe executed directly
-Sms.send(ARGV[0]||raise('needs message!')) if __FILE__ == $0
+if __FILE__ == $0
+  Sms.send(ARGV[0]||raise('needs message!'), (ARGV[1]||CFG[:sms_recipients]).split(','))
+end
