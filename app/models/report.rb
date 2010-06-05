@@ -42,7 +42,10 @@ class Report < ActiveRecord::Base
   end
 
   def store_state_as_historic_value
-    historic_values.create!(attributes.slice('reported_at', 'value', 'current_error_level'))
+    historic = historic_values.build
+    ['reported_at', 'value', 'current_error_level'].each{|v| historic[v] = self[v] }
+    historic.save!
+
     # keep last 30 values
     (historic_values.sort_by(&:reported_at).reverse[30..-1]||[]).each(&:destroy)
   end

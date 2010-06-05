@@ -102,7 +102,7 @@ describe Report do
       report.group.group.reload.current_error_level.should == 2
     end
 
-    it "does not propage unchanged error levels" do
+    it "does not propagate unchanged error levels" do
       report = Factory(:report, :current_error_level => 3)
       validation = Factory(:value_validation, :value => 1, :error_level => 2, :report => report)
       Report.report!(1, [report.group.group.name, report.group.name], :address => report.deputy.address, :name => 'something')
@@ -112,6 +112,18 @@ describe Report do
       report.current_error_level.should == 3
       report.group.reload.current_error_level.should == 0
       report.group.group.reload.current_error_level.should == 0
+    end
+  end
+
+  describe :store_state_as_historic_value do
+    it "creates a historic value from current state" do
+      report = Factory(:report)
+      lambda{
+        report.store_state_as_historic_value
+      }.should change(HistoricValue, :count).by(+1)
+      historic = report.historic_values.last
+      historic.value.should == report.value
+      historic.reported_at.to_s.should == report.reported_at.to_s
     end
   end
 end
