@@ -31,9 +31,9 @@ class Report < ActiveRecord::Base
 
     if report = first(:conditions => {:group_id => group.id, :deputy_id => deputy.id})
       report.store_state_as_historic_value
-      report.update_attributes!(:value => value, :reported_at => Time.now)
+      report.update_attributes!(:value => value, :reported_at => Time.current)
     else
-      report = create!(:value => value, :group => group, :deputy => deputy, :reported_at => Time.now)
+      report = create!(:value => value, :group => group, :deputy => deputy, :reported_at => Time.current)
     end
 
     report.validations.each(&:check!)
