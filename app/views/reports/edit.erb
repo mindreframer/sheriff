@@ -17,6 +17,7 @@
           <% when RunEveryValidation %>
             <%= vf.text_field :interval_value %>
             <%= vf.select :interval_unit, time_units_for_select %>
+            <%= vf.check_box :only_run_once %> <%= vf.label :only_run_once, 'once' %>
           <% when RunBetweenValidation %>
             <%= vf.text_field :start_hms %>
             <%= vf.text_field :end_hms %>

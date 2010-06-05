@@ -10,7 +10,7 @@ class RunEveryValidation < Validation
       Alert.create(alert_options.merge(
         :message => "Did not run in expected interval: #{report.reported_at.to_s(:db)} <-> #{interval_as_text}"
       ))
-    elsif historic = report.historic_values.first
+    elsif only_run_once? and historic = report.historic_values.first
       if (historic.reported_at - buffer) >= interval.seconds.ago
         Alert.create(alert_options.merge(
           :message => "Reported more than once in interval: #{report.reported_at.to_s(:db)} + #{historic.reported_at.to_s(:db)} <-> #{interval_as_text}"

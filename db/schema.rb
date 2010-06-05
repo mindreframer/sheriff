@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100604140805) do
+ActiveRecord::Schema.define(:version => 20100605132134) do
 
   create_table "alerts", :force => true do |t|
     t.integer  "error_level",     :null => false
@@ -85,16 +85,17 @@ ActiveRecord::Schema.define(:version => 20100604140805) do
   add_index "reports", ["group_id", "deputy_id"], :name => "index_reports_on_group_id_and_deputy_id", :unique => true
 
   create_table "validations", :force => true do |t|
-    t.integer  "start_seconds",       :default => 0, :null => false
-    t.integer  "end_seconds",         :default => 0, :null => false
-    t.integer  "error_level",                        :null => false
-    t.integer  "current_error_level", :default => 0, :null => false
-    t.integer  "report_id",                          :null => false
-    t.integer  "interval",            :default => 0, :null => false
-    t.string   "type",                               :null => false
+    t.integer  "start_seconds",       :default => 0,     :null => false
+    t.integer  "end_seconds",         :default => 0,     :null => false
+    t.integer  "error_level",                            :null => false
+    t.integer  "current_error_level", :default => 0,     :null => false
+    t.integer  "report_id",                              :null => false
+    t.integer  "interval",            :default => 0,     :null => false
+    t.string   "type",                                   :null => false
     t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "only_run_once",       :default => false, :null => false
   end
 
 end

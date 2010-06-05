@@ -5,7 +5,7 @@ describe RunEveryValidation do
     before do
       RunEveryValidation.delete_all
       Alert.delete_all
-      @validation = Factory(:run_every_validation)
+      @validation = Factory(:run_every_validation, :only_run_once => true)
       @validation.report.reported_at.seconds_after_midnight
       @buffer = 10
       @validation.stub!(:buffer).and_return @buffer
