@@ -15,10 +15,9 @@ class ValueValidation < Validation
     end
 
     if matches
-      update_attributes!(:current_error_level => 0)
+      validation_passed!
     else
-      update_attributes!(:current_error_level => error_level)
-      Alert.create(:message => "Value did not match #{report.value.inspect} <-> #{value.inspect}", :error_level => error_level, :validation => self, :report => report)
+      validation_failed! "Value did not match #{report.value.inspect} <-> #{value.inspect}"
     end
   end
 end

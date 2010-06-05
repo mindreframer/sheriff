@@ -104,11 +104,11 @@ describe Report do
 
     it "does not propagate unchanged error levels" do
       report = Factory(:report, :current_error_level => 3)
-      validation = Factory(:value_validation, :value => 1, :error_level => 2, :report => report)
+      validation = Factory(:value_validation, :value => 2, :error_level => 2, :current_error_level => 2, :report => report)
       Report.report!(1, [report.group.group.name, report.group.name], :address => report.deputy.address, :name => 'something')
 
       report.reload
-      validation.current_error_level.should == 0
+      validation.current_error_level.should == 2
       report.current_error_level.should == 3
       report.group.reload.current_error_level.should == 0
       report.group.group.reload.current_error_level.should == 0
