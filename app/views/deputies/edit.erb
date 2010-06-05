@@ -38,7 +38,7 @@
     <th>Value</th>
     <th>Reported at</th>
   </tr>
-  <% @deputy.reports(:include => [{:group => :group}, {:report => :validations}], :order => 'id desc', :limit => 30).each do |report| %>
+  <% @deputy.reports.all(:include => [{:group => :group}, :validations], :order => 'reported_at desc', :limit => 30).each do |report| %>
     <%= render :partial => 'reports/report_row', :locals => {:report => report, :hide_deputy => true} %>
   <% end %>
 </table>

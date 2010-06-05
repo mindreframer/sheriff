@@ -51,7 +51,7 @@
     </tr>
     <% @report.historic_values_including_current.each do |historic_value| %>
       <tr <%= error_attribute(historic_value) %>>
-        <td><%= historic_value.value %></td>
+        <td><%= historic_value.value_as_text %></td>
         <td><%= detailed_time historic_value.reported_at %></td>
       </tr>
     <% end %>

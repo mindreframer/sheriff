@@ -3,10 +3,6 @@ class ValueValidation < Validation
   
   belongs_to :report
 
-  def value_as_text
-    value.inspect
-  end
-
   def value_as_text=(x)
     self.value = eval(x) # this is evil, but dont tell anyone ok ?
   end

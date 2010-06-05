@@ -6,7 +6,7 @@
     <th>Value</th>
     <th>time</th>
   </tr>
-  <% @group.reports(:join => :deputy, :include => [:deputy, :validations], :sort => 'deputies.name').each do |report| %>
+  <% @group.reports.all(:include => [:deputy, :validations], :order => 'reported_at desc').each do |report| %>
     <%= render :partial => 'reports/report_row', :locals => {:report => report, :hide_group => true} %>
   <% end %>
 </table>
