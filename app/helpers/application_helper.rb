@@ -32,7 +32,8 @@ module ApplicationHelper
     case validation
     when ValueValidation then "<span title='#{validation.value_as_text}'>:#{validation.value_as_text.first(10)}</span>"
     when RunEveryValidation then "<span title='#{validation.humanized_interval}'>:#{validation.interval_value}#{validation.interval_unit_as_text.first.downcase}</span>"
-    when RunEveryValidation then ""
+    when RunBetweenValidation then ""
+    else raise "unknown validation #{validation}"    
     end
   end
 
