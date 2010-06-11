@@ -1,7 +1,7 @@
 <ul>
   <% Group.level1.each do |group| %>
     <li <%= error_attribute group %>>
-      <%= group.name %>
+      <%= link_to_object group %>
       <ul>
         <% group.children.each do |child| %>
           <li <%= error_attribute child %>>
