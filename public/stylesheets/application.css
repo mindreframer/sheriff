@@ -26,3 +26,7 @@
 .error_level_3, .error_level_3 td{
   background: red;
 }
+
+ul{
+  padding-left: 10px;
+}
