@@ -5,7 +5,7 @@ class ReportsController < RestController
   def create
     address, name = Deputy.extract_address_and_name(request)
     value = SerializedValue.convert_value_from_params(params[:value])
-    Report.report!(value, [params[:level1], params[:level2]], :name => name, :address => address)
+    Report.report!(value, params[:group].to_s.split('.',2), :name => name, :address => address)
     render :text => 'OK'
   end
 

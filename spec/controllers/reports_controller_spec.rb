@@ -9,7 +9,7 @@ describe ReportsController do
     end
 
     def get_it
-      get :create, :level1 => 'mysql', :level2 => 'connections', :value => '15'
+      get :create, :group => 'mysql.connections', :value => '15'
     end
 
     it "creates a report if none exists" do
