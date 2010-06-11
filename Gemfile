@@ -4,6 +4,7 @@ gem 'rails', '3.0.0.beta3'
 gem 'mysql'
 gem "will_paginate", :git => "git://github.com/mislav/will_paginate.git", :branch => "rails3"
 gem 'inherited_resources'
+gem 'hoptoad_notifier'
 
 group :test do
   gem 'factory_girl', :git => 'git://github.com/thoughtbot/factory_girl.git', :branch => 'rails3'
