@@ -33,6 +33,7 @@ class ReportsController < RestController
     when /^\d+$/ then value.to_i
     when /^\d+\.\d+$/ then value.to_f
     when /^['"](.+)['"]/ then $1
+    when /^[a-zA-z]/ then "'#{value}'" # rails or browser is stupid and converts text entered as "XXX" to XXX
     else value
     end
   end
