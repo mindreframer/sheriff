@@ -4,6 +4,7 @@
 }
 .main{
   float: left;
+  max-width: 1400px;
 }
 .bold{
   font-weight: bold;
