@@ -7,7 +7,7 @@ Sheriff::Application.routes.draw do
   resources :deputies
   resources :plugins
 
-  match "report", :to => "reports#create"
+  match "/notify", :to => "reports#create"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
