@@ -3,9 +3,10 @@ class RunEveryValidation < Validation
   belongs_to :report
 
   def check!
-    interval_as_text = "#{(Time.current - interval).to_s(:db)}..#{Time.current.to_s(:db)}"
+    interval_start = interval.seconds.ago
+    interval_as_text = "#{interval_start.to_s(:db)}..#{Time.current.to_s(:db)}"
 
-    if (report.reported_at + buffer) < interval.seconds.ago
+    if (report.reported_at + buffer) < interval_start
       validation_failed! "Did not run in expected interval: #{report.reported_at.to_s(:db)} <-> #{interval_as_text}"
     elsif only_run_once? and historic = report.historic_values.first
       if (historic.reported_at - buffer) >= interval.seconds.ago
