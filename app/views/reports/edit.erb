@@ -1,8 +1,11 @@
 <% if deputy_plugin = @report.deputy_plugin %>
-  Reported by <%= link_to_object deputy_plugin.plugin %>
-  every <%= deputy_plugin.humanized_interval %>.
-  <br />
+  Reported by <%= link_to_object deputy_plugin.plugin %> @ <%= link_to_object @report.deputy %>
+  every <%= deputy_plugin.humanized_interval %>
+<% else %>
+  Reported by <%= link_to_object @report.deputy %>
 <% end %>
+
+<br />
 
 <%= form_for @report do |f| %>
   <%= f.error_messages %>
