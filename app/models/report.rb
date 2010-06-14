@@ -21,6 +21,11 @@ class Report < ActiveRecord::Base
     [self] + historic_values
   end
 
+  # try to find the plugin that reported
+  def deputy_plugin
+    DeputyPlugin.first(:conditions => {:deputy_id => deputy_id, 'plugins.name' => group.try(:group).try(:name)}, :joins => :plugin)
+  end
+
   def self.report!(value, groups, options={})
     raise if groups.size != 2
     group = Group.find_or_create_for_level1(groups.first)
