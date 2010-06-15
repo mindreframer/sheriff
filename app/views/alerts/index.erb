@@ -1,4 +1,4 @@
-<%= will_paginate collection %>
+<%= will_paginate collection %> <%= link_to 'delete all', delete_all_alerts_path, :method => :delete %>
 <table>
   <% collection.each do |alert| %>
     <tr <%= error_attribute(alert) %>>
