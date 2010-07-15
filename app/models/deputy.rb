@@ -33,7 +33,7 @@ class Deputy < ActiveRecord::Base
   end
 
   def self.extract_address_and_name(request)
-    remote_host = request.remote_host.presence || UNKNOWN
+    remote_host = request.remote_host.presence || request.headers['HTTP_REMOTE_HOST'] ||UNKNOWN
     [request.ip, remote_host]
   end
 end
