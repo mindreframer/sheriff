@@ -34,8 +34,7 @@ class Deputy < ActiveRecord::Base
 
   def self.extract_address_and_name(request)
 
-    remote_host = request.headers['HTTP_REMOTE_HOST'] || request.remote_host.presence || UNKNOWN
-    logger.info "!!!!!!!!!!!!! " + request.headers.inspect if request.ip =~  /\.75/
+    remote_host = request.headers['HTTP_DEPUTY_HOST'] || request.remote_host.presence || UNKNOWN
     [request.ip, remote_host]
   end
 end
