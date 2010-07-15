@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   def authenticate
     if Rails.env.production?
       authenticate_or_request_with_http_basic do |id, password|
-        id == "deputy" && password == "sheriff1rockt"
+        id == CFG[:user] && password == CFG[:password]
       end
     end
   end
