@@ -1,9 +1,16 @@
 <%= will_paginate collection %>
 <table>
+  <th>
+    <td>Name</td>
+    <td>IP</td>
+    <td>Last Report</td>
+    <td>Actions</td>
+  </th>
   <% collection.each do |deputy| %>
     <tr <%= error_attribute(deputy) %>>
       <td><%= link_to_object deputy %></td>
-      <td>Last report <%= time_ago deputy.last_report_at %></td>
+      <td><%= deputy.address %></td>
+      <td><%= time_ago deputy.last_report_at %></td>
       <td><%= link_to_delete deputy, :text => 'x' %></td>
     </tr>
   <% end %>
