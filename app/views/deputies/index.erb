@@ -1,6 +1,9 @@
 <%= will_paginate collection %>
+
+<% form_tag '/deputies/batch' do %>
 <table>
   <th>
+    <td></td>
     <td>Name</td>
     <td>IP</td>
     <td>Last Report</td>
@@ -8,6 +11,7 @@
   </th>
   <% collection.each do |deputy| %>
     <tr <%= error_attribute(deputy) %>>
+      <td><%= check_box_tag 'ids[]', deputy.id, false %></td>
       <td><%= link_to_object deputy %></td>
       <td><%= deputy.address %></td>
       <td><%= time_ago deputy.last_report_at %></td>
@@ -15,4 +19,13 @@
     </tr>
   <% end %>
 </table>
+
+  Run <%= select_options_tag 'deputy_plugin[plugin_name]', [nil] + Plugin.names %>
+  every
+  <%= text_field_tag 'deputy_plugin[interval_value]', '', :size => 5 %>
+  <%= select_options_tag 'deputy_plugin[interval_unit]', time_units_for_select(:without => 'Seconds') %>
+  <%= check_box_with_label 'overwrite', true, false, 'overwrite' %>
+  <%= submit_tag 'for all!' %>
+<% end %>
+
 <%= will_paginate collection %>

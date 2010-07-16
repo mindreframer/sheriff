@@ -8,7 +8,11 @@ Sheriff::Application.routes.draw do
   end
   resources :groups
   resources :reports
-  resources :deputies
+  resources :deputies do
+    collection do
+      post :batch
+    end
+  end
   resources :plugins
 
   match "/notify", :to => "reports#create"
