@@ -3,7 +3,7 @@ class DeputiesController < RestController
   before_filter :convert_plugin_interval, :only => [:update, :create]
 
   def collection
-    @collection ||= resource_class.paginate(:per_page => 20, :page => params[:page], :order => 'CONCAT(COALESCE(human_name,""),name)')
+    @collection ||= resource_class.paginate(:per_page => 40, :page => params[:page], :order => 'CONCAT(COALESCE(human_name,""),name)')
   end
 
   def convert_plugin_interval
