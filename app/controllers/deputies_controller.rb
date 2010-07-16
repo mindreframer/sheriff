@@ -2,6 +2,10 @@ class DeputiesController < RestController
   layout 'group_sidebar'
   before_filter :convert_plugin_interval, :only => [:update, :create]
 
+  def collection
+    @collection ||= resource_class.paginate(:per_page => 20, :page => params[:page], :order => :address)
+  end
+
   def convert_plugin_interval
     values = params[:deputy][:deputy_plugins_attributes]
     values.each do |key, value|

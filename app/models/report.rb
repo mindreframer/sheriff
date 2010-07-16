@@ -33,6 +33,7 @@ class Report < ActiveRecord::Base
 
     deputy = Deputy.find_or_create_by_address_or_name(options[:address], options[:name])
     deputy.update_last_report_at!
+    deputy.update_name!(options[:name])
 
     if report = first(:conditions => {:group_id => group.id, :deputy_id => deputy.id})
       report.store_state_as_historic_value

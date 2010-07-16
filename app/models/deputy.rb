@@ -20,6 +20,11 @@ class Deputy < ActiveRecord::Base
     update_attribute(:last_report_at, Time.current)
   end
 
+  def update_name!(name)
+    return if name.blank?
+    update_attribute(:name, name) if self.name != name
+  end
+
   def self.find_by_address_or_name(address, name)
     if name == UNKNOWN
       first(:conditions => {:address => address})
@@ -33,8 +38,7 @@ class Deputy < ActiveRecord::Base
   end
 
   def self.extract_address_and_name(request)
-
-    remote_host = request.headers['HTTP_DEPUTY_HOST'] || request.remote_host.presence || UNKNOWN
+    remote_host =  request.params[:hostname].presence || request.remote_host.presence || UNKNOWN
     [request.ip, remote_host]
   end
 end

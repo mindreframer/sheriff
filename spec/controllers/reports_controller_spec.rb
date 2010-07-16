@@ -8,8 +8,8 @@ describe ReportsController do
       Deputy.delete_all
     end
 
-    def get_it
-      get :create, :group => 'mysql.connections', :value => '15'
+    def get_it(params={})
+      get :create, params.merge(:group => 'mysql.connections', :value => '15')
     end
 
     it "creates a report if none exists" do
@@ -28,6 +28,12 @@ describe ReportsController do
       get_it
       Deputy.last.address.should == '0.0.0.0'
       Deputy.last.name.should =~ /unknown_host/
+    end
+
+    it "collects address from hostname" do
+      get_it :hostname => 'my_host'
+      Deputy.last.address.should == '0.0.0.0'
+      Deputy.last.name.should == 'my_host'
     end
   end
 

@@ -47,6 +47,20 @@ describe Report do
       deputy.reload.last_report_at.should be_close(Time.current, 3)
     end
 
+    it "updates deputies name" do
+      group = Factory(:group_l2)
+      deputy = Factory(:deputy, :last_report_at =>10.minutes.ago, :name => 'old_name')
+      Report.report!('12', [group.group.name, group.name], :address => deputy.address, :name => 'new_name')
+      deputy.reload.name.should == 'new_name'
+    end
+
+    it "does not updates deputies name with blank" do
+      group = Factory(:group_l2)
+      deputy = Factory(:deputy, :last_report_at =>10.minutes.ago, :name => 'old_name')
+      Report.report!('12', [group.group.name, group.name], :address => deputy.address, :name => '')
+      deputy.reload.name.should == 'old_name'
+    end
+
     it "creates a groups if none exist" do
       deputy = Factory(:deputy)
       lambda{
