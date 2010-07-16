@@ -12,7 +12,7 @@ class Deputy < ActiveRecord::Base
   UNKNOWN = 'unknown_host'
 
   def full_name
-    "#{human_name.presence || name} (#{address})"
+    "#{human_name.presence || name}"
   end
 
   def update_last_report_at!
