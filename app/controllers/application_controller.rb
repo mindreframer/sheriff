@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  layout 'application'
+  layout 'group_sidebar'
   helper :all
   before_filter :authenticate
 

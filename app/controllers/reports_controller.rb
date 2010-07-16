@@ -1,5 +1,4 @@
 class ReportsController < RestController
-  layout 'group_sidebar'
   before_filter :convert_validation_interval, :remove_inactive_validations, :only => :update
 
   def create

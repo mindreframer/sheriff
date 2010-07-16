@@ -1,5 +1,4 @@
 class AlertsController < RestController
-  layout 'group_sidebar'
 
   def delete_all
     Alert.all.each(&:destroy)

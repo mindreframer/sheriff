@@ -1,5 +1,4 @@
 class DeputiesController < RestController
-  layout 'group_sidebar'
   before_filter :convert_plugin_interval, :only => [:update, :create]
 
   def collection

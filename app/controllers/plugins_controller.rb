@@ -1,4 +1,5 @@
 class PluginsController < RestController
+  layout 'application'
   new! do |format|
     format.html{render 'edit'}
   end
