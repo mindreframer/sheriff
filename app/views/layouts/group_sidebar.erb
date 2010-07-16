@@ -1,14 +1,4 @@
-<% content_for :content do %>
-  <table>
-    <tr>
-      <td class=sidebar valign=top>
-        <%= render :partial => 'groups/navigation' %>
-      </td>
-      <td class=main valign=top>
-        <h1><%= heading %></h1>
-        <%= yield(:group_sidebar_content).presence || yield %>
-      </td>
-    </tr>
-  </table>
+<% content_for :sidebar do %>
+  <%= render :partial => 'groups/navigation' %>
 <% end %>
-<%= render :file => 'layouts/application' %>
+<%= render :file => 'layouts/admin' %>
