@@ -3,6 +3,11 @@ class PluginsController < RestController
   new! do |format|
     format.html{render 'edit'}
   end
+
+  create! do |success, error|
+    error.html{render 'edit'}
+  end
+
   index! do |format|
     format.html{render 'index'}
     format.rb do

@@ -1,6 +1,18 @@
 class DeputiesController < RestController
   before_filter :convert_plugin_interval, :only => [:update, :create]
 
+  def batch
+    convert_interval params[:deputy_plugin]
+    deputies = Deputy.find_all_by_id(params[:ids])
+    deputies.each do |deputy|
+      if params[:overwrite]
+        deputy.deputy_plugins.select{|dp| dp.plugin_name == params[:deputy_plugin][:plugin_name] }.each(&:destroy)
+      end
+      deputy.deputy_plugins.create!(params[:deputy_plugin])
+    end
+    redirect_to :back, :notice => "Added #{deputies.size} plugins!"
+  end
+
   def collection
     @collection ||= resource_class.paginate(:per_page => 40, :page => params[:page], :order => 'CONCAT(COALESCE(human_name,""),name)')
   end
