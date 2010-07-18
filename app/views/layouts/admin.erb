@@ -1,50 +1,53 @@
+<!-- http://pilu.github.com/web-app-theme/ -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <title>Sheriff</title>
-  <%= stylesheet_link_tag "web_app_theme","themes/default/style", :cache => true %>
+  <%= stylesheet_link_tag "web_app_theme", "themes/default/style", :cache => true %>
   <%= javascript_include_tag :jquery %>
   <%= csrf_meta_tag %>
 </head>
 <body>
-  <div id="container">
-    <div id="header">
-      <h1><a href="/">Sheriff</a></h1>
-      <div id="user-navigation">
-        <ul class="wat-cf">
-          <li><a href="/logout" class="logout">Logout</a></li>
-        </ul>
-      </div>
-      <div id="main-navigation">
-        <ul class="wat-cf">
-          <% [Group, Report, Deputy, Alert, Plugin].each do |type| %>
-            <% is_active = type.to_s.pluralize.downcase == params[:controller] %>
-            <li class="<%= is_active ? 'active' : '' %>"><%= link_to type.to_s.pluralize, type %></li>
-          <% end %>          
-        </ul>
-      </div>
+<div id="container">
+  <div id="header">
+    <h1><a href="/">Sheriff</a></h1>
+
+    <div id="user-navigation">
+      <ul class="wat-cf">
+        <li><a href="/logout" class="logout">Logout</a></li>
+      </ul>
     </div>
-    <div id="wrapper" class="wat-cf">
-      <div class="flash">
-        <% flash.each do |type, message| -%>
-          <div class="message <%= type %>">
-            <p><%= message %></p>
-          </div>
-        <% end -%>
-      </div>
-      <div id="main">
-        <%= yield %>
-        <div id="footer">
-          <div class="block">
-            <p>Copyright &copy; <%= Time.now.year %> Dawanda GmbH</p>
-          </div>
-        </div>
-      </div>
-      <div id="sidebar">
-        <%= yield :sidebar %>
-      </div>
+    <div id="main-navigation">
+      <ul class="wat-cf">
+        <% [Group, Report, Deputy, Alert, Plugin].each do |type| %>
+          <% is_active = type.to_s.pluralize.downcase == params[:controller] %>
+          <li class="<%= is_active ? 'active' : '' %>"><%= link_to type.to_s.pluralize, type %></li>
+        <% end %>
+      </ul>
     </div>
   </div>
+  <div id="wrapper" class="wat-cf">
+    <div class="flash">
+      <% flash.each do |type, message| -%>
+        <div class="message <%= type %>">
+          <p><%= message %></p>
+        </div>
+      <% end -%>
+    </div>
+    <div id="sidebar">
+      <%= yield :sidebar %>
+    </div>
+    <div id="main">
+      <%= yield %>
+    </div>
+  </div>
+  <%= clearer %>
+  <div id="footer">
+    <div class="block">
+      <p>Copyright &copy; <%= Time.now.year %> Dawanda GmbH</p>
+    </div>
+  </div>
+</div>
 </body>
 </html>
