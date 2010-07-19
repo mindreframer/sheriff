@@ -43,7 +43,9 @@ input.checkbox {
 }
 
 #main {
-  background: #EBEBEB;
+  background: white;
+  padding: 10px;
+  min-height: 600px;
   width: 73%;
 }
 
