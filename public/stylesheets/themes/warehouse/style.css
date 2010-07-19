@@ -1,9 +1,7 @@
-a:link, a:visited { color: #07b; text-decoration: none; }
-a, a:hover, a:active { color: #d30; }
+a:link, a:visited { text-decoration: none; }
 h1, h2, h3 {color: #444}
 
 body {
-  color: #333;
   background: #EBEBEB;
   font: normal 12px/1.5em "Lucida Grande", "Helvetica Neue", Arial, sans-serif;
 }
@@ -144,7 +142,6 @@ input.checkbox {
 }
 
 #sidebar ul.navigation li a:link,#sidebar ul.navigation li a:visited {
-  padding: 5px 10px;
   color:#6a6a6a;
   text-decoration: none;
 }
