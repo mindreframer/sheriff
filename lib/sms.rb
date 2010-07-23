@@ -1,6 +1,7 @@
 require 'config/environment' unless defined?(Rails)
 require 'open-uri'
 require 'cgi'
+require 'openssl'
 
 class Sms
   def self.send(message, recipients)
@@ -14,10 +15,26 @@ class Sms
     recipients.each do |recipient|
       data = "id=#{user}&pw=#{password}&msgtype=t&receiver=#{recipient}&msg=#{message}&sender=Sheriff"
       url = "https://gate1.goyyamobile.com/sms/sendsms.asp?#{data}"
-      open(url).read if CFG[:send_sms]
+      without_ssl_verification do
+        open(url).read if CFG[:send_sms]
+      end
     end
   rescue Exception => e
     puts "SMS ERROR #{e.inspect}"
+  end
+
+  private
+
+  def self.without_ssl_verification
+    silence_warnings do
+      begin
+        old = OpenSSL::SSL::VERIFY_PEER
+        OpenSSL::SSL.const_set(:VERIFY_PEER, OpenSSL::SSL::VERIFY_NONE)
+        yield
+      ensure
+        OpenSSL::SSL.const_set(:VERIFY_PEER, old)
+      end
+    end
   end
 end
 
