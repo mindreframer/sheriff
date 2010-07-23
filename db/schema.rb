@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100605132134) do
+ActiveRecord::Schema.define(:version => 20100723075756) do
 
   create_table "alerts", :force => true do |t|
     t.integer  "error_level",     :null => false
@@ -96,6 +96,8 @@ ActiveRecord::Schema.define(:version => 20100605132134) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "only_run_once",       :default => false, :null => false
+    t.string   "ignore_start"
+    t.string   "ignore_end"
   end
 
 end

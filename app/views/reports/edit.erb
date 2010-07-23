@@ -31,6 +31,23 @@
             <%= vf.text_field :start_hms %>
             <%= vf.text_field :end_hms %>
           <% end %>
+          <% fields = capture do %>
+            Ignore between
+            <%= vf.text_field :ignore_start, :size => 5 %> and
+            <%= vf.text_field :ignore_end, :size => 5 %>
+          <% end %>
+
+          <% if validation.ignore_start? or validation.ignore_end? %>
+            <br />
+            <%= fields %>
+          <% else %>
+            <% id = "_#{rand(111111111111)}" %>
+            <%= link_to_function 'ignore?', "$('##{id}').toggle()" %>
+            <br />
+            <span style="display:none" id="<%=id%>">
+              <%= fields %>
+            </span>
+          <% end %>
         </td>
         <td>warn via <%= vf.select :error_level, [['Ignore', 0], ['Log', 1], ['Email', 2], ['Sms', 3]] %></td>
       </tr>
