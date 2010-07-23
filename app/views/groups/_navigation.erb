@@ -1,17 +1,16 @@
 <ul class="navigation">
   <% Group.level1.each do |group| %>
     <li <%= error_attribute group %>>
-      <% is_current_or_parent = (@group and (group == @group or @group.group == group)) %>
       <% id = "_#{rand(111111111111)}" %>
       <div>
         <%= link_to_function '↕', "$('##{id}').toggle()", :class => :left %>
-        <%= link_to_object group, :class => "left #{is_current_or_parent ? 'bold' : ''}" %>
+        <%= link_to_object group, :class => "left #{is_current_or_parent?(group) ? 'bold' : ''}" %>
         <%= clearer %>
       </div>
       <ul class="subnavigation" <%= 'style="display:none"'.html_safe if not should_show_group?(group) %> id="<%=id%>">
         <% group.children.each do |child| %>
           <li <%= error_attribute child %>>
-            <%= link_to child.name, child, :class => (child == @group ? 'bold' : '') %>
+            <%= link_to child.name, child, :class => (is_current_or_parent?(child) ? 'bold' : '') %>
           </li>
         <% end %>
       </ul>

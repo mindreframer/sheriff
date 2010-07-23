@@ -96,6 +96,11 @@ module ApplicationHelper
   end
 
   def should_show_group?(group)
-    !!(group.current_error_level != 0 or (@group and (@group == group or @group.group == group)))
+    !!(group.current_error_level != 0 or is_current_or_parent?(group))
+  end
+
+  def is_current_or_parent?(group)
+    current_group = @group || @report.try(:group)
+    current_group and (group == current_group or current_group.group == group)
   end
 end
