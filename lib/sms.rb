@@ -4,18 +4,17 @@ require 'cgi'
 
 class Sms
   def self.send(message, recipients)
-    message = CGI.escape(message)
     user = CFG[:sms_user]
     password = CFG[:sms_password]
-
     if ['development', 'staging'].include?(Rails.env)
       message = "#{Rails.env}: #{message}"
     end
+    message = CGI.escape(message)
 
     recipients.each do |recipient|
       data = "id=#{user}&pw=#{password}&msgtype=t&receiver=#{recipient}&msg=#{message}&sender=Sheriff"
       url = "https://gate1.goyyamobile.com/sms/sendsms.asp?#{data}"
-      open(url).read unless CFG[:send_sms]
+      open(url).read if CFG[:send_sms]
     end
   rescue Exception => e
     puts "SMS ERROR #{e.inspect}"
