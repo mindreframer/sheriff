@@ -94,4 +94,8 @@ module ApplicationHelper
     label_for = options[:id] || name
     check_box_tag(name, value, checked, options) + label_tag(label_for, label)
   end
+
+  def should_show_group?(group)
+    !!(group.current_error_level != 0 or (@group and (@group == group or @group.group == group)))
+  end
 end
