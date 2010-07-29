@@ -103,4 +103,8 @@ module ApplicationHelper
     current_group = @group || @report.try(:group)
     current_group and (group == current_group or current_group.group == group)
   end
+
+  def toogle_all_check_boxes(klass)
+    link_to_function 'all', "$.each($('.#{klass}'), function(){this.checked = !this.checked})"
+  end
 end

@@ -10,7 +10,7 @@
   </tr>
   <% collection.each do |deputy| %>
     <tr <%= error_attribute(deputy) %>>
-      <td><%= check_box_tag 'ids[]', deputy.id, false %></td>
+      <td><%= check_box_tag 'ids[]', deputy.id, false, :class => 'deputy_id' %></td>
       <td><%= link_to_object deputy %></td>
       <td><%= deputy.address %></td>
       <td><%= time_ago deputy.last_report_at %></td>
@@ -18,6 +18,8 @@
     </tr>
   <% end %>
 </table>
+
+  <%= toogle_all_check_boxes 'deputy_id' %>
 
   Run <%= select_options_tag 'deputy_plugin[plugin_name]', [nil] + Plugin.names %>
   every
