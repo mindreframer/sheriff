@@ -78,12 +78,14 @@
 
 #sidebar ul.navigation li a:link, #sidebar ul.navigation li a:visited {
   display: block;
-  padding: 8px 10px;
+  padding: 2px 5px;
 }
+#sidebar ul.navigation li{  background: #ffffcc;}
 
 #sidebar ul.subnavigation li a:link, #sidebar ul.subnavigation li a:visited {
   display: block;
-  padding: 5px 18px;
+  padding: 4px 18px;
+  background: #fff;
 }
 
 #sidebar .block .sidebar-block, #sidebar .notice {

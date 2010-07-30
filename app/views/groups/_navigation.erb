@@ -3,7 +3,7 @@
     <li <%= error_attribute group %>>
       <% id = "_#{rand(111111111111)}" %>
       <div>
-        <%= link_to_function '↕', "$('##{id}').toggle()", :class => :left %>
+        <%= link_to_function '>', "$('##{id}').toggle()", :class => :left %>
         <%= link_to_object group, :class => "left #{is_current_or_parent?(group) ? 'bold' : ''}" %>
         <%= clearer %>
       </div>
