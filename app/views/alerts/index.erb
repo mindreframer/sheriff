@@ -1,10 +1,18 @@
 <%= will_paginate collection %> <%= link_to 'delete all', delete_all_alerts_path, :method => :delete %>
 <table>
+  <tr>
+    <td><%= sort_head 'Reported at', :column => :id %></td>
+    <td><%= sort_head 'Report', :column => :report_id %></td>
+    <td><%= sort_head 'Message' %></td>
+    <td><%= sort_head 'Lvl', :column => :error_level %></td>
+    <td></td>
+  </tr>
   <% collection.each do |alert| %>
     <tr <%= error_attribute(alert) %>>
       <td><%= detailed_time alert.created_at %></td>
       <td><%= link_to_object alert.report %></td>
       <td><%= alert.message %></td>
+      <td align=center><%= alert.error_level %></td>
       <td><%= link_to_delete alert, :text => 'x' %></td>
     </tr>
   <% end %>
