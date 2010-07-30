@@ -1,14 +1,16 @@
-<% if @group.reports.present? %>
-  <table>
-    <tr>
-      <th></th>
-      <th></th>
-      <th>Deputy</th>
-      <th>Value</th>
-      <th>time</th>
-    </tr>
-    <% @group.reports.all(:include => [:deputy, :validations], :order => 'reported_at desc').each do |report| %>
-      <%= render :partial => 'reports/report_row', :locals => {:report => report, :hide_group => true} %>
+<% hide_group = !@group.level1? %>
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <% unless hide_group %>
+      <th>Group</th>
     <% end %>
-  </table>
-<% end %>
+    <th>Deputy</th>
+    <th>Value</th>
+    <th>time</th>
+  </tr>
+  <% @group.reports_or_children_reports.all(:include => [:deputy, :validations], :order => 'reported_at desc').each do |report| %>
+    <%= render :partial => 'reports/report_row', :locals => {:report => report, :hide_group => hide_group} %>
+  <% end %>
+</table>

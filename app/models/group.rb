@@ -9,6 +9,18 @@ class Group < ActiveRecord::Base
 
   scope :level1, :conditions => {:group_id => nil}, :order => 'name asc'
 
+  def reports_or_children_reports
+    level1? ? children_reports : reports
+  end
+
+  def level1?
+    not group_id?
+  end
+
+  def children_reports
+    Report.where(:group_id => children.map(&:id))
+  end
+
   def full_name
     group ? "#{group.name}.#{name}" : name
   end
