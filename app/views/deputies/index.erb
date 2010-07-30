@@ -3,9 +3,10 @@
 <% form_tag '/deputies/batch' do %>
 <table width="100%">
   <tr style="font-weight:bold;">
-    <td>Name</td>
-    <td>IP</td>
-    <td>Last Report</td>
+    <td></td>
+    <td><%= sort_head 'Name' %></td>
+    <td><%= sort_head 'IP', :column => :address %></td>
+    <td><%= sort_head 'Last Report', :column => :last_report_at %></td>
     <td>Actions</td>
   </tr>
   <% collection.each do |deputy| %>

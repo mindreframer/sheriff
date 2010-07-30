@@ -6,6 +6,10 @@ class AlertsController < RestController
   end
 
   def collection
-    @collection ||= resource_class.paginate(:per_page => 20, :page => params[:page], :order => 'id desc', :include => {:report => [{:group => :group}, :deputy]})
+    @collection ||= resource_class.paginate(
+      :per_page => 20, :page => params[:page],
+      :order => params[:order] || 'id desc',
+      :include => {:report => [{:group => :group}, :deputy]}
+    )
   end
 end

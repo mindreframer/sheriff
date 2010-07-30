@@ -24,4 +24,18 @@ module LinkHelper
     text = options.delete(:text) || 'delete'
     link_to text, object, options.merge(:method => :delete, :confirm => 'delete ?', :title => 'Delete')
   end
+
+  def current_url(options)
+    url_for(params.merge(options).except(:controller, :action))
+  end
+
+  def sort_head(name, options={})
+    column = options[:column] || name.downcase.sub(' ','_')
+    current = h(params[:order])
+    down = "#{column} asc"
+    link_to(name, current_url(:order => down), :style => 'text-decoration:none') + ' ' +
+    [['^', down], ['v', "#{column} desc"]].map do |arrow, order|
+      link_to arrow, current_url(:order => order), :class => (current == order ? 'highlight' : ''), :style => 'text-decoration:none'
+    end.join.html_safe
+  end
 end

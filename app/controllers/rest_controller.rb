@@ -17,6 +17,6 @@ class RestController < ApplicationController
   end
 
   def collection
-    @collection ||= resource_class.paginate(:per_page => 20, :page => params[:page])
+    @collection ||= resource_class.paginate(:per_page => 20, :page => params[:page], :order => params[:order].presence)
   end
 end
