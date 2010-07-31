@@ -1,5 +1,5 @@
 <% hide_group = !@group.level1? %>
-<table>
+<table width="100%">
   <tr>
     <th></th>
     <th></th>
@@ -7,8 +7,9 @@
       <th>Group</th>
     <% end %>
     <th>Deputy</th>
-    <th>Value</th>
+    <th class='max_width_200'>Value</th>
     <th>time</th>
+    <th></th>
   </tr>
   <% @group.reports_or_children_reports.all(:include => [:deputy, :validations], :order => 'reported_at desc').each do |report| %>
     <%= render :partial => 'reports/report_row', :locals => {:report => report, :hide_group => hide_group} %>
