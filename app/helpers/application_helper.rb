@@ -104,7 +104,11 @@ module ApplicationHelper
     current_group and (group == current_group or current_group.group == group)
   end
 
-  def toogle_all_check_boxes(klass)
-    link_to_function 'all', "$.each($('.#{klass}'), function(){this.checked = !this.checked})"
+  def toogle_all_check_boxes(klass, options={})
+    link_to_function (options[:text]||'all'), "$.each($('.#{klass}'), function(){this.checked = !this.checked})"
+  end
+
+  def nbsp(x=1)
+    ('&nbsp;' * x).html_safe
   end
 end

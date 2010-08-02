@@ -1,6 +1,9 @@
 <% hide_group ||= false %>
 <% hide_deputy ||= false %>
 <tr <%= error_attribute(report) %>>
+  <% if checkbox ||= false %>
+    <td><%= check_box_tag 'ids[]', report.id, false, :class => 'report_id' %></td>
+  <% end %>
   <td>
     <%= short_validations report %>
   </td>

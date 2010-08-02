@@ -1,24 +1,24 @@
 <%= will_paginate collection %>
 
 <% form_tag '/deputies/batch' do %>
-<table width="100%">
-  <tr style="font-weight:bold;">
-    <td></td>
-    <td><%= sort_head 'Name' %></td>
-    <td><%= sort_head 'IP', :column => :address %></td>
-    <td><%= sort_head 'Last Report', :column => :last_report_at %></td>
-    <td>Actions</td>
-  </tr>
-  <% collection.each do |deputy| %>
-    <tr <%= error_attribute(deputy) %>>
-      <td><%= check_box_tag 'ids[]', deputy.id, false, :class => 'deputy_id' %></td>
-      <td><%= link_to_object deputy %></td>
-      <td><%= deputy.address %></td>
-      <td><%= time_ago deputy.last_report_at %></td>
-      <td><%= link_to_delete deputy, :text => 'delete' %></td>
+  <table width="100%">
+    <tr style="font-weight:bold;">
+      <td></td>
+      <td><%= sort_head 'Name' %></td>
+      <td><%= sort_head 'IP', :column => :address %></td>
+      <td><%= sort_head 'Last Report', :column => :last_report_at %></td>
+      <td>Actions</td>
     </tr>
-  <% end %>
-</table>
+    <% collection.each do |deputy| %>
+      <tr <%= error_attribute(deputy) %>>
+        <td><%= check_box_tag 'ids[]', deputy.id, false, :class => 'deputy_id' %></td>
+        <td><%= link_to_object deputy %></td>
+        <td><%= deputy.address %></td>
+        <td><%= time_ago deputy.last_report_at %></td>
+        <td><%= link_to_delete deputy, :text => 'delete' %></td>
+      </tr>
+    <% end %>
+  </table>
 
   <%= toogle_all_check_boxes 'deputy_id' %>
 

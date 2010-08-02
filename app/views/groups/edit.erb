@@ -1,16 +1,26 @@
 <% hide_group = !@group.level1? %>
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <% unless hide_group %>
-      <th>Group</th>
+<%= form_for Report.new, :url => '/reports/batch_validate' do |f| %>
+  <table>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <% unless hide_group %>
+        <th>Group</th>
+      <% end %>
+      <th>Deputy</th>
+      <th>Value</th>
+      <th>time</th>
+    </tr>
+    <% @group.reports_or_children_reports.all(:include => [:deputy, :validations], :order => 'reported_at desc').each do |report| %>
+      <%= render :partial => 'reports/report_row', :locals => {:report => report, :hide_group => hide_group, :checkbox => true} %>
     <% end %>
-    <th>Deputy</th>
-    <th>Value</th>
-    <th>time</th>
-  </tr>
-  <% @group.reports_or_children_reports.all(:include => [:deputy, :validations], :order => 'reported_at desc').each do |report| %>
-    <%= render :partial => 'reports/report_row', :locals => {:report => report, :hide_group => hide_group} %>
-  <% end %>
-</table>
+  </table>
+
+  <hr />
+
+  <%= render 'reports/validation_form', :f => f %>
+  <%= toogle_all_check_boxes 'report_id', :text => 'all reports' %> <%= nbsp(4) %>
+  <%= check_box_with_label 'overwrite', true, true, 'Overwrite' %> <%= nbsp(4) %>
+  <%= f.submit 'Add validations' %>
+<% end %>

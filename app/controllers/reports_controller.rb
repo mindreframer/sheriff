@@ -1,5 +1,5 @@
 class ReportsController < RestController
-  before_filter :convert_validation_interval, :remove_inactive_validations, :only => :update
+  before_filter :convert_validation_interval, :mark_inactive_validations_for_destroy, :only => [:update, :batch_validate]
 
   def create
     address, name = Deputy.extract_address_and_name(request)
@@ -8,9 +8,24 @@ class ReportsController < RestController
     render :text => 'OK'
   end
 
+  def batch_validate
+    reports = Report.find_all_by_id(params[:ids])
+    reports.each do |report|
+      if params[:overwrite]
+        to_delete = validations_in_params.map do |attributes|
+          next if attributes[:_destroy]
+          report.validations.to_a.select{|v| v.class.to_s == attributes[:type] }
+        end
+        to_delete.flatten.compact.uniq.each(&:destroy)
+      end
+      report.update_attributes(params[:report])
+    end
+    redirect_back_or_default '/reports'
+  end
+
   private
 
-  def remove_inactive_validations
+  def mark_inactive_validations_for_destroy
     validations_in_params.each do |attributes|
       next if attributes.delete(:active)
       attributes[:_destroy] = true

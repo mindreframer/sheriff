@@ -8,57 +8,7 @@
 <br />
 
 <%= form_for @report do |f| %>
-  <%= f.error_messages %>
-  <table>
-    <% add = [ValueValidation, RunEveryValidation, RunBetweenValidation] %>
-    <% fields_for_sti f, :validations, add do |vf, index| %>
-      <% validation = vf.object %>
-      <%= vf.hidden_field :type %>
-      <tr <%= error_attribute validation %>>
-        <td>
-          <% key = "report[validations_attributes][#{index}][active]" %>
-          <%= check_box_with_label key, true, !validation.new_record?, validation.type.to_s.sub('Validation','') %>
-        </td>
-        <td>
-          <% case validation
-             when ValueValidation %>
-            <%= vf.text_field :value_as_text %>
-          <% when RunEveryValidation %>
-            <%= vf.text_field :interval_value %>
-            <%= vf.select :interval_unit, time_units_for_select %>
-            <%= vf.check_box :only_run_once %> <%= vf.label :only_run_once, 'once' %>
-          <% when RunBetweenValidation %>
-            <%= vf.text_field :start_hms %>
-            <%= vf.text_field :end_hms %>
-          <% end %>
-          <% fields = capture do %>
-            Ignore between
-            <%= vf.text_field :ignore_start, :size => 5 %> and
-            <%= vf.text_field :ignore_end, :size => 5 %>
-          <% end %>
-
-          <% if validation.ignore_start? or validation.ignore_end? %>
-            <br />
-            <%= fields %>
-          <% else %>
-            <% id = "_#{rand(111111111111)}" %>
-            <%= link_to_function 'ignore?', "$('##{id}').toggle()" %>
-            <br />
-            <span style="display:none" id="<%=id%>">
-              <%= fields %>
-            </span>
-          <% end %>
-        </td>
-        <td>
-          warn via <%= vf.select :error_level, [['Ignore', 0], ['Log', 1], ['Email', 2], ['Sms', 3]] %>
-          <% if validation.current_error_level != 0 %>
-            <% path = {:controller => :validations, :action => :update, :id => validation.id, :validation => {:current_error_level => 0}} %>
-            <%= link_to 'dismiss', path, :method => :put %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </table>
+  <%= render 'validation_form', :f => f %>
   <%= f.submit %>
 <% end %>
 
