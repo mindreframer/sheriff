@@ -4,19 +4,15 @@
   <% if checkbox ||= false %>
     <td><%= check_box_tag 'ids[]', report.id, false, :class => 'report_id' %></td>
   <% end %>
-  <td>
-    <%= short_validations report %>
-  </td>
-  <td>
-    <%= link_to_edit report, :text => 'Details' %>
-  </td>
+  <td><%= short_validations report %></td>
+  <td><%= link_to_edit report, :text => 'Details' %></td>
   <% unless hide_group %>
     <td><%= link_to_object report.group %></td>
   <% end %>
   <% unless hide_deputy %>
     <td><%= link_to_object report.deputy %></td>
   <% end %>
-  <td><%= report.value %></td>
+  <td class='max_width_200'><%= report.value %></td>
   <td><%= detailed_time report.reported_at %></td>
   <td><%= link_to_delete report, :text => 'X' %></td>
 </tr>

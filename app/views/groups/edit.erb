@@ -9,7 +9,7 @@
         <th>Group</th>
       <% end %>
       <th>Deputy</th>
-      <th>Value</th>
+      <th class='max_width_200'>Value</th>
       <th>time</th>
     </tr>
     <% @group.reports_or_children_reports.all(:include => [:deputy, :validations], :order => 'reported_at desc').each do |report| %>

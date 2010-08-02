@@ -1,26 +1,11 @@
-.bold{
-  font-weight: bold;
-}
-.left{
-  float:left;
-}
+.bold{font-weight: bold;}
+.left{float:left;}
 .clearer{clear: both}
 
-.error_level_0, .error_level_0 td{
-  background: white;
-}
-.error_level_1, .error_level_1 td{
-  background: yellow;
-}
-.error_level_2, .error_level_2 td{
-  background: orange;
-}
-.error_level_3, .error_level_3 td{
-  background: red;
-}
-.pagination{
-  height: 29px;
-}
-.highlight{
-  background: lime;
-}
+.error_level_0, .error_level_0 td{background: white;}
+.error_level_1, .error_level_1 td{background: yellow;}
+.error_level_2, .error_level_2 td{background: orange;}
+.error_level_3, .error_level_3 td{background: red;}
+.pagination{ height: 29px; }
+.highlight{ background: lime;}
+.max_width_200{  max-width: 200px;}
