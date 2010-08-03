@@ -39,7 +39,7 @@ end
 
 namespace :gems do
   task :bundle, :roles => :app do
-    run "cd #{current_release} && bundle install .bundle --without test development"
+    run "cd #{current_release} && bundle install /home/#{user}/.bundle --without test development"
   end
 end
 after 'deploy:update_code', 'gems:bundle'
