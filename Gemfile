@@ -7,8 +7,10 @@ gem 'inherited_resources'
 gem 'hoptoad_notifier'
 gem 'newrelic_rpm', '2.13.0.beta5'
 
-group :test do
-  gem 'factory_girl', :git => 'git://github.com/thoughtbot/factory_girl.git', :branch => 'rails3'
-  gem 'rspec', '2.0.0.beta.19'
-  gem 'rspec-rails', '2.0.0.beta.19'
+unless ARGV.join(' ').include?('--without test') # bundler would still executes the block <-> fail on servers with git version 1.5
+  group :test do
+    gem 'factory_girl', :git => 'git://github.com/thoughtbot/factory_girl.git', :branch => 'rails3'
+    gem 'rspec', '2.0.0.beta.19'
+    gem 'rspec-rails', '2.0.0.beta.19'
+  end
 end
