@@ -7,4 +7,5 @@ env
 config/database.yml
 config/config.yml
 config/email.yml
+config/newrelic.yml
 .idea/*
