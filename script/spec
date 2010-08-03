@@ -1,0 +1,2 @@
+#!/usr/bin/env ruby
+exec "export RAILS_ENV=test; bundle exec rspec #{ARGV.map{|a| a.include?(' ') ? "'#{a}'" : a} * ' '}"

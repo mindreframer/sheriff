@@ -9,7 +9,10 @@ module SerializedValue
   end
 
   def value=(x)
-    write_attribute(:value, x.to_yaml)
+    # since Rails 3 RC 1 this gets set with yaml when loading the record
+    # specs in report_spec will catch it, so try to remove it ...
+    yaml = (x.to_s =~ /^--- / ? x : x.to_yaml)
+    write_attribute(:value, yaml)
   end
 
   def self.convert_value_from_params(value)

@@ -17,12 +17,12 @@ class Deputy < ActiveRecord::Base
 
   def update_last_report_at!
     return if last_report_at and last_report_at > 1.minute.ago
-    update_attribute(:last_report_at, Time.current)
+    update_attributes(:last_report_at => Time.current)
   end
 
   def update_name!(name)
     return if name.blank?
-    update_attribute(:name, name) if self.name != name
+    update_attributes(:name => name) if self.name != name
   end
 
   def self.find_by_address_or_name(address, name)
