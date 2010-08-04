@@ -74,3 +74,7 @@ end
 def kill_processes_matching(name, options={})
   run "ps -ef | grep #{name} | grep -v grep | awk '{print $2}' | xargs --no-run-if-empty kill #{options[:signal]}"
 end
+
+# worker
+# start:   COUNT=3 RAILS_ENV=production QUEUE=* bundle exec rake resque:workers &
+# kill:   ps -ef | grep resque:workers | grep -v grep | awk '{print $2}' | xargs --no-run-if-empty kill
