@@ -10,6 +10,7 @@ describe ReportsController do
 
     def get_it(params={})
       get :create, params.merge(:group => 'mysql.connections', :value => '15')
+      GenericJob.perform_all
     end
 
     it "creates a report if none exists" do
