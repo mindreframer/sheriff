@@ -6,7 +6,10 @@ require File.expand_path('../config/application', __FILE__)
 require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
+require 'resque/tasks.rb'
 
-Dir["#{Gem.searcher.find('resque').full_gem_path}/tasks/*.rake"].each { |ext| load ext }
+namespace :resque do
+  task :setup => :environment
+end
 
 Rails::Application.load_tasks

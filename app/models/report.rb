@@ -26,6 +26,10 @@ class Report < ActiveRecord::Base
     DeputyPlugin.first(:conditions => {:deputy_id => deputy_id, 'plugins.name' => group.try(:group).try(:name)}, :joins => :plugin)
   end
 
+  def self.delayed_report(*args)
+    GenericJob.publish(Report, :report!, :args => args)
+  end
+
   def self.report!(value, groups, options={})
     raise if groups.size != 2
     group = Group.find_or_create_for_level1(groups.first)
