@@ -44,24 +44,12 @@ namespace :gems do
 end
 after 'deploy:update_code', 'gems:bundle'
 
-namespace :jobs do
-  desc "start"
-  task :start, :roles => :app do
-    run "cd #{current_release} && RAILS_ENV=#{stage} QUEUE=* bundle exec rake resque:work &"
-  end
-
-  desc "stop"
-  task :stop, :roles => :app do
-    kill_processes_matching "resque"
-  end
-
+namespace :resque_web do
   desc "restart"
-  task :restart, :roles => :dj do
-    stop
-    start
+  task :start, :roles => :app do
+    kill_processes_matching "resque-web", :signal => '-9'
+    run "cd #{current_release} && bundle exec resque-web"
   end
-
-  after "deploy:update_code", "jobs:restart"
 end
 
 namespace :fix do
@@ -83,6 +71,6 @@ namespace :fix do
   end
 end
 
-def kill_processes_matching(name)
-  run "ps -ef | grep #{name} | grep -v grep | awk '{print $2}' | xargs --no-run-if-empty kill"
+def kill_processes_matching(name, options={})
+  run "ps -ef | grep #{name} | grep -v grep | awk '{print $2}' | xargs --no-run-if-empty kill #{options[:signal]}"
 end
