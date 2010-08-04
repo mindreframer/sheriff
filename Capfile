@@ -12,7 +12,7 @@ require 'capistrano/ext/multistage'
 set :application, "Sheriff"
 set :scm, :git
 set :repository, "git@github.com:dawanda/sheriff.git"
-set :branch, "master"
+set :branch, "resque"
 
 set :deploy_to, '/srv/sheriff'
 
@@ -44,6 +44,26 @@ namespace :gems do
 end
 after 'deploy:update_code', 'gems:bundle'
 
+namespace :jobs do
+  desc "start"
+  task :start, :roles => :app do
+    run "cd #{current_release} && RAILS_ENV=#{stage} QUEUE=* bundle exec rake resque:work &"
+  end
+
+  desc "stop"
+  task :stop, :roles => :app do
+    kill_processes_matching "resque"
+  end
+
+  desc "restart"
+  task :restart, :roles => :dj do
+    stop
+    start
+  end
+
+  after "deploy:update_code", "jobs:restart"
+end
+
 namespace :fix do
   desc "update code and restart"
   task :update do
@@ -61,4 +81,8 @@ namespace :fix do
   task :restart, :roles => :app do
     run "cd #{current_path}; touch tmp/restart.txt"
   end
+end
+
+def kill_processes_matching(name)
+  run "ps -ef | grep #{name} | grep -v grep | awk '{print $2}' | xargs --no-run-if-empty kill"
 end
