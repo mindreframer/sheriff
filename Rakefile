@@ -7,4 +7,6 @@ require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
 
+Dir["#{Gem.searcher.find('resque').full_gem_path}/tasks/*.rake"].each { |ext| load ext }
+
 Rails::Application.load_tasks
