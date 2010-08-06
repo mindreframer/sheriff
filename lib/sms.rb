@@ -13,7 +13,7 @@ class Sms
     message = CGI.escape(message)
 
     recipients.each do |recipient|
-      data = "id=#{user}&pw=#{password}&msgtype=t&receiver=#{recipient}&msg=#{message}&sender=Sheriff"
+      data = "id=#{user}&pw=#{password}&msgtype=t&receiver=#{recipient.strip}&msg=#{message}&sender=Sheriff"
       url = "https://gate1.goyyamobile.com/sms/sendsms.asp?#{data}"
       without_ssl_verification do
         open(url).read if CFG[:send_sms]
