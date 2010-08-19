@@ -4,6 +4,8 @@ common: &common
   sms_user: my_user
   sms_password: my_password
   send_sms: false
+  domain: http://sheriff.yourhost.com
+
 
 test:
   <<: *common

@@ -4,6 +4,6 @@ class Notifier < ActionMailer::Base
 
   def alert(alert)
     mail :subject => "Sheriff Error -- #{alert.report.full_name}",
-      :body => "#{alert.message}\n#{Time.current.to_s(:db)} UTC"
+      :body => "#{alert.message}\n#{Time.current.to_s(:db)} UTC\n#{CFG[:domain]}/reports/#{alert.report_id}"
   end
 end
