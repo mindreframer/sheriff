@@ -6,5 +6,10 @@ require File.expand_path('../config/application', __FILE__)
 require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
+require 'resque/tasks.rb'
+
+namespace :resque do
+  task :setup => :environment
+end
 
 Rails::Application.load_tasks
