@@ -1,0 +1,16 @@
+= resque-multi-job-forks
+
+Fast jobs have a very high fork overhead.  
+This reduces the overhead of forking by running multiple jobs inside a single fork.
+
+  QUEUE=* MINUTES_PER_FORK=5 rake resque:work # fork lives for 5 minutes
+  QUEUE=* rake resque:work # one job per fork as usual
+
+
+New hook: before_child_exit hook gets called right before the fork terminates:
+
+  Resque.before_child_exit do |worker|
+    worker.log("#{worker.jobs_processed} were processed in this fork")
+  end
+
+Copyright (c) 2010 Mick Staugaard. See LICENSE for details.

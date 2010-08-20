@@ -71,10 +71,31 @@ namespace :fix do
   end
 end
 
+namespace :resque_worker do
+  desc "start"
+  task :start, :roles => :resque_worker do
+    count = (stage == :staging ? 1 : 2)
+    run "cd #{current_path}; MINUTES_PER_FORK=5 QUEUE='*' COUNT=#{count} RAILS_ENV=#{rails_env} rake resque:workers #{daemonized}"
+  end
+
+  desc "stop"
+  task :stop, :roles => :resque_worker do
+    kill_processes_matching "resque-1.9"
+  end
+
+  desc "restart"
+  task :restart, :roles => :resque_worker do
+    stop
+    start
+  end
+
+  after "deploy:symlink", "resque_worker:restart"
+end
+
 def kill_processes_matching(name, options={})
   run "ps -ef | grep #{name} | grep -v grep | awk '{print $2}' | xargs --no-run-if-empty kill #{options[:signal]}"
 end
 
-# worker
-# start:   COUNT=3 RAILS_ENV=production QUEUE=* bundle exec rake resque:workers &
-# kill:   ps -ef | grep resque:workers | grep -v grep | awk '{print $2}' | xargs --no-run-if-empty kill
+def daemonized
+  " > /dev/null 2>&1 &"
+end
