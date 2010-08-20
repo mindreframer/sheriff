@@ -12,7 +12,7 @@ require 'capistrano/ext/multistage'
 set :application, "Sheriff"
 set :scm, :git
 set :repository, "git@github.com:dawanda/sheriff.git"
-set :branch, "resque"
+set :branch, "master"
 
 set :deploy_to, '/srv/sheriff'
 
