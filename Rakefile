@@ -9,7 +9,9 @@ require 'rake/rdoctask'
 require 'resque/tasks.rb'
 
 namespace :resque do
-  task :setup => :environment
+  task :setup => :environment do
+    require 'resque-multi-job-forks'
+  end
 end
 
 Rails::Application.load_tasks
