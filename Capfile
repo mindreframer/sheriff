@@ -71,29 +71,53 @@ namespace :fix do
   end
 end
 
-namespace :resque_worker do
-  desc "start"
-  task :start, :roles => :resque_worker do
-    count = (stage == :staging ? 1 : 2)
-    run "cd #{current_path}; MINUTES_PER_FORK=5 QUEUE='*' COUNT=#{count} RAILS_ENV=#{stage} rake resque:workers #{daemonized}"
+namespace :resque do
+  namespace :worker do
+    desc "start"
+    task :start, :roles => :resque_worker do
+      count = (stage == :staging ? 1 : 2)
+      run "cd #{current_path}; MINUTES_PER_FORK=5 QUEUE='*' COUNT=#{count} RAILS_ENV=#{stage} rake resque:workers #{daemonized}"
+    end
+
+    desc "stop"
+    task :stop, :roles => :resque_worker do
+      kill_processes_matching "resque", :not_matching => 'resque-web'
+    end
+
+    desc "restart"
+    task :restart, :roles => :resque_worker do
+      stop
+      start
+    end
+
+    after "deploy:symlink", "resque:worker:restart"
   end
 
-  desc "stop"
-  task :stop, :roles => :resque_worker do
-    kill_processes_matching "resque-1.9"
-  end
+  namespace :web do
+    desc "start"
+    task :start, :roles => :resque_worker do
+      run "cd #{current_path}; RAILS_ENV=#{stage} resque-web config/resque-web.rb"
+    end
 
-  desc "restart"
-  task :restart, :roles => :resque_worker do
-    stop
-    start
-  end
+    desc "stop"
+    task :stop, :roles => :resque_worker do
+      kill_processes_matching "resque-web"
+    end
 
-  after "deploy:symlink", "resque_worker:restart"
+    desc "restart"
+    task :restart, :roles => :resque_worker do
+      stop
+      start
+    end
+
+    after "deploy:symlink", "resque:web:restart"
+  end
 end
 
+
 def kill_processes_matching(name, options={})
-  run "ps -ef | grep #{name} | grep -v grep | awk '{print $2}' | xargs --no-run-if-empty kill #{options[:signal]}"
+  not_matching = " | grep -v #{options[:not_matching]}" if options[:not_matching]
+  run "ps -ef | grep #{name} | grep -v grep #{not_matching} | awk '{print $2}' | xargs --no-run-if-empty kill #{options[:signal]}"
 end
 
 def daemonized

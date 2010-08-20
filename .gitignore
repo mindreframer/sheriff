@@ -8,4 +8,5 @@ config/database.yml
 config/config.yml
 config/email.yml
 config/newrelic.yml
+config/resque_web.rb
 .idea/*
