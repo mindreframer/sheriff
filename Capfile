@@ -96,12 +96,12 @@ namespace :resque do
   namespace :web do
     desc "start"
     task :start, :roles => :resque_worker do
-      run "cd #{current_path}; RAILS_ENV=#{stage} resque-web config/resque-web.rb"
+      run "cd #{current_path}; RAILS_ENV=#{stage} resque-web config/resque_web.rb"
     end
 
     desc "stop"
     task :stop, :roles => :resque_worker do
-      kill_processes_matching "resque-web"
+      kill_processes_matching "resque-web", :signal => '-9'
     end
 
     desc "restart"
