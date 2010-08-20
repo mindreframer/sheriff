@@ -75,7 +75,7 @@ namespace :resque_worker do
   desc "start"
   task :start, :roles => :resque_worker do
     count = (stage == :staging ? 1 : 2)
-    run "cd #{current_path}; MINUTES_PER_FORK=5 QUEUE='*' COUNT=#{count} RAILS_ENV=#{rails_env} rake resque:workers #{daemonized}"
+    run "cd #{current_path}; MINUTES_PER_FORK=5 QUEUE='*' COUNT=#{count} RAILS_ENV=#{stage} rake resque:workers #{daemonized}"
   end
 
   desc "stop"
