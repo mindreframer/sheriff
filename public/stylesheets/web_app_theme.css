@@ -80,11 +80,13 @@
   display: block;
   padding: 2px 5px;
 }
-#sidebar ul.navigation li{  background: #ffffcc;}
+#sidebar ul.navigation li{  background: #ddd;}
 
 #sidebar ul.subnavigation li a:link, #sidebar ul.subnavigation li a:visited {
   display: block;
-  padding: 4px 18px;
+    padding: 4px 18px;
+}
+#sidebar ul.subnavigation li{
   background: #fff;
 }
 
