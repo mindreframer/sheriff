@@ -6,10 +6,11 @@ class Deputy < ActiveRecord::Base
   accepts_nested_attributes_for :deputy_plugins
 
   validates_uniqueness_of :address
-  validates_uniqueness_of :name, :if => lambda{|d| d.name != UNKNOWN }
+  validates_uniqueness_of :name, :if => lambda{|d| d.name != UNKNOWN_HOST }
   validates_uniqueness_of :human_name, :allow_blank => true
 
-  UNKNOWN = 'unknown_host'
+  UNKNOWN_HOST = 'unknown_host'
+  UNKNOWN_ADDRESS = 'unknown_address'
 
   def full_name
     "#{human_name.presence || name}"
@@ -26,10 +27,14 @@ class Deputy < ActiveRecord::Base
   end
 
   def self.find_by_address_or_name(address, name)
-    if name == UNKNOWN
+    if name == UNKNOWN_HOST and address == UNKNOWN_ADDRESS
+      raise 'Cannot possibly find anything'
+    elsif name == UNKNOWN_HOST
       first(:conditions => {:address => address})
+    elsif address == UNKNOWN_ADDRESS
+      first(:conditions => {:name => name})
     else
-      first(:conditions => ["address = ? OR name = ?", address, name])
+      first(:conditions => ["name = ? OR address = ?", name, address])
     end
   end
 
@@ -38,7 +43,8 @@ class Deputy < ActiveRecord::Base
   end
 
   def self.extract_address_and_name(request)
-    remote_host =  request.params[:hostname].presence || request.remote_host.presence || UNKNOWN
-    [request.ip, remote_host]
+    remote_host =  request.params[:hostname].presence || request.remote_host.presence || UNKNOWN_HOST
+    ip = (request.params[:forced_host] ? UNKNOWN_ADDRESS : request.ip)
+    [ip, remote_host]
   end
 end
