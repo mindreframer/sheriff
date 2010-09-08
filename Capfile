@@ -15,6 +15,7 @@ set :repository, "git@github.com:dawanda/sheriff.git"
 set :branch, "master"
 
 set :deploy_to, '/srv/sheriff'
+set :keep_releases, 3 
 
 set :user, "deploy"
 set :use_sudo, false
