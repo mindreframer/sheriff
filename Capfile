@@ -37,13 +37,22 @@ namespace :deploy do
   end
   after 'deploy:update_code', 'deploy:add_env'
 end
+after 'deploy', 'deploy:cleanup'
 
-namespace :gems do
-  task :bundle, :roles => :app do
-    run "cd #{current_release} && bundle install /home/#{user}/.bundle --without test development"
+namespace :bundler do
+  task :create_symlink, :roles => :app do
+    shared_dir = File.join(shared_path, 'bundle')
+    release_dir = File.join(current_release, '.bundle')
+    run("mkdir -p #{shared_dir} && ln -s #{shared_dir} #{release_dir}")
+  end
+
+  task :bundle_new_release, :roles => :app do
+    bundler.create_symlink
+    run "cd #{release_path} && bundle install .bundle --without test --without development"
   end
 end
-after 'deploy:update_code', 'gems:bundle'
+
+after 'deploy:update_code', 'bundler:bundle_new_release'
 
 namespace :resque_web do
   desc "restart"
