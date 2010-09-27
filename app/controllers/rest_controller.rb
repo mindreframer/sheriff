@@ -3,10 +3,6 @@ class RestController < ApplicationController
   inherit_resources
   include InheritedResources::DSL
 
-  show! do |success|
-    success.html{render :action=>:edit}
-  end
-
   protected
 
   def resource
