@@ -1,4 +1,5 @@
 class RestController < ApplicationController
+  respond_to :html, :xml, :json
   inherit_resources
   include InheritedResources::DSL
 
