@@ -1,5 +1,5 @@
 class AlertsController < RestController
-
+  respond_to :html, :xml, :json
   def delete_all
     Alert.all.each(&:destroy)
     redirect_to :action => :index
