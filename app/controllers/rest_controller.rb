@@ -9,10 +9,11 @@ class RestController < ApplicationController
 
   # standard respond_to :html, :xml, :json does not seem to work, roll our own...
   def self.hacky_respond_to(*args)
+    options = args.extract_options!.delete(:options) rescue nil
     index! do |success|
       if @collection and @collection.respond_to?("to_#{params[:format]}")
-        success.xml{ render :text => @collection.to_xml }
-        success.json{ render :text => @collection.to_json }
+        success.xml{ render :text => @collection.to_xml(options) }
+        success.json{ render :text => @collection.to_json(options) }
       end
     end
   end
