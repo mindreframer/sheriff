@@ -6,6 +6,10 @@ class Validation < ActiveRecord::Base
   validates_presence_of :ignore_end, :if => :ignore_start?
   validates_presence_of :ignore_start, :if => :ignore_end?
 
+  def ignored?
+    in_ignore_interval? or report.deputy.disabled?
+  end
+
   def in_ignore_interval?
     return false if not ignore_end? or not ignore_start?
 
@@ -26,7 +30,7 @@ class Validation < ActiveRecord::Base
   protected
 
   def validation_failed!(message)
-    return if in_ignore_interval?
+    return if ignored?
     if error_level != 0
       update_attributes!(:current_error_level => error_level)
       Alert.create(:message => message, :error_level => error_level, :validation => self, :report => report)
