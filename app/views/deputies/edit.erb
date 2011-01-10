@@ -14,6 +14,10 @@
       <td>Address (Used for recognition!)</td>
       <td><%= f.text_field :address %></td>
     </tr>
+    <tr>
+      <td>Disabled until</td>
+      <td><%= f.text_field :disabled_until %></td>
+    </tr>
   </table>
 
   <% @deputy.deputy_plugins.build %>

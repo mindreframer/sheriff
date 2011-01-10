@@ -26,6 +26,10 @@ class Deputy < ActiveRecord::Base
     update_attributes(:name => name) if self.name != name
   end
 
+  def disabled?
+    disabled_until? and disabled_until > Time.current
+  end
+
   def self.find_by_address_or_name(address, name)
     if name == UNKNOWN_HOST and address == UNKNOWN_ADDRESS
       raise 'Cannot possibly find anything'

@@ -1,15 +1,16 @@
-# This file is auto-generated from the current state of the database. Instead of editing this file, 
-# please use the migrations feature of Active Record to incrementally modify your database, and
-# then regenerate this schema definition.
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your database schema. If you need
-# to create the application database on another system, you should be using db:schema:load, not running
-# all the migrations from scratch. The latter is a flawed and unsustainable approach (the more migrations
+# Note that this schema.rb definition is the authoritative source for your
+# database schema. If you need to create the application database on another
+# system, you should be using db:schema:load, not running all the migrations
+# from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100723075756) do
+ActiveRecord::Schema.define(:version => 20110110135655) do
 
   create_table "alerts", :force => true do |t|
     t.integer  "error_level",     :null => false
@@ -29,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20100723075756) do
     t.datetime "last_report_at"
     t.integer  "current_error_level", :default => 0, :null => false
     t.string   "human_name"
+    t.datetime "disabled_until"
   end
 
   add_index "deputies", ["address"], :name => "index_deputies_on_address", :unique => true
