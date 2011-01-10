@@ -35,6 +35,23 @@ describe Validation do
     end
   end
 
+  describe :validation_failed! do
+    let(:validation){ Factory(:value_validation) }
+
+    it "reports an error" do
+      lambda{
+        validation.send(:validation_failed!, 'FFF')
+      }.should change{Alert.count}.by(+1)
+    end
+
+    it "does not report an error if deputy is disabled" do
+      validation.report.deputy.update_attribute(:disabled_until, 1.minute.from_now)
+      lambda{
+        validation.send(:validation_failed!, 'FFF')
+      }.should_not change{Alert.count}
+    end
+  end
+
   describe :in_ignore_interval? do
     it "is not in ignore when nothing is set" do
       Validation.new.in_ignore_interval?.should == false
