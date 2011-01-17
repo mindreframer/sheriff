@@ -8,6 +8,7 @@ gem 'hoptoad_notifier'
 gem 'newrelic_rpm', '2.13.0.beta5'
 gem 'resque'
 gem 'SystemTimer', :require => 'system_timer'
+gem 'ar_serialized_array', '>=0.3.0'
 
 group :test do
   gem 'factory_girl', :git => 'git://github.com/thoughtbot/factory_girl.git'

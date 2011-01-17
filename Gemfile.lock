@@ -42,6 +42,8 @@ GEM
       activemodel (= 3.0.0)
       activesupport (= 3.0.0)
     activesupport (3.0.0)
+    ar_serialized_array (0.3.0)
+      activerecord
     arel (1.0.1)
       activesupport (~> 3.0.0)
     builder (2.1.2)
@@ -116,6 +118,7 @@ PLATFORMS
 
 DEPENDENCIES
   SystemTimer
+  ar_serialized_array (>= 0.3.0)
   factory_girl!
   hoptoad_notifier
   inherited_resources
