@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110110135655) do
+ActiveRecord::Schema.define(:version => 20110117103438) do
 
   create_table "alerts", :force => true do |t|
     t.integer  "error_level",     :null => false
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20110110135655) do
   end
 
   add_index "groups", ["group_id", "name"], :name => "index_groups_on_group_id_and_name", :unique => true
+  add_index "groups", ["name", "group_id"], :name => "enforce_unique_idx", :unique => true
 
   create_table "historic_values", :force => true do |t|
     t.integer  "report_id",                          :null => false
@@ -85,6 +86,13 @@ ActiveRecord::Schema.define(:version => 20110110135655) do
 
   add_index "reports", ["deputy_id"], :name => "index_reports_on_deputy_id"
   add_index "reports", ["group_id", "deputy_id"], :name => "index_reports_on_group_id_and_deputy_id", :unique => true
+
+  create_table "summaries", :force => true do |t|
+    t.string   "report_ids", :null => false
+    t.string   "name",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "validations", :force => true do |t|
     t.integer  "start_seconds",       :default => 0,     :null => false

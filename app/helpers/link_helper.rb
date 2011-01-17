@@ -11,7 +11,7 @@ module LinkHelper
   def name_for_object(object)
     case object
     when Group, Deputy, Report then object.full_name
-    when Plugin then object.name
+    when Plugin, Summary then object.name
     else "No name found"  
     end
   end

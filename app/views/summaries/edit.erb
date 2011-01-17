@@ -1,0 +1,37 @@
+<h3>Summary</h3>
+<table>
+  <tr>
+    <th>Report</th>
+    <th>value</th>
+    <th>reported at</th>
+  </tr>
+
+  <% @summary.recent_historic_values.each do |historic_value| %>
+    <tr <%= error_attribute(historic_value) %>>
+      <td><%= link_to_object historic_value.report %></td>
+      <td><%= historic_value.value_as_text %></td>
+      <td><%= detailed_time historic_value.reported_at %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br/>
+<br/>
+<br/>
+<h1>Edit</h1>
+<% form_for @summary do |f| %>
+  <%= f.error_messages %>
+
+  <table>
+    <tr>
+      <td>Name</td>
+      <td><%= f.text_field :name %></td>
+    </tr>
+    <tr>
+      <td>Report IDs</td>
+      <td><%= f.text_area :report_ids_as_text %></td>
+    </tr>
+  </table>
+
+  <%= f.submit 'Save' %>
+<% end %>
