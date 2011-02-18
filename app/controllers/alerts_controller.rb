@@ -2,7 +2,7 @@ class AlertsController < RestController
   hacky_respond_to :html, :xml, :json
 
   def delete_all
-    Alert.all.each(&:destroy)
+    Alert.delete_all
     redirect_to :action => :index
   end
 
