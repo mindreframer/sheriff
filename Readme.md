@@ -2,3 +2,6 @@ Deputies report via /notice?group=#{name}&value=#{value} e.g. `curl myhost/notic
 
 ### Cron
     * * * * * cd /srv/sheriff/current && RAILS_ENV=production ruby sh/cron_minute.rb && deputy Cron.sheriff
+
+# TODO
+ - hightlight and notify any new error/alert message <-> set them to default email -> user can adjust down
