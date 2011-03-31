@@ -8,8 +8,8 @@ Sheriff is a web-based tool for server monitoring and reporting.
 ### Reporting
 Values get pushed to Sheriff via http get e.g. curl but preferably via [deputy](https://github.com/dawanda/deputy)
 
-  curl myhost/notice?group=Cron.count_users&value=123
-  deputy Cron.count_users 123
+    curl myhost/notice?group=Cron.count_users&value=123
+    deputy Cron.count_users 123
 
 ### Validations
 Sheriff validates reported values against a set of validations to see if someone should be notified.
@@ -19,7 +19,7 @@ Sheriff validates reported values against a set of validations to see if someone
  - RunBetweenValidation -- reported between 00:00 and 02:00
 
 ### Plugins
-Plugins can be defined an assigned to deputies/servers to run every x minutes/hours/days.
+Plugins can be stored and assigned to deputies/servers to run every x minutes/hours/days.
 These plugins are compatible to Scout, so you can use these [predefined](https://github.com/highgroove/scout-plugins) once or build your own.
 
     class Redis < Scout::Plugin
