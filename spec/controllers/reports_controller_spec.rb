@@ -25,16 +25,48 @@ describe ReportsController do
       lambda{get_it}.should change(Group, :count).by(+2)
     end
 
-    it "collects ip and address" do
+    it "collects ip and hostname" do
       get_it
       Deputy.last.address.should == '0.0.0.0'
       Deputy.last.name.should =~ /unknown_host/
     end
 
-    it "collects address from hostname" do
+    it "collects hostname" do
       get_it :hostname => 'my_host'
       Deputy.last.address.should == '0.0.0.0'
       Deputy.last.name.should == 'my_host'
+    end
+
+    it "uses existing deputy and report by address" do
+      lambda{
+        lambda{
+          get_it
+          get_it
+        }.should change(Deputy, :count).by(+1)
+      }.should change(Report, :count).by(+1)
+      Report.last.historic_values.count.should == 1
+    end
+
+    it "uses existing deputy and report by hostname whn forced" do
+      lambda{
+        lambda{
+          get_it :hostname => 'my_host', :forced_host => true
+          get_it :hostname => 'my_host', :forced_host => true
+        }.should change(Deputy, :count).by(+1)
+      }.should change(Report, :count).by(+1)
+      Deputy.last.address.should == 'unknown_address'
+      Deputy.last.name.should == 'my_host'
+      Report.last.historic_values.count.should == 1
+    end
+
+    it "uses existing deputy deputy if hostname is known but ip is unknown" do
+      lambda{
+        get_it :hostname => 'my_host', :forced_host => true
+        get_it :hostname => 'my_host'
+      }.should change(Deputy, :count).by(+1)
+      Deputy.last.address.should == 'unknown_address'
+      Deputy.last.name.should == 'my_host'
+      Report.last.historic_values.count.should == 1
     end
   end
 
