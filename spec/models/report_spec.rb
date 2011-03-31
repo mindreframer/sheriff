@@ -20,7 +20,7 @@ describe Report do
       }.should change(Report, :count).by(+1)
       report = Report.last
       report.value.should == '12'
-      report.reported_at.should be_close(Time.current, 3)
+      report.reported_at.should be_within(3).of(Time.current)
     end
 
     it "creates a deputy if none exists" do
@@ -44,7 +44,7 @@ describe Report do
       group = Factory(:group_l2)
       deputy = Factory(:deputy, :last_report_at =>10.minutes.ago)
       Report.report!('12', [group.group.name, group.name], :address => '123.123.123.123', :name => deputy.name)
-      deputy.reload.last_report_at.should be_close(Time.current, 3)
+      deputy.reload.last_report_at.should be_within(3).of(Time.current)
     end
 
     it "updates deputies name" do

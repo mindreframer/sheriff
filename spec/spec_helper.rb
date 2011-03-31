@@ -4,6 +4,6 @@ require 'rspec/rails'
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
-Rspec.configure do |config|
+RSpec.configure do |config|
   config.mock_with :rspec
 end
