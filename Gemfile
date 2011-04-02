@@ -10,6 +10,11 @@ gem 'resque'
 gem 'SystemTimer', '>=1.2.3', :require => 'system_timer'
 gem 'ar_serialized_array', '>=0.3.0'
 
+group :development do
+  gem 'capistrano', :require => false
+  gem 'capistrano-ext', :require => false
+end
+
 group :test do
   gem 'factory_girl', :git => 'git://github.com/thoughtbot/factory_girl.git'
   gem 'rspec-rails', '>=2'

@@ -22,6 +22,9 @@ set :user, "deploy"
 set :use_sudo, false
 
 namespace :deploy do
+ task(:start){}
+ task(:stop){}
+
   task :restart, :roles => :app do
     run "touch #{current_release}/tmp/restart.txt" unless ENV['NO_RESTART']
   end
