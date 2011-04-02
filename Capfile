@@ -40,14 +40,6 @@ namespace :deploy do
 end
 after 'deploy', 'deploy:cleanup'
 
-namespace :resque_web do
-  desc "restart"
-  task :start, :roles => :app do
-    kill_processes_matching "resque-web", :signal => '-9'
-    run "cd #{current_release} && bundle exec resque-web"
-  end
-end
-
 namespace :resque do
   namespace :worker do
     desc "start"
@@ -58,7 +50,7 @@ namespace :resque do
 
     desc "stop"
     task :stop, :roles => :resque_worker do
-      kill_processes_matching "resque", :not_matching => 'resque-web'
+      kill_processes_matching "resque"
     end
 
     desc "restart"
@@ -69,28 +61,7 @@ namespace :resque do
 
     after "deploy:symlink", "resque:worker:restart"
   end
-
-  namespace :web do
-    desc "start"
-    task :start, :roles => :resque_worker do
-      run "cd #{current_path}; RAILS_ENV=#{stage} resque-web config/resque_web.rb"
-    end
-
-    desc "stop"
-    task :stop, :roles => :resque_worker do
-      kill_processes_matching "resque-web", :signal => '-9'
-    end
-
-    desc "restart"
-    task :restart, :roles => :resque_worker do
-      stop
-      start
-    end
-
-    after "deploy:symlink", "resque:web:restart"
-  end
 end
-
 
 def kill_processes_matching(name, options={})
   not_matching = " | grep -v #{options[:not_matching]}" if options[:not_matching]
