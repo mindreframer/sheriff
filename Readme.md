@@ -39,6 +39,26 @@ Sheriff is Rails app deployed via capistrano. It needs:
  - newrelic account for performance reporting
  - hoptoad account for error reporting
 
+### Commands
+For user 'deploy' group 'users' in /srv/sheriff
+
+    # on server:
+    sudo su
+    cd /srv
+    mkdir sheriff
+    chown users:deploy -R sheriff
+
+    sudo su deploy
+    cd /srv/sheriff
+    mkdir -p shared/config
+    mkdir -p shared/log
+    mkdir -p shared/pids
+    --- add customized shared/config/config.yml + database.yml + newrelic.yml
+    --- to customize SMTP settings add shared/config/email.yml
+
+    # from your box
+    bundle exec cap deploy
+
 ### Logrotate
     sudo ln -s /srv/sheriff/current/config/logrotate /etc/cron.d/sheriff
 
@@ -46,6 +66,7 @@ Sheriff is Rails app deployed via capistrano. It needs:
     * * * * * cd /srv/sheriff/current && RAILS_ENV=production ruby sh/cron_minute.rb && deputy Cron.sheriff
 
 # TODO
+ - remove capistrano-ext dependency
  - make newrelic optional
  - make hoptoad optional
  - make resque/redis optional
