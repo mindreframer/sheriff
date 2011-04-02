@@ -61,6 +61,8 @@ For user 'deploy' group 'users' in /srv/sheriff
 
 ### Server
 Use anything rack-ish e.g. `passenger start [OPTIONS]`
+    passenger start --port 3000 --address myhost.com --environment production --max-pool-size 1
+
 or add via normal apache/nginx config.
 
 ### Logrotate
