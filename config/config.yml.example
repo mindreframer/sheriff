@@ -1,11 +1,15 @@
 common: &common
   email_recipients: adsasd@asdas.ccc
+  send_email: false
   sms_recipients: 1111111111
   sms_user: my_user
   sms_password: my_password
   send_sms: false
   domain: http://sheriff.yourhost.com
-
+  hoptoad_api_key: xxxx
+  user: user-for-basic-auth
+  password: password-for-basic-auth
+  hoptoad_api_key: 621418e3ee70b63e0b85318a2e700963
 
 test:
   <<: *common
