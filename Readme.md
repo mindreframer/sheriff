@@ -59,6 +59,10 @@ For user 'deploy' group 'users' in /srv/sheriff
     # from your box
     bundle exec cap deploy
 
+### Server
+Use anything rack-ish e.g. `passenger start [OPTIONS]`
+or add via normal apache/nginx config.
+
 ### Logrotate
     sudo ln -s /srv/sheriff/current/config/logrotate /etc/cron.d/sheriff
 
