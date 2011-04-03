@@ -35,6 +35,9 @@ Resque status can be seen at your-sheriff-url.com/resque/overview.
 ### [Hoptoad](http://hoptoadapp.com/)
 Add hoptoad_api_key to config.yml to get error reported to Hoptoad.
 
+### [Newrelic](https://newrelic.com/)
+If you want performance analysis, add config/newrelic.yml
+
 # Setup
 Sheriff is Rails app deployed via capistrano. It needs:
 
@@ -42,8 +45,8 @@ Sheriff is Rails app deployed via capistrano. It needs:
  - Redis
  - Rack server (tested with passenger)
  - mail server to send out mails
- - goyyamobile.com login for sms notifications
- - newrelic account for performance reporting
+ - (Optional) goyyamobile.com login for sms notifications
+ - (Optional) Newrelic account for performance analysis
  - (Optional) Hoptoad account for error reporting
 
 ### Commands
@@ -80,7 +83,6 @@ or add via normal apache/nginx config.
 
 # TODO
  - remove capistrano-ext dependency
- - make newrelic optional
  - make resque/redis optional
  - make sms provider configurable (create a gem for that ?)
  - make 1.9 compatible

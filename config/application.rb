@@ -5,6 +5,8 @@ require 'open-uri'
 
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
+require 'newrelic_rpm' if File.exit?('config/newrelic.yml')
+
 module Sheriff
   class Application < Rails::Application
   
