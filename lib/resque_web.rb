@@ -16,8 +16,8 @@ class ResqueWeb < Sinatra::Base
       env["PATH_INFO"].sub!(/^\/resque/, '')
       env['SCRIPT_NAME'] = '/resque'
 
-      @app ||= Resque::Server.new
-      status, headers, body = @app.call(env)
+      @server ||= Resque::Server.new
+      status, headers, body = @server.call(env)
 
       # in production with nginx, assets always hang endless <-> this fixes it
       if body.is_a? Sinatra::Helpers::StaticFile
