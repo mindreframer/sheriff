@@ -32,6 +32,8 @@ These plugins are compatible to Scout, so you can use these [predefined](https:/
 To keep Sheriff responsive, report processing is queued in Resque. Resque workers are started when doing `cap deploy`.
 Resque status can be seen at your-sheriff-url.com/resque/overview.
 
+### [Hoptoad](http://hoptoadapp.com/)
+Add hoptoad_api_key to config.yml to get error reported to Hoptoad.
 
 # Setup
 Sheriff is Rails app deployed via capistrano. It needs:
@@ -42,7 +44,7 @@ Sheriff is Rails app deployed via capistrano. It needs:
  - mail server to send out mails
  - goyyamobile.com login for sms notifications
  - newrelic account for performance reporting
- - hoptoad account for error reporting
+ - (Optional) Hoptoad account for error reporting
 
 ### Commands
 For user 'deploy' group 'users' in /srv/sheriff
@@ -79,7 +81,6 @@ or add via normal apache/nginx config.
 # TODO
  - remove capistrano-ext dependency
  - make newrelic optional
- - make hoptoad optional
  - make resque/redis optional
  - make sms provider configurable (create a gem for that ?)
  - make 1.9 compatible

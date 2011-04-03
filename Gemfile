@@ -4,7 +4,7 @@ gem 'rails', '3.0.5'
 gem 'mysql'
 gem "will_paginate", :git => "git://github.com/mislav/will_paginate.git", :branch => "rails3"
 gem 'inherited_resources'
-gem 'hoptoad_notifier'
+gem 'hoptoad_notifier', :require => 'false'
 gem 'newrelic_rpm'
 gem 'resque'
 gem 'SystemTimer', '>=1.2.3', :require => 'system_timer'

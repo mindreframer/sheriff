@@ -6,10 +6,9 @@ common: &common
   sms_password: my_password
   send_sms: false
   domain: http://sheriff.yourhost.com
-  hoptoad_api_key: xxxx
+  hoptoad_api_key: xxxx # leave blank to deactivate
   user: user-for-basic-auth
   password: password-for-basic-auth
-  hoptoad_api_key: 621418e3ee70b63e0b85318a2e700963
 
 test:
   <<: *common
