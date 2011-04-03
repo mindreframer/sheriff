@@ -5,8 +5,10 @@ class ResqueWeb < Sinatra::Base
   require 'resque/server'
   use Rack::ShowExceptions
 
-  Resque::Server.use Rack::Auth::Basic do |user, password|
-    user == CFG[:user] && password == CFG[:password]
+  if CFG[:user].present? and CFG[:password].present?
+    Resque::Server.use Rack::Auth::Basic do |user, password|
+      user == CFG[:user] && password == CFG[:password]
+    end
   end
 
   def call(env)
