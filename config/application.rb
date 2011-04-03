@@ -5,11 +5,12 @@ require 'open-uri'
 
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
-require 'newrelic_rpm' if File.exit?('config/newrelic.yml')
+require 'newrelic_rpm' if File.exist?('config/newrelic.yml')
+
+CFG = YAML.load_file('config/config.yml')[Rails.env].with_indifferent_access.freeze
 
 module Sheriff
   class Application < Rails::Application
-  
     config.generators do |g|
       g.test_framework :rspec, :fixture => true, :views => false
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
