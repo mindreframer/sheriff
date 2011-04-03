@@ -28,6 +28,11 @@ These plugins are compatible to Scout, so you can use these [predefined](https:/
       end
     end
 
+### [Resque](https://github.com/defunkt/resque)
+To keep Sheriff responsive, report processing is queued in Resque. Resque workers are started when doing `cap deploy`.
+Resque status can be seen at your-sheriff-url.com/resque/overview.
+
+
 # Setup
 Sheriff is Rails app deployed via capistrano. It needs:
 
