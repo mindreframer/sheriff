@@ -11,6 +11,9 @@ Values get pushed to Sheriff via http get e.g. curl but preferably via [deputy](
     curl myhost/notice?group=Cron.count_users&value=123
     deputy Cron.count_users 123
 
+    # report the success/failure of script execution
+    ./database_backup ; deputy Cron.db_backup $?
+
 ### Validations
 Sheriff validates reported values against a set of validations to see if someone should be notified.
 
@@ -20,7 +23,7 @@ Sheriff validates reported values against a set of validations to see if someone
 
 ### Plugins
 Plugins can be stored and assigned to deputies/servers to run every x minutes/hours/days.
-These plugins are compatible to Scout, so you can use these [predefined](https://github.com/highgroove/scout-plugins) once or build your own.
+These plugins are compatible to Scout, so you can use these [50+ existing plugins](https://github.com/highgroove/scout-plugins) or build your own.
 
     class Redis < Scout::Plugin
       def build_report
@@ -30,13 +33,12 @@ These plugins are compatible to Scout, so you can use these [predefined](https:/
 
 ### [Resque](https://github.com/defunkt/resque)
 To keep Sheriff responsive, report processing should be queued in Resque.<br/>
-Install redis on localhost and activate resque: true in config.yml<br/>
+Install redis on localhost and set `resque: true` in config.yml<br/>
 
     # config.yml
     resque: true
 
-Resque workers are then started when doing `cap deploy`.<br/>
-Resque status can be seen at your-sheriff-url.com/resque/overview
+If activated Resque workers are started on `cap deploy` and Resque status can be seen at your-sheriff-url.com/resque/overview
 
 ### [Hoptoad](http://hoptoadapp.com/)
 Add hoptoad_api_key to config.yml to get error reported to Hoptoad.
@@ -70,7 +72,6 @@ For user 'deploy' group 'users' in /srv/sheriff
     mkdir -p shared/log
     mkdir -p shared/pids
     --- add customized shared/config/config.yml + database.yml [+ newrelic.yml]
-    --- to customize SMTP settings add shared/config/email.yml
 
     # from your box
     bundle exec cap deploy
@@ -93,8 +94,8 @@ To notice when a report is missing we need a cron to check for it.
 
 # TODO
  - make send_email flag do something...
+ - make email settings more configureable (e.g. for sendmail / gmail sending)
  - remove capistrano-ext dependency
- - make email settings easier to configure
  - make sms provider configurable (create a gem for that ?)
  - make 1.9 compatible
  - highlight and notify any new error/alert message <-> set them to default email -> user can adjust down
