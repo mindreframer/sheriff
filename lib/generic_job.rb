@@ -15,6 +15,10 @@ class GenericJob
   end
 
   def self.publish(klass, method, options={})
-    Resque.enqueue(self, klass.to_s, method.to_s, options)
+    if CFG[:resque]
+      Resque.enqueue(self, klass.to_s, method.to_s, options)
+    else
+      perform(klass.to_s, method.to_s, options)
+    end
   end
 end

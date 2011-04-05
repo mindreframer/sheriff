@@ -29,23 +29,29 @@ These plugins are compatible to Scout, so you can use these [predefined](https:/
     end
 
 ### [Resque](https://github.com/defunkt/resque)
-To keep Sheriff responsive, report processing is queued in Resque. Resque workers are started when doing `cap deploy`.
-Resque status can be seen at your-sheriff-url.com/resque/overview.
+To keep Sheriff responsive, report processing should be queued in Resque.<br/>
+Install redis on localhost and activate resque: true in config.yml<br/>
+
+    # config.yml
+    resque: true
+
+Resque workers are then started when doing `cap deploy`.<br/>
+Resque status can be seen at your-sheriff-url.com/resque/overview
 
 ### [Hoptoad](http://hoptoadapp.com/)
 Add hoptoad_api_key to config.yml to get error reported to Hoptoad.
 
 ### [Newrelic](https://newrelic.com/)
-If you want performance analysis, add config/newrelic.yml
+If you want performance analysis, add your `config/newrelic.yml`
 
 # Setup
 Sheriff is Rails app deployed via capistrano. It needs:
 
- - MySql
- - Redis
+ - Relational database (tested with MySql)
  - Rack server (tested with passenger)
  - mail server to send out mails
- - (Optional) goyyamobile.com login for sms notifications
+ - (Optional) Resque for higher responsiveness / no timeouts
+ - (Optional) goyyamobile.com account for sms notifications
  - (Optional) Newrelic account for performance analysis
  - (Optional) Hoptoad account for error reporting
 
@@ -63,7 +69,7 @@ For user 'deploy' group 'users' in /srv/sheriff
     mkdir -p shared/config
     mkdir -p shared/log
     mkdir -p shared/pids
-    --- add customized shared/config/config.yml + database.yml + newrelic.yml
+    --- add customized shared/config/config.yml + database.yml [+ newrelic.yml]
     --- to customize SMTP settings add shared/config/email.yml
 
     # from your box
@@ -76,14 +82,19 @@ Use anything rack-ish e.g. `passenger start [OPTIONS]`
 or add via normal apache/nginx config.
 
 ### Logrotate
+Dont let those log-files grow!
+
     sudo ln -s /srv/sheriff/current/config/logrotate /etc/cron.d/sheriff
 
 ### Cron
+To notice when a report is missing we need a cron to check for it.
+
     * * * * * cd /srv/sheriff/current && RAILS_ENV=production ruby sh/cron_minute.rb && deputy Cron.sheriff
 
 # TODO
  - remove capistrano-ext dependency
- - make resque/redis optional
+ - make email settings easier to configure
  - make sms provider configurable (create a gem for that ?)
  - make 1.9 compatible
- - hightlight and notify any new error/alert message <-> set them to default email -> user can adjust down
+ - highlight and notify any new error/alert message <-> set them to default email -> user can adjust down
+ - make plugin OPTIONS configurable

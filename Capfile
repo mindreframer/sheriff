@@ -43,6 +43,7 @@ namespace :deploy do
 end
 after 'deploy', 'deploy:cleanup'
 
+# If deactivated resque, this will run an empty rake task, no need to worry
 namespace :resque do
   namespace :worker do
     desc "start"

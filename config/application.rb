@@ -7,7 +7,9 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 require 'newrelic_rpm' if File.exist?('config/newrelic.yml')
 
-CFG = YAML.load_file('config/config.yml')[Rails.env].with_indifferent_access.freeze
+require File.expand_path('../../lib/cfg', __FILE__)
+
+require 'resque' if CFG[:resque]
 
 module Sheriff
   class Application < Rails::Application
@@ -16,7 +18,7 @@ module Sheriff
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
     end
 
-    config.middleware.use 'ResqueWeb'
+    config.middleware.use 'ResqueWeb' if CFG[:resque]
 
     config.autoload_paths << "lib"
     config.encoding = "utf-8"

@@ -1,14 +1,18 @@
 common: &common
-  email_recipients: adsasd@asdas.ccc
   send_email: false
+  email_recipients: adsasd@asdas.ccc
+
   sms_recipients: 1111111111
   sms_user: my_user
   sms_password: my_password
   send_sms: false
+
   domain: http://sheriff.yourhost.com
-  hoptoad_api_key: xxxx # leave blank to deactivate
   user: user-for-basic-auth
   password: password-for-basic-auth
+
+  hoptoad_api_key: xxxx # leave blank to deactivate
+  resque: true
 
 test:
   <<: *common

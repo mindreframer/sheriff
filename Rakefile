@@ -6,11 +6,20 @@ require File.expand_path('../config/application', __FILE__)
 require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
-require 'resque/tasks.rb'
 
-namespace :resque do
-  task :setup => :environment do
-    require 'resque-multi-job-forks'
+if CFG[:resque]
+  require 'resque/tasks.rb'
+
+  namespace :resque do
+    task :setup => :environment do
+      require 'resque-multi-job-forks'
+    end
+  end
+else
+  namespace :resque do
+    task :workers do
+      puts "Resque is deactivated, have a nice day :>"
+    end
   end
 end
 
