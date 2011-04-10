@@ -94,7 +94,6 @@ To notice when a report is missing we need a cron to check for it.
 
 # TODO
  - make send_email flag do something...
- - make email settings more configureable (e.g. for sendmail / gmail sending)
  - remove capistrano-ext dependency
  - make sms provider configurable (create a gem for that ?)
  - make 1.9 compatible
