@@ -25,9 +25,5 @@ module Sheriff
     config.filter_parameters += [:password]
     config.consider_all_requests_local = true
     config.active_support.deprecation = :log
-
-    if CFG[:smtp_settings]
-      ActionMailer::Base.smtp_settings = CFG[:smtp_settings]
-    end
   end
 end

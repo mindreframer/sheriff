@@ -27,9 +27,3 @@ staging:
 production:
   <<: *common
   send_sms: true
-  smtp_settings:
-    address: 192.168.2.1
-    port: 25
-    domain: xxx.com
-    enable_starttls_auto: false
-

@@ -31,7 +31,7 @@ namespace :deploy do
 
   desc "Copy config files to config/"
   task :copy_config_files, :roles => [:app, :db] do
-    run "cp #{deploy_to}/shared/config/* #{current_release}/config/"
+    run "cp -R #{deploy_to}/shared/config/* #{current_release}/config/"
   end
   after 'deploy:update_code', 'deploy:copy_config_files'
 

@@ -51,7 +51,7 @@ Sheriff is Rails app deployed via capistrano. It needs:
 
  - Relational database (tested with MySql)
  - Rack server (tested with passenger)
- - mail server to send out mails
+ - Mail setup in e.g. sheriff/shared/config/initializers/mail.rb
  - (Optional) Resque for higher responsiveness / no timeouts
  - (Optional) goyyamobile.com account for sms notifications
  - (Optional) Newrelic account for performance analysis
