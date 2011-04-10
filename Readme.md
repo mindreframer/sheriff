@@ -41,7 +41,7 @@ Install redis on localhost and set `resque: true` in config.yml<br/>
 If activated Resque workers are started on `cap deploy` and Resque status can be seen at your-sheriff-url.com/resque/overview
 
 ### [Hoptoad](http://hoptoadapp.com/)
-Add hoptoad_api_key to config.yml to get error reported to Hoptoad.
+Add hoptoad_api_key to config.yml to get errors reported to Hoptoad.
 
 ### [Newrelic](https://newrelic.com/)
 If you want performance analysis, add your `config/newrelic.yml`
