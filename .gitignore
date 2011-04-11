@@ -5,7 +5,7 @@ tmp/**/*
 config/deploy/staging.rb
 env
 config/database.yml
-config/config.yml
+config/config*.yml
 config/email.yml
 config/newrelic.yml
 config/resque_web.rb
