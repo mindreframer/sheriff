@@ -46,7 +46,28 @@ Add hoptoad_api_key to config.yml to get errors reported to Hoptoad.
 ### [Newrelic](https://newrelic.com/)
 If you want performance analysis, add your `config/newrelic.yml`
 
-# Setup
+# Demo / Heroku
+You can play around with the demo at [sheriff.heroku.com](sheriff.heroku.com),
+its public, so people will make crazy/dangerous plugins.<br/>
+**Do not run plugins via deputy**.<br/>
+Only ValueValidations work, since there are no cron jobs.
+
+    # /etc/deputy.yml
+    sheriff_url: http://sheriff.heroku.com
+
+    # report a value
+    deputy Foo.bar 111
+
+    # run plugins written by annonymouse pranksters
+    deputy --run-plugins --no-wait
+
+To run your own setup:
+
+ - create a heroku instance
+ - make a config in `config/config.heroku.yml`
+ - run `sh/configure_heroku.rb`
+
+# Setup on normal server
 Sheriff is Rails app deployed via capistrano. It needs:
 
  - Relational database (tested with MySql)
