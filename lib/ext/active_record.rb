@@ -15,7 +15,7 @@ class ActiveRecord::ConnectionAdapters::MysqlAdapter
 end
 
 # for heroku
-class ActiveRecord::ConnectionAdapters::PostgresqlAdapter
+class ActiveRecord::ConnectionAdapters::PostgreSQLAdapter
   def self.concat_sql(*values)
     values * " || "
   end
