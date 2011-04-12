@@ -14,7 +14,8 @@ class DeputiesController < RestController
   end
 
   def collection
-    order = params[:order] || "CONCAT(COALESCE(human_name,''),name)"
+    default_oder = ActiveRecord::Base.connection.class.concat_sql("COALESCE(human_name,'')", "name")
+    order = params[:order] || default_oder
     @collection ||= resource_class.paginate(:per_page => 40, :page => params[:page], :order => order)
   end
 

@@ -7,3 +7,16 @@ class ActiveRecord::ConnectionAdapters::MysqlAdapter
     "="
   end
 end
+
+class ActiveRecord::ConnectionAdapters::MysqlAdapter
+  def self.concat_sql(*values)
+    "CONCAT(#{values * ', '})"
+  end
+end
+
+# for heroku
+class ActiveRecord::ConnectionAdapters::PostgresqlAdapter
+  def self.concat_sql(*values)
+    values * " || "
+  end
+end
