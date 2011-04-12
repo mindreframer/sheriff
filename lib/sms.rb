@@ -5,6 +5,7 @@ require 'openssl'
 
 class Sms
   def self.send(message, recipients)
+    return unless CFG[:send_sms]
     user = CFG[:sms_user]
     password = CFG[:sms_password]
     if ['development', 'staging'].include?(Rails.env)
@@ -16,7 +17,7 @@ class Sms
       data = "id=#{user}&pw=#{password}&msgtype=t&receiver=#{recipient.strip}&msg=#{message}&sender=Sheriff"
       url = "https://gate1.goyyamobile.com/sms/sendsms.asp?#{data}"
       without_ssl_verification do
-        open(url).read if CFG[:send_sms]
+        open(url).read
       end
     end
   rescue Exception => e
