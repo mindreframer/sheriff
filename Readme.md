@@ -34,20 +34,20 @@ These plugins are compatible to Scout, so you can use these [50+ existing plugin
 ### Summaries
 With summaries you can aggregate multiple reports, to e.g. compare responses.
 
-### [Resque](https://github.com/defunkt/resque)
-To keep Sheriff responsive, report processing should be queued in Resque.<br/>
+### Resque
+To keep Sheriff responsive, report processing should be queued in [Resque](https://github.com/defunkt/resque).<br/>
 Install redis on localhost and set `resque: true` in config.yml<br/>
 
     # config.yml
     resque: true
 
-If activated Resque workers are started on `cap deploy` and Resque status can be seen at your-sheriff-url.com/resque/overview
+If activated, Resque workers are started on `cap deploy` and Resque status can be seen at your-sheriff-url.com/resque/overview
 
-### [Hoptoad](http://hoptoadapp.com/)
-Add hoptoad_api_key to config.yml to get errors reported to Hoptoad.
+### Hoptoad
+Add hoptoad_api_key to config.yml to get errors reported to [Hoptoad](http://hoptoadapp.com).
 
-### [Newrelic](https://newrelic.com/)
-If you want performance analysis, add your `config/newrelic.yml`
+### Newrelic
+If you want performance analysis via [Newrelic](https://newrelic.com), add your `config/newrelic.yml`
 
 # Demo / Heroku
 You can play around with the demo at [sheriff.heroku.com](sheriff.heroku.com),
@@ -55,7 +55,7 @@ its public, so people will make crazy/dangerous plugins.<br/>
 **Do not run plugins via deputy**.<br/>
 Only ValueValidations work, since there are no cron jobs.
 
-    # /etc/deputy.yml
+    # configure deputy via /etc/deputy.yml or ~/.deputy.yml
     sheriff_url: http://sheriff.heroku.com
 
     # report a value
@@ -64,16 +64,22 @@ Only ValueValidations work, since there are no cron jobs.
     # run plugins written by annonymouse pranksters
     deputy --run-plugins --no-wait
 
-To run your own setup:
+**To run your own setup**<br/>
+Setup your heroku account
 
- - create a heroku instance
- - make a config in `config/config.heroku.yml`
- - run `sh/configure_heroku.rb`
+    git clone https://github.com/dawanda/sheriff.git
+    cd sheriff
+    heroku create my-sheriff
+
+Make a config in config/config.heroku.yml
+
+    sh/configure_heroku.rb
+    git ps heroku
 
 # Setup on normal server
 Sheriff is Rails app deployed via capistrano. It needs:
 
- - Relational database (tested with MySql)
+ - Relational database (tested with MySql/Postgres)
  - Rack server (tested with passenger)
  - Mail setup in e.g. sheriff/shared/config/initializers/mail.rb
  - (Optional) Resque for higher responsiveness / no timeouts
