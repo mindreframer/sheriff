@@ -31,6 +31,9 @@ These plugins are compatible to Scout, so you can use these [50+ existing plugin
       end
     end
 
+### Summaries
+With summaries you can aggregate multiple reports, to e.g. compare responses.
+
 ### [Resque](https://github.com/defunkt/resque)
 To keep Sheriff responsive, report processing should be queued in Resque.<br/>
 Install redis on localhost and set `resque: true` in config.yml<br/>
