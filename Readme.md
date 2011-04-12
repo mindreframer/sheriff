@@ -114,7 +114,6 @@ To notice when a report is missing we need a cron to check for it.
     * * * * * cd /srv/sheriff/current && RAILS_ENV=production ruby sh/cron_minute.rb && deputy Cron.sheriff
 
 # TODO
- - make send_email flag do something...
  - remove capistrano-ext dependency
  - make sms provider configurable (create a gem for that ?)
  - make 1.9 compatible
