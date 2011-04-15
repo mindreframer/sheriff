@@ -27,7 +27,7 @@
   <%= text_field_tag 'deputy_plugin[interval_value]', '', :size => 5 %>
   <%= select_options_tag 'deputy_plugin[interval_unit]', time_units_for_select(:without => 'Seconds') %>
   <%= check_box_with_label 'overwrite', true, false, 'overwrite' %>
-  <%= submit_tag 'for all!' %>
+  <%= submit_tag 'update' %>
 <% end %>
 
 <%= will_paginate collection %>
