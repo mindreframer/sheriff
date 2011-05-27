@@ -2,8 +2,9 @@
   Reported by <%= link_to_object deputy_plugin.plugin %> @ <%= link_to_object @report.deputy %>
   every <%= deputy_plugin.humanized_interval %>
 <% else %>
-  Reported by <%= link_to_object @report.deputy %>
+  Reported by <%= link_to_object @report.deputy %> 
 <% end %>
+in group: <%= link_to_object @report.group %>
 
 <br />
 
