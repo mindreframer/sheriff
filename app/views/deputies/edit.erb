@@ -1,4 +1,4 @@
-<% form_for @deputy do |f| %>
+<%= form_for @deputy do |f| %>
   <%= f.error_messages %>
 
   <table>
@@ -8,7 +8,7 @@
     </tr>
     <tr>
       <td>Name (Used for recognition!)</td>
-      <td><%= f.text_field :name %></td>
+      <td><%=H f.text_field :name %></td>
     </tr>
     <tr>
       <td>Address (Used for recognition!)</td>

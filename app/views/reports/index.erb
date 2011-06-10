@@ -17,7 +17,7 @@
 <br />
 <br />
 
-<% form_tag '/reports' do %>
+<%= form_tag '/reports' do %>
   Group: <%= text_field_tag :group, '' %>
   Value: <%= text_field_tag :value, '' %>
   <%= submit_tag 'Test-report' %>
