@@ -16,7 +16,7 @@ set :repository, "git@github.com:dawanda/sheriff.git"
 set :branch, ENV['BRANCH'] || "master"
 
 set :deploy_to, '/srv/sheriff'
-set :keep_releases, 3 
+set :keep_releases, 3
 
 set :user, "deploy"
 set :use_sudo, false
@@ -49,7 +49,7 @@ namespace :resque do
     desc "start"
     task :start, :roles => :resque_worker do
       count = (stage == :staging ? 1 : 2)
-      run "cd #{current_path}; MINUTES_PER_FORK=5 QUEUE='*' COUNT=#{count} RAILS_ENV=#{stage} rake resque:workers #{daemonized}"
+      run "cd #{current_path}; MINUTES_PER_FORK=5 QUEUE='*' COUNT=#{count} RAILS_ENV=#{stage} bundle exec rake resque:workers #{daemonized}"
     end
 
     desc "stop"
