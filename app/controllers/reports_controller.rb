@@ -43,6 +43,6 @@ class ReportsController < RestController
   end
 
   def collection
-    @collection ||= Report.page(params[:page]).per(50).all(:order => 'id desc', :include => [{:group => :group}, :deputy, :validations])
+    @collection ||= Report.page(params[:page]).per(50).order('id desc').includes([{:group => :group}, :deputy, :validations])
   end
 end

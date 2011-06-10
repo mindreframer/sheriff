@@ -16,7 +16,7 @@ class DeputiesController < RestController
   def collection
     default_oder = ActiveRecord::Base.connection.class.concat_sql("COALESCE(human_name,'')", "name")
     order = params[:order] || default_oder
-    @collection ||= resource_class.page(params[:page]).per(40).all(:order => order)
+    @collection ||= resource_class.page(params[:page]).per(40).order(order)
   end
 
   def convert_plugin_interval

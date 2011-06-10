@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0.rc4'
-gem 'mysql'
+gem 'rails', '3.0.8'
+gem 'mysql2', '~>0.2.0'
 gem 'kaminari'
 gem 'inherited_resources'
 gem 'hoptoad_notifier', :require => false
