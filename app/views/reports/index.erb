@@ -1,4 +1,4 @@
-<%= will_paginate collection %>
+<%= paginate collection %>
 <table>
   <tr>
     <th></th>
@@ -12,7 +12,7 @@
     <%= render :partial => 'report_row', :locals => {:report => report} %>
   <% end %>
 </table>
-<%= will_paginate collection %>
+<%= paginate collection %>
 
 <br />
 <br />

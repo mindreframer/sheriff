@@ -30,6 +30,6 @@ class PluginsController < RestController
   layout 'group_sidebar'
 
   def collection
-    @collection ||= Plugin.paginate(:page => params[:page], :per_page => 50, :order => 'name asc')
+    @collection ||= Plugin.page(params[:page]).per(50).all(:order => 'name asc')
   end
 end

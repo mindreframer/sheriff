@@ -1,4 +1,4 @@
-<%= will_paginate collection %> <%= link_to 'delete all', delete_all_alerts_path, :method => :delete %>
+<%= paginate collection %> <%= link_to 'delete all', delete_all_alerts_path, :method => :delete %>
 <table>
   <tr>
     <td><%= sort_head 'Reported at', :column => :id %></td>
@@ -17,4 +17,4 @@
     </tr>
   <% end %>
 </table>
-<%= will_paginate collection %>
+<%= paginate collection %>
