@@ -16,7 +16,7 @@
     </tr>
     <tr>
       <td>Disabled until</td>
-      <td><%= f.text_field :disabled_until %></td>
+      <td><%= f.text_field :disabled_until, :value => @deputy.disabled_until.try(:to_s, :db) %></td>
     </tr>
   </table>
 
