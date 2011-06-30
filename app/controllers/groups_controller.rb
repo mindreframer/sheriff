@@ -4,7 +4,7 @@ class GroupsController < RestController
   before_filter :add_conditions , :only => :index
 
   def resource
-    @resource ||= @group ||= Group.find(params[:id], :include => {:reports => :validations}, :order => (params[:order] || :group_id))
+    @resource ||= @group ||= Group.find(params[:id], :include => {:reports => :validations})
   end
 
   def error_groups
