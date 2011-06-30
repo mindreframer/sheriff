@@ -3,10 +3,10 @@
   <tr>
     <th></th>
     <th></th>
-    <th>Group</th>
-    <th>Deputy</th>
-    <th>Value</th>
-    <th>at</th>
+    <th><%= sort_head 'Group', :column => :group_id %></th>
+    <th><%= sort_head 'Deputy', :column => :deputy_id %></th>
+    <th><%= sort_head 'Value' %></th>
+    <th><%= sort_head 'at', :column => :reported_at %></th>
   </tr>
   <% collection.each do |report| %>
     <%= render :partial => 'report_row', :locals => {:report => report} %>
