@@ -1,4 +1,11 @@
-<%= paginate collection %> <%= link_to 'delete all', delete_all_alerts_path, :method => :delete %>
+<%= paginate collection %>
+<%= link_to 'delete all', delete_all_alerts_path, :method => :delete %>
+<% if params[:unique] %>
+  <%= link_to 'non-unique', params.merge(:unique => nil) %>
+<% else %>
+  <%= link_to 'unique', params.merge(:unique => 1) %>
+<% end %>
+
 <table>
   <tr>
     <td><%= sort_head 'Reported at', :column => :id %></td>
