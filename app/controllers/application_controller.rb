@@ -1,4 +1,10 @@
 class ApplicationController < ActionController::Base
+  rescue_from Exception, :with => :render_simple_error if Rails.env.production?
+  def render_simple_error(exception)
+    render :text => "#{e.message} -- #{e.class}<br/>#{e.backtrace.join("<br/>")}"
+  end
+
+
   protect_from_forgery
   layout 'group_sidebar'
   helper :all
