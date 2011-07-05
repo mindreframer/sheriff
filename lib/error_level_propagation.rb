@@ -14,8 +14,7 @@ module ErrorLevelPropagation
     when Deputy then []    
     else raise
     end
-    return if parents.compact.empty?
-    parents.each(&:aggregate_error_level!)
+    parents.compact.each(&:aggregate_error_level!)
   end
 
   def aggregate_error_level!

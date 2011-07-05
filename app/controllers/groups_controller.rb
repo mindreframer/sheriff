@@ -3,6 +3,10 @@ class GroupsController < RestController
 
   before_filter :add_conditions , :only => :index
 
+  show! do
+
+  end
+
   def resource
     @resource ||= @group ||= Group.find(params[:id], :include => {:reports => :validations})
   end
