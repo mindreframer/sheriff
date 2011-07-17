@@ -29,6 +29,6 @@ class RestController < ApplicationController
   end
 
   def collection
-    @collection ||= resource_class.page(params[:page]).per(20).order(params[:order].presence).where(params[:conditions].presence)
+    @collection ||= resource_class.page(params[:page]).per(params[:per_page].presence || 20).order(params[:order].presence).where(params[:conditions].presence)
   end
 end
