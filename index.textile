@@ -19,7 +19,7 @@ h2(project_name). {{ page.title }}
 
 h3(#what). What
 
-Describe what this project does
+!images/cowboy_sheriff.gif(Sheriff)!
 
 h3(#why). Why
 
