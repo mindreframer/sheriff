@@ -15,13 +15,13 @@ nav:
     link: "#dependencies"
 ---
 
-## [{{page.title}}](#project_name)
+## {{page.title}} {#project_name}
 
-### [What](#what)
+### What {#what}  
 
 Describe what this project does
 
-### [Why](#why)
+### Why {#why}
 
 Why should you use it?
 
@@ -30,6 +30,6 @@ Why should you use it?
 {% endhighlight %}
 
 
-### [Dependencies](#dependencies)
+###  Dependencies {#dependencies}
 
 * rubygems >= 1.3.1
