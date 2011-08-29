@@ -15,13 +15,13 @@ nav:
     link: "#dependencies"
 ---
 
-h2(project_name). {{ page.title }}
+## [{{page.title}}](#project_name)
 
-h3(#what). What
+### [What](#what)
 
-!images/cowboy_sheriff.gif(Sheriff)!
+Describe what this project does
 
-h3(#why). Why
+### [Why](#why)
 
 Why should you use it?
 
@@ -30,6 +30,6 @@ Why should you use it?
 {% endhighlight %}
 
 
-h3(#dependencies). Dependencies
+### [Dependencies](#dependencies)
 
 * rubygems >= 1.3.1
