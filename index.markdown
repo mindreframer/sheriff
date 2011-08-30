@@ -112,8 +112,6 @@ Use anything rack-ish e.g. `passenger start [OPTIONS]`
 or add via normal apache/nginx config.
 
 
-
-
 ###  Dependencies {#dependencies}
 
 * rubygems >= 1.3.1
