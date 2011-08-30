@@ -2,7 +2,6 @@
 layout: default
 title: Sheriff
 github_name: sheriff
-current_version: 0.0.0
 custom_install: true
 nav:
   - name: What is sheriff?
