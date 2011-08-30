@@ -21,11 +21,11 @@ nav:
 ### Sheriff is a web-based tool for server monitoring and reporting. {#what}  
  - keeps track of what was reported (historic values)
  - keeps track of who reported (hostname/ip)
- - distributes scout-compatible plugins to deputies (see [deputy](https://dawanda.github.com/deputy))
+ - distributes scout-compatible plugins to deputies (see [deputy](http://dawanda.github.com/deputy))
  - alerts via logging / email / sms when something goes wrong
 
 ### Reporting {#reporting}
-Values get pushed to Sheriff via http get e.g. curl but preferably via [deputy](https://dawanda.github.com/deputy)
+Values get pushed to Sheriff via http get e.g. curl but preferably via [deputy](http://dawanda.github.com/deputy)
 
     curl myhost/notice?group=Cron.count_users&value=123
     deputy Cron.count_users 123
