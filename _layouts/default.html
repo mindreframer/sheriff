@@ -31,7 +31,9 @@
           {% for nav in page.nav %}
           <li><a href="{{ nav['link'] }}">{{ nav['name'] }}</a></li>
           {% endfor %}
-          <li><a href="#installing">Installing</a></li>
+          {% if page.custom_install != nil %}
+            <li><a href="#installing">Installing</a></li>
+          {% endif %}
           <li><a href="#requests">Bugs/Feature<br />Requests</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>

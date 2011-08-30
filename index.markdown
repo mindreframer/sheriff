@@ -74,6 +74,45 @@ To notice when a report is missing we need a cron to check for it.
 
     * * * * * cd /srv/sheriff/current && RAILS_ENV=production ruby sh/cron_minute.rb && deputy Cron.sheriff
 
+### Installation {#installation}
+# Setup on normal server
+Sheriff is Rails app deployed via capistrano. It needs:
+
+ - Relational database (tested with MySql/Postgres)
+ - Rack server (tested with passenger)
+ - Mail setup in e.g. sheriff/shared/config/initializers/mail.rb
+ - (Optional) Resque for higher responsiveness / no timeouts
+ - (Optional) goyyamobile.com account for sms notifications
+ - (Optional) Newrelic account for performance analysis
+ - (Optional) Hoptoad account for error reporting
+
+### Commands
+For user 'deploy' group 'users' in /srv/sheriff
+
+    # on server:
+    sudo su
+    cd /srv
+    mkdir sheriff
+    chown users:deploy -R sheriff
+
+    sudo su deploy
+    cd /srv/sheriff
+    mkdir -p shared/config
+    mkdir -p shared/log
+    mkdir -p shared/pids
+    --- add customized shared/config/config.yml + database.yml [+ newrelic.yml]
+
+    # from your box
+    bundle exec cap deploy
+
+### Server
+Use anything rack-ish e.g. `passenger start [OPTIONS]`
+    passenger start --port 3000 --address myhost.com --environment production --max-pool-size 1
+
+or add via normal apache/nginx config.
+
+
+
 
 ###  Dependencies {#dependencies}
 
