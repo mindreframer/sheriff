@@ -17,14 +17,10 @@ h2 {
 }
 a:link, a:visited {
 	color:#3C6A8F;
-	text-decoration: underline;
 }
 a:hover {
 	color:#333;
 	text-decoration: underline;
-}
-a img {
-	border:1px solid #E5E5E5;
 }
 #container {
 	width: 100%;
