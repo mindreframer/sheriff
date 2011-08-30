@@ -38,7 +38,8 @@
         {% endif %}
       <div id="content">
         {{ content }}
-        {% if page.github_name != 'home' %}
+        
+        {% if page.custom_install == nil %}
         <h3 id="installing">Installing</h3>
         <div class="highlight"><pre>sudo gem install {{ page.github_name }}
         </pre></div>
