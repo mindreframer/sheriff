@@ -14,6 +14,8 @@ nav:
     link: "#validations"
   - name: Dependencies
     link: "#dependencies"
+  - name: Installation
+    link: "#installation"
 ---
 
 ### Sheriff is a web-based tool for server monitoring and reporting. {#what}  
@@ -75,7 +77,7 @@ To notice when a report is missing we need a cron to check for it.
     * * * * * cd /srv/sheriff/current && RAILS_ENV=production ruby sh/cron_minute.rb && deputy Cron.sheriff
 
 ### Installation {#installation}
-# Setup on normal server
+#### Setup on normal server
 Sheriff is Rails app deployed via capistrano. It needs:
 
  - Relational database (tested with MySql/Postgres)
@@ -86,7 +88,7 @@ Sheriff is Rails app deployed via capistrano. It needs:
  - (Optional) Newrelic account for performance analysis
  - (Optional) Hoptoad account for error reporting
 
-### Commands
+#### Commands
 For user 'deploy' group 'users' in /srv/sheriff
 
     # on server:
@@ -105,7 +107,7 @@ For user 'deploy' group 'users' in /srv/sheriff
     # from your box
     bundle exec cap deploy
 
-### Server
+#### Server
 Use anything rack-ish e.g. `passenger start [OPTIONS]`
     passenger start --port 3000 --address myhost.com --environment production --max-pool-size 1
 
