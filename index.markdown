@@ -6,8 +6,6 @@ custom_install: true
 nav:
   - name: What is sheriff?
     link: "#what"
-  - name: Why
-    link: "#why"
   - name: Reporting
     link: "#reporting"
   - name: Validations
