@@ -20,7 +20,7 @@
     </div>
     <div id="main-navigation">
       <ul class="wat-cf">
-        <% [Group, Report, Deputy, Alert, Plugin, Summary].each do |type| %>
+        <% [Alert, Group, Report, Deputy, Plugin, Summary].each do |type| %>
           <% is_active = type.to_s.pluralize.downcase == params[:controller] %>
           <li class="<%= is_active ? 'active' : '' %>"><%= link_to type.to_s.pluralize, type %></li>
         <% end %>
