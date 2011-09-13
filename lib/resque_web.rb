@@ -15,12 +15,12 @@ class ResqueWeb < Sinatra::Base
     @server ||= Resque::Server.new
     status, headers, body = @server.call(env)
 
-    # in production with nginx, assets always hang endless <-> this fixes it
-    #if body.is_a? Sinatra::Helpers::StaticFile
-    #  buffer = []
-    #  body.each{|x| buffer << x }
-    #  body = buffer
-    #end
+    # in production/staging with nginx, assets always hang endless <-> this fixes it
+    if body.is_a? Sinatra::Helpers::StaticFile
+      buffer = []
+      body.each{|x| buffer << x }
+      body = buffer
+    end
 
     [status, headers, body]
   end
