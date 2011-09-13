@@ -4,8 +4,11 @@
 require File.expand_path('../config/application', __FILE__)
 
 require 'rake'
-require 'rake/testtask'
 require 'rake/rdoctask'
+
+task :default do
+  sh "bundle exec rspec spec"
+end
 
 if CFG[:resque]
   require 'resque/tasks.rb'
