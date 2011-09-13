@@ -18,6 +18,7 @@ test:
   <<: *common
   user:
   password:
+  resque: true
 
 development:
   <<: *common
