@@ -1,11 +1,11 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.9'
-gem 'mysql2', '~>0.2.0'
+gem 'rails', '3.1.0'
+gem 'mysql2', '>=0.3'
 gem 'kaminari'
 gem 'inherited_resources'
 gem 'hoptoad_notifier', :require => false
-gem 'newrelic_rpm', :require => false
+gem 'newrelic_rpm', '>=3', :require => false
 gem 'resque', :require => false
 gem 'SystemTimer', '>=1.2.3', :require => 'system_timer', :platforms => :ruby_18
 gem 'ar_serialized_array', '>=0.3.0'
