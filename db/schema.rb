@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(:version => 20110117103438) do
   end
 
   add_index "groups", ["group_id", "name"], :name => "index_groups_on_group_id_and_name", :unique => true
-  add_index "groups", ["name", "group_id"], :name => "enforce_unique_idx", :unique => true
 
   create_table "historic_values", :force => true do |t|
     t.integer  "report_id",                          :null => false
