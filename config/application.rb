@@ -3,13 +3,20 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 require 'open-uri'
 
-Bundler.require(:default, Rails.env) if defined?(Bundler)
+if defined?(Bundler)
+  # If you precompile assets before deploying to production, use this line
+  Bundler.require *Rails.groups(:assets => %w(development test))
+  # If you want your assets lazily compiled in production, use this line
+  # Bundler.require(:default, :assets, Rails.env)
+end
 
 require 'newrelic_rpm' if File.exist?('config/newrelic.yml')
 
 require File.expand_path('../../lib/cfg', __FILE__)
 
 require 'resque' if CFG[:resque]
+
+
 
 module Sheriff
   class Application < Rails::Application
@@ -25,5 +32,8 @@ module Sheriff
     config.filter_parameters += [:password]
     config.consider_all_requests_local = true
     config.active_support.deprecation = :log
+
+    config.assets.enabled = true
+    config.assets.version = '1.0' # Version of your assets, change this if you want to expire all your assets
   end
 end

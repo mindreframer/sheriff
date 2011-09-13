@@ -10,3 +10,5 @@ config/email.yml
 config/newrelic.yml
 config/resque_web.rb
 .idea/*
+.sass-cache/
+.DS_Store
