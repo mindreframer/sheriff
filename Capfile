@@ -13,7 +13,9 @@ require 'capistrano/ext/multistage'
 set :application, "Sheriff"
 set :scm, :git
 set :repository, "git@github.com:dawanda/sheriff.git"
-set :branch, ENV['BRANCH'] || "master"
+
+current_branch = ENV['BRANCH'] || `git branch | grep '*'`.split.last
+set :branch, current_branch
 
 set :deploy_to, '/srv/sheriff'
 set :keep_releases, 3
