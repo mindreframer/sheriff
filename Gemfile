@@ -12,7 +12,7 @@ gem 'SystemTimer', '>=1.2.3', :require => 'system_timer', :platforms => :ruby_18
 gem 'ar_serialized_array', '>=0.3.0'
 gem 'jquery-rails'
 
-gem "therubyracer", :require => 'v8'
+gem "therubyracer", :require => false
 gem 'sass-rails', "~> 3.1.0", :require => false
 gem 'uglifier', :require => false
 
