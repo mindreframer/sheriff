@@ -15,7 +15,9 @@
 
     <div id="user-navigation">
       <ul class="wat-cf">
-        <li><a href="/logout" class="logout">Logout</a></li>
+        <% if CFG[:resque] %>
+          <li><%= link_to 'Resque overview', '/resque/overview' %></li>
+        <% end %>
       </ul>
     </div>
     <div id="main-navigation">
@@ -46,7 +48,7 @@
   <%= clearer %>
   <div id="footer">
     <div class="block">
-      <p>Copyright &copy; <%= Time.now.year %> Dawanda GmbH -- <%= link_to 'Resque overview', '/resque/overview' %></p>
+      <p>Copyright &copy; <%= Time.now.year %> Dawanda GmbH</p>
     </div>
   </div>
 </div>
