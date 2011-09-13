@@ -16,11 +16,19 @@ Sheriff is a web-based tool for server monitoring and reporting.
     rake #run tests
     rails s
 
+### Generating test data
+
+    curl "http://localhost:3000/notify?group=Cron.count_users&value=123"
+    # open "http://localhost:3000/reports/1"
+    # add a value validation (value: 1, warn via: email)
+    curl "http://localhost:3000/notify?group=Cron.count_users&value=123"
+    # open "http://localhost:3000/reports"
+    # you should see an error => group (Cron) and subgroup (count_users) are marked as error
 
 ### Reporting
 Values get pushed to Sheriff via http get e.g. curl but preferably via [deputy](https://github.com/dawanda/deputy)
 
-    curl myhost/notice?group=Cron.count_users&value=123
+    curl "http://localhost:3000/notify?group=Cron.count_users&value=123"
     deputy Cron.count_users 123
 
     # report the success/failure of script execution
