@@ -1,23 +1,23 @@
 development:
-  adapter: mysql
+  adapter: mysql2
   database: sheriff_development
   pool: 5
   timeout: 5000
 
 test:
-  adapter: mysql
+  adapter: mysql2
   database: sheriff_test
   pool: 5
   timeout: 5000
 
 production:
-  adapter: mysql
+  adapter: mysql2
   database: sheriff_production
   pool: 5
   timeout: 5000
 
 staging:
-  adapter: mysql
+  adapter: mysql2
   database: sheriff_staging
   pool: 5
   timeout: 5000
