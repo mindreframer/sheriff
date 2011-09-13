@@ -1,4 +1,4 @@
-# https://gist.github.com/324196
+# https://gist.github.com/1214052
 require 'sinatra/base'
 
 class ResqueWeb < Sinatra::Base

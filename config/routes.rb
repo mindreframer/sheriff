@@ -22,7 +22,7 @@ Sheriff::Application.routes.draw do
   resources :plugins
 
   match "/notify", :to => "reports#create"
-  match "/resque" => ResqueWeb, :anchor => false #if CFG[:resque]
+  match "/resque" => ResqueWeb, :anchor => false if CFG[:resque]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
