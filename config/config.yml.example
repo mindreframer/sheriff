@@ -12,7 +12,7 @@ common: &common
   password: password-for-basic-auth
 
   hoptoad_api_key: xxxx # leave blank to deactivate
-  resque: true
+  resque: false
 
 test:
   <<: *common
