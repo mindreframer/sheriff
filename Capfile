@@ -29,6 +29,12 @@ namespace :deploy do
     run "touch #{current_release}/tmp/restart.txt" unless ENV['NO_RESTART']
   end
 
+  desc "Compile assets"
+  task :assets do
+    run "cd #{deploy_to}; RAILS_ENV=production bundle exec rake assets:precompile"
+  end
+  before "deploy:symlink", "deploy:assets"
+
   desc "Copy config files to config/"
   task :copy_config_files, :roles => [:app, :db] do
     run "cp -R #{deploy_to}/shared/config/* #{current_release}/config/"

@@ -16,7 +16,6 @@ Sheriff::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   config.action_mailer.perform_deliveries = CFG[:send_email]
-  config.action_controller.consider_all_requests_local = true
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
