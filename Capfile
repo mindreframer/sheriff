@@ -31,7 +31,7 @@ namespace :deploy do
 
   desc "Compile assets"
   task :assets do
-    run "cd #{deploy_to}; RAILS_ENV=production bundle exec rake assets:precompile"
+    run "cd #{current_release}; RAILS_ENV=production bundle exec rake assets:precompile"
   end
   before "deploy:symlink", "deploy:assets"
 
