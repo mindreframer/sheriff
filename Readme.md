@@ -5,6 +5,18 @@ Sheriff is a web-based tool for server monitoring and reporting.
  - distributes scout-compatible plugins to deputies (see [deputy](https://github.com/dawanda/deputy))
  - alerts via logging / email / sms when something goes wrong
 
+### Development server
+    git clone git@github.com:dawanda/sheriff.git
+    cd sheriff
+    bundle
+    cp config/config.yml.example config/config.yml
+    cp config/database.yml.example config/database.yml
+    rake db:create
+    rake db:migrate
+    rake #run tests
+    rails s
+
+
 ### Reporting
 Values get pushed to Sheriff via http get e.g. curl but preferably via [deputy](https://github.com/dawanda/deputy)
 
