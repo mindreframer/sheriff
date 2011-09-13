@@ -12,11 +12,8 @@ gem 'SystemTimer', '>=1.2.3', :require => 'system_timer', :platforms => :ruby_18
 gem 'ar_serialized_array', '>=0.3.0'
 gem 'jquery-rails'
 
-
-group :assets do
-  gem 'sass-rails', "  ~> 3.1.0"
-  gem 'uglifier'
-end
+gem 'sass-rails', "~> 3.1.0", :require => false
+gem 'uglifier', :require => false
 
 group :development do
   gem 'capistrano', :require => false
