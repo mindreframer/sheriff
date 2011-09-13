@@ -20,8 +20,6 @@ module Sheriff
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
     end
 
-    config.middleware.use 'ResqueWeb' if CFG[:resque]
-
     config.autoload_paths << "lib"
     config.encoding = "utf-8"
     config.filter_parameters += [:password]
