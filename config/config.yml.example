@@ -16,9 +16,13 @@ common: &common
 
 test:
   <<: *common
+  user:
+  password:
 
 development:
   <<: *common
+  user:
+  password:
 
 staging:
   <<: *common
