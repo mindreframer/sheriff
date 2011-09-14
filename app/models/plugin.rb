@@ -1,4 +1,12 @@
 class Plugin < ActiveRecord::Base
+  EXAMPLE_CODE = <<-Ruby.gsub(/^    /,'')
+    class MyPlugin < Scout::Plugin
+      def build_report
+        report "my_metric" => 42
+      end
+    end
+  Ruby
+
   has_many :deputies, :class_name => 'DeputyPlugin'
   has_many :deputy_plugins, :dependent => :destroy
 
@@ -23,7 +31,7 @@ class Plugin < ActiveRecord::Base
   end
 
   def self.syntax_error(code)
-    eval("BEGIN {return false}\n#{code}", nil, 'Plugin code', 0) 
+    eval("BEGIN {return false}\n#{code}", nil, 'Plugin code', 0)
   rescue Exception
     $!.message
   end

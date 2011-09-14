@@ -51,6 +51,11 @@ These plugins are compatible to Scout, so you can use these [50+ existing plugin
       end
     end
 
+Plugins are executed via `deputy --run-plugins`. deputy queries sheriff for plugins, assigned to this host and runs them if it's time to. The host is defined e.g. in:
+
+    #/etc/deputy.yml
+    sheriff_url: localhost:3000
+
 ### Summaries
 With summaries you can aggregate multiple reports, to e.g. compare responses.
 
