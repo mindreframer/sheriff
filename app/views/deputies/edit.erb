@@ -22,15 +22,19 @@
 
   <% @deputy.deputy_plugins.build %>
   <h3>Plugins</h3>
-  <%= f.fields_for :deputy_plugins do |child| %>
-    <%= child.hidden_field :deputy_id %>
-    Run <%= child.select :plugin_name, [nil] + Plugin.names %>
-    every
-    <%= child.text_field :interval_value, :size => 5 %>
-    <%= child.select :interval_unit, time_units_for_select(:without => 'Seconds') %>.
-    <br />
+  <% if Plugin.any? %>
+    <%= f.fields_for :deputy_plugins do |child| %>
+      <%= child.hidden_field :deputy_id %>
+      Run <%= child.select :plugin_name, [nil] + Plugin.names %>
+      every
+      <%= child.text_field :interval_value, :size => 5 %>
+      <%= child.select :interval_unit, time_units_for_select(:without => 'Seconds') %>.
+      <br />
+    <% end %>
+    <%= f.submit 'Save' %>
+  <% else %>
+    <%= link_to 'Create your first plugin now :)', new_plugin_path %>
   <% end %>
-  <%= f.submit 'Save' %>
 <% end %>
 
 <h3>Reports (Last report <%= time_ago @deputy.last_report_at %>)</h3>
