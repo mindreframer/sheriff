@@ -41,10 +41,12 @@
       </td>
       <td>
         warn via <%= vf.select :error_level, [['Ignore - 0', 0], ['Log - 1', 1], ['Email - 2', 2], ['Sms - 3', 3]] %>
-        <% if validation.current_error_level != 0 %>
-          <% path = {:controller => :validations, :action => :update, :id => validation.id, :validation => {:current_error_level => 0}} %>
-          <%= link_to 'dismiss', path, :method => :put %>
-        <% end %>
+        <%=
+            if validation.current_error_level != 0
+              path = {:controller => :validations, :action => :update, :id => validation.id, :validation => {:current_error_level => 0}}
+              link_to 'dismiss', path, :method => :put
+            end
+        %>
       </td>
     </tr>
   <% end %>
