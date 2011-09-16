@@ -1,3 +1,9 @@
+<% content_for :head do %>
+  <script>
+    jQuery(function($) { Sheriff.Groups.observeInputControls("tr.error_level_0") })
+  </script>
+<% end %>
+
 <% hide_group = !@group.level1? %>
 <%= form_for Report.new, :url => '/reports/batch_validate' do |f| %>
   <table>
