@@ -16,3 +16,7 @@
 .pagination{ height: 29px; }
 .highlight{ background: lime;}
 .max_width_200{  max-width: 200px;}
+#main-navigation ul li.red_alert {
+  background: #900;
+  border-top: 1px solid #d00;
+}

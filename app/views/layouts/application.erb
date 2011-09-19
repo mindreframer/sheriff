@@ -20,7 +20,8 @@
           <li class="<%= is_active ? 'active' : '' %>"><%= link_to type.to_s.pluralize, type %></li>
         <% end %>
         <% if CFG[:resque] %>
-          <li><%= link_to "Resque overview (#{Resque.size(:jobs)} jobs) ⇗", '/resque/overview' %></li>
+          <% count = Resque.size(:jobs) %>
+          <li <%= "class='red_alert'" if count > 200 %>><%= link_to "Resque overview (#{count} jobs) ⇗", '/resque/overview' %></li>
         <% end %>
       </ul>
     </div>
