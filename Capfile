@@ -75,6 +75,20 @@ namespace :resque do
   end
 end
 
+
+desc "copy database from production"
+task :copy_database, :roles => :db do
+  filename = "/tmp/sheriff_production.sql.gz"
+  run "mysqldump sheriff_#{stage} -uroot | gzip > #{filename}"
+
+  sh "scp #{ENV['USER']}@#{servers.first.host}:#{filename} #{filename}"
+  sh "gunzip --stdout #{filename} | mysql sheriff_development -uroot"
+end
+
+def sh(command)
+  raise "failed: #{command}" unless system(command)
+end unless defined? sh
+
 def kill_processes_matching(name, options={})
   not_matching = " | grep -v #{options[:not_matching]}" if options[:not_matching]
   run "ps -ef | grep #{name} | grep -v grep #{not_matching} | awk '{print $2}' | xargs --no-run-if-empty kill #{options[:signal]}"
@@ -82,4 +96,8 @@ end
 
 def daemonized
   " > /dev/null 2>&1 &"
+end
+
+def servers
+  find_servers_for_task(current_task)
 end
