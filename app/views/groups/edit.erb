@@ -18,7 +18,7 @@
       <th class='max_width_200'><%= sort_head 'Value' %></th>
       <th><%= sort_head 'time', :column => :reported_at %></th>
     </tr>
-    <% @group.reports_or_children_reports.all(:include => [:deputy, :validations], :order => (params[:order] || 'reported_at desc')).each do |report| %>
+    <% @group.reports_or_children_reports.all(:include => [:deputy, :validations], :order => (params[:order] || 'current_error_level desc, reported_at desc')).each do |report| %>
       <%= render :partial => 'reports/report_row', :locals => {:report => report, :hide_group => hide_group, :checkbox => true} %>
     <% end %>
   </table>
