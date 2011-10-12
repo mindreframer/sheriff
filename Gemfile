@@ -20,6 +20,7 @@ gem 'uglifier', :require => false
 group :development do
   gem 'capistrano', :require => false
   gem 'capistrano-ext', :require => false
+  gem 'shotgun', :require => false
 end
 
 group :test do
