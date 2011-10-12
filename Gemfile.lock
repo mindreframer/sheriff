@@ -70,6 +70,8 @@ GEM
     json (1.5.3)
     kaminari (0.12.4)
       rails (>= 3.0.0)
+    key_value (0.4.3)
+      activerecord
     libv8 (3.3.10.2)
     mail (2.3.0)
       i18n (>= 0.4.0)
@@ -176,6 +178,7 @@ DEPENDENCIES
   jquery-rails
   json
   kaminari
+  key_value
   mysql2 (>= 0.3)
   newrelic_rpm (>= 3)
   rails (= 3.1.0)
