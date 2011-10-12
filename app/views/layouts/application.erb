@@ -15,9 +15,9 @@
     <h1><a href="/">Sheriff</a></h1>
     <div id="main-navigation">
       <ul class="wat-cf">
-        <% [Alert, Group, Report, Deputy, Plugin, Summary].each do |type| %>
-          <% is_active = type.to_s.pluralize.downcase == params[:controller] %>
-          <li class="<%= is_active ? 'active' : '' %>"><%= link_to type.to_s.pluralize, type %></li>
+        <% %w(Alert Group Report Deputy Plugin Summary Settings).each do |type| %>
+          <% is_active = (type.downcase == params[:controller]) %>
+          <li class="<%= is_active ? 'active' : '' %>"><%= link_to type.pluralize, type.downcase %></li>
         <% end %>
         <% if CFG[:resque] %>
           <% count = Resque.size(:jobs) %>
