@@ -2,15 +2,24 @@
 
 <%= form_tag :action => :update do %>
   <%
-    settings = @settings['notifications'] || []
-    settings << {}
+    notifications = @settings['notifications'] || []
+    notifications << {}
+
+    notifications.each do |notification_data|
   %>
-  <% settings.each do |notification_data| %>
-    <%= text_field_tag 'settings[notifications][][name]',         notification_data[:name],         :placeholder => 'Name' %> :
-    <%= text_field_tag 'settings[notifications][][phone_number]', notification_data[:phone_number], :placeholder => 'Phone Number' %>
-    <%= text_field_tag 'settings[notifications][][mail]',         notification_data[:mail], :placeholder => 'Mail' %>
-    <br/><br/>
+    <% input_fields = %w(name phone_number mail enabled).map do |key| %>
+      <% if key == "enabled" %>
+        <%= check_box_tag("settings[notifications][][#{key}]", 1, !!notification_data[key.to_sym], :placeholder => key.humanize) %>
+        enabled
+      <% else %>
+        <%= text_field_tag "settings[notifications][][#{key}]", notification_data[key.to_sym], :placeholder => key.humanize, :style => "width: 200px" %>
+      <% end %>
+    <% end %>
+    <br><br>
   <% end %>
 
+  <%= check_box_tag "settings[send_sms]", 1, !!@settings['send_sms'] %> send_sms <br/><br/>
+
   <%= submit_tag 'save' %>
+  <%= link_to 'Test settings (save first)', '/settings/test' %>
 <% end %>

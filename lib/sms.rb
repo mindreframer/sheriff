@@ -4,6 +4,10 @@ require 'cgi'
 require 'openssl'
 
 class Sms
+  def self.test
+    send('Sheriff test', Settings[:notifications].map(&:phone_number))
+  end
+
   def self.send(message, recipients)
     return unless CFG[:send_sms]
     user = CFG[:sms_user]

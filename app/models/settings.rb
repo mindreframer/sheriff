@@ -1,10 +1,20 @@
+=begin
+  Schema of settings:
+
+  > Settings.all #==>
+  {
+    "notifications"=>[
+      {"name"=>"Name", "mail"=>"me@example.com", "phone_number"=>"01234339922"}
+    ]
+  }
+=end
+
 class Settings
-  BLOCKED_KEYS = %w(domain user password hoptoad_api_key).map(&:to_sym)
-  ALLOWED_KEYS = %w(notifications)
+  ALLOWED_KEYS = %w(notifications send_sms)
 
   def self.[](key)
     key = key.to_sym
-    (KeyValue['settings'] || {})[key.to_s] unless BLOCKED_KEYS.include?(key)
+    (KeyValue['settings'] || {})[key.to_s] if ALLOWED_KEYS.include?(key.to_s)
   end
 
   def self.[]=(key, value)
