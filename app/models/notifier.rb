@@ -3,7 +3,13 @@ class Notifier < ActionMailer::Base
   default :to   => CFG[:email_recipients].split(',')
 
   def self.test
-    mail(:subject => "Sheriff Test -- Hello world", :body => 'Just a test.').deliver
+    alert_data = OpenStruct.new({
+      :report => OpenStruct.new({:full_name => 'Test'}),
+      :message => 'This is just a test!',
+      :report_id => 'none'
+    })
+
+    alert(alert_data).deliver
   end
 
   def alert(alert)
