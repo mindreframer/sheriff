@@ -23,6 +23,7 @@ Sheriff::Application.routes.draw do
   resources :settings do
     collection do
       post :update
+      get  :test
     end
   end
 
