@@ -10,7 +10,7 @@
 =end
 
 class Settings
-  ALLOWED_KEYS = %w(notifications send_sms)
+  ALLOWED_KEYS = %w(notifications send_sms run_cron)
 
   def self.[](key)
     key = key.to_sym
