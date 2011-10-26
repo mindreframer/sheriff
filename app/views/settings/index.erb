@@ -18,10 +18,14 @@
     <br><br>
   <% end %>
 
-  <%= check_box_tag "settings[send_sms]", 1, !!@settings['send_sms'] %> send_sms <br/><br/>
+  <%= text_field_tag "settings[send_sms]", 0, :type => "hidden" %>
+  <%= check_box_tag "settings[send_sms]", 1, Boolean(@settings['send_sms']) %> send_sms <br/>
+  <%= text_field_tag "settings[run_cron]", 0, :type => "hidden" %>
+  <%= check_box_tag "settings[run_cron]", 1, Boolean(@settings['run_cron']) %> run_cron <br/>
   
-  <%= check_box_tag "settings[run_cron]", 1, !!@settings['run_cron'] %> run_cron <br/><br/>
 
+
+  <br/>
   <%= submit_tag 'save' %>
   <%= link_to 'Test settings (save first)', '/settings/test' %>
 <% end %>

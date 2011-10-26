@@ -13,6 +13,9 @@
 <div id="container">
   <div id="header">
     <h1><a href="/">Sheriff</a></h1>
+    <% unless Boolean(Settings['run_cron']) %>
+      <h3 style='text-weight:bold; color:red;'>CRON DISABLED!</h3>
+    <% end %>
     <div id="main-navigation">
       <ul class="wat-cf">
         <% %w(Alert Group Report Deputy Plugin Summary Settings).each do |type| %>
