@@ -29,3 +29,9 @@
   <%= submit_tag 'save' %>
   <%= link_to 'Test settings (save first)', '/settings/test' %>
 <% end %>
+
+
+<h3>Reset Validations</h3>
+<%= form_tag :action => :reset do %>
+  <%= submit_tag 'RESET' %>
+<% end %>

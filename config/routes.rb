@@ -24,6 +24,7 @@ Sheriff::Application.routes.draw do
     collection do
       post :update
       get  :test
+      post :reset
     end
   end
 

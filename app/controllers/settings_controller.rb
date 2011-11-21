@@ -22,4 +22,17 @@ class SettingsController < ApplicationController
     Sms.test
     redirect_to :action => :index
   end
+  
+  def reset
+    # run every validation: report once
+    validations = Validation.find(:all, :conditions => {:type => "RunEveryValidation"})
+    validations.map(&:report).map(&:store_state_as_historic_value); nil
+    # mark all as passed
+    all = Validation.all
+    all.each do |x| 
+      x.report.update_attributes!(:reported_at => Time.current)
+      x.send(:validation_passed!)
+    end ; nil
+    redirect_to :action => :index
+  end
 end
