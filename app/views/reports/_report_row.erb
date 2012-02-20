@@ -4,8 +4,10 @@
   <% if checkbox ||= false %>
     <td><%= check_box_tag 'ids[]', report.id, false, :class => 'report_id' %></td>
   <% end %>
-  <td><%= short_validations report %></td>
-  <td><%= link_to_edit report, :text => 'Details' %></td>
+  <td>
+    <span class="label"><%= link_to_edit report, :text => 'Details' %></span><br>
+    <%= short_validations report %>
+  </td>
   <% unless hide_group %>
     <td><%= link_to_object report.group %></td>
   <% end %>
