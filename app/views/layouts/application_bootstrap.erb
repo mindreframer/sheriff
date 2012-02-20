@@ -12,37 +12,27 @@
 <body>
 <%= render 'layouts/topnav' %>
 
-<div id="container">
-  <div id="header" class="row">
-    <% unless Boolean(Settings['run_cron']) %>
-      <h3 style='text-weight:bold; color:red;'>CRON DISABLED!</h3>
-    <% end %>
-    <div class="flash">
-      <% flash.each do |type, message| %>
-        <div class="message <%= type %>">
-          <p><%= message %></p>
-        </div>
-      <% end %>
-    </div>
-  </div>
-  <div class='row'>
-    <div id="sidebar" class="span4">
-      <%= yield :sidebar %>
-    </div>
-  </div>
 
-  <div id="main" class='row'>
-      <h1><%= heading %></h1>
-      <div class='span8'>
-        <%= yield %>
-      </div>
-  </div>
-  <%= clearer %>
-  <footer>
-    <div class="block">
-      <p>Copyright &copy; <%= Time.now.year %> Dawanda GmbH</p>
+<div class="container" style='margin-top:40px;'>
+  <div class="row">
+    <div class="span2">
+      sidebar
+      <!--Sidebar content-->
     </div>
-  </footer>
+    <div class="span10">
+      <section id="gridSystem">
+        <div class="page-header">
+          <h2>Default grid system <small>for hey</small></h2>
+        </div>
+
+        <div class="row show-grid">
+          <div class='span10'>
+            <%= yield %>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
 </div>
 </body>
 </html>
