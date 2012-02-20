@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0'
+gem 'rails', '3.2.1'
 gem 'mysql2', '>=0.3'
 gem 'json'
 gem 'kaminari'
@@ -14,7 +14,7 @@ gem 'jquery-rails'
 gem 'key_value', :require => false
 
 gem "therubyracer", :require => false
-gem 'sass-rails', "~> 3.1.0", :require => false
+gem 'sass-rails', "~> 3.2.1", :require => false
 gem 'uglifier', :require => false
 
 group :development do
