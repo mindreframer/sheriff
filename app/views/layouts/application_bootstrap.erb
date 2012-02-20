@@ -1,0 +1,48 @@
+<!-- http://pilu.github.com/web-app-theme/ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title><%= title %></title>
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tag %>
+    <%= yield :head %>
+  </head>
+<body>
+<%= render 'layouts/topnav' %>
+
+<div id="container">
+  <div id="header" class="row">
+    <% unless Boolean(Settings['run_cron']) %>
+      <h3 style='text-weight:bold; color:red;'>CRON DISABLED!</h3>
+    <% end %>
+    <div class="flash">
+      <% flash.each do |type, message| %>
+        <div class="message <%= type %>">
+          <p><%= message %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class='row'>
+    <div id="sidebar" class="span4">
+      <%= yield :sidebar %>
+    </div>
+  </div>
+
+  <div id="main" class='row'>
+      <h1><%= heading %></h1>
+      <div class='span8'>
+        <%= yield %>
+      </div>
+  </div>
+  <%= clearer %>
+  <footer>
+    <div class="block">
+      <p>Copyright &copy; <%= Time.now.year %> Dawanda GmbH</p>
+    </div>
+  </footer>
+</div>
+</body>
+</html>
