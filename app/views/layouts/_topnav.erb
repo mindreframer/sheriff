@@ -1,11 +1,6 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
-      <div class="container" style="width: auto;">
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
+      <div class="container">
         <a class="brand" href="/">Sheriff</a>
         <div class="nav-collapse">
           <ul class="nav">
@@ -15,7 +10,7 @@
             <% end %>
             <% if CFG[:resque] %>
               <% count = Resque.size(:jobs) %>
-              <li <%= "class='red_alert'" if count > 200 %>><%= link_to "Resque overview (#{count} jobs) ⇗", '/resque/overview' %></li>
+              <li <%= "class='red_alert'" if count > 200 %>><%= link_to "Resque (#{count} jobs) ⇗", '/resque/overview' %></li>
             <% end %>
           </ul>
           <form class="navbar-search pull-left" action="">
