@@ -1,7 +1,7 @@
 <%= form_for @deputy do |f| %>
   <%= f.error_messages %>
 
-  <table>
+  <table class="sharp">
     <tr>
       <td>Human Name</td>
       <td><%= f.text_field :human_name %></td>
@@ -38,7 +38,7 @@
 <% end %>
 
 <h3>Reports (Last report <%= time_ago @deputy.last_report_at %>)</h3>
-<table>
+<table class="sharp">
   <tr>
     <th></th>
     <th></th>

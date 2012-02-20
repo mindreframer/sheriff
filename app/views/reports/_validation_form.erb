@@ -1,5 +1,5 @@
 <%= f.error_messages %>
-<table>
+<table class="sharp">
   <% add = [ValueValidation, RunEveryValidation, RunBetweenValidation] %>
   <%= fields_for_sti f, :validations, add do |vf, index| %>
     <% validation = vf.object %>

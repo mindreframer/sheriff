@@ -1,6 +1,6 @@
 <% if @plugin.deputy_plugins.present? %>
   <h3>Run by</h3>
-  <table>
+  <table class="sharp">
     <% @plugin.deputy_plugins.all(:include => :deputy).each do |deputy_plugin| %>
       <tr>
         <td><%= link_to_object deputy_plugin.deputy %></td>
@@ -13,7 +13,7 @@
 <h3>Code</h3>
 <%= form_for @plugin do |f| %>
   <%= f.error_messages %>
-  <table>
+  <table class="sharp">
     <tr>
       <td>Name</td><td><%= f.text_field :name, :placeholder => 'MyPlugin' %></td>
     </tr>

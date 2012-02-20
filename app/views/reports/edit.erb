@@ -2,7 +2,7 @@
   Reported by <%= link_to_object deputy_plugin.plugin %> @ <%= link_to_object @report.deputy %>
   every <%= deputy_plugin.humanized_interval %>
 <% else %>
-  Reported by <%= link_to_object @report.deputy %> 
+  Reported by <%= link_to_object @report.deputy %>
 <% end %>
 in group: <%= link_to_object @report.group %>
 
@@ -15,7 +15,7 @@ in group: <%= link_to_object @report.group %>
 
 <h3>Alerts</h3>
 <div style="max-height:200px; overflow:auto">
-  <table>
+  <table class="sharp">
     <% @report.alerts.each do |alert| %>
       <tr <%= error_attribute alert %>>
         <td><%= detailed_time alert.created_at %></td>
@@ -29,7 +29,7 @@ in group: <%= link_to_object @report.group %>
 
 <h3>Values</h3>
 <div style="max-height:600px; overflow:auto">
-  <table>
+  <table class="sharp">
     <tr>
       <th>Value</th>
       <th>Reported at</th>
