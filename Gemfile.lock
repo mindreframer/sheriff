@@ -38,9 +38,9 @@ GEM
       multi_json (~> 1.0)
     ar_serialized_array (0.3.0)
       activerecord
-    arel (3.0.0)
+    arel (3.0.1)
     builder (3.0.0)
-    capistrano (2.11.0)
+    capistrano (2.11.1)
       highline
       net-scp (>= 1.0.0)
       net-sftp (>= 2.0.0)
