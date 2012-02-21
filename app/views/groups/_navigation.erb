@@ -1,11 +1,11 @@
 <div class="well" style="padding: 8px 0;">
   <ul class="nav nav-list">
     <% Group.level1.each do |group| %>
-    <li <%= error_attribute group %>>
+    <% display_children =  is_current_or_parent?(group) ? 'block' : 'none' %>
+    <li class=' <%= error_class(group) %> <%= is_current_or_parent?(group) ? 'active' : '' %>'>
       <i class="icon-plus "></i>
       <%= link_to_object group, :name => "#{name_for_object(group)} (#{group.children.count})".html_safe %>
-        <% display_children =  is_current_or_parent?(group) ? 'block' : 'none' %>
-        <ul style='display:<%= display_children %>;'>
+      <ul style='display:<%= display_children %>;'>
         <% group.children.each do |child| %>
           <li <%= error_attribute child %>>
             <%= link_to child.name, child, :class => (child == @group ? 'active' : '') %>
