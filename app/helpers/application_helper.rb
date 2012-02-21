@@ -3,13 +3,14 @@ module ApplicationHelper
     raw %{class="error_level_#{error_level object}"}
   end
 
-  def visual_error(object)
+  def visual_error(object, text=nil)
+    text ||= error_level(object)
     level_class = case error_level(object)
       when 1 then "label-important"
       when 2 then "label-warning"
       else ''
     end
-    raw %{<span class="label #{level_class}">#{error_level object}</span>}
+    raw %{<span class="label #{level_class}">#{text}</span>}
   end
 
   def error_level(object)
