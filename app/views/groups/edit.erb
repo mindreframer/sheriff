@@ -25,7 +25,7 @@
   <hr />
 
   <%= render 'reports/validation_form', :f => f %>
-  <%= toogle_all_check_boxes 'report_id', :text => 'all reports' %> <%= nbsp(4) %>
-  <%= check_box_with_label 'overwrite', true, true, 'Overwrite' %> <%= nbsp(4) %>
-  <%= f.submit 'Add validations' %>
+  <%= toogle_all_check_boxes 'report_id', :text => 'all reports', :class => 'btn' %> <%= nbsp(4) %>
+  <%= check_box_with_label 'overwrite', true, true, 'Overwrite', {:class => 'checkbox inline'} %> <%= nbsp(4) %>
+  <%= submit_tag 'Add validations', :class => 'btn btn-primary' %>
 <% end %>

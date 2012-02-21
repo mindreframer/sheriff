@@ -115,7 +115,7 @@ module ApplicationHelper
   end
 
   def toogle_all_check_boxes(klass, options={})
-    link_to_function (options[:text]||'all'), "$.each($('.#{klass}'), function(){this.checked = !this.checked})"
+    link_to_function (options[:text]||'all'), "$.each($('.#{klass}'), function(){this.checked = !this.checked})", options
   end
 
   def nbsp(x=1)

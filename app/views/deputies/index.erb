@@ -20,7 +20,7 @@
     <% end %>
   </table>
 
-  <%= toogle_all_check_boxes 'deputy_id' %>
+  <%= toogle_all_check_boxes 'deputy_id', {:class => 'btn'} %>
 
   Run <%= select_options_tag 'deputy_plugin[plugin_name]', [nil] + Plugin.names %>
   every
