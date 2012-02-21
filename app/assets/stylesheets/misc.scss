@@ -1,3 +1,14 @@
+// colors (copy from bootstap)
+$blue:                  #049cdb;
+$blueDark:              #0064cd;
+$green:                 #46a546;
+$red:                   #9d261d;
+$yellow:                #ffc40d;
+$orange:                #f89406;
+$pink:                  #c3325f;
+$purple:                #7a43b6;
+
+
 .max_width_200{  max-width: 200px;}
 .left{float:left;}
 .clearer{clear: both}
@@ -7,6 +18,6 @@
   float: left;
 }
 .error_level_0, .error_level_0 td{background: white;}
-.error_level_1, .error_level_1 td, #sidebar ul.navigation .error_level_1{background: yellow;}
-.error_level_2, .error_level_2 td, #sidebar ul.navigation .error_level_2{background: orange;}
-.error_level_3, .error_level_3 td, #sidebar ul.navigation .error_level_3{background: red;}
+.error_level_1, .error_level_1 td, #sidebar ul.navigation .error_level_1{background: lighten($yellow, 30%);}
+.error_level_2, .error_level_2 td, #sidebar ul.navigation .error_level_2{background: lighten($orange, 30%);}
+.error_level_3, .error_level_3 td, #sidebar ul.navigation .error_level_3{background: lighten($red,    30%);}
