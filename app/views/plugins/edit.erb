@@ -15,16 +15,22 @@
   <%= f.error_messages %>
   <table class="sharp">
     <tr>
-      <td>Name</td><td><%= f.text_field :name, :placeholder => 'MyPlugin' %></td>
+      <td>Name</td>
+      <td>
+        <%= f.text_field :name, :placeholder => 'MyPlugin', :class => 'span7' %>
+      </td>
     </tr>
     <tr>
-      <td>Copied from</td><td><%= f.text_field :url, :size => '80', :placeholder => "http://example.com/myplugin.rb" %></td>
+      <td>Copied from</td>
+      <td>
+        <%= f.text_field :url, :size => '80', :placeholder => "http://example.com/myplugin.rb", :class => 'span7' %>
+      </td>
     </tr>
     <tr>
       <td>Code</td>
       <td>
         <% @plugin.code = Plugin::EXAMPLE_CODE if @plugin.new_record? %>
-        <%= f.text_area :code, :size => '80x20' %>
+        <%= f.text_area :code, :size => '80x20', :style => "width:90%;" %>
       </td>
     </tr>
   </table>

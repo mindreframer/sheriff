@@ -7,24 +7,25 @@
     <tr <%= error_attribute validation %>>
       <td>
         <% key = "report[validations_attributes][#{index}][active]" %>
-        <%= check_box_with_label key, true, !validation.new_record?, validation.type.to_s.sub('Validation','') %>
+        <%= check_box_with_label(key, true, !validation.new_record?, validation.type.to_s.sub('Validation',''), {:class => 'checkbox inline'} )%>
       </td>
       <td>
         <% case validation
         when ValueValidation %>
           <%= vf.text_field :value_as_text %>
         <% when RunEveryValidation %>
-          <%= vf.text_field :interval_value %>
-          <%= vf.select :interval_unit, time_units_for_select %>
-          <%= vf.check_box :only_run_once %> <%= vf.label :only_run_once, 'once' %>
+          <%= vf.text_field :interval_value, :class => 'span1' %>
+          <%= vf.select :interval_unit, time_units_for_select, {}, {:class => 'span2'} %>
+          <%= vf.label :only_run_once, vf.check_box(:only_run_once)+ " once", {:class => 'checkbox inline'}%>
+
         <% when RunBetweenValidation %>
           <%= vf.text_field :start_hms %>
           <%= vf.text_field :end_hms %>
         <% end %>
         <% fields = capture do %>
           Ignore between
-          <%= vf.text_field :ignore_start, :size => 5 %> and
-          <%= vf.text_field :ignore_end, :size => 5 %>
+          <%= vf.text_field :ignore_start, :size => 5, :class => 'span1' %> and
+          <%= vf.text_field :ignore_end, :size => 5, :class => 'span1' %>
         <% end %>
 
         <% if validation.ignore_start? or validation.ignore_end? %>

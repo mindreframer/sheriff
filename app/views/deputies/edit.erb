@@ -27,8 +27,8 @@
       <%= child.hidden_field :deputy_id %>
       Run <%= child.select :plugin_name, [nil] + Plugin.names %>
       every
-      <%= child.text_field :interval_value, :size => 5 %>
-      <%= child.select :interval_unit, time_units_for_select(:without => 'Seconds') %>.
+      <%= child.text_field :interval_value, :size => 5, :class => 'span1'  %>
+      <%= child.select :interval_unit, time_units_for_select(:without => 'Seconds'), {}, :class => 'span2' %>.
       <br />
     <% end %>
     <%= f.submit 'Save' %>
