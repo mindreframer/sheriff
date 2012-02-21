@@ -3,7 +3,7 @@
   <% collection.each do |group| %>
     <tr>
       <td><%= link_to_object group %></td>
-      <td><%= link_to_delete group, :text => 'x' %></td>
+      <td><%= link_to_delete group, :text => 'x', :class => 'btn btn-danger' %></td>
     </tr>
   <% end %>
 </table>
