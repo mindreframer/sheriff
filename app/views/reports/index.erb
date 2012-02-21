@@ -6,6 +6,7 @@
     <th><%= sort_head 'Deputy', :column => :deputy_id %></th>
     <th><%= sort_head 'Value' %></th>
     <th><%= sort_head 'at', :column => :reported_at %></th>
+    <th></th>
   </tr>
   <% collection.each do |report| %>
     <%= render :partial => 'report_row', :locals => {:report => report} %>

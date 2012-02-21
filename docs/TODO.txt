@@ -2,4 +2,5 @@
 - make sorting arrows more inviting
 - split long message to multiline, so tables look neater
 - sidebar
-
+- fix forms (they look hideous)
+- make the interface more searchable (reports, deputies, everything..)
