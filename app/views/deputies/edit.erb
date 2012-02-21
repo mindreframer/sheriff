@@ -41,10 +41,10 @@
 <table class="sharp">
   <tr>
     <th></th>
-    <th></th>
     <th><%= sort_head 'Group', :column => :group_id %></th>
     <th><%= sort_head 'Value' %></th>
     <th><%= sort_head 'Reported at' %></th>
+    <th></th>
   </tr>
   <% @deputy.reports.all(:include => [{:group => :group}, :validations], :order => (params[:order] || 'reported_at desc'), :limit => 30).each do |report| %>
     <%= render :partial => 'reports/report_row', :locals => {:report => report, :hide_deputy => true} %>
