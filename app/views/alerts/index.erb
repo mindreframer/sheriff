@@ -18,7 +18,7 @@
     <tr <%= error_attribute(alert) %>>
       <td><%= detailed_time alert.created_at %></td>
       <td><%= link_to_object alert.report %></td>
-      <td><%= visual_error(alert, alert.message) %></td>
+      <td class='max_width_200'><%= visual_error(alert, alert.message) %></td>
       <td align=center><%= visual_error(alert) %></td>
       <td><%= link_to_delete alert, :text => 'x' %></td>
     </tr>
