@@ -12,7 +12,7 @@ module LinkHelper
     case object
     when Group, Deputy, Report then object.full_name
     when Plugin, Summary then object.name
-    else "No name found"  
+    else "No name found"
     end
   end
 
@@ -35,7 +35,7 @@ module LinkHelper
     down = "#{column} asc"
     link_to(name, current_url(:order => down), :style => 'text-decoration:none') + ' ' +
     [['^', down], ['v', "#{column} desc"]].map do |arrow, order|
-      link_to arrow, current_url(:order => order), :class => (current == order ? 'highlight' : ''), :style => 'text-decoration:none'
+      link_to arrow, current_url(:order => order), :class => (current == order ? 'highlight' : ''), :style => 'text-decoration:none;padding:0 3px 0 3px;'
     end.join.html_safe
   end
 end
