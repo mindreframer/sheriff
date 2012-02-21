@@ -19,8 +19,8 @@
           <%= vf.label :only_run_once, vf.check_box(:only_run_once)+ " once", {:class => 'checkbox inline'}%>
 
         <% when RunBetweenValidation %>
-          <%= vf.text_field :start_hms %>
-          <%= vf.text_field :end_hms %>
+          <%= vf.text_field :start_hms, {:class => 'span2'} %>
+          <%= vf.text_field :end_hms,   {:class => 'span2'} %>
         <% end %>
         <% fields = capture do %>
           Ignore between
@@ -33,7 +33,7 @@
           <%= fields %>
         <% else %>
           <% id = "_#{rand(111111111111)}" %>
-          <%= link_to_function 'ignore?', "$('##{id}').toggle()", :class => 'btn btn-danger' %>
+          <%= link_to_function 'ignore?', "$('##{id}').toggle()", :class => 'btn btn-warning' %>
           <br />
             <span style="display:none" id="<%=id%>">
               <%= fields %>
