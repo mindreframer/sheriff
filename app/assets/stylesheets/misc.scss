@@ -1,3 +1,12 @@
-
-
 .max_width_200{  max-width: 200px;}
+.left{float:left;}
+.clearer{clear: both}
+
+.nav-toggler{
+  margin: 4px 5px 0 2px  !important;
+  float: left;
+}
+.error_level_0, .error_level_0 td{background: white;}
+.error_level_1, .error_level_1 td, #sidebar ul.navigation .error_level_1{background: yellow;}
+.error_level_2, .error_level_2 td, #sidebar ul.navigation .error_level_2{background: orange;}
+.error_level_3, .error_level_3 td, #sidebar ul.navigation .error_level_3{background: red;}
