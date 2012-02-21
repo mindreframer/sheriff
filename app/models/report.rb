@@ -14,7 +14,7 @@ class Report < ActiveRecord::Base
   validates_uniqueness_of :group_id, :scope => :deputy_id
 
   def full_name
-    "#{group.full_name} @ #{deputy.full_name}"
+    "#{(group||Group.new).full_name} @ #{(deputy|| Deputy.new).full_name}"
   end
 
   def historic_values_including_current
