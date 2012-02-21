@@ -3,6 +3,15 @@ module ApplicationHelper
     raw %{class="error_level_#{error_level object}"}
   end
 
+  def visual_error(object)
+    level_class = case error_level(object)
+      when 1 then "label-important"
+      when 2 then "label-warning"
+      else ''
+    end
+    raw %{<span class="label #{level_class}">#{error_level object}</span>}
+  end
+
   def error_level(object)
     case object
     when Deputy, Group, Report, Validation then object.current_error_level
@@ -12,7 +21,7 @@ module ApplicationHelper
 
   def detailed_time(time)
     return unless time
-    "#{time.to_s(:db)} : #{time_ago time}"
+    "#{time.to_s(:db)} <br/> #{time_ago time}".html_safe
   end
 
   def short_validations(report)
@@ -33,7 +42,7 @@ module ApplicationHelper
     when ValueValidation then "<span title='#{validation.value_as_text}'>:#{validation.value_as_text.first(10)}</span>"
     when RunEveryValidation then "<span title='#{validation.humanized_interval}'>:#{validation.interval_value}#{validation.interval_unit_as_text.first.downcase}</span>"
     when RunBetweenValidation then ""
-    else raise "unknown validation #{validation}"    
+    else raise "unknown validation #{validation}"
     end
   end
 

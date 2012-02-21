@@ -19,7 +19,7 @@
       <td><%= detailed_time alert.created_at %></td>
       <td><%= link_to_object alert.report %></td>
       <td><%= alert.message %></td>
-      <td align=center><%= alert.error_level %></td>
+      <td align=center><%= visual_error(alert) %></td>
       <td><%= link_to_delete alert, :text => 'x' %></td>
     </tr>
   <% end %>
