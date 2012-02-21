@@ -15,7 +15,7 @@
         <td><%= link_to_object deputy %></td>
         <td><%= deputy.address %></td>
         <td><%= time_ago deputy.last_report_at %></td>
-        <td><%= link_to_delete deputy, :text => 'delete' %></td>
+        <td><%= link_to_delete deputy, :text => 'x', :class => 'btn btn-danger btn-mini' %></td>
       </tr>
     <% end %>
   </table>
@@ -24,10 +24,10 @@
 
   Run <%= select_options_tag 'deputy_plugin[plugin_name]', [nil] + Plugin.names %>
   every
-  <%= text_field_tag 'deputy_plugin[interval_value]', '', :size => 5 %>
-  <%= select_options_tag 'deputy_plugin[interval_unit]', time_units_for_select(:without => 'Seconds') %>
-  <%= check_box_with_label 'overwrite', true, false, 'overwrite' %>
-  <%= submit_tag 'update' %>
+  <%= text_field_tag 'deputy_plugin[interval_value]', '', :size => 5, :class => 'span1' %>
+  <%= select_options_tag 'deputy_plugin[interval_unit]', time_units_for_select(:without => 'Seconds'), {:class => 'span1'} %>
+  <%= check_box_with_label 'overwrite', true, false, 'overwrite', {:class => 'checkbox inline'} %>
+  <%= submit_tag 'update', :class => 'btn btn-primary' %>
 <% end %>
 
 <%= paginate collection %>
