@@ -73,11 +73,6 @@ module ApplicationHelper
     raw text
   end
 
-  def check_box_with_label(name, value, checked, label, options={})
-    label_for = options[:id] || name
-    check_box_tag(name, value, checked, options) + label_tag(label_for, label)
-  end
-
   def time_units_for_select(options={})
     IntervalAccessors::UNITS.map(&:reverse).reject{|x,y| (options[:without]||[]).include?(x) }
   end
@@ -106,7 +101,8 @@ module ApplicationHelper
 
   def check_box_with_label(name, value, checked, label, options={})
     label_for = options[:id] || name
-    check_box_tag(name, value, checked, options) + label_tag(label_for, label)
+    chk_bx_html = check_box_tag(name, value, checked, options)
+    label_tag(label_for, chk_bx_html  + label, options)
   end
 
   def should_show_group?(group)
