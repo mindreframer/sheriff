@@ -22,8 +22,9 @@ module LinkHelper
   end
 
   def link_to_delete(object, options={})
-    text = options.delete(:text) || 'delete'
-    link_to text, object, options.merge(:method => :delete, :confirm => 'delete ?', :title => 'Delete')
+    text    = options.delete(:text) || 'delete'
+    message = "Delete #{name_for_object(object)} ?"
+    link_to text, object, options.merge(:method => :delete, :confirm => message, :title => 'Delete')
   end
 
   def current_url(options)
