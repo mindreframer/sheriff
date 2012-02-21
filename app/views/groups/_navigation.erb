@@ -2,7 +2,7 @@
   <ul class="nav nav-list">
     <% Group.level1.each do |group| %>
     <li <%= error_attribute group %>>
-      <i class="icon-plus nav-toggler"></i>
+      <i class="icon-plus "></i>
       <%= link_to_object group, :name => "#{name_for_object(group)} (#{group.children.count})".html_safe %>
         <% display_children =  is_current_or_parent?(group) ? 'block' : 'none' %>
         <ul style='display:<%= display_children %>;'>
@@ -22,6 +22,10 @@
  $(document).ready(function(){
     $('#sidebar i').live('click', function(a, event){
       var childNode = a.originalEvent.toElement;
+      var isVisible = $(childNode).siblings('ul').is(":visible");
+
+      $(childNode).toggleClass('icon-plus',  isVisible);
+      $(childNode).toggleClass('icon-minus', !isVisible);
       $(childNode).siblings('ul').toggle();
     })
  });
