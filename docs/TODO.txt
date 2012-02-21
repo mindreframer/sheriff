@@ -1,0 +1,5 @@
+- adjust pagination to look less broad
+- make sorting arrows more inviting
+- split long message to multiline, so tables look neater
+- sidebar
+
