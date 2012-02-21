@@ -23,7 +23,7 @@
   <ul class="nav nav-list">
     <% Group.level1.each do |group| %>
     <li <%= error_attribute group %>>
-      <%= link_to_object group %>
+      <%= link_to_object group, :name => "<i class='icon-book'></i>#{name_for_object(group)}".html_safe %>
       <!-- <ul>
         <% group.children.each do |child| %>
           <li <%= error_attribute child %>>

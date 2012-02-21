@@ -1,6 +1,6 @@
 module LinkHelper
   def link_to_object(object, options={})
-    link_to name_for_object(object), object, options
+    link_to name_for_object(object, options), object, options
   end
 
   def link_to_edit(object, options={})
@@ -8,7 +8,8 @@ module LinkHelper
     link_to text, edit_polymorphic_path(object), options
   end
 
-  def name_for_object(object)
+  def name_for_object(object, options={})
+    return options[:name] if options[:name]
     case object
     when Group, Deputy, Report then object.full_name
     when Plugin, Summary then object.name
