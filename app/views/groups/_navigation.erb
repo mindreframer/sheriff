@@ -1,4 +1,4 @@
-<ul class="navigation">
+<!-- <ul class="navigation">
   <% Group.level1.each do |group| %>
     <li <%= error_attribute group %>>
       <% id = "_#{rand(111111111111)}" %>
@@ -17,3 +17,22 @@
     </li>
   <% end %>
 </ul>
+ -->
+
+<div class="well" style="padding: 8px 0;">
+  <ul class="nav nav-list">
+    <% Group.level1.each do |group| %>
+    <li <%= error_attribute group %>>
+      <%= link_to_object group %>
+      <ul>
+        <% group.children.each do |child| %>
+          <li <%= error_attribute child %>>
+            <%= link_to child.name, child, :class => (child == @group ? 'active' : '') %>
+          </li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+  </ul>
+</div>
+
