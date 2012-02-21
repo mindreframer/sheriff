@@ -19,16 +19,14 @@
       <%= yield :sidebar %>
     </div>
     <div class="span9">
-      <section id="gridSystem">
-        <div class="page-header">
-          <h2><%= heading %></h2>
+      <div class="page-header">
+        <h2><%= heading %></h2>
+      </div>
+      <div class="row">
+        <div class='span9'>
+          <%= yield %>
         </div>
-        <div class="row">
-          <div class='span9'>
-            <%= yield %>
-          </div>
-        </div>
-      </section>
+      </div>
     </div>
   </div>
 </div>
