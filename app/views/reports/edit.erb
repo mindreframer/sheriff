@@ -6,26 +6,45 @@
 <% end %>
 in group: <%= link_to_object @report.group %>
 
-<br />
 
-
+<hr>
 <a class="btn btn-primary" data-toggle="modal" href="#validationForm" >Add Validation</a>
+<br>
 
-<div class="modal fade" id="myModal">
-  <div class="modal-header">
-    <a class="close" data-dismiss="modal">×</a>
-    <h3>Add Validation</h3>
-  </div>
-  <div class="modal-body">
-    <p>One fine body…</p>
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="btn btn-primary" data-dismiss="modal">Save changes</a>
-    <a href="#" class="btn">Close</a>
+<div class="well">
+  <h3>Alerts</h3>
+  <div style="max-height:200px; overflow:auto">
+    <table class="sharp">
+      <% @report.alerts.each do |alert| %>
+        <tr <%= error_attribute alert %>>
+          <td><%= detailed_time alert.created_at %></td>
+          <td><%= alert.message %></td>
+          <td><%= button_to_delete alert, :text => 'x' %></td>
+        </tr>
+      <% end %>
+    </table>
   </div>
 </div>
 
+<div class="well">
+  <h3>Recent Values</h3>
+  <div style="max-height:600px; overflow:auto">
+    <table class="sharp">
+      <tr>
+        <th>Value</th>
+        <th>Reported at</th>
+      </tr>
+      <% @report.historic_values_including_current.each do |historic_value| %>
+        <tr <%= error_attribute(historic_value) %>>
+          <td><%= historic_value.value_as_text %></td>
+          <td><%= detailed_time historic_value.reported_at %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
 
+<!-- this form is not visible -->
 <div id='validationForm' class='modal fade well'>
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
@@ -34,39 +53,10 @@ in group: <%= link_to_object @report.group %>
   <%= form_for @report do |f| %>
     <%= render 'validation_form', :f => f %>
     <%= submit_tag 'Save', :class => 'btn btn-primary' %>
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
   <% end %>
-  <div class="modal-footer">
+ <!--  <div class="modal-footer">
     <a href="#" class="btn btn-primary" data-dismiss="modal">Save changes</a>
     <a href="#" class="btn" data-dismiss="modal">Close</a>
-  </div>
-</div>
-
-<h3>Alerts</h3>
-<div style="max-height:200px; overflow:auto">
-  <table class="sharp">
-    <% @report.alerts.each do |alert| %>
-      <tr <%= error_attribute alert %>>
-        <td><%= detailed_time alert.created_at %></td>
-        <td><%= alert.message %></td>
-        <td><%= button_to_delete alert, :text => 'x' %></td>
-      </tr>
-    <% end %>
-  </table>
-</div>
-
-
-<h3>Values</h3>
-<div style="max-height:600px; overflow:auto">
-  <table class="sharp">
-    <tr>
-      <th>Value</th>
-      <th>Reported at</th>
-    </tr>
-    <% @report.historic_values_including_current.each do |historic_value| %>
-      <tr <%= error_attribute(historic_value) %>>
-        <td><%= historic_value.value_as_text %></td>
-        <td><%= detailed_time historic_value.reported_at %></td>
-      </tr>
-    <% end %>
-  </table>
+  </div> -->
 </div>
