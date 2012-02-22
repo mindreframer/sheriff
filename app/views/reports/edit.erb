@@ -8,7 +8,7 @@ in group: <%= link_to_object @report.group %>
 
 
 <hr>
-<a class="btn btn-primary" data-toggle="modal" href="#validationForm" >Add Validation</a>
+<a class="btn btn-primary" data-toggle="modal" href="#validationForm" >Edit Validations</a>
 <br>
 
 <%= render 'reports/validation_plain' %>
@@ -59,7 +59,7 @@ in group: <%= link_to_object @report.group %>
 <div id='validationForm' class='modal fade well'>
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
-    <h3>Add Validation</h3>
+    <h3>Edit Validations</h3>
   </div>
   <%= form_for @report do |f| %>
     <%= render 'validation_form', :f => f %>
