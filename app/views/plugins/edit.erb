@@ -30,9 +30,6 @@
       <td>Code</td>
       <td>
         <% @plugin.code = Plugin::EXAMPLE_CODE if @plugin.new_record? %>
-        <pre id="editor">
-<%= @plugin.code %>
-        </pre>
         <%= f.text_area :code, :style => "display:none;" %>
       </td>
     </tr>
@@ -40,30 +37,42 @@
   <%= submit_tag 'Save', {:id => 'submit_plugin', :class => 'btn btn-primary'} %>
 <% end %>
 
+
+
 <script type="text/javascript">
 $(document).ready(
   function(){
+    // setup editor
+    // $('#container').css('width', 800);
+    // $('#container').css('height', 600);
     var editor = ace.edit("editor");
+    editor.resize();
     window.editor = editor;
-    //editor.setTheme("theme-solarized_light");
+    var rubyMode  = require("ace/mode/ruby").Mode;
+    editor.getSession().setMode(new rubyMode());
 
+    // update the textarea for code before submitting
     $("#plugin_code").hide();
-
     $('form.edit_plugin').submit(function(e){
-      console.log('saving');
       $("#plugin_code").text(editor.getSession().getValue());
       //e.preventDefault();
     });
 });
 </script>
 
-
+<div id="container" style="position:relative;">
+   <div id="editor" style="position:absolute; top:0;bottom:0;left: 0;right:0"><%= @plugin.code %></div>
+</div>
 
 <style type="text/css">
   #editor {
     position: relative;
+    overflow: hidden;
     height:300px;
     left: 0;
     right: 0;
   }
 </style>
+
+
+

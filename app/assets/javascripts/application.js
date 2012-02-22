@@ -2,7 +2,8 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require ace
-//= require theme-solarized_light.js
+//= require theme-solarized_light
+//= require mode-ruby
 //= require sheriff
 //= require groups
 //= require_self
