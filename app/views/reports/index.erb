@@ -1,9 +1,3 @@
-<%= form_tag '/reports' do %>
-  Group: <%= text_field_tag :group, '' %>
-  Value: <%= text_field_tag :value, '' %>
-  <%= submit_tag 'Test-report', :class => 'btn btn-primary' %>
-<% end %>
-
 <%= paginate collection %>
 <table class="sharp">
   <tr>
@@ -19,3 +13,12 @@
   <% end %>
 </table>
 <%= paginate collection %>
+
+<div class="well">
+  <h3>Test Report <small> (as if a deputy reported it)</small> </h3>
+  <%= form_tag '/reports', :class => 'form-inline' do %>
+    Group: <%= text_field_tag :group, '' %>
+    Value: <%= text_field_tag :value, '' %>
+    <%= submit_tag 'Test-report', :class => 'btn btn-primary' %>
+  <% end %>
+</div>
