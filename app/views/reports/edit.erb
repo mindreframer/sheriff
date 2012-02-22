@@ -13,10 +13,11 @@ in group: <%= link_to_object @report.group %>
 
 <div class="well">
   <% if @report.alerts.size > 0 %>
-    <h3>Alerts (<%= @report.alerts.size %>)</h3>
+    <% alerts = @report.alerts %>
+    <h3>Alerts (<%= alerts.size %> in last <%= distance_of_time_in_words_to_now(alerts.last.created_at) %>)</h3>
     <div style="max-height:200px; overflow:auto">
       <table class="sharp">
-        <% @report.alerts.each do |alert| %>
+        <% alerts.each do |alert| %>
           <tr <%= error_attribute alert %>>
             <td><%= detailed_time alert.created_at %></td>
             <td><%= alert.message %></td>
