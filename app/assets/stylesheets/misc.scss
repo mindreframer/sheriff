@@ -13,6 +13,10 @@ $purple:                #7a43b6;
 .left{float:left;}
 .clearer{clear: both}
 
+#sidebar{
+  margin-top: 10px;
+}
+
 #sidebar i{
   margin: 4px 5px 0 2px  !important;
   float: left;
@@ -21,6 +25,12 @@ $purple:                #7a43b6;
 #sidebar li li{
   list-style: none;
 }
+
+#main_content{
+  margin-top: 10px;
+}
+
+
 .error_level_0, .error_level_0 td{background: white;}
 .error_level_1, .error_level_1 td, #sidebar ul.navigation .error_level_1{background: lighten($yellow, 30%);}
 .error_level_2, .error_level_2 td, #sidebar ul.navigation .error_level_2{background: lighten($orange, 30%);}
