@@ -32,7 +32,7 @@ class Plugin < ActiveRecord::Base
   end
 
   def cleanup_code
-    self.code = code.gsub(/(\r\n\s*){2,}/, '')
+    self.code = code.gsub(/(\r\n\s*){2,}/, "\r\n")
   end
 
   def self.syntax_error(code)

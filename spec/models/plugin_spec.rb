@@ -13,10 +13,18 @@ describe Plugin do
       plugin.save!
     end
 
-    it "removes newlines/spaces from the end of code" do
-      plugin = Factory.build(:plugin, :code => "puts 'hey'\r\n   \r\n    \r\n    \r\n    \r\n")
-      plugin.save!
-      plugin.code.should == "puts 'hey'" #
+
+    code_values = [
+      ["puts 'hey'\r\n   \r\n    \r\n    \r\n    \r\n", "puts 'hey'\r\n"],
+      ["\r\n    \r\n    \r\nputs 'hey'\r\n       \r\n", "\r\nputs 'hey'\r\n"],
+    ]
+
+    code_values.each_with_index do |values, i|
+      it "removes newlines/spaces from the end of code nr. #{i}" do
+        plugin = Factory.build(:plugin, :code => values[0])
+        plugin.save!
+        plugin.code.should == values[1]
+      end
     end
   end
 end
