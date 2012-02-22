@@ -27,10 +27,12 @@
       </td>
     </tr>
     <tr>
-      <td>Code</td>
-      <td>
+      <td colspan='2'>
         <% @plugin.code = Plugin::EXAMPLE_CODE if @plugin.new_record? %>
         <%= f.text_area :code, :style => "display:none;" %>
+<div id="container" style="position:relative;">
+   <div id="editor" style="position:absolute; top:0;bottom:0;left: 0;right:0"><%= @plugin.code %></div>
+</div>
       </td>
     </tr>
   </table>
@@ -43,8 +45,9 @@
 $(document).ready(
   function(){
     // setup editor
-    // $('#container').css('width', 800);
-    // $('#container').css('height', 600);
+    // see here: https://groups.google.com/forum/#!msg/ace-discuss/aAf8VCyNCPw/zOZcHjvZt-0J (for scrollbars)
+    $('#container').css('width', 800);
+    $('#container').css('height', 400);
     var editor = ace.edit("editor");
     editor.resize();
     window.editor = editor;
@@ -59,20 +62,4 @@ $(document).ready(
     });
 });
 </script>
-
-<div id="container" style="position:relative;">
-   <div id="editor" style="position:absolute; top:0;bottom:0;left: 0;right:0"><%= @plugin.code %></div>
-</div>
-
-<style type="text/css">
-  #editor {
-    position: relative;
-    overflow: hidden;
-    height:300px;
-    left: 0;
-    right: 0;
-  }
-</style>
-
-
 
