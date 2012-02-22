@@ -13,7 +13,7 @@ in group: <%= link_to_object @report.group %>
 
 <div class="well">
   <% if @report.alerts.size > 0 %>
-    <h3>Alerts</h3>
+    <h3>Alerts (<%= @report.alerts.size %>)</h3>
     <div style="max-height:200px; overflow:auto">
       <table class="sharp">
         <% @report.alerts.each do |alert| %>
