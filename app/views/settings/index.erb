@@ -1,4 +1,10 @@
-<h2>Notifications</h2>
+<h3>Set Validation back to OK <small>(if you fixed a bigger issue and don't want to wait for all validations to pass)</small></h3>
+<%= form_tag :action => :reset do %>
+  <%= submit_tag 'Set All To OK', :class => 'btn btn-danger' %>
+<% end %>
+
+
+<h3>Notifications</h>
 
 <%= form_tag :action => :update do %>
   <%
@@ -19,9 +25,11 @@
   <% end %>
 
   <%= text_field_tag "settings[send_sms]", 0, :type => "hidden" %>
-  <%= check_box_tag "settings[send_sms]", 1, Boolean(@settings['send_sms']) %> send_sms <br/>
+  <%= check_box_with_label "settings[send_sms]", 1, Boolean(@settings['send_sms']), 'Send SMS', :class => 'checkbox inline' %> <br>
+
+
   <%= text_field_tag "settings[run_cron]", 0, :type => "hidden" %>
-  <%= check_box_tag "settings[run_cron]", 1, Boolean(@settings['run_cron']) %> run_cron <br/>
+  <%= check_box_with_label "settings[run_cron]", 1, Boolean(@settings['run_cron']), 'Run Cron', :class => 'checkbox inline' %> <br>
 
 
 
@@ -31,7 +39,3 @@
 <% end %>
 
 
-<h3>Reset Validations <small>(if you fixed a bigger issue and don't want to wait for all validations to pass)</small></h3>
-<%= form_tag :action => :reset do %>
-  <%= submit_tag 'RESET', :class => 'btn btn-primary' %>
-<% end %>
