@@ -1,6 +1,6 @@
-- adjust pagination to look less broad
-- make sorting arrows more inviting
+- remove only_run_once for Validations (does not make sense)
+- alerts better Search
 - split long message to multiline, so tables look neater
-- sidebar
-- fix forms (they look hideous)
 - make the interface more searchable (reports, deputies, everything..)
+
+
