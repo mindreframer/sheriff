@@ -19,8 +19,8 @@
           <%= vf.label :only_run_once, vf.check_box(:only_run_once)+ " once", {:class => 'checkbox inline'}%>
 
         <% when RunBetweenValidation %>
-          <%= vf.text_field :start_hms, {:class => 'span2'} %>
-          <%= vf.text_field :end_hms,   {:class => 'span2'} %>
+          <%= vf.text_field :start_hms, {:class => 'span1'} %>
+          <%= vf.text_field :end_hms,   {:class => 'span1'} %>
         <% end %>
         <% fields = capture do %>
           Ignore between
