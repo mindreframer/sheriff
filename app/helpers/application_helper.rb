@@ -37,6 +37,12 @@ module ApplicationHelper
     end.sort.join(' ').html_safe
   end
 
+  def human_validation_display(report)
+    report.validations.map do |v|
+      v.human_display
+    end.join(' <br/> ').html_safe
+  end
+
   def uppercase_letters(name)
     letters = name.split('').select{|c|c =~ /[A-Z]/}[0..-2].join('')
     "<span title='#{name}'>#{letters}</span>"

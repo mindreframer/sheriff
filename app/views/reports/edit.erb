@@ -11,7 +11,7 @@ in group: <%= link_to_object @report.group %>
 <a class="btn btn-primary" data-toggle="modal" href="#validationForm" >Edit Validations</a>
 <br>
 <div class="well">
-  <%= @report.human_validation_display %>
+  <%= human_validation_display(@report) %>
 </div>
 
 <div class="well">
