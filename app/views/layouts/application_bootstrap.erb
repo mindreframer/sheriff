@@ -22,11 +22,15 @@
  </div>
   <% end %>
 
+<% alert_types = {:notice => 'success', :warning => '', :error => 'error'} %>
+<% flash.each do |type, message| %>
+  <% alert_type = alert_types[type] %>
+  <div class="alert alert-<%= alert_type %>" >
+    <a class="close" data-dismiss="alert">×</a>
+     <%= message %>
+  </div>
+<% end %>
 
-<div class="alert">
-  <a class="close" data-dismiss="alert">×</a>
-  <strong>Warning!</strong> Best check yo self, you're not looking too good.
-</div>
 
   <div class="row">
     <div id='sidebar' class='span3'>
