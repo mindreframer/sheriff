@@ -40,9 +40,11 @@ module LinkHelper
     column = options[:column] || name.downcase.sub(' ','_')
     current = h(params[:order])
     down = "#{column} asc"
+    down_icon = "<i class='icon-arrow-down'></i>".html_safe
+    up_icon = "<i class='icon-arrow-up'></i>".html_safe
     link_to(name, current_url(:order => down), :style => 'text-decoration:none') + ' ' +
-    [['^', down], ['v', "#{column} desc"]].map do |arrow, order|
-      link_to arrow, current_url(:order => order), :class => (current == order ? 'highlight' : ''), :style => 'text-decoration:none;padding:0 3px 0 3px;'
+    [[up_icon, down], [down_icon, "#{column} desc"]].map do |arrow, order|
+      link_to arrow, current_url(:order => order), :class => (current == order ? 'highlight' : ''), :style => 'text-decoration:none;padding:0 1px 0 1px;'
     end.join.html_safe
   end
 end
