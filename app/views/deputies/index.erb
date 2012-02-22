@@ -7,7 +7,7 @@
       <td><%= sort_head 'Name' %></td>
       <td><%= sort_head 'IP', :column => :address %></td>
       <td><%= sort_head 'Last Report', :column => :last_report_at %></td>
-      <td>Actions</td>
+      <td></td>
     </tr>
     <% collection.each do |deputy| %>
       <tr <%= error_attribute(deputy) %>>
