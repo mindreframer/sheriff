@@ -1,36 +1,47 @@
-<h3>Set Validation back to OK <small>(if you fixed a bigger issue and don't want to wait for all validations to pass)</small></h3>
+<h2>Settings</h2>
+
+<h3>Set Validations back to OK</h3>
+<div class="well">
 <%= form_tag :action => :reset do %>
-  <%= submit_tag 'Set All To OK', :class => 'btn btn-danger' %>
+  <h5>You fixed a bigger issue and don't want to wait for all validations to pass -> Click the button!</h5>
+
+
+  <%= submit_tag 'Set All To OK', :class => 'btn btn-danger btn-large' %>
+
 <% end %>
+</div>
 
-
-<h3>Notifications</h>
-
+<h3>Notifications <small>(Users to be notified)</small>   </h3>
 <%= form_tag :action => :update do %>
+  <div class="well">
   <%
     notifications = @settings['notifications'] || []
     notifications << {}
 
     notifications.each do |notification_data|
   %>
-    <% input_fields = %w(name phone_number mail enabled).map do |key| %>
-      <% if key == "enabled" %>
-        <%= check_box_tag("settings[notifications][][#{key}]", 1, !!notification_data[key.to_sym], :placeholder => key.humanize) %>
-        enabled
-      <% else %>
-        <%= text_field_tag "settings[notifications][][#{key}]", notification_data[key.to_sym], :placeholder => key.humanize, :style => "width: 200px" %>
+
+      <% input_fields = %w(name phone_number mail enabled).map do |key| %>
+        <% if key == "enabled" %>
+          <%= check_box_tag("settings[notifications][][#{key}]", 1, !!notification_data[key.to_sym], :placeholder => key.humanize) %>
+          enabled
+        <% else %>
+          <%= text_field_tag "settings[notifications][][#{key}]", notification_data[key.to_sym], :placeholder => key.humanize, :style => "width: 200px" %>
+        <% end %>
       <% end %>
+      <br><br>
     <% end %>
-    <br><br>
-  <% end %>
+  </div>
 
-  <%= text_field_tag "settings[send_sms]", 0, :type => "hidden" %>
-  <%= check_box_with_label "settings[send_sms]", 1, Boolean(@settings['send_sms']), 'Send SMS', :class => 'checkbox inline' %> <br>
+  <h3>Some Flags <small></small></h3>
+  <div class="well">
+    <%= text_field_tag "settings[send_sms]", 0, :type => "hidden" %>
+    <%= check_box_with_label "settings[send_sms]", 1, Boolean(@settings['send_sms']), 'Send SMS', :class => 'checkbox inline' %> <br>
 
 
-  <%= text_field_tag "settings[run_cron]", 0, :type => "hidden" %>
-  <%= check_box_with_label "settings[run_cron]", 1, Boolean(@settings['run_cron']), 'Run Cron', :class => 'checkbox inline' %> <br>
-
+    <%= text_field_tag "settings[run_cron]", 0, :type => "hidden" %>
+    <%= check_box_with_label "settings[run_cron]", 1, Boolean(@settings['run_cron']), 'Run Cron', :class => 'checkbox inline' %> <br>
+  </div>
 
 
   <br/>
