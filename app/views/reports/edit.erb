@@ -12,24 +12,26 @@ in group: <%= link_to_object @report.group %>
 <br>
 
 <div class="well">
-  <h3>Alerts</h3>
-  <div style="max-height:200px; overflow:auto">
-    <table class="sharp">
-      <% @report.alerts.each do |alert| %>
-        <tr <%= error_attribute alert %>>
-          <td><%= detailed_time alert.created_at %></td>
-          <td><%= alert.message %></td>
-          <td><%= button_to_delete alert, :text => 'x' %></td>
-        </tr>
-      <% end %>
-    </table>
-  </div>
-
-  <%= form_tag '/reports/clear_alerts' do %>
-    <%= hidden_field_tag :id, @report.id %>
-    <%= submit_tag 'Clear Alerts', :class => 'btn btn-primary' %>
+  <% if @report.alerts.size > 0 %>
+    <h3>Alerts</h3>
+    <div style="max-height:200px; overflow:auto">
+      <table class="sharp">
+        <% @report.alerts.each do |alert| %>
+          <tr <%= error_attribute alert %>>
+            <td><%= detailed_time alert.created_at %></td>
+            <td><%= alert.message %></td>
+            <td><%= button_to_delete alert, :text => 'x' %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+    <%= form_tag '/reports/clear_alerts' do %>
+      <%= hidden_field_tag :id, @report.id %>
+      <%= submit_tag 'Clear Alerts', :class => 'btn btn-primary' %>
+    <% end %>
+  <% else %>
+  <h3>No Recent Alerts</h3>
   <% end %>
-
 </div>
 
 <div class="well">
