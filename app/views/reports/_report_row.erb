@@ -3,9 +3,11 @@
 <tr <%= error_attribute(report) %>>
   <td>
     <% if checkbox ||= false %>
-      <%= check_box_tag 'ids[]', report.id, false, :class => 'report_id' %><br>
+      <%= check_box_tag 'ids[]', report.id, false, :class => 'report_id checkbox inline' %>
+      <%= nbsp(2) %>
     <% end %>
-    <span class="label label-info"><%= link_to_edit report, :text => 'Details' %></span><br>
+
+    <%= link_to_edit report, :text => 'Details', :class => 'btn btn-mini' %><br>
     <%= short_validations report %>
   </td>
   <% unless hide_group %>
