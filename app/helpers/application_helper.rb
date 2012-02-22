@@ -65,7 +65,7 @@ module ApplicationHelper
       if @resource.new_record?
         "New #{@resource.class}"
       else
-        "<span #{error_attribute @resource}>#{name_for_object @resource}</span> #{link_to_delete @resource, :text => 'x', :class => 'btn btn-danger btn-mini'}"
+        "<span #{error_attribute @resource}>#{name_for_object @resource}</span> #{button_to_delete @resource, :text => 'x'}"
       end
     elsif @collection
       "#{resource_class.to_s.pluralize}"
