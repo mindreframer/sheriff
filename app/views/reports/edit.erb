@@ -48,7 +48,7 @@ in group: <%= link_to_object @report.group %>
       <tr <%= error_attribute alert %>>
         <td><%= detailed_time alert.created_at %></td>
         <td><%= alert.message %></td>
-        <td><%= link_to_delete alert, :text => 'x' %></td>
+        <td><%= button_to_delete alert, :text => 'x' %></td>
       </tr>
     <% end %>
   </table>
