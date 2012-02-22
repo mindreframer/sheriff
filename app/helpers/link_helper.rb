@@ -23,7 +23,7 @@ module LinkHelper
 
   def link_to_delete(object, options={})
     text    = options.delete(:text) || 'delete'
-    message = "Delete #{name_for_object(object)} ?"
+    message = "Delete #{object.class} '#{name_for_object(object)}' ?"
     link_to text, object, options.merge(:method => :delete, :confirm => message, :title => 'Delete')
   end
 
