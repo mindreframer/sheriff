@@ -10,8 +10,9 @@ in group: <%= link_to_object @report.group %>
 <hr>
 <a class="btn btn-primary" data-toggle="modal" href="#validationForm" >Edit Validations</a>
 <br>
-
-<%= render 'reports/validation_plain' %>
+<div class="well">
+  <%= @report.human_validation_display %>
+</div>
 
 <div class="well">
   <% if @report.alerts.size > 0 %>
@@ -66,8 +67,4 @@ in group: <%= link_to_object @report.group %>
     <%= submit_tag 'Save', :class => 'btn btn-primary' %>
     <a href="#" class="btn" data-dismiss="modal">Close</a>
   <% end %>
- <!--  <div class="modal-footer">
-    <a href="#" class="btn btn-primary" data-dismiss="modal">Save changes</a>
-    <a href="#" class="btn" data-dismiss="modal">Close</a>
-  </div> -->
 </div>

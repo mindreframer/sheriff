@@ -1,5 +1,6 @@
 class Validation < ActiveRecord::Base
   include ErrorLevelPropagation
+  ERROR_LEVELS = {0 => 'Ignore', 1 => 'Log', 2 => 'Email', 3 => 'Sms'}
   before_update :adjust_current_error_level
 
   validates_format_of :ignore_start, :ignore_end, :with => /^\d\d:\d\d$/, :allow_blank => true
@@ -25,6 +26,10 @@ class Validation < ActiveRecord::Base
     end
 
     now.between?(start_time, end_time)
+  end
+
+  def human_error_level
+    ERROR_LEVELS[error_level]
   end
 
   protected

@@ -22,17 +22,9 @@ class Report < ActiveRecord::Base
   end
 
   def human_validation_display
-    output = ""
-    if v = validations.select{|x| x.class == RunEveryValidation}.first
-      output << "runs every #{v.interval} seconds with error_level #{v.error_level}"
-    end
-    if v = validations.select{|x| x.class == ValueValidation}.first
-      output << " and expects values #{v.value} with error_level #{v.error_level}"
-    end
-    if v = validations.select{|x| x.class == RunBetweenValidation}.first
-      output << " and runs between #{v.start_seconds} and #{v.end_seconds} with error_level #{v.error_level}"
-    end
-    output
+    validations.map do |v|
+      v.human_display
+    end.join(' and ')
   end
 
   # try to find the plugin that reported
