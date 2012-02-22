@@ -22,16 +22,16 @@
   <%= check_box_tag "settings[send_sms]", 1, Boolean(@settings['send_sms']) %> send_sms <br/>
   <%= text_field_tag "settings[run_cron]", 0, :type => "hidden" %>
   <%= check_box_tag "settings[run_cron]", 1, Boolean(@settings['run_cron']) %> run_cron <br/>
-  
+
 
 
   <br/>
-  <%= submit_tag 'save' %>
+  <%= submit_tag 'Save', :class => 'btn btn-primary' %>
   <%= link_to 'Test settings (save first)', '/settings/test' %>
 <% end %>
 
 
-<h3>Reset Validations</h3>
+<h3>Reset Validations <small>(if you fixed a bigger issue and don't want to wait for all validations to pass)</small></h3>
 <%= form_tag :action => :reset do %>
-  <%= submit_tag 'RESET' %>
+  <%= submit_tag 'RESET', :class => 'btn btn-primary' %>
 <% end %>
