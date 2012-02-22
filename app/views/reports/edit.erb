@@ -11,6 +11,8 @@ in group: <%= link_to_object @report.group %>
 <a class="btn btn-primary" data-toggle="modal" href="#validationForm" >Add Validation</a>
 <br>
 
+<%= render 'reports/validation_plain' %>
+
 <div class="well">
   <% if @report.alerts.size > 0 %>
     <% alerts = @report.alerts %>
