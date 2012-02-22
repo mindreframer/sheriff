@@ -12,5 +12,11 @@ describe Plugin do
       plugin = Factory.build(:plugin, :code => '1+2')
       plugin.save!
     end
+
+    it "removes newlines/spaces from the end of code" do
+      plugin = Factory.build(:plugin, :code => "puts 'hey'\r\n   \r\n    \r\n    \r\n    \r\n")
+      plugin.save!
+      plugin.code.should == "puts 'hey'" #
+    end
   end
 end

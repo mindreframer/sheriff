@@ -18,6 +18,7 @@ class Plugin < ActiveRecord::Base
     end
   end
   before_validation :download_code, :on => :create
+  before_save :cleanup_code
 
   def self.names
     all(:select => 'name').map(&:name).sort
@@ -28,6 +29,10 @@ class Plugin < ActiveRecord::Base
   def download_code
     return unless url.present?
     self.code = open(url).read
+  end
+
+  def cleanup_code
+    self.code = code.gsub(/(\r\n\s*){2,}/, '')
   end
 
   def self.syntax_error(code)
