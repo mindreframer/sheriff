@@ -24,6 +24,12 @@ in group: <%= link_to_object @report.group %>
       <% end %>
     </table>
   </div>
+
+  <%= form_tag '/reports/clear_alerts' do %>
+    <%= hidden_field_tag :id, @report.id %>
+    <%= submit_tag 'Clear Alerts', :class => 'btn btn-primary' %>
+  <% end %>
+
 </div>
 
 <div class="well">

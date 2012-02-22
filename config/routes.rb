@@ -11,6 +11,7 @@ Sheriff::Application.routes.draw do
   resources :reports do
     collection do
       post :batch_validate
+      post :clear_alerts
     end
   end
   resources :validations
