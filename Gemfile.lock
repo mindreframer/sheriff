@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
+  revision: c248bbd4c19936a9624f19fa6fa91ca5c9617315
+  specs:
+    twitter-bootstrap-rails (2.0.1.0)
+      actionpack (>= 3.1)
+      less-rails (~> 2.1.6)
+      railties (>= 3.1)
+
+GIT
   remote: git://github.com/thoughtbot/factory_girl.git
   revision: 09e1cead5fc5239060d0a93ec045bbcc6fd99953
   specs:
@@ -169,10 +178,6 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
-    twitter-bootstrap-rails (2.0.1)
-      actionpack (>= 3.1)
-      less-rails (~> 2.1.5)
-      railties (>= 3.1)
     tzinfo (0.3.31)
     uglifier (1.2.3)
       execjs (>= 0.3.0)
@@ -203,5 +208,5 @@ DEPENDENCIES
   sass-rails (~> 3.2.1)
   shotgun
   therubyracer
-  twitter-bootstrap-rails (~> 2.0.1.0)
+  twitter-bootstrap-rails!
   uglifier

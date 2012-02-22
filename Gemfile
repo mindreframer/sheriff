@@ -17,7 +17,7 @@ gem "therubyracer", :require => false
 gem 'sass-rails', "~> 3.2.1", :require => false
 gem 'uglifier', :require => false
 
-gem "twitter-bootstrap-rails", "~> 2.0.1.0"
+gem "twitter-bootstrap-rails", :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 group :development do
   gem 'capistrano', :require => false
