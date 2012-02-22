@@ -27,6 +27,11 @@ module LinkHelper
     link_to text, object, options.merge(:method => :delete, :confirm => message, :title => 'Delete')
   end
 
+  def button_to_delete(object, options={})
+    options[:class] = (options[:class] ||'')  + " btn btn-danger btn-mini"
+    link_to_delete(object, options)
+  end
+
   def current_url(options)
     url_for(params.merge(options).except(:controller, :action))
   end
