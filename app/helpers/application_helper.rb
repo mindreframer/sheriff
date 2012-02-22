@@ -101,7 +101,7 @@ module ApplicationHelper
         :content => "Fill the values for positive outcome."}
     when 'RunEveryValidation' then
       { :title => 'Check how often it should run',
-        :content => "Choose the period, how often a report should come in"}
+        :content => "Choose the period, how often a report should come in. Check only_once-checkbox, if only one report is expected."}
     when 'RunBetweenValidation' then
       { :title => 'Check when (night/special hours) it should run',
         :content => "If some reports are expected in special daily hours, set them here."}
