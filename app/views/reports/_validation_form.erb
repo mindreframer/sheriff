@@ -8,6 +8,13 @@
       <td>
         <% key = "report[validations_attributes][#{index}][active]" %>
         <%= check_box_with_label(key, true, !validation.new_record?, validation.type.to_s.sub('Validation',''), {:class => 'checkbox inline'} )%>
+
+        <a rel="popover"
+            title="<%= help_for_validations(validation)[:title] %>"
+            data-content='<%= help_for_validations(validation)[:content] %>'>
+          <i class='icon-question-sign'></i>
+        </a>
+
       </td>
       <td>
         <% case validation
@@ -16,7 +23,7 @@
         <% when RunEveryValidation %>
           <%= vf.text_field :interval_value, :class => 'span1' %>
           <%= vf.select :interval_unit, time_units_for_select, {}, {:class => 'span2'} %>
-          <%= vf.label :only_run_once, vf.check_box(:only_run_once)+ " once", {:class => 'checkbox inline'}%>
+          <%= vf.label :only_run_once, vf.check_box(:only_run_once)+ "only once/period", {:class => 'checkbox inline'}%>
 
         <% when RunBetweenValidation %>
           <%= vf.text_field :start_hms, {:class => 'span1'} %>
@@ -33,6 +40,7 @@
           <%= fields %>
         <% else %>
           <% id = "_#{rand(111111111111)}" %>
+          <%= nbsp(2) %>
           <%= link_to_function 'ignore?', "$('##{id}').toggle()", :class => 'btn btn-warning' %>
           <br />
             <span style="display:none" id="<%=id%>">

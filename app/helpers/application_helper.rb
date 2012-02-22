@@ -94,6 +94,22 @@ module ApplicationHelper
     end
   end
 
+  def help_for_validations(validation)
+    case validation.class.to_s
+    when 'ValueValidation' then
+      { :title => 'Check the value range/type',
+        :content => "Fill the values for positive outcome."}
+    when 'RunEveryValidation' then
+      { :title => 'Check how often it should run',
+        :content => "Choose the period, how often a report should come in"}
+    when 'RunBetweenValidation' then
+      { :title => 'Check when (night/special hours) it should run',
+        :content => "If some reports are expected in special daily hours, set them here."}
+    else
+      raise validation.class
+    end
+  end
+
   def select_options_tag(name,list,options={})
     selected = options[:value] || h(params[name])
     select_tag(name, options_for_select(list,selected), options)
