@@ -1,5 +1,5 @@
 class PluginsController < RestController
-  layout 'application'
+
   new! do |format|
     format.html{render 'edit'}
   end
@@ -27,7 +27,6 @@ class PluginsController < RestController
       render :text => text
     end
   end
-  layout 'group_sidebar'
 
   def collection
     @collection ||= Plugin.page(params[:page]).per(50).order('name asc')
