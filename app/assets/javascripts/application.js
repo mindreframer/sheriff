@@ -1,5 +1,5 @@
 //= require jquery
-//= require jquery_ujs
+//= require vendor/chosen.jquery.min
 //= require twitter/bootstrap
 //= require bootstrap
 //= require ace
