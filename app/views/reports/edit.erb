@@ -8,7 +8,12 @@ in group: <%= link_to_object @report.group %>
 
 
 <hr>
-<a class="btn btn-primary" data-toggle="modal" href="#validationForm" >Edit Validations</a>
+<div class="row">
+  <div class=" span3">
+    <a class="btn btn-primary" data-toggle="modal" href="#validationForm" >Edit Validations</a>
+  </div>
+</div>
+
 <br>
 <div class="well">
   <%= human_validation_display(@report) %>

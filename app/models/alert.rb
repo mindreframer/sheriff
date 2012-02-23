@@ -2,8 +2,13 @@ class Alert < ActiveRecord::Base
   belongs_to :validation, :polymorphic => true
   belongs_to :report
   after_create :send_notification
+  before_create :adjust_validation_type
 
   protected
+
+  def adjust_validation_type
+    self.validation_type = validation.class.to_s
+  end
 
   def send_notification
     case error_level

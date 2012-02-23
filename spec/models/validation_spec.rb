@@ -44,6 +44,11 @@ describe Validation do
       }.should change{Alert.count}.by(+1)
     end
 
+    it "sets the right validation type on alerts" do
+      validation.send(:validation_failed!, 'FFF')
+      Alert.last.validation_type.should == "ValueValidation"
+    end
+
     it "does not report an error if deputy is disabled" do
       validation.report.deputy.update_attribute(:disabled_until, 1.minute.from_now)
       lambda{
