@@ -15,9 +15,16 @@ in group: <%= link_to_object @report.group %>
 </div>
 
 <br>
-<div class="well">
-  <%= human_validation_display(@report) %>
-</div>
+
+
+  <div class="well">
+    <% if @report.validations.size > 0 %>
+      <%= human_validation_display(@report) %>
+    <% else %>
+      <h3>No Validations</h3>
+    <% end %>
+  </div>
+
 
 <div class="well">
   <% if @report.alerts.size > 0 %>
@@ -39,7 +46,7 @@ in group: <%= link_to_object @report.group %>
       <%= submit_tag 'Clear Alerts', :class => 'btn btn-primary' %>
     <% end %>
   <% else %>
-  <h3>No Recent Alerts</h3>
+    <h3>No Recent Alerts</h3>
   <% end %>
 </div>
 
