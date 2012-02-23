@@ -39,6 +39,23 @@
     <div id='main_content' class="span9">
       <h2><%= heading %></h2>
       <div class="row">
+        <div class="span4 offset5">
+          <select data-placeholder="Select a Resource" style="width:350px;" class="chzn-select">
+            <option value=""></option>
+            <optgroup label="Deputy">
+              <% Deputy.find(:all, :order => "name asc").each do |deputy| %>
+                <option><%= deputy.name %></option>
+              <% end %>
+            <optgroup>
+            <optgroup label="Group">
+              <% Group.find(:all, :order => "name asc").each do |group| %>
+                <option><%= group.full_name %></option>
+              <% end %>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+      <div class="row">
         <div class='span9'>
           <%= yield %>
         </div>
@@ -47,4 +64,13 @@
   </div>
 </div>
 </body>
+
+<script type="text/javascript">
+  $(".chzn-select").chosen();
+  $(".chzn-select").chosen().change(function(e){
+    var option_el = $("option:selected", this);
+    var type = option_el.parent().attr('label');
+    console.log("going to " + type + " namens " + option_el.val());
+  });
+</script>
 </html>
