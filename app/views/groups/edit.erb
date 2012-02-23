@@ -5,7 +5,20 @@
 <% end %>
 
 <% hide_group = !@group.level1? %>
-<h3>Is running on following deputies: </h3>
+<% if @group.current_error_level != 0 %>
+  <%= form_for @group do |f| %>
+    <%= f.hidden_field :id %>
+    <%= f.hidden_field :current_error_level, {:value => 0} %>
+    <%= submit_tag 'reset error level', :class => 'btn btn-primary' %>
+    <a rel="popover"
+            title="Reset Error Level"
+            data-content='sometimes error level needs manual resetting'>
+          <i class='icon-question-sign'></i>
+    </a>
+  <% end %>
+
+<% end %>
+<h3>Is running on following Deputies: </h3>
 <%= form_for Report.new, :url => '/reports/batch_validate' do |f| %>
   <table class="sharp">
     <tr>

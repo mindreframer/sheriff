@@ -1,6 +1,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require bootstrap
 //= require ace
 //= require theme-solarized_light
 //= require mode-ruby

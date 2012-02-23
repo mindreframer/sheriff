@@ -37,6 +37,12 @@ module ApplicationHelper
     end.sort.join(' ').html_safe
   end
 
+  def human_validation_display(report)
+    report.validations.map do |v|
+      v.human_display
+    end.join(' <br/> ').html_safe
+  end
+
   def uppercase_letters(name)
     letters = name.split('').select{|c|c =~ /[A-Z]/}[0..-2].join('')
     "<span title='#{name}'>#{letters}</span>"
@@ -91,6 +97,22 @@ module ApplicationHelper
     form.fields_for many do |vf|
       index += 1
       yield vf, index
+    end
+  end
+
+  def help_for_validations(validation)
+    case validation.class.to_s
+    when 'ValueValidation' then
+      { :title => 'Check the value range/type',
+        :content => "Fill the values for positive outcome."}
+    when 'RunEveryValidation' then
+      { :title => 'Check how often it should run',
+        :content => "Choose the period, how often a report should come in. Check only_once-checkbox, if only one report is expected."}
+    when 'RunBetweenValidation' then
+      { :title => 'Check when (night/special hours) it should run',
+        :content => "If some reports are expected in special daily hours, set them here."}
+    else
+      raise validation.class
     end
   end
 

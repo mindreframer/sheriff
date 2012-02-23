@@ -1,5 +1,6 @@
 class RunEveryValidation < Validation
   include IntervalAccessors
+  include ActionView::Helpers::DateHelper
   belongs_to :report
 
   def check!
@@ -15,6 +16,10 @@ class RunEveryValidation < Validation
     else
       validation_passed!
     end
+  end
+
+  def human_display
+    "runs every #{distance_of_time_in_words(interval)} (#{human_error_level})"
   end
 
   def self.check_all!

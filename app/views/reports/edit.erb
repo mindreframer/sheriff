@@ -8,22 +8,34 @@ in group: <%= link_to_object @report.group %>
 
 
 <hr>
-<a class="btn btn-primary" data-toggle="modal" href="#validationForm" >Add Validation</a>
+<a class="btn btn-primary" data-toggle="modal" href="#validationForm" >Edit Validations</a>
 <br>
+<div class="well">
+  <%= human_validation_display(@report) %>
+</div>
 
 <div class="well">
-  <h3>Alerts</h3>
-  <div style="max-height:200px; overflow:auto">
-    <table class="sharp">
-      <% @report.alerts.each do |alert| %>
-        <tr <%= error_attribute alert %>>
-          <td><%= detailed_time alert.created_at %></td>
-          <td><%= alert.message %></td>
-          <td><%= button_to_delete alert, :text => 'x' %></td>
-        </tr>
-      <% end %>
-    </table>
-  </div>
+  <% if @report.alerts.size > 0 %>
+    <% alerts = @report.alerts %>
+    <h3>Alerts (<%= alerts.size %> in last <%= distance_of_time_in_words_to_now(alerts.last.created_at) %>)</h3>
+    <div style="max-height:200px; overflow:auto">
+      <table class="sharp">
+        <% alerts.each do |alert| %>
+          <tr <%= error_attribute alert %>>
+            <td><%= detailed_time alert.created_at %></td>
+            <td><%= alert.message %></td>
+            <td><%= button_to_delete alert, :text => 'x' %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+    <%= form_tag '/reports/clear_alerts' do %>
+      <%= hidden_field_tag :id, @report.id %>
+      <%= submit_tag 'Clear Alerts', :class => 'btn btn-primary' %>
+    <% end %>
+  <% else %>
+  <h3>No Recent Alerts</h3>
+  <% end %>
 </div>
 
 <div class="well">
@@ -48,15 +60,11 @@ in group: <%= link_to_object @report.group %>
 <div id='validationForm' class='modal fade well'>
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
-    <h3>Add Validation</h3>
+    <h3>Edit Validations</h3>
   </div>
   <%= form_for @report do |f| %>
     <%= render 'validation_form', :f => f %>
     <%= submit_tag 'Save', :class => 'btn btn-primary' %>
     <a href="#" class="btn" data-dismiss="modal">Close</a>
   <% end %>
- <!--  <div class="modal-footer">
-    <a href="#" class="btn btn-primary" data-dismiss="modal">Save changes</a>
-    <a href="#" class="btn" data-dismiss="modal">Close</a>
-  </div> -->
 </div>

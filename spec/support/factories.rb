@@ -38,6 +38,15 @@ Factory.define(:run_every_validation) do |f|
   f.interval 60*60
 end
 
+Factory.define(:alert) do |f|
+  f.error_level 1
+  f.message 'Value did not match 1 <-> 0'
+  f.validation_type 'Validation'
+  f.association :validation, :factory => :value_validation
+  f.association :report
+end
+
+
 Factory.define(:plugin) do |f|
   f.code "class Bla < Scout::Plugin;def build_report;puts 'fooo';end;end"
   f.name{ "useless plugin #{rand(111111111)}" }

@@ -115,4 +115,15 @@ describe ReportsController do
       reports.each(&:reload).map{|r| r.validations.map(&:interval) }.should == [[3.days], [3.days]]
     end
   end
+
+  describe '#clear_alerts' do
+    let(:alert){Factory(:alert)}
+
+    it "removes alerts for this report" do
+      report = alert.report
+      report.alerts.size.should > 0
+      post :clear_alerts, :id => report.id
+      report.reload.alerts.size.should == 0
+    end
+  end
 end

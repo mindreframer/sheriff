@@ -23,6 +23,12 @@ class ReportsController < RestController
     redirect_back_or_default '/reports'
   end
 
+  def clear_alerts
+    report = Report.find(params[:id])
+    report.alerts.delete_all
+    redirect_back_or_default '/reports'
+  end
+
   private
 
   def mark_inactive_validations_for_destroy

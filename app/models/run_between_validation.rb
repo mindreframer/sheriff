@@ -17,6 +17,10 @@ class RunBetweenValidation < Validation
     self.end_seconds = Time.parse(x).seconds_after_midnight
   end
 
+  def human_display
+    "runs between #{start_hms} and #{end_hms} (#{human_error_level})"
+  end
+
   def check!
     if report.reported_at.seconds_after_midnight.between?(start_seconds, end_seconds)
       validation_passed!
