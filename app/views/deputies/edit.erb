@@ -40,10 +40,10 @@
     <% if Plugin.any? %>
       <%= f.fields_for :deputy_plugins do |child| %>
         <%= child.hidden_field :deputy_id %>
-        Run <%= child.select :plugin_name, [nil] + Plugin.names %>
+        <%= child.select :plugin_name, [nil] + Plugin.names %>
         every
         <%= child.text_field :interval_value, :size => 5, :class => 'span1'  %>
-        <%= child.select :interval_unit, time_units_for_select(:without => 'Seconds'), {}, :class => 'span2' %>.
+        <%= child.select :interval_unit, time_units_for_select(:without => 'Seconds'), {}, :class => 'span2' %>
         <br />
       <% end %>
       <%= submit_tag 'Save', :class => 'btn btn-primary' %>
