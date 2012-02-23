@@ -35,8 +35,8 @@
   </table>
 
   <% @deputy.deputy_plugins.build %>
+  <h3>Plugins</h3>
   <div class="well">
-    <h3>Plugins</h3>
     <% if Plugin.any? %>
       <%= f.fields_for :deputy_plugins do |child| %>
         <%= child.hidden_field :deputy_id %>
