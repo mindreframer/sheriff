@@ -1,4 +1,5 @@
 //= require jquery
+//= require vendor/jquery-ujs
 //= require vendor/chosen.jquery.min
 //= require twitter/bootstrap
 //= require bootstrap
