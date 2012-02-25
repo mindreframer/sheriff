@@ -10,7 +10,7 @@ window.SheriffController = ($route, $xhr)->
 
   <% Sheriff::EXPOSED_MODELS.map{|x| x.pluralize.downcase}.each do |m| %>
   $route.when('/<%= m %>',
-      {template: '<%= asset_path("#{m}.html") %>', controller: <%= m.humanize %>Controller});
+      {template: '<%= asset_path("#{m}/index.html") %>', controller: <%= m.humanize %>Controller});
   <% end %>
 
   $route.otherwise({redirectTo: '/deputies'});
