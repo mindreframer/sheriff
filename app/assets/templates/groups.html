@@ -1,0 +1,21 @@
+<h1>Groups</h1>
+
+<a ng:href="#/groups?page={{page-1}}">Prev</a>
+<strong>{{page}}</strong>
+<a ng:href="#/groups?page={{page+1}}">Next</a>
+
+<table class='sharp'>
+  <tr>
+    <th>ID</th>
+    <th>Full Name</th>
+  </tr>
+  <tr ng:repeat="group in groups">
+    <td>{{group.group.id}}</td>
+    <td class='max_width_200'>{{group.group.full_name}}</td>
+  </tr>
+
+</table>
+
+<a ng:href="#/groups?page={{page-1}}">Prev</a>
+<strong>{{page}}</strong>
+<a ng:href="#/groups?page={{page+1}}">Next</a>

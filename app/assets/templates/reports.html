@@ -1,0 +1,22 @@
+<h1>Reports</h1>
+
+<a ng:href="#/reports?page={{page-1}}">Prev</a>
+<strong>{{page}}</strong>
+<a ng:href="#/reports?page={{page+1}}">Next</a>
+
+<table class='sharp'>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+  </tr>
+  <tr ng:repeat="report in reports">
+    <td>{{report.report.id}}</td>
+    <td class='max_width_200'>{{report.report.value}}</td>
+    <td class='max_width_200'>{{report.report.deputy_name}}</td>
+  </tr>
+
+</table>
+
+<a ng:href="#/reports?page={{page-1}}">Prev</a>
+<strong>{{page}}</strong>
+<a ng:href="#/reports?page={{page+1}}">Next</a>
