@@ -1,4 +1,4 @@
-window.SheriffController = ($route, $xhr)->
+Sheriff.SheriffController = ($route, $xhr)->
   $xhr.defaults.headers.post['Content-Type'] = 'application/json'
   $xhr.defaults.headers.put['Content-Type'] = 'application/json'
 
@@ -10,7 +10,9 @@ window.SheriffController = ($route, $xhr)->
 
   <% Sheriff::EXPOSED_MODELS.map{|x| x.pluralize.downcase}.each do |m| %>
   $route.when('/<%= m %>',
-      {template: '<%= asset_path("#{m}/index.html") %>', controller: <%= m.humanize %>Controller});
+      {template: '<%= asset_path("#{m}/index.html") %>', controller: Sheriff.<%= m.humanize %>Controller});
+  $route.when('/<%= m %>/show/:<%= m.singularize %>_id',
+      {template: '<%= asset_path("#{m}/show.html") %>', controller: Sheriff.<%= m.humanize %>Controller});
   <% end %>
 
   $route.otherwise({redirectTo: '/deputies'});
@@ -19,11 +21,11 @@ window.SheriffController = ($route, $xhr)->
   #   console.log($route.current.params);
   # );
 
-SheriffController.$inject = ['$route', '$xhr'];
+Sheriff.SheriffController.$inject = ['$route', '$xhr'];
 
 <% Sheriff::EXPOSED_MODELS.each do |model| %>
 <% models = model.pluralize %>
-<%= models.humanize %>Controller = ($location, <%= models.humanize %>)->
+Sheriff.<%= models.humanize %>Controller = ($location, <%= models.humanize %>)->
   self = @
   Sheriff.<%= models.downcase  %>Controller = self
   Sheriff.<%= models %> = <%= models %>
@@ -33,7 +35,9 @@ SheriffController.$inject = ['$route', '$xhr'];
     self.page = 1 if isNaN(self.page)
     @<%= models.downcase %> = <%= models %>.index(page: @page)
 
+
+
   self
-<%= models %>Controller.$inject = ['$location', '<%= models %>'];
+Sheriff.<%= models %>Controller.$inject = ['$location', '<%= models %>'];
 <% end %>
 
