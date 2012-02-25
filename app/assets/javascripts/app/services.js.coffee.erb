@@ -1,18 +1,13 @@
 # http://docs.angularjs.org/#!angular.service *
-angular.service('Alerts', ($resource)->
- $resource('alerts/:alert_id', {},
+
+<%# here only basic routes, extend, if needed! %>
+<% Sheriff::EXPOSED_MODELS.map{|x| x.pluralize.downcase}.each do |m| %>
+angular.service('<%= m.humanize %>', ($resource)->
+ $resource('<%= m %>/:<%= m.singularize %>_id', {},
                   { 'index': { method: 'GET', isArray: true, params:{page:1} }});
 );
+<% end %>
 
-angular.service('Deputies', ($resource)->
- $resource('deputies/:deputy_id', {},
-                  { 'index': { method: 'GET', isArray: true, params:{page:1} }});
-);
-
-angular.service('Groups', ($resource)->
- $resource('groups/:group_id', {},
-                  { 'index': { method: 'GET', isArray: true }});
-);
 
 angular.service('SelectedPhotos', ($resource)->
  $resource('selected_photos/:selected_photo_id', {},
