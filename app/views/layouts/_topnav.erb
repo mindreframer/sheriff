@@ -6,7 +6,8 @@
         <ul class="nav">
           <% %w(alerts groups reports deputies plugins summaries settings).each do |type| %>
             <% is_active = (type == params[:controller]) %>
-            <li class="<%= is_active ? 'active' : '' %>"><%= link_to type.pluralize.humanize, '/' + type.pluralize.downcase %></li>
+            <!-- <li class="<%= is_active ? 'active' : '' %>"><%= link_to type.pluralize.humanize, '/' + type.pluralize.downcase %></li> -->
+            <li><a href="#/<%= type.pluralize.downcase %>"><%= type.pluralize.humanize %></a></li>
           <% end %>
           <% if CFG[:resque] %>
             <% count = Resque.size(:jobs) %>

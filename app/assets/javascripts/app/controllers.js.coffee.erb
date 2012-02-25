@@ -12,8 +12,8 @@ window.SheriffController = ($route, $xhr)->
   $route.when('/alerts',
       {template: '<%= asset_path("alerts.html") %>', controller: AlertsController});
 
-  # $route.when('/deputies/:deputy_id',
-  #     {template: '<%= asset_path("deputies.html") %>', controller: DeputiesController});
+  $route.when('/deputies',
+      {template: '<%= asset_path("deputies.html") %>', controller: DeputiesController});
 
   # $route.when('/groups/:group_id',
   #     {template: '<%= asset_path("groups.html") %>', controller: GroupsController});
@@ -34,9 +34,10 @@ window.SheriffController = ($route, $xhr)->
 SheriffController.$inject = ['$route', '$xhr'];
 
 
-window.AlertsController = ($location, Alerts)->
+AlertsController = ($location, Alerts)->
   self = @
-  window.ac = self
+  Sheriff.alertsController = self
+  Sheriff.Alerts = Alerts
 
   if ($location.hash)
     self.page =  parseInt($location.hash.match(/page=\d*/)?[0]?.split('=')?[1])
@@ -44,6 +45,20 @@ window.AlertsController = ($location, Alerts)->
     @alerts = Alerts.index(page: @page)
 
   self
-
-
 AlertsController.$inject = ['$location', 'Alerts'];
+
+
+
+
+DeputiesController = ($location, Deputies)->
+  self = @
+  Sheriff.deputiesController = self
+  Sheriff.Deputies = Deputies
+
+  if ($location.hash)
+    self.page =  parseInt($location.hash.match(/page=\d*/)?[0]?.split('=')?[1])
+    self.page = 1 if isNaN(self.page)
+    @deputies = Deputies.index(page: @page)
+
+  self
+DeputiesController.$inject = ['$location', 'Deputies'];

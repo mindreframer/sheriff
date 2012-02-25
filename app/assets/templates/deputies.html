@@ -1,0 +1,23 @@
+<h1>Deputies</h1>
+
+<a ng:href="#/deputies?page={{page-1}}">Prev</a>
+<strong>{{page}}</strong>
+<a ng:href="#/deputies?page={{page+1}}">Next</a>
+
+<table class='sharp'>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Address</th>
+  </tr>
+  <tr ng:repeat="deputy in deputies">
+    <td>{{deputy.deputy.id}}</td>
+    <td class='max_width_200'>{{deputy.deputy.name}}</td>
+    <td class='max_width_200'>{{deputy.deputy.address}}</td>
+  </tr>
+
+</table>
+
+<a ng:href="#/deputies?page={{page-1}}">Prev</a>
+<strong>{{page}}</strong>
+<a ng:href="#/deputies?page={{page+1}}">Next</a>

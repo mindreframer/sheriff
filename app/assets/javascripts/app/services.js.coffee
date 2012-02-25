@@ -6,7 +6,7 @@ angular.service('Alerts', ($resource)->
 
 angular.service('Deputies', ($resource)->
  $resource('deputies/:deputy_id', {},
-                  { 'index': { method: 'GET', isArray: true }});
+                  { 'index': { method: 'GET', isArray: true, params:{page:1} }});
 );
 
 angular.service('Groups', ($resource)->
