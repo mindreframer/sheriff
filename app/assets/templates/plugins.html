@@ -1,0 +1,21 @@
+<h1>Plugins</h1>
+
+<a ng:href="#/plugins?page={{page-1}}">Prev</a>
+<strong>{{page}}</strong>
+<a ng:href="#/plugins?page={{page+1}}">Next</a>
+
+<table class='sharp'>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+  </tr>
+  <tr ng:repeat="plugin in plugins">
+    <td>{{plugin.plugin.id}}</td>
+    <td class='max_width_200'>{{plugin.plugin.name}}</td>
+  </tr>
+
+</table>
+
+<a ng:href="#/plugins?page={{page-1}}">Prev</a>
+<strong>{{page}}</strong>
+<a ng:href="#/plugins?page={{page+1}}">Next</a>
