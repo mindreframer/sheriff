@@ -1,2 +1,4 @@
+extends "deputies/show"
 collection @collection
-attributes :id, :name, :address, :human_name
+
+

@@ -1,2 +1,2 @@
+extends "groups/show"
 collection @collection
-attributes :id, :full_name

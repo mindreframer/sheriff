@@ -1,2 +1,2 @@
+extend "plugins/show"
 collection @collection
-attributes :id, :name
