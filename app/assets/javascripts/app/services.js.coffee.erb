@@ -8,6 +8,11 @@ angular.service('<%= m.humanize %>', ($resource)->
 );
 <% end %>
 
+angular.service('Settings', ($resource)->
+ $resource('settings', {},
+                  { 'index': { method: 'GET' }});
+);
+
 
 angular.service('SelectedPhotos', ($resource)->
  $resource('selected_photos/:selected_photo_id', {},

@@ -1,1 +1,1 @@
-Sheriff::EXPOSED_MODELS = ['Alert', 'Deputy', 'Group', 'Plugin', 'Report' ]
+Sheriff::EXPOSED_MODELS = ['Alert', 'Deputy', 'Group', 'Plugin', 'Report', 'Settings']
