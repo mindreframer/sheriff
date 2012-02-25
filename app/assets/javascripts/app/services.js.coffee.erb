@@ -4,20 +4,15 @@
 <% Sheriff::EXPOSED_MODELS.map{|x| x.pluralize.downcase}.each do |m| %>
 angular.service('<%= m.humanize %>', ($resource)->
  $resource('<%= m %>/:<%= m.singularize %>_id', {},
-                  { 'index': { method: 'GET', isArray: true, params:{page:1} }});
+                  { 'index': { method: 'GET', isArray: true, params:{page:1} }},
+                  'create': { method: 'POST' },
+                  'update': { method: 'PUT' },
+                  'destroy': { method: 'DELETE' }
+          );
 );
 <% end %>
 
 angular.service('Settings', ($resource)->
  $resource('settings', {},
                   { 'index': { method: 'GET' }});
-);
-
-
-angular.service('SelectedPhotos', ($resource)->
- $resource('selected_photos/:selected_photo_id', {},
-                      'create': { method: 'POST' },
-                      'index':  { method: 'GET', isArray: true },
-                      'update': { method: 'PUT' },
-                      'destroy': { method: 'DELETE' });
 );
