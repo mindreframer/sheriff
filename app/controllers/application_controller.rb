@@ -1,8 +1,22 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  layout 'group_sidebar'
+  #layout 'group_sidebar'
+  layout nil
   helper :all
   before_filter :authenticate if Rails.env == :production
+  before_filter :intercept_html_requests
+
+
+
+  private
+  def intercept_html_requests
+    render('layouts/dynamic') if request.format == Mime::HTML
+  end
+
+  def handle_unverified_request
+    reset_session
+    render "#{Rails.root}/public/500.html", :status => 500, :layout => nil
+  end
 
   def convert_interval(hash)
     return unless hash
