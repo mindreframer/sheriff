@@ -20,6 +20,7 @@ gem 'coffee-script', '2.2.0', :require => false
 
 gem "twitter-bootstrap-rails", :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'ace-rails-ap'
+gem 'rabl', :git => 'git://github.com/nesquena/rabl.git'
 
 group :development do
   gem 'capistrano', :require => false
