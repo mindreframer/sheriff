@@ -15,7 +15,7 @@
           <% end %>
         </ul>
         <form class="navbar-search pull-right" action="">
-          <% deputies = Deputy.all.map{|x| x.name}.sort  %>
+          <% deputies = []  %>
           <input id='q' type="text" class="search-query span2 typeahead" placeholder="Search"
             data-source='<%= deputies.to_json.html_safe %>'
             data-provide="typeahead" data-items="12"

@@ -1,5 +1,5 @@
 Sheriff::Application.routes.draw do
-  match '/', :to => redirect('/alerts')
+  match '/', :to => 'deputies#index'
 
   resources :alerts do
     collection do
