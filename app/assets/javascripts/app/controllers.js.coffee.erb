@@ -25,10 +25,10 @@ window.SheriffController = ($route, $xhr)->
   #     {template: '<%= asset_path("reports.html") %>', controller: ReportsController});
 
   $route.otherwise({redirectTo: '/alerts'});
-  $route.onChange(()->
-    $route.current.scope.params = $route.current.params;
-    console.log($route.current.params);
-  );
+  # $route.onChange(()->
+  #   $route.current.scope.params = $route.current.params;
+  #   console.log($route.current.params);
+  # );
 
 
 SheriffController.$inject = ['$route', '$xhr'];
@@ -36,21 +36,11 @@ SheriffController.$inject = ['$route', '$xhr'];
 
 window.AlertsController = ($location, Alerts)->
   self = @
-  self.alerts = Alerts.index()
-  self.page   = 1
   window.ac = self
 
   if ($location.hash)
     self.page =  parseInt($location.hash.match(/page=\d*/)?[0]?.split('=')?[1])
     self.page = 1 if isNaN(self.page)
-    console.log(self.page)
-
-  self.goNext = ()->
-    @page = @page + 1
-    @alerts = Alerts.index(page: @page)
-
-  self.goPrev = ()->
-    @page = @page - 1
     @alerts = Alerts.index(page: @page)
 
   self
