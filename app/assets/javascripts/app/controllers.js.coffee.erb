@@ -1,0 +1,29 @@
+window.SheriffController = ($route, $xhr)->
+  $xhr.defaults.headers.post['Content-Type'] = 'application/json'
+  $xhr.defaults.headers.put['Content-Type'] = 'application/json'
+
+  # assumes the presence of jQuery
+  token = $("meta[name='csrf-token']").attr("content")
+  $xhr.defaults.headers.post['X-CSRF-Token'] = token;
+  $xhr.defaults.headers.put['X-CSRF-Token'] = token;
+  $xhr.defaults.headers['delete']['X-CSRF-Token'] = token;
+
+
+  $route.when('/alerts',
+      {template: '<%= asset_path("alerts.html") %>', controller: AlertsController});
+
+  $route.when('/deputies/:deputy_id',
+      {template: '<%= asset_path("deputies.html") %>', controller: DeputiesController});
+
+  $route.when('/groups/:group_id',
+      {template: '<%= asset_path("groups.html") %>', controller: GroupsController});
+
+  $route.when('/plugins/:plugin_id',
+      {template: '<%= asset_path("plugins.html") %>', controller: PluginsController});
+
+  $route.when('/reports/:report_id',
+      {template: '<%= asset_path("reports.html") %>', controller: ReportsController});
+
+  $route.otherwise({redirectTo: '/'});
+
+SheriffController.$inject = ['$route', '$xhr'];
