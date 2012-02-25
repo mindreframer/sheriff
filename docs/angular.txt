@@ -1,0 +1,13 @@
+Screencasts:
+### with Rails 3.1
+- http://blog.centresource.com/2011/10/13/javascript-frameworks-for-well-architected-immersive-web-apps-part-ii/
+- http://vimeo.com/30329977
+
+
+
+Reasons:
+- http://zdam.posterous.com/angularjs-is-the-best-client-side-mvc-framewo
+
+Google+ search:
+- https://plus.google.com/u/0/s/AngularJS
+
