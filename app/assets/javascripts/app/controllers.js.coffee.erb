@@ -12,18 +12,39 @@ window.SheriffController = ($route, $xhr)->
   $route.when('/alerts',
       {template: '<%= asset_path("alerts.html") %>', controller: AlertsController});
 
-  $route.when('/deputies/:deputy_id',
-      {template: '<%= asset_path("deputies.html") %>', controller: DeputiesController});
+  # $route.when('/deputies/:deputy_id',
+  #     {template: '<%= asset_path("deputies.html") %>', controller: DeputiesController});
 
-  $route.when('/groups/:group_id',
-      {template: '<%= asset_path("groups.html") %>', controller: GroupsController});
+  # $route.when('/groups/:group_id',
+  #     {template: '<%= asset_path("groups.html") %>', controller: GroupsController});
 
-  $route.when('/plugins/:plugin_id',
-      {template: '<%= asset_path("plugins.html") %>', controller: PluginsController});
+  # $route.when('/plugins/:plugin_id',
+  #     {template: '<%= asset_path("plugins.html") %>', controller: PluginsController});
 
-  $route.when('/reports/:report_id',
-      {template: '<%= asset_path("reports.html") %>', controller: ReportsController});
+  # $route.when('/reports/:report_id',
+  #     {template: '<%= asset_path("reports.html") %>', controller: ReportsController});
 
-  $route.otherwise({redirectTo: '/'});
+  $route.otherwise({redirectTo: '/alerts'});
 
 SheriffController.$inject = ['$route', '$xhr'];
+
+
+window.AlertsController = (Alerts)->
+  self = @
+  self.name = 'Hello World';
+  self.alerts = Alerts.index()
+  self.page   = 1
+  window.ac = self
+
+  self.goNext = ()->
+    @page = @page + 1
+    @alerts = Alerts.index(page: @page)
+
+  self.goPrev = ()->
+    @page = @page - 1
+    @alerts = Alerts.index(page: @page)
+
+  self
+
+
+AlertsController.$inject = ['Alerts'];

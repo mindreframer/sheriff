@@ -1,20 +1,20 @@
 # http://docs.angularjs.org/#!angular.service *
-angular.module('Alerts', ($resource)->
+angular.service('Alerts', ($resource)->
  $resource('alerts/:alert_id', {},
-                  { 'index': { method: 'GET', isArray: true }});
+                  { 'index': { method: 'GET', isArray: true, params:{page:1} }});
 );
 
-angular.module('Deputies', ($resource)->
+angular.service('Deputies', ($resource)->
  $resource('deputies/:deputy_id', {},
                   { 'index': { method: 'GET', isArray: true }});
 );
 
-angular.module('Groups', ($resource)->
+angular.service('Groups', ($resource)->
  $resource('groups/:group_id', {},
                   { 'index': { method: 'GET', isArray: true }});
 );
 
-angular.module('SelectedPhotos', ($resource)->
+angular.service('SelectedPhotos', ($resource)->
  $resource('selected_photos/:selected_photo_id', {},
                       'create': { method: 'POST' },
                       'index':  { method: 'GET', isArray: true },

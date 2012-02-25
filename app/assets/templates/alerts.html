@@ -1,0 +1,10 @@
+<h1>Alerts of {{name}}</h1>
+
+<li ng:repeat="alert in alerts">
+  <span>{{alert.alert.id}}</span>
+  <span>{{alert.alert.message}}</span>
+</li>
+
+<a ng:click='goPrev()'>Prev</a>
+<strong>{{page}}</strong>
+<a ng:click='goNext()'>Next</a>
