@@ -12,6 +12,7 @@ angular.service('<%= m.humanize %>', ($resource)->
                   action: 'update',
                   isArray: false
                 },
+                <%# save ($save) is an important method for Resouces, changed from POST to PUT,  %>
                 'save': {
                   method:'PUT',
                   action: 'update',
