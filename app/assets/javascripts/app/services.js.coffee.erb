@@ -3,12 +3,25 @@
 <%# here only basic routes, extend, if needed! %>
 <% Sheriff::EXPOSED_MODELS.map{|x| x.pluralize.downcase}.each do |m| %>
 angular.service('<%= m.humanize %>', ($resource)->
- $resource('<%= m %>/:id', {},
-                  'index':  { method: 'GET', isArray: true, params:{page:1} },
-                  'show':   { method: 'GET', params:{id:1} },
-                  'create': { method: 'POST' },
-                  'update': { method: 'PUT' },
-                  'destroy':{ method: 'DELETE' }
+ $resource('<%= m %>/:id/:action', { id: '@<%= m.singularize %>.id', action: '@action'},
+                'index':  { method: 'GET', isArray: true, params:{page:1} },
+                'show':   { method: 'GET' },
+                'create': { method: 'POST' },
+                'update': {
+                  method: 'PUT'
+                  action: 'update',
+                  isArray: false
+                },
+                'save': {
+                  method:'PUT',
+                  action: 'update',
+                  isArray: false
+                },
+                'destroy': {
+                  method: 'DELETE',
+                  action: 'destroy',
+                  isArray: false
+                }
           );
 );
 <% end %>
