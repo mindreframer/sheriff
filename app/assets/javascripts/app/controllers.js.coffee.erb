@@ -17,23 +17,34 @@ Sheriff.controllers.SheriffController = ($route, $xhr)->
   <% end %>
 
   $route.otherwise({redirectTo: '/deputies'});
+  $route.parent(@);
 
 Sheriff.controllers.SheriffController.$inject = ['$route', '$xhr'];
 
 <% Sheriff::EXPOSED_MODELS.each do |model| %>
 <% models = model.pluralize %>
-Sheriff.controllers.<%= models.humanize %>Controller = ($location, models)->
+Sheriff.controllers.<%= models.humanize %>Controller = ($route, $location, redirect, models)->
   self = @
   Sheriff.<%= models.downcase  %>Controller = self
   Sheriff.models = models
+  self.route = $route
+  self.location = $location
+  self.currentObject = {}
+  console.log('INIT FOR <%= model %>Controller')
 
+  # console.log($route)
   if ($location.hash)
     self.page =  parseInt($location.hash.match(/page=\d*/)?[0]?.split('=')?[1])
     self.page = 1 if isNaN(self.page)
     @<%= models.downcase %> = models.<%= models %>.index(page: @page)
 
+  self.show = (object)->
+    self.currentObject = object;
+    redirect.redirectHash('/<%= models.downcase %>/show/', {id:object.id})
+
+
   self
 <%#=  %>
-Sheriff.controllers.<%= models %>Controller.$inject = ['$location', 'models'];
+Sheriff.controllers.<%= models %>Controller.$inject = ['$route', '$location', 'redirect', 'models'];
 <% end %>
 
