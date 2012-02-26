@@ -8,10 +8,12 @@
   <tr>
     <th>ID</th>
     <th>Message</th>
+    <th>Level</th>
   </tr>
   <tr ng:repeat="alert in alerts">
     <td>{{alert.alert.id}}</td>
     <td class='max_width_200'>{{alert.alert.message}}</td>
+    <td>{{alert.alert.error_level}}</td>
   </tr>
 
 </table>

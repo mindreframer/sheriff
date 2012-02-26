@@ -1,5 +1,9 @@
 <h1>Deputies</h1>
 
+Route: {{route.current.template}}<br>
+Location {{$location}}<br>
+
+
 <a ng:href="#/deputies?page={{page-1}}">Prev</a>
 <strong>{{page}}</strong>
 <a ng:href="#/deputies?page={{page+1}}">Next</a>
@@ -9,11 +13,13 @@
     <th>ID</th>
     <th>Name</th>
     <th>Address</th>
+    <th></th>
   </tr>
   <tr ng:repeat="deputy in deputies">
     <td>{{deputy.deputy.id}}</td>
     <td class='max_width_200'>{{deputy.deputy.name}}</td>
     <td class='max_width_200'>{{deputy.deputy.address}}</td>
+    <td><a href='' ng:click='show(deputy.deputy)'>Show</a></td>
   </tr>
 
 </table>
