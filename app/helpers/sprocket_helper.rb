@@ -16,7 +16,9 @@ module SprocketHelper
     base_path        = Rails.root.join("app/assets/templates")
     file_path        = base_path.join(template_path.to_s)
     possible_files   = ALL_PERMUTATIONS.map{|e| "#{file_path}.#{e.join('.')}"}
-    possible_files.reject!{|x| not File.exists?(x)}
+    # check existence
+    possible_files   = possible_files.reject{|x| not File.exists?(x)}
+    raise "no file found for template_path" if possible_files.size == 0
     content          = File.read(possible_files.first)
     template         = ERB.new(content)
     template.result(binding)
