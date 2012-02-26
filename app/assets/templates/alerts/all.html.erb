@@ -1,0 +1,7 @@
+<% models = 'alerts' %>
+<% actions = ['index', 'show', 'edit'] %>
+<% actions.each do |action| %>
+<div id='action-<%= action %>' ng:show="currentAction == '<%= action %>' ">
+  <ng:include src="'/assets/<%= models %>/<%= action %>.html'"></ng:include>
+</div>
+<% end %>
