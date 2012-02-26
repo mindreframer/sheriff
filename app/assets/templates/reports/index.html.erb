@@ -1,8 +1,7 @@
 <h1>Reports</h1>
 
-<a ng:href="#/reports?page={{page-1}}">Prev</a>
-<strong>{{page}}</strong>
-<a ng:href="#/reports?page={{page+1}}">Next</a>
+<%#= render :partial => 'shared/pagination' %>
+<%= hallo %>
 
 <table class='sharp'>
   <tr>
@@ -18,6 +17,7 @@
 
 </table>
 
-<a ng:href="#/reports?page={{page-1}}">Prev</a>
+<a ng:href="{{prevUrl()}}">Prev</a>
 <strong>{{page}}</strong>
-<a ng:href="#/reports?page={{page+1}}">Next</a>
+<a ng:href="{{nextUrl()}}">Next</a>
+
