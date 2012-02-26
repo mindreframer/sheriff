@@ -22,10 +22,12 @@ gem "twitter-bootstrap-rails", :git => 'git://github.com/seyhunak/twitter-bootst
 gem 'ace-rails-ap'
 gem 'rabl', :git => 'git://github.com/nesquena/rabl.git'
 
+# gem 'ruby-debug', '0.10.0' # only for debugging
 group :development do
   gem 'capistrano', :require => false
   gem 'capistrano-ext', :require => false
   gem 'shotgun', :require => false
+
 end
 
 group :test do
