@@ -1,2 +1,2 @@
-extend "plugins/show"
+extends "plugins/show"
 collection @collection
