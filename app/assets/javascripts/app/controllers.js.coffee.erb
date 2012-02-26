@@ -1,3 +1,7 @@
+###
+Main controller for Sheriff
+- controls routing + sets the headers for  $xhr for Rails
+###
 Sheriff.controllers.SheriffController = ($xhr, $route, $routeParams )->
   self = @
   Sheriff.sheriffController = self
@@ -10,14 +14,74 @@ Sheriff.controllers.SheriffController = ($xhr, $route, $routeParams )->
   $xhr.defaults.headers.put['X-CSRF-Token'] = token;
   $xhr.defaults.headers['delete']['X-CSRF-Token'] = token;
 
+  ## set the default routes for all Rails resources
   <% Sheriff::EXPOSED_MODELS.map{|x| x.pluralize.downcase}.each do |m| %>
   <% full_controller = "Sheriff.controllers.#{m.humanize}Controller" %>
   $route.when('/<%= m %>',
-      {template: '<%= asset_path("#{m}/index.html") %>', controller: <%= full_controller %> });
-  $route.when('/<%= m %>/show/:<%= m.singularize %>_id',
-      {template: '<%= asset_path("#{m}/show.html") %>', controller: <%= full_controller %> });
+      {template: '<%= asset_path("#{m}/all.html") %>', controller: <%= full_controller %> });
+  # $route.when('/<%= m %>/show/:<%= m.singularize %>_id',
+  #     {template: '<%= asset_path("#{m}/show.html") %>', controller: <%= full_controller %> });
   <% end %>
 
+  $route.otherwise({redirectTo: '/deputies'});
+  $route.parent(@);
+
+Sheriff.controllers.SheriffController.$inject = ['$xhr', '$route', '$routeParams'];
+
+
+<% Sheriff::EXPOSED_MODELS.each do |model| %>
+<% models = model.pluralize %>
+
+###
+Provides basic structure for RESTful interaction and workflow.
+If you want to extend the functionality of this generated code, use the prototype
+for this controller function.
+  e.g
+  Sherriff.controllers.<%= models.humanize %>Controller::say_hello = (name)->
+    console.log "Hello #{name}"
+
+and call then in your templates
+###
+Sheriff.controllers.<%= models.humanize %>Controller = ($route, $routeParams, $location, models)->
+  self = @
+  ## expose instances for better debugging in console
+  Sheriff.<%= models.downcase  %>Controller = self
+  Sheriff.models = models
+
+  # store the reference on self
+  self.$route       = $route
+  self.$location    = $location
+  self.$routeParams = $routeParams
+
+  # defaults for objects
+  self.currentAction = null
+  self.currentObject = null
+  self.<%= models.downcase %> = []
+
+  self.index = ()->
+    self.page = parseInt($routeParams.page)
+    self.page = 1 if isNaN(self.page)
+    self.currentAction = 'index'
+    self.<%= models.downcase %> = models.<%= models %>.index(page: self.page)
+
+  self.show = (object)->
+    currentId = parseInt($routeParams.id)
+    object ?= self.<%= models.downcase %>.filter( (e)->
+      e.<%= model.downcase %>.id == currentId
+    )[0]
+    object ?= models.<%= models %>.get(id: currentId)
+    console.log(object)
+    self.currentObject = object;
+    self.currentAction = 'show'
+
+  if ($location.hash)
+    switch $routeParams.action
+      when 'index' then self.index()
+      when 'show' then  self.show()
+      else self.index() # default
+
+
+  ## code for debugging, disable later...
   # self.$on( '$afterRouteChange', ()->
   #   console.log('afterRouteChange')
   #   console.log($routeParams)
@@ -28,54 +92,9 @@ Sheriff.controllers.SheriffController = ($xhr, $route, $routeParams )->
   #   console.log($routeParams)
   # )
 
-  # $route.onUrlChange ()->
-  #   self.params = $route.current.params
-
-  $route.otherwise({redirectTo: '/deputies'});
-  $route.parent(@);
-
-Sheriff.controllers.SheriffController.$inject = ['$xhr', '$route', '$routeParams'];
-
-<% Sheriff::EXPOSED_MODELS.each do |model| %>
-<% models = model.pluralize %>
-Sheriff.controllers.<%= models.humanize %>Controller = ($route, $routeParams, $location, models)->
-  self = @
-  Sheriff.<%= models.downcase  %>Controller = self
-  Sheriff.models = models
-  self.$route = $route
-  self.$location = $location
-  self.$routeParams = $routeParams
-
-  self.currentObject = {}
-  # console.log('INIT FOR <%= model %>Controller')
-
-  # console.log($route)
-  if ($location.hash)
-    # console.log($location.$$url)
-    self.page =  parseInt($location.$$url.match(/page=\d*/)?[0]?.split('=')?[1])
-    self.page = 1 if isNaN(self.page)
-    @<%= models.downcase %> = models.<%= models %>.index(page: @page)
-
-  self.$on( '$afterRouteChange', ()->
-    console.log('afterRouteChange')
-    console.log($routeParams)
-  )
-
-  self.$on('$beforeRouteChange', ()->
-    console.log("beforeRouteChange")
-    console.log($routeParams)
-  )
-
-  self.show = (object)->
-    self.currentObject = object;
-    self.location.path('/welcome')
-    self.route.reload()
-    # angular.service('$browser')(Sheriff.sheriffController).url("http://localhost:3000/#/deputies?page=5")
-    ## or use http://docs.angularjs.org/#!/api/angular.widget.ng:include !!!!!!
-
-
+  ## return self, needs to be last
   self
-<%#=  %>
+## initialize the controller with needed services
 Sheriff.controllers.<%= models %>Controller.$inject = ['$route', '$routeParams', '$location', 'models'];
 <% end %>
 
