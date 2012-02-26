@@ -1,8 +1,9 @@
 <h1>Deputies</h1>
 
+<pre>
 Route: {{$route.current.$route.template}}<br>
 Location {{$location.$$absUrl}}<br>
-
+</pre>
 
 <a ng:href="#/deputies?page={{page-1}}">Prev</a>
 <strong>{{page}}</strong>
@@ -19,7 +20,7 @@ Location {{$location.$$absUrl}}<br>
     <td>{{deputy.deputy.id}}</td>
     <td class='max_width_200'>{{deputy.deputy.name}}</td>
     <td class='max_width_200'>{{deputy.deputy.address}}</td>
-    <td><a ng:href='#/deputies?page=3' >Show</a></td>
+    <td><a ng:href='#/deputies?id={{deputy.deputy.id}}&action=show'>Show</a></td>
   </tr>
 
 </table>
@@ -28,4 +29,3 @@ Location {{$location.$$absUrl}}<br>
 <strong>{{page}}</strong>
 <a ng:href="#/deputies?page={{page+1}}">Next</a>
 
-<ng:include src="'/assets/deputies/show.html'"></ng:include>
