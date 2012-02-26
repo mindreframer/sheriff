@@ -18,15 +18,15 @@ Sheriff.controllers.SheriffController = ($xhr, $route, $routeParams )->
       {template: '<%= asset_path("#{m}/show.html") %>', controller: <%= full_controller %> });
   <% end %>
 
-  self.$on( '$afterRouteChange', ()->
-    console.log('afterRouteChange')
-    console.log($routeParams)
-  )
+  # self.$on( '$afterRouteChange', ()->
+  #   console.log('afterRouteChange')
+  #   console.log($routeParams)
+  # )
 
-  self.$on('$beforeRouteChange', ()->
-    console.log("beforeRouteChange")
-    console.log($routeParams)
-  )
+  # self.$on('$beforeRouteChange', ()->
+  #   console.log("beforeRouteChange")
+  #   console.log($routeParams)
+  # )
 
   # $route.onUrlChange ()->
   #   self.params = $route.current.params
@@ -49,13 +49,22 @@ Sheriff.controllers.<%= models.humanize %>Controller = ($route, $routeParams, $l
   self.currentObject = {}
   # console.log('INIT FOR <%= model %>Controller')
 
-  console.log($route)
+  # console.log($route)
   if ($location.hash)
     # console.log($location.$$url)
     self.page =  parseInt($location.$$url.match(/page=\d*/)?[0]?.split('=')?[1])
     self.page = 1 if isNaN(self.page)
     @<%= models.downcase %> = models.<%= models %>.index(page: @page)
 
+  self.$on( '$afterRouteChange', ()->
+    console.log('afterRouteChange')
+    console.log($routeParams)
+  )
+
+  self.$on('$beforeRouteChange', ()->
+    console.log("beforeRouteChange")
+    console.log($routeParams)
+  )
 
   self.show = (object)->
     self.currentObject = object;

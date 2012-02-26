@@ -3,10 +3,12 @@ Screencasts:
 - http://blog.centresource.com/2011/10/13/javascript-frameworks-for-well-architected-immersive-web-apps-part-ii/
 - http://vimeo.com/30329977
 
-
+Docs:
+- http://docs-next.angularjs.org/guide/dev_guide.overview
 
 Reasons:
 - http://zdam.posterous.com/angularjs-is-the-best-client-side-mvc-framewo
+
 
 Google+ search:
 - https://plus.google.com/u/0/s/AngularJS
