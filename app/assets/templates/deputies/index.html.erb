@@ -5,9 +5,7 @@ Route: {{$route.current.$route.template}}<br>
 Location {{$location.$$absUrl}}<br>
 </pre>
 
-<a ng:href="#/deputies?page={{page-1}}">Prev</a>
-<strong>{{page}}</strong>
-<a ng:href="#/deputies?page={{page+1}}">Next</a>
+<%= partial 'shared/pagination' %>
 
 <table class='sharp'>
   <tr>
@@ -25,7 +23,4 @@ Location {{$location.$$absUrl}}<br>
 
 </table>
 
-<a ng:href="#/deputies?page={{page-1}}">Prev</a>
-<strong>{{page}}</strong>
-<a ng:href="#/deputies?page={{page+1}}">Next</a>
-
+<%= partial 'shared/pagination' %>

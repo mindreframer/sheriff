@@ -1,0 +1,17 @@
+<h1>Plugins</h1>
+
+<%= partial 'shared/pagination' %>
+
+<table class='sharp'>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+  </tr>
+  <tr ng:repeat="plugin in plugins">
+    <td>{{plugin.plugin.id}}</td>
+    <td class='max_width_200'>{{plugin.plugin.name}}</td>
+  </tr>
+
+</table>
+
+<%= partial 'shared/pagination' %>
