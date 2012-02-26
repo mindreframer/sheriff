@@ -1,4 +1,5 @@
-<% models = 'deputies' %>
+<%# read models var from the request path %>
+<% models = self.logical_path.split('/').first %>
 <% actions = ['index', 'show', 'edit'] %>
 <% actions.each do |action| %>
 <div id='action-<%= action %>' ng:show="currentAction == '<%= action %>' ">
