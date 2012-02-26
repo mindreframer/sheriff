@@ -1,7 +1,7 @@
 # http://docs.angularjs.org/#!angular.service *
 
 <%# here only basic routes, extend, if needed! %>
-<% Sheriff::EXPOSED_MODELS.map{|x| x.pluralize.downcase}.each do |m| %>
+<% (Sheriff::EXPOSED_MODELS-['Settings']).map{|x| x.pluralize.downcase}.each do |m| %>
 angular.service('<%= m.humanize %>', ($resource)->
  $resource('<%= m %>/:id/:action', { id: '@<%= m.singularize %>.id', action: '@action'},
                 'index':  { method: 'GET', isArray: true, params:{page:1} },
