@@ -35,9 +35,9 @@ angular.service('Settings', ($resource)->
 # service for all models
 <% plural_models = Sheriff::EXPOSED_MODELS.map{|x| x.pluralize} %>
 angular.service('models', (<%= plural_models.join(',')  %>)->
-  res = {}
+  result = {}
   <% plural_models.each do |m| %>
-  res.<%= m %> = <%= m %>
+  result.<%= m %> = <%= m %>
   <% end %>
-  res
+  result
 )
