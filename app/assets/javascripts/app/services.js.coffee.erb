@@ -30,3 +30,13 @@ angular.service('Settings', ($resource)->
  $resource('settings', {},
                   { 'index': { method: 'GET' }});
 );
+
+# service for all models
+<% plural_models = Sheriff::EXPOSED_MODELS.map{|x| x.pluralize} %>
+angular.service('models', (<%= plural_models.join(',')  %>)->
+  res = {}
+  <% plural_models.each do |m| %>
+  res.<%= m %> = <%= m %>
+  <% end %>
+  res
+)
