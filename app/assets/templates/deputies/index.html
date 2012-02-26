@@ -1,7 +1,7 @@
 <h1>Deputies</h1>
 
-Route: {{route.current.$route.template}}<br>
-Location {{$location}}<br>
+Route: {{$route.current.$route.template}}<br>
+Location {{$location.$$absUrl}}<br>
 
 
 <a ng:href="#/deputies?page={{page-1}}">Prev</a>
@@ -19,7 +19,7 @@ Location {{$location}}<br>
     <td>{{deputy.deputy.id}}</td>
     <td class='max_width_200'>{{deputy.deputy.name}}</td>
     <td class='max_width_200'>{{deputy.deputy.address}}</td>
-    <td><a href='' ng:click='show(deputy.deputy)'>Show</a></td>
+    <td><a ng:href='#/deputies?page=3' >Show</a></td>
   </tr>
 
 </table>
