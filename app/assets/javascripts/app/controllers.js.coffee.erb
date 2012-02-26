@@ -80,6 +80,13 @@ Sheriff.controllers.<%= models.humanize %>Controller = ($route, $routeParams, $l
       when 'show' then  self.show()
       else self.index() # default
 
+  ## helper methods for view
+  self.prevUrl = ()->
+    "#/<%= models.downcase %>?page=#{self.page-1}"
+
+  self.nextUrl = ()->
+    "#/<%= models.downcase %>?page=#{self.page+1}"
+
 
   ## code for debugging, disable later...
   # self.$on( '$afterRouteChange', ()->
