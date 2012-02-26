@@ -1,4 +1,5 @@
-Sheriff.controllers.SheriffController = ($route, $xhr)->
+Sheriff.controllers.SheriffController = ($xhr, $route )->
+  self = @
   $xhr.defaults.headers.post['Content-Type'] = 'application/json'
   $xhr.defaults.headers.put['Content-Type'] = 'application/json'
 
@@ -16,35 +17,39 @@ Sheriff.controllers.SheriffController = ($route, $xhr)->
       {template: '<%= asset_path("#{m}/show.html") %>', controller: <%= full_controller %> });
   <% end %>
 
+  # $route.onChange ()->
+  #   self.params = $route.current.params
+
   $route.otherwise({redirectTo: '/deputies'});
   $route.parent(@);
 
-Sheriff.controllers.SheriffController.$inject = ['$route', '$xhr'];
+Sheriff.controllers.SheriffController.$inject = ['$xhr', '$route'];
 
 <% Sheriff::EXPOSED_MODELS.each do |model| %>
 <% models = model.pluralize %>
-Sheriff.controllers.<%= models.humanize %>Controller = ($route, $location, redirect, models)->
+Sheriff.controllers.<%= models.humanize %>Controller = ($route, $location, models)->
   self = @
   Sheriff.<%= models.downcase  %>Controller = self
   Sheriff.models = models
   self.route = $route
   self.location = $location
   self.currentObject = {}
-  console.log('INIT FOR <%= model %>Controller')
+  # console.log('INIT FOR <%= model %>Controller')
 
-  # console.log($route)
+  console.log($route)
   if ($location.hash)
-    self.page =  parseInt($location.hash.match(/page=\d*/)?[0]?.split('=')?[1])
+    console.log($location.$$url)
+    self.page =  parseInt($location.$$url.match(/page=\d*/)?[0]?.split('=')?[1])
     self.page = 1 if isNaN(self.page)
     @<%= models.downcase %> = models.<%= models %>.index(page: @page)
 
   self.show = (object)->
     self.currentObject = object;
-    redirect.redirectHash('/<%= models.downcase %>/show/', {id:object.id})
+    # redirect.redirectHash('/<%= models.downcase %>/show/', {id:object.id})
 
 
   self
 <%#=  %>
-Sheriff.controllers.<%= models %>Controller.$inject = ['$route', '$location', 'redirect', 'models'];
+Sheriff.controllers.<%= models %>Controller.$inject = ['$route', '$location', 'models'];
 <% end %>
 
