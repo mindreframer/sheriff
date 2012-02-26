@@ -7,7 +7,7 @@
   <%= csrf_meta_tag %>
 </head>
 
-<body ng:controller="Sheriff.SheriffController">
+<body ng:controller="Sheriff.controllers.SheriffController">
 
 <%= render 'layouts/topnav' %>
 
@@ -33,7 +33,7 @@
 </div>
 
 
-  <script src="/assets/vendor/angular/angular-0.9.19.min.js" ng:autobind></script>
+  <script src="/assets/vendor/angular/angular-0.9.19.js" ng:autobind></script>
   <%= javascript_include_tag "application" -%>
 </body>
 </html>

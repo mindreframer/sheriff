@@ -1,4 +1,4 @@
-Sheriff.SheriffController = ($route, $xhr)->
+Sheriff.controllers.SheriffController = ($route, $xhr)->
   $xhr.defaults.headers.post['Content-Type'] = 'application/json'
   $xhr.defaults.headers.put['Content-Type'] = 'application/json'
 
@@ -9,35 +9,31 @@ Sheriff.SheriffController = ($route, $xhr)->
   $xhr.defaults.headers['delete']['X-CSRF-Token'] = token;
 
   <% Sheriff::EXPOSED_MODELS.map{|x| x.pluralize.downcase}.each do |m| %>
+  <% full_controller = "Sheriff.controllers.#{m.humanize}Controller" %>
   $route.when('/<%= m %>',
-      {template: '<%= asset_path("#{m}/index.html") %>', controller: Sheriff.<%= m.humanize %>Controller});
+      {template: '<%= asset_path("#{m}/index.html") %>', controller: <%= full_controller %> });
   $route.when('/<%= m %>/show/:<%= m.singularize %>_id',
-      {template: '<%= asset_path("#{m}/show.html") %>', controller: Sheriff.<%= m.humanize %>Controller});
+      {template: '<%= asset_path("#{m}/show.html") %>', controller: <%= full_controller %> });
   <% end %>
 
   $route.otherwise({redirectTo: '/deputies'});
-  # $route.onChange(()->
-  #   $route.current.scope.params = $route.current.params;
-  #   console.log($route.current.params);
-  # );
 
-Sheriff.SheriffController.$inject = ['$route', '$xhr'];
+Sheriff.controllers.SheriffController.$inject = ['$route', '$xhr'];
 
 <% Sheriff::EXPOSED_MODELS.each do |model| %>
 <% models = model.pluralize %>
-Sheriff.<%= models.humanize %>Controller = ($location, <%= models.humanize %>)->
+Sheriff.controllers.<%= models.humanize %>Controller = ($location, models)->
   self = @
   Sheriff.<%= models.downcase  %>Controller = self
-  Sheriff.<%= models %> = <%= models %>
+  Sheriff.models = models
 
   if ($location.hash)
     self.page =  parseInt($location.hash.match(/page=\d*/)?[0]?.split('=')?[1])
     self.page = 1 if isNaN(self.page)
-    @<%= models.downcase %> = <%= models %>.index(page: @page)
-
-
+    @<%= models.downcase %> = models.<%= models %>.index(page: @page)
 
   self
-Sheriff.<%= models %>Controller.$inject = ['$location', '<%= models %>'];
+<%#=  %>
+Sheriff.controllers.<%= models %>Controller.$inject = ['$location', 'models'];
 <% end %>
 
