@@ -11,3 +11,5 @@ Reasons:
 Google+ search:
 - https://plus.google.com/u/0/s/AngularJS
 
+## Generate Routes for rails --> angular
+- https://github.com/xrd/Angrea (not working for 3.2)
