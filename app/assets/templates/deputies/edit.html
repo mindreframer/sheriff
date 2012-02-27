@@ -2,15 +2,21 @@
 <hr>
 <h2>Deputy:  {{currentObject.name}}</h2>
 
-<form class="well">
-  <label>address</label>
+<form class="well" ng:submit="update(currentObject)">
+  <label>Name</label>
+    <input ng:model='currentObject.name' type="text" class="span3" placeholder="Type something…" >
+    <span class="help-inline">(only normal chars)</span>
+
+
+  <label>IP</label>
     <input ng:model='currentObject.address' type="text" class="span3" placeholder="Type something…" >
     <span class="help-inline">Please use a valid IP</span>
+
 
   <label class="checkbox">
     <input type="checkbox"> Check me out
   </label>
-  <button type="submit" class="btn">Submit</button>
+  <button type="submit" class="btn" >Submit</button>
 </form>
 
  {{currentObject}}
