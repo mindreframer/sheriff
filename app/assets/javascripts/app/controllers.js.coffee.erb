@@ -83,10 +83,21 @@ Sheriff.controllers.<%= models.humanize %>Controller = ($xhr, $routeParams, $loc
     self.currentObject = object;
     self.currentAction = 'show'
 
+  self.edit = ()->
+    currentId = parseInt($routeParams.id)
+    object ?= self.<%= models.downcase %>.filter( (e)->
+      e.<%= model.downcase %>.id == currentId
+    )[0]
+    object ?= models.<%= models %>.get(id: currentId)
+    console.log(object)
+    self.currentObject = object;
+    self.currentAction = 'edit'
+
   if ($location.hash)
     switch $routeParams.action
       when 'index' then self.index()
       when 'show' then  self.show()
+      when 'edit' then  self.edit()
       else self.index() # default
 
   ## helper methods for view

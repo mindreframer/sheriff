@@ -10,7 +10,7 @@
     <th>Address</th>
   </tr>
   <tr ng:repeat="deputy in deputies().get()">
-    <td><a ng:href='#/deputies?id={{deputy.id}}&action=show'>Show</a></td>
+    <td><a ng:href='#/deputies?id={{deputy.id}}&action=edit' class='btn btn-mini'>Edit</a></td>
     <td>{{deputy.id}}</td>
     <td class='max_width_200'>{{deputy.name}}</td>
     <td class='max_width_200'>{{deputy.address}}</td>
