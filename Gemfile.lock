@@ -210,7 +210,7 @@ DEPENDENCIES
   coffee-script (= 2.2.0)
   factory_girl!
   hoptoad_notifier
-  inherited_resources
+  inherited_resources (= 1.3.0)
   jquery-rails
   json
   kaminari

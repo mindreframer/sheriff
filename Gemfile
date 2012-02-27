@@ -4,7 +4,7 @@ gem 'rails', '3.2.1'
 gem 'mysql2', '>=0.3'
 gem 'json'
 gem 'kaminari'
-gem 'inherited_resources'
+gem 'inherited_resources', '1.3.0'
 gem 'hoptoad_notifier', :require => false
 gem 'newrelic_rpm', '>=3', :require => false
 gem 'resque', :require => false
