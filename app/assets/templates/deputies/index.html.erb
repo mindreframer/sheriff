@@ -1,21 +1,28 @@
-<input type="search" results="0" placeholder="deputy search..." accesskey="s" autofocus="autofocus" name="" ng:model="search" />
+
+<input type="search" results="0" placeholder="deputy search..." accesskey="s" autofocus="autofocus" name="" ng:model="queryParam" />
 <div class='clearer'></div>
 <h1>Deputies</h1>
+
 
 <%= partial 'shared/pagination' %>
 
 <table class='sharp'>
   <tr>
-    <th></th>
     <th>ID</th>
     <th>Name</th>
     <th>Address</th>
+    <th>Act</th>
   </tr>
-  <tr ng:repeat="deputy in deputies().get()">
-    <td><a ng:href='#/deputies?id={{deputy.id}}&action=edit' class='btn btn-mini'>Edit</a></td>
+
+
+  <tr ng:repeat="deputy in deputies([{name:{like:queryParam} }]).get()">
     <td>{{deputy.id}}</td>
     <td class='max_width_200'>{{deputy.name}}</td>
     <td class='max_width_200'>{{deputy.address}}</td>
+    <td>
+      <a ng:href='#/deputies?id={{deputy.id}}&action=edit' class='btn btn-mini'>Edit</a> &nbsp;
+      <a ng:href='#/deputies?id={{deputy.id}}&action=edit' class='btn btn-mini btn-danger'>X</a>
+    </td>
   </tr>
 </table>
 
