@@ -105,10 +105,17 @@ Sheriff.controllers.<%= models.humanize %>Controller = ($xhr, $routeParams, $loc
 
   ## helper methods for view
   self.prevUrl = ()->
-    "#/<%= models.downcase %>?page=#{self.page-1}"
+    current      = angular.copy($routeParams)
+    current.page = self.page - 1
+    "#/<%= models.downcase %>?#{self.buildUrl(current)}"
 
   self.nextUrl = ()->
-    "#/<%= models.downcase %>?page=#{self.page+1}"
+    current      = angular.copy($routeParams)
+    current.page = self.page + 1
+    "#/<%= models.downcase %>?#{self.buildUrl(current)}"
+
+  self.buildUrl = (params)->
+    angular.toKeyValue(params)
 
   self.goBack = ()->
     window.history.back()
