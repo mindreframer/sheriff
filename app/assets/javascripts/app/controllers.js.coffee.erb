@@ -15,7 +15,7 @@ Sheriff.controllers.SheriffController = ($xhr, $route, $routeParams )->
   $xhr.defaults.headers['delete']['X-CSRF-Token'] = token;
 
   ## set the default routes for all Rails resources
-  <% Sheriff::EXPOSED_MODELS.map{|x| x.pluralize.downcase}.each do |m| %>
+  <% Sheriff::EXPOSED_MODELS.map{|x| x[:model].pluralize.downcase}.each do |m| %>
   <% full_controller = "Sheriff.controllers.#{m.humanize}Controller" %>
   $route.when('/<%= m %>',
       {template: '<%= asset_path("#{m}/all.html") %>', controller: <%= full_controller %> });
@@ -40,7 +40,8 @@ for this controller function.
 and call then in your templates
 ###
 
-<% Sheriff::EXPOSED_MODELS.each do |model| %>
+<% Sheriff::EXPOSED_MODELS.each do |model_config| %>
+  <% model  = model_config[:model]  %>
   <% models = model.pluralize %>
 Sheriff.controllers.<%= models.humanize %>Controller = ($xhr, $routeParams, $location, models)->
   self = @
