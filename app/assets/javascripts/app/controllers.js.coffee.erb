@@ -65,15 +65,15 @@ Sheriff.controllers.<%= models.humanize %>Controller = ($xhr, $routeParams, $loc
     self.page = 1 if isNaN(self.page)
     self.currentAction = 'index'
 
-    $xhr('GET', "/<%= models.downcase %>?page=#{self.page}&per_page=#{self.perPage}", (code, response)->
-      self.<%= models.downcase %> = TAFFY(response)
-    )
+    # $xhr('GET', "/<%= models.downcase %>?page=#{self.page}&per_page=#{self.perPage}", (code, response)->
+    #   self.<%= models.downcase %> = TAFFY(response)
+    # )
       #$("#loading").remove();
 
 
-    # models.<%= models %>.index({page: self.page}, (response)->
-    #   self.<%= models.downcase %> = TAFFY(response)
-    # )
+    models.<%= models %>.index({page: self.page}, (response)->
+      self.<%= models.downcase %> = TAFFY(response)
+    )
 
   self.show = (object)->
     currentId = parseInt($routeParams.id)
