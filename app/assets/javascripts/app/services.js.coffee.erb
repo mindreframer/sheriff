@@ -4,23 +4,20 @@
 <% generic_controllers = Sheriff::EXPOSED_MODELS.map{|x| x[:model]}-['Settings'] %>
 <% generic_controllers.map{|x| x.pluralize.downcase}.each do |m| %>
 angular.service('<%= m.humanize %>', ($resource)->
- $resource('<%= m %>/:id/:action', { id: '@<%= m.singularize %>.id', action: '@action'},
+ $resource('<%= m %>/:id/:action', { id: '@id', action: '@action'},
                 'index':  { method: 'GET', isArray: true, params:{page:1} },
                 'show':   { method: 'GET' },
                 'create': { method: 'POST' },
                 'update': {
                   method: 'PUT'
-                  action: 'update',
                   isArray: false
                 },
                 <%# save ($save) is an important method for Resouces, changed from POST to PUT,  %>
                 'save': {
                   method:'PUT',
-                  action: 'update',
                   isArray: false
                 },
                 'destroy': {
-                  method: 'DELETE',
                   action: 'destroy',
                   isArray: false
                 }
