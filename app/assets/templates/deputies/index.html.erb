@@ -14,11 +14,11 @@ Location {{$location.$$absUrl}}<br>
     <th>Address</th>
     <th></th>
   </tr>
-  <tr ng:repeat="deputy in deputies">
-    <td>{{deputy.deputy.id}}</td>
-    <td class='max_width_200'>{{deputy.deputy.name}}</td>
-    <td class='max_width_200'>{{deputy.deputy.address}}</td>
-    <td><a ng:href='#/deputies?id={{deputy.deputy.id}}&action=show'>Show</a></td>
+  <tr ng:repeat="deputy in deputies().get()">
+    <td>{{deputy.id}}</td>
+    <td class='max_width_200'>{{deputy.name}}</td>
+    <td class='max_width_200'>{{deputy.address}}</td>
+    <td><a ng:href='#/deputies?id={{deputy.id}}&action=show'>Show</a></td>
   </tr>
 
 </table>

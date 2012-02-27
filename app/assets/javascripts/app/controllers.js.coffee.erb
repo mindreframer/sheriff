@@ -42,14 +42,14 @@ for this controller function.
 
 and call then in your templates
 ###
-Sheriff.controllers.<%= models.humanize %>Controller = ($route, $routeParams, $location, models)->
+Sheriff.controllers.<%= models.humanize %>Controller = ($xhr, $routeParams, $location, models)->
   self = @
   ## expose instances for better debugging in console
   Sheriff.<%= models.downcase  %>Controller = self
   Sheriff.models = models
 
   # store the reference on self
-  self.$route       = $route
+  self.$xhr         = $xhr 
   self.$location    = $location
   self.$routeParams = $routeParams
 
@@ -62,7 +62,16 @@ Sheriff.controllers.<%= models.humanize %>Controller = ($route, $routeParams, $l
     self.page = parseInt($routeParams.page)
     self.page = 1 if isNaN(self.page)
     self.currentAction = 'index'
-    self.<%= models.downcase %> = models.<%= models %>.index(page: self.page)
+
+    $xhr('GET', "/<%= models.downcase %>?page=#{self.page}", (code, response)->
+      self.<%= models.downcase %> = TAFFY(response)
+    )
+      #$("#loading").remove();
+
+
+    # models.<%= models %>.index({page: self.page}, (response)->
+    #   self.<%= models.downcase %> = TAFFY(response)
+    # )
 
   self.show = (object)->
     currentId = parseInt($routeParams.id)
@@ -105,6 +114,6 @@ Sheriff.controllers.<%= models.humanize %>Controller = ($route, $routeParams, $l
   ## return self, needs to be last
   self
 ## initialize the controller with needed services
-Sheriff.controllers.<%= models %>Controller.$inject = ['$route', '$routeParams', '$location', 'models'];
+Sheriff.controllers.<%= models %>Controller.$inject = ['$xhr', '$routeParams', '$location', 'models'];
 <% end %>
 
