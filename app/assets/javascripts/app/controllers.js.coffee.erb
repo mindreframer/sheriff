@@ -87,7 +87,16 @@ Sheriff.controllers.<%= models.humanize %>Controller = ($xhr, $routeParams, $loc
     object ?= models.<%= models %>.get(id: currentId)
 
   self.update = (object)->
-    object.$save()
+    #debugger
+    object.$save({},
+      (e)->
+        console.log 'first'
+        console.log(e)
+      (e)->
+        console.log 'second'
+        console.log(e)
+
+    )
 
   if ($location.hash)
     switch $routeParams.action
