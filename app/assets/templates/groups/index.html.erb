@@ -7,9 +7,9 @@
     <th>ID</th>
     <th>Full Name</th>
   </tr>
-  <tr ng:repeat="group in groups">
-    <td>{{group.group.id}}</td>
-    <td class='max_width_200'>{{group.group.full_name}}</td>
+  <tr ng:repeat="group in groups().get()">
+    <td>{{group.id}}</td>
+    <td class='max_width_200'>{{group.full_name}}</td>
   </tr>
 
 </table>

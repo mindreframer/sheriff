@@ -7,9 +7,9 @@
     <th>ID</th>
     <th>Name</th>
   </tr>
-  <tr ng:repeat="plugin in plugins">
-    <td>{{plugin.plugin.id}}</td>
-    <td class='max_width_200'>{{plugin.plugin.name}}</td>
+  <tr ng:repeat="plugin in plugins().get()">
+    <td>{{plugin.id}}</td>
+    <td class='max_width_200'>{{plugin.name}}</td>
   </tr>
 
 </table>
