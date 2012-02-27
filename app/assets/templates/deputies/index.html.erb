@@ -1,26 +1,25 @@
 <h1>Deputies</h1>
 
-<pre>
-Route: {{$route.current.$route.template}}<br>
-Location {{$location.$$absUrl}}<br>
-</pre>
-
 <%= partial 'shared/pagination' %>
 
 <table class='sharp'>
   <tr>
+    <th></th>
     <th>ID</th>
     <th>Name</th>
     <th>Address</th>
-    <th></th>
   </tr>
   <tr ng:repeat="deputy in deputies().get()">
+    <td><a ng:href='#/deputies?id={{deputy.id}}&action=show'>Show</a></td>
     <td>{{deputy.id}}</td>
     <td class='max_width_200'>{{deputy.name}}</td>
     <td class='max_width_200'>{{deputy.address}}</td>
-    <td><a ng:href='#/deputies?id={{deputy.id}}&action=show'>Show</a></td>
   </tr>
-
 </table>
 
 <%= partial 'shared/pagination' %>
+
+<pre>
+Route: {{$route.current.$route.template}}<br>
+Location {{$location.$$absUrl}}<br>
+</pre>

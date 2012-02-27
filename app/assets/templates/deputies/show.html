@@ -1,12 +1,12 @@
-<h2>Deputy:  {{currentObject.name}}</h2>
-
-
 <a ng:click='goBack()' class='btn btn-primary'><< Back</a>
 <hr>
+<h2>Deputy:  {{currentObject.name}}</h2>
+
 <form class="well">
   <label>address</label>
-  <input type="text" class="span3" placeholder="Type something…" >
-  <span class="help-inline">Associated help text!</span>
+    <input ng:model='currentObject.address' type="text" class="span3" placeholder="Type something…" >
+    <span class="help-inline">Please use a valid IP</span>
+
   <label class="checkbox">
     <input type="checkbox"> Check me out
   </label>
