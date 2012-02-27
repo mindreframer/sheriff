@@ -61,6 +61,7 @@ Sheriff.controllers.<%= models.humanize %>Controller = ($xhr, $routeParams, $loc
   self.currentObject = null
   self.perPage       = <%= model_config[:per_page] %>
   self.<%= models.downcase %> = null
+  console.log("initializing <%= models %>Controller")
 
   self.index = ()->
     self.page = parseInt($routeParams.page)
@@ -73,7 +74,7 @@ Sheriff.controllers.<%= models.humanize %>Controller = ($xhr, $routeParams, $loc
       #$("#loading").remove();
 
 
-    models.<%= models %>.index({page: self.page}, (response)->
+    models.<%= models %>.index({page: self.page, per_page: self.perPage}, (response)->
       self.<%= models.downcase %> = TAFFY(response)
     )
 
@@ -89,9 +90,9 @@ Sheriff.controllers.<%= models.humanize %>Controller = ($xhr, $routeParams, $loc
 
   self.edit = ()->
     currentId = parseInt($routeParams.id)
-    object ?= self.<%= models.downcase %>.filter( (e)->
-      e.<%= model.downcase %>.id == currentId
-    )[0]
+    # object ?= self.<%= models.downcase %>.filter( (e)->
+    #   e.<%= model.downcase %>.id == currentId
+    # )[0]
     object ?= models.<%= models %>.get(id: currentId)
     console.log(object)
     self.currentObject = object;
