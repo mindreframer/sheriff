@@ -12154,7 +12154,8 @@ extend(angular, {
   'version': version,
   'isDate': isDate,
   'lowercase': lowercase,
-  'uppercase': uppercase
+  'uppercase': uppercase,
+  'toKeyValue': toKeyValue
 });
 
 //try to bind to jquery now so that one can write angular.element().read()

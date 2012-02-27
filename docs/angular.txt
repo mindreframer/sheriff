@@ -1,3 +1,7 @@
+Upgrading Angular:
+- 'toKeyValue': toKeyValue (made public) (12158)
+
+
 Screencasts:
 ### with Rails 3.1
 - http://blog.centresource.com/2011/10/13/javascript-frameworks-for-well-architected-immersive-web-apps-part-ii/
