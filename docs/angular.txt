@@ -20,7 +20,8 @@ Google+ search:
 ## Generate Routes for rails --> angular
 - https://github.com/xrd/Angrea (not working for 3.2)
 
-
+## angular with some UI js: (tooltips)
+- http://jsfiddle.net/vojtajina/z7a58/15/
 
 ## examples for angular modules with an app:
 - https://groups.google.com/group/angular/browse_thread/thread/93a8a36b1b6e9765/bac564d187c82e0d?lnk=raot
