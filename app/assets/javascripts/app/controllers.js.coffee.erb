@@ -47,6 +47,7 @@ Sheriff.controllers.<%= models.humanize %>Controller = ($xhr, $routeParams, $loc
   self = @
   ## expose instances for better debugging in console
   Sheriff.<%= models.downcase  %>Controller = self
+  # all resources for REST
   Sheriff.models = models
 
   # store the reference on self
@@ -59,7 +60,7 @@ Sheriff.controllers.<%= models.humanize %>Controller = ($xhr, $routeParams, $loc
   self.currentAction = null
   self.currentObject = null
   self.perPage       = <%= model_config[:per_page] %>
-  self.<%= models.downcase %> = []
+  self.<%= models.downcase %> = null
 
   self.index = ()->
     self.page = parseInt($routeParams.page)
