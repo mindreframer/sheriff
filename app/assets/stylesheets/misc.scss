@@ -30,6 +30,19 @@ $purple:                #7a43b6;
   margin-top: 10px;
 }
 
+input[type="search"] {
+  margin-top: 20px;
+  padding: 0px 0px 0px 12px;
+  font-family: 'Doppio One', sans-serif;
+  font-size:18px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  width: 48%;
+  height: 40px;
+  -webkit-border-radius: 0px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  float: left;
+}
 
 .error_level_0, .error_level_0 td{background: white;}
 .error_level_1, .error_level_1 td, #sidebar ul.navigation .error_level_1{background: lighten($yellow, 30%);}
