@@ -29,19 +29,19 @@ Sheriff.controllers.SheriffController = ($xhr, $route, $routeParams )->
 Sheriff.controllers.SheriffController.$inject = ['$xhr', '$route', '$routeParams'];
 
 
-<% Sheriff::EXPOSED_MODELS.each do |model| %>
-<% models = model.pluralize %>
-
 ###
 Provides basic structure for RESTful interaction and workflow.
 If you want to extend the functionality of this generated code, use the prototype
 for this controller function.
   e.g
-  Sherriff.controllers.<%= models.humanize %>Controller::say_hello = (name)->
+  Sherriff.controllers.AlertsController::say_hello = (name)->
     console.log "Hello #{name}"
 
 and call then in your templates
 ###
+
+<% Sheriff::EXPOSED_MODELS.each do |model| %>
+  <% models = model.pluralize %>
 Sheriff.controllers.<%= models.humanize %>Controller = ($xhr, $routeParams, $location, models)->
   self = @
   ## expose instances for better debugging in console
@@ -49,7 +49,7 @@ Sheriff.controllers.<%= models.humanize %>Controller = ($xhr, $routeParams, $loc
   Sheriff.models = models
 
   # store the reference on self
-  self.$xhr         = $xhr 
+  self.$xhr         = $xhr
   self.$location    = $location
   self.$routeParams = $routeParams
 
@@ -126,5 +126,6 @@ Sheriff.controllers.<%= models.humanize %>Controller = ($xhr, $routeParams, $loc
   self
 ## initialize the controller with needed services
 Sheriff.controllers.<%= models %>Controller.$inject = ['$xhr', '$routeParams', '$location', 'models'];
+
 <% end %>
 
