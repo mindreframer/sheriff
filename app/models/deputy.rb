@@ -12,6 +12,10 @@ class Deputy < ActiveRecord::Base
   UNKNOWN_HOST = 'unknown_host'
   UNKNOWN_ADDRESS = 'unknown_address'
 
+  def self.per_page
+    200
+  end
+
   def full_name
     "#{human_name.presence || name}"
   end
