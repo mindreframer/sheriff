@@ -13,7 +13,7 @@ class Deputy < ActiveRecord::Base
   UNKNOWN_ADDRESS = 'unknown_address'
 
   def self.per_page
-    200
+    20
   end
 
   def full_name
