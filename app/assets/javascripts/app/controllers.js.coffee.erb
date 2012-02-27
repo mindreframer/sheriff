@@ -87,6 +87,9 @@ Sheriff.controllers.<%= models.humanize %>Controller = ($route, $routeParams, $l
   self.nextUrl = ()->
     "#/<%= models.downcase %>?page=#{self.page+1}"
 
+  self.goBack = ()->
+    window.history.back()
+
 
   ## code for debugging, disable later...
   # self.$on( '$afterRouteChange', ()->
