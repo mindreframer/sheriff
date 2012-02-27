@@ -27,6 +27,9 @@ Google+ search:
 - https://groups.google.com/group/angular/browse_thread/thread/93a8a36b1b6e9765/bac564d187c82e0d?lnk=raot
 - http://jsfiddle.net/gh/get/jQuery/1.7.1/msgilligan/fiddles/tree/master/angular-hashdemo/
 
+Auth in angular:
+- http://www.espeo.pl/2012/02/26/authentication-in-angularjs-application
+
 Good examples:
 - https://github.com/angular/angular.js/wiki/Projects-using-AngularJS
 - http://movies.carlbarrdahl.se/ (pretty cool)
