@@ -2,7 +2,7 @@
 <hr>
 <h2>Alert</h2>
 
-<table class='sharp'>
+<!-- <table class='sharp'>
   <tr>
     <td>ID</td>
     <td>{{currentObject.id}}</td>
@@ -11,9 +11,21 @@
     <td>Created At</td>
     <td>{{currentObject.created_at}}</td>
   </tr>
-
-
 </table>
+ -->
+
+<form class="well" ng:submit="update(currentObject)">
+  <label>Message</label>
+    <input ng:model='currentObject.message' type="text" class="span3" placeholder="Type something…" >
+    <span class="help-inline">(only normal chars)</span>
+
+  <button class="btn" ng:click='goBack()' >Cancel</button>
+  <button type="submit" class="btn btn-primary" >Submit</button>
+</form>
+
+ {{currentObject}}
+
+
 
 alert <br>
 <pre>
