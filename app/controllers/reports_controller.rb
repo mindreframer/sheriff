@@ -1,4 +1,5 @@
 class ReportsController < RestController
+  #belongs_to :deputy
   before_filter :convert_validation_interval, :mark_inactive_validations_for_destroy, :only => [:update, :batch_validate]
 
   def create
@@ -50,6 +51,8 @@ class ReportsController < RestController
 
   def collection
     params[:order] ||= 'id desc'
-    @collection ||= Report.page(params[:page]).per(50).order(params[:order]).includes([{:group => :group}, :deputy, :validations])
+    scope = Report.page(params[:page]).per(50)
+    scope = scope.where(:deputy_id => params[:deputy_id]) if params[:deputy_id]
+    @collection ||= scope.order(params[:order]).includes([{:group => :group}, :deputy, :validations])
   end
 end
