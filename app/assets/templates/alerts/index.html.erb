@@ -5,15 +5,20 @@
 
 <table class='sharp'>
   <tr>
-    <th>ID</th>
-    <th>Message</th>
-    <th>Level</th>
+    <th>Deputy</th>
+    <th>Report</th>
     <th>Act</th>
   </tr>
   <tr ng:repeat="alert in alerts().get()">
-    <td>{{alert.id}}</td>
-    <td class='max_width_200'>{{alert.message}}</td>
-    <td>{{alert.error_level}}</td>
+    <td>
+      <span class="label label-info">
+        {{alert.deputy.name}}
+      </span>
+    </td>
+    <td class='max_width_200'>
+      <span class='label' ng:class="color_error(alert.error_level)">{{alert.report.group_full_name}}</span> <br>
+      {{alert.message}}
+    </td>
     <td>
       <a ng:href='{{editUrl(alert)}}' class='btn btn-mini'>Edit</a> &nbsp;
       <a ng:href='{{destroyUrl(alert)}}' class='btn btn-mini btn-danger'>X</a>
