@@ -102,10 +102,10 @@ and call then in your templates
 <%= controller %>::update = (object)->
     object.$save({},
       (e)->
-        console.log 'first'
+        console.log 'save was ok'
         console.log(e)
       (e)->
-        console.log 'second'
+        console.log 'an error accured while saving!'
         console.log(e)
     )
 ## helper methods for view
@@ -141,16 +141,13 @@ Sheriff.controllers.<%= models %>Controller.$inject = ['$xhr', '$routeParams', '
 <% end %>
 
 
-
 ## here custom extensions for controllers
 Sheriff.controllers.AlertsController::edit = ()->
   @currentObject = Sheriff.models.Alerts.get( id:@$routeParams.id )
   @report_id =    @currentObject.report_id
   @currentAction = 'edit'
-  console.log('custom edit!')
 
 Sheriff.controllers.DeputiesController::edit = ()->
+  console.log('custom edit for deputies!')
   @currentObject = Sheriff.models.Deputies.get( id:@$routeParams.id )
   @currentAction = 'edit'
-  console.log('custom edit for deputies!')
-
