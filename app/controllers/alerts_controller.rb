@@ -8,7 +8,8 @@ class AlertsController < RestController
 
   def collection
     @collection ||= begin
-      r = resource_class.page(params[:page]).per(20).
+      r = resource_class.page(params[:page]).
+        per(params[:per_page].presence || Alert.per_page).
         order(params[:order] || 'id desc').
         includes(:report => [{:group => :group}, :deputy])
       r = r.group(:report_id) if params[:unique]
