@@ -87,7 +87,6 @@ Sheriff.controllers.<%= models.humanize %>Controller = ($xhr, $routeParams, $loc
     object ?= models.<%= models %>.get(id: currentId)
 
   self.update = (object)->
-    #debugger
     object.$save({},
       (e)->
         console.log 'first'
@@ -95,7 +94,6 @@ Sheriff.controllers.<%= models.humanize %>Controller = ($xhr, $routeParams, $loc
       (e)->
         console.log 'second'
         console.log(e)
-
     )
 
   if ($location.hash)
@@ -107,14 +105,23 @@ Sheriff.controllers.<%= models.humanize %>Controller = ($xhr, $routeParams, $loc
 
   ## helper methods for view
   self.prevUrl = ()->
-    current      = angular.copy($routeParams)
-    current.page = self.page - 1
-    "#/<%= models.downcase %>?#{self.buildUrl(current)}"
+    params      = angular.copy($routeParams)
+    params.page = self.page - 1
+    self.completeUrl(params)
 
   self.nextUrl = ()->
-    current      = angular.copy($routeParams)
-    current.page = self.page + 1
-    "#/<%= models.downcase %>?#{self.buildUrl(current)}"
+    params      = angular.copy($routeParams)
+    params.page = self.page + 1
+    self.completeUrl(params)
+
+  self.editUrl = (object)->
+    self.completeUrl(id: object.id, action: 'edit')
+
+  self.destroyUrl = (object)->
+    self.completeUrl(id: object.id, action: 'destroy')
+
+  self.completeUrl= (params)->
+    "#/<%= models.downcase %>?#{self.buildUrl(params)}"
 
   self.buildUrl = (params)->
     angular.toKeyValue(params)
