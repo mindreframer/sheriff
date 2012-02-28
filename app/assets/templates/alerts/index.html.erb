@@ -8,11 +8,16 @@
     <th>ID</th>
     <th>Message</th>
     <th>Level</th>
+    <th>Act</th>
   </tr>
   <tr ng:repeat="alert in alerts().get()">
     <td>{{alert.id}}</td>
     <td class='max_width_200'>{{alert.message}}</td>
     <td>{{alert.error_level}}</td>
+    <td>
+      <a ng:href='{{editUrl(alert)}}' class='btn btn-mini'>Edit</a> &nbsp;
+      <a ng:href='{{destroyUrl(deputy)}}' class='btn btn-mini btn-danger'>X</a>
+    </td>
   </tr>
 </table>
 

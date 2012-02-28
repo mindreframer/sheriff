@@ -21,8 +21,8 @@
     <td class='max_width_200'>{{deputy.name}}</td>
     <td class='max_width_200'>{{deputy.address}}</td>
     <td>
-      <a ng:href='#/deputies?id={{deputy.id}}&action=edit' class='btn btn-mini'>Edit</a> &nbsp;
-      <a ng:href='#/deputies?id={{deputy.id}}&action=edit' class='btn btn-mini btn-danger'>X</a>
+      <a ng:href='{{editUrl(deputy)}}' class='btn btn-mini'>Edit</a> &nbsp;
+      <a ng:href='{{destroyUrl(deputy)}}' class='btn btn-mini btn-danger'>X</a>
     </td>
   </tr>
 </table>
