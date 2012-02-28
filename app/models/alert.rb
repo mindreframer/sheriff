@@ -4,11 +4,11 @@ class Alert < ActiveRecord::Base
   after_create :send_notification
   before_create :adjust_validation_type
 
-  protected
 
   def self.per_page
     30
   end
+  protected
 
   def adjust_validation_type
     self.validation_type = validation.class.to_s
