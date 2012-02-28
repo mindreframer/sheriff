@@ -6,6 +6,10 @@ class Alert < ActiveRecord::Base
 
   protected
 
+  def self.per_page
+    30
+  end
+
   def adjust_validation_type
     self.validation_type = validation.class.to_s
   end
