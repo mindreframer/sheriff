@@ -143,9 +143,17 @@ Sheriff.controllers.<%= models %>Controller.$inject = ['$xhr', '$routeParams', '
 
 ## here custom extensions for controllers
 Sheriff.controllers.AlertsController::edit = ()->
-  @currentObject = Sheriff.models.Alerts.get( id:@$routeParams.id )
-  @report_id     = @currentObject.report_id
+  Sheriff.models.Alerts.get( id:@$routeParams.id , (response)=>
+    console.log response
+    @currentObject = response
+    Sheriff.models.Reports.get( id: @currentObject.report_id, (response2)=>
+      console.log response2
+      @report = response2
+      @deputy = Sheriff.models.Deputies.get( id: @report.deputy_id)
+    )
+  )
   @currentAction = 'edit'
+
 
 Sheriff.controllers.DeputiesController::edit = ()->
   console.log('custom edit for deputies!')
