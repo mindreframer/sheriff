@@ -5,6 +5,7 @@
 #
 # This file contains settings for ActionController::ParamsWrapper which
 # is enabled by default.
+# http://edgeapi.rubyonrails.org/classes/ActionController/ParamsWrapper.html
 
 # Enable parameter wrapping for JSON. You can disable this by setting :format to an empty array.
 ActionController::Base.wrap_parameters :format => [:json]
