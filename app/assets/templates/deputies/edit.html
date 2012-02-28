@@ -11,13 +11,35 @@
   <label>IP</label>
     <input ng:model='currentObject.address' type="text" class="span3" placeholder="Type something…" >
     <span class="help-inline">Please use a valid IP</span>
-
-
-  <label class="checkbox">
-    <input type="checkbox"> Check me out
-  </label>
+  <br>
   <a class="btn" ng:click='goBack()' >Cancel</a>
   <button type="submit" class="btn btn-primary" >Submit</button>
 </form>
 
- {{currentObject}}
+<h3>Reports</h3>
+<table class="sharp">
+  <tr>
+    <th>Group</th>
+    <th>Value</th>
+    <th>Level</th>
+    <th>Act</th>
+  </tr>
+  <tr ng:repeat="report in reports().order('group_full_name').get()">
+    <td>{{report.group_full_name}}</td>
+    <td>{{report.value}}</td>
+    <td>{{report.current_error_level}}</td>
+    <td><a ng:click='goBack()' class='btn btn-mini'>Edit</a></td>
+  </tr>
+</table>
+
+<div ng:hide='true'>
+  <hr>
+  <h5>currentObject</h5>
+  <pre>
+  {{currentObject}}
+  </pre>
+  <h5>reports</h5>
+  <pre>
+  {{reports().get()}}
+  </pre>
+</div>
