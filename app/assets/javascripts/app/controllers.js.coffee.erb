@@ -142,15 +142,32 @@ Sheriff.controllers.<%= models %>Controller.$inject = ['$xhr', '$routeParams', '
 
 
 ## here custom extensions for controllers
+
+
+
+
+Sheriff.controllers.AlertsController::index = ()->
+    @page = parseInt(@$routeParams.page)
+    @page = 1 if isNaN(@page)
+    @currentAction = 'index'
+
+    ## load the inital json
+    Sheriff.models.Alerts.index({page: @page, per_page: @perPage}, (response)=>
+      @alerts = TAFFY(response)
+      console.log "TEST"
+    )
+
+
+
 Sheriff.controllers.AlertsController::edit = ()->
   Sheriff.models.Alerts.get( id:@$routeParams.id , (response)=>
     console.log response
     @currentObject = response
-    Sheriff.models.Reports.get( id: @currentObject.report_id, (response2)=>
-      console.log response2
-      @report = response2
-      @deputy = Sheriff.models.Deputies.get( id: @report.deputy_id)
-    )
+    # Sheriff.models.Reports.get( id: @currentObject.report_id, (response2)=>
+    #   console.log response2
+    #   @report = response2
+    #   @deputy = Sheriff.models.Deputies.get( id: @report.deputy_id)
+    # )
   )
   @currentAction = 'edit'
 
