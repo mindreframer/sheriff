@@ -79,6 +79,7 @@ and call then in your templates
   self
 
 <%= controller %>::index = ()->
+    @log "index"
     @page = parseInt(@$routeParams.page)
     @page = 1 if isNaN(@page)
     @currentAction = 'index'
@@ -89,14 +90,17 @@ and call then in your templates
     )
 
 <%= controller %>::show = (object)->
+    @log "show"
     @currentObject = @loadCurrentObject(object, @$routeParams);
     @currentAction = 'show'
 
 <%= controller %>::edit = ()->
+    @log "edit"
     @currentObject = @loadCurrentObject(null,   @$routeParams);
     @currentAction = 'edit'
 
 <%= controller %>::loadCurrentObject = (object, params)->
+    @log "loadCurrentObject"
     currentId = parseInt(@$routeParams.id)
     object ?= Sheriff.models.<%= models %>.get(id: currentId)
 
@@ -138,8 +142,8 @@ and call then in your templates
 <%= controller %>::goBack = ()->
     window.history.back()
 
-## for debugging
 
+## for debugging
 <%= controller %>::error = (msg)->
     @log(msg, 'error')
 
@@ -169,5 +173,24 @@ Sheriff.controllers.AlertsController::edit = ()->
   Sheriff.models.Alerts.get( id:@$routeParams.id , (response)=>
     @log response
     @currentObject = response
+  )
+  @currentAction = 'edit'
+
+
+Sheriff.controllers.AlertsController::color_error = (error_level)->
+  switch error_level
+    when 0, 1 then ''
+    when 2 then 'label-warning'
+    else 'label-important'
+
+
+
+Sheriff.controllers.DeputiesController::edit = ()->
+  Sheriff.models.Deputies.get( {id:@$routeParams.id} , (response)=>
+    @log response
+    @currentObject = response
+    Sheriff.models.Reports.index( deputy_id: @currentObject.id, (response2)=>
+      @reports = TAFFY(response2)
+    )
   )
   @currentAction = 'edit'
