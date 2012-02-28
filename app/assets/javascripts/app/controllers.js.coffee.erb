@@ -77,7 +77,6 @@ and call then in your templates
   self
 
 <%= controller %>::index = ()->
-    self = @
     @page = parseInt(@$routeParams.page)
     @page = 1 if isNaN(@page)
     @currentAction = 'index'
