@@ -44,7 +44,8 @@ and call then in your templates
 <% Sheriff::EXPOSED_MODELS.each do |model_config| %>
   <% model  = model_config[:model]  %>
   <% models = model.pluralize %>
-Sheriff.controllers.<%= models.humanize %>Controller = ($xhr, $routeParams, $location, models)->
+  <% controller = "Sheriff.controllers.#{models.humanize}Controller" %>
+<%= controller %>= ($xhr, $routeParams, $location, models)->
   self = @
   ## expose instances for better debugging in console
   Sheriff.<%= models.downcase  %>Controller = self
@@ -61,40 +62,9 @@ Sheriff.controllers.<%= models.humanize %>Controller = ($xhr, $routeParams, $loc
   self.currentAction = null
   self.currentObject = null
   self.perPage       = <%= model_config[:per_page] %>
-  self.<%= models.downcase %> = null
+  @<%= models.downcase %> = null
   console.log("initializing <%= models %>Controller")
 
-  self.index = ()->
-    self.page = parseInt($routeParams.page)
-    self.page = 1 if isNaN(self.page)
-    self.currentAction = 'index'
-
-    ## load the inital json
-    models.<%= models %>.index({page: self.page, per_page: self.perPage}, (response)->
-      self.<%= models.downcase %> = TAFFY(response)
-    )
-
-  self.show = (object)->
-    self.currentObject = self.loadCurrentObject(object, self.$routeParams);
-    self.currentAction = 'show'
-
-  self.edit = ()->
-    self.currentObject = self.loadCurrentObject(null, self.$routeParams);
-    self.currentAction = 'edit'
-
-  self.loadCurrentObject = (object, params)->
-    currentId = parseInt($routeParams.id)
-    object ?= models.<%= models %>.get(id: currentId)
-
-  self.update = (object)->
-    object.$save({},
-      (e)->
-        console.log 'first'
-        console.log(e)
-      (e)->
-        console.log 'second'
-        console.log(e)
-    )
 
   if ($location.hash)
     switch $routeParams.action
@@ -103,37 +73,84 @@ Sheriff.controllers.<%= models.humanize %>Controller = ($xhr, $routeParams, $loc
       when 'edit' then  self.edit()
       else self.index() # default
 
-  ## helper methods for view
-  self.prevUrl = ()->
-    params      = angular.copy($routeParams)
-    params.page = self.page - 1
-    self.completeUrl(params)
-
-  self.nextUrl = ()->
-    params      = angular.copy($routeParams)
-    params.page = self.page + 1
-    self.completeUrl(params)
-
-  self.editUrl = (object)->
-    self.completeUrl(id: object.id, action: 'edit')
-
-  self.destroyUrl = (object)->
-    self.completeUrl(id: object.id, action: 'destroy')
-
-  self.completeUrl= (params)->
-    "#/<%= models.downcase %>?#{self.buildUrl(params)}"
-
-  self.buildUrl = (params)->
-    angular.toKeyValue(params)
-
-  self.goBack = ()->
-    window.history.back()
-
-
   ## return self, needs to be last
   self
+
+<%= controller %>::index = ()->
+    self = @
+    @page = parseInt(@$routeParams.page)
+    @page = 1 if isNaN(@page)
+    @currentAction = 'index'
+
+    ## load the inital json
+    Sheriff.models.<%= models %>.index({page: @page, per_page: @perPage}, (response)=>
+      @<%= models.downcase %> = TAFFY(response)
+    )
+
+<%= controller %>::show = (object)->
+    @currentObject = @loadCurrentObject(object, @$routeParams);
+    @currentAction = 'show'
+
+<%= controller %>::edit = ()->
+    @currentObject = @loadCurrentObject(null,   @$routeParams);
+    @currentAction = 'edit'
+
+<%= controller %>::loadCurrentObject = (object, params)->
+    currentId = parseInt(@$routeParams.id)
+    object ?= Sheriff.models.<%= models %>.get(id: currentId)
+
+<%= controller %>::update = (object)->
+    object.$save({},
+      (e)->
+        console.log 'first'
+        console.log(e)
+      (e)->
+        console.log 'second'
+        console.log(e)
+    )
+## helper methods for view
+
+<%= controller %>::completeUrl= (params)->
+    "#/<%= models.downcase %>?#{@buildUrl(params)}"
+
+<%= controller %>::buildUrl = (params)->
+    angular.toKeyValue(params)
+
+<%= controller %>::prevUrl = ()->
+    params      = angular.copy(@$routeParams)
+    params.page = @page - 1
+    @completeUrl(params)
+
+<%= controller %>::nextUrl = ()->
+    params      = angular.copy(@$routeParams)
+    params.page = @page + 1
+    @completeUrl(params)
+
+<%= controller %>::editUrl = (object)->
+    @completeUrl(id: object.id, action: 'edit')
+
+<%= controller %>::destroyUrl = (object)->
+    @completeUrl(id: object.id, action: 'destroy')
+
+<%= controller %>::goBack = ()->
+    window.history.back()
+
 ## initialize the controller with needed services
 Sheriff.controllers.<%= models %>Controller.$inject = ['$xhr', '$routeParams', '$location', 'models'];
 
 <% end %>
+
+
+
+## here custom extensions for controllers
+Sheriff.controllers.AlertsController::edit = ()->
+  @currentObject = Sheriff.models.Alerts.get( id:@$routeParams.id )
+  @report_id =    @currentObject.report_id
+  @currentAction = 'edit'
+  console.log('custom edit!')
+
+Sheriff.controllers.DeputiesController::edit = ()->
+  @currentObject = Sheriff.models.Deputies.get( id:@$routeParams.id )
+  @currentAction = 'edit'
+  console.log('custom edit for deputies!')
 
