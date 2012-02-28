@@ -1,5 +1,5 @@
 Upgrading Angular:
-- 'toKeyValue': toKeyValue (made public) (12158)
+- 'toKeyValue': toKeyValue (made public) (line: 12158)
 
 
 Screencasts:
@@ -26,6 +26,9 @@ Google+ search:
 ## examples for angular modules with an app:
 - https://groups.google.com/group/angular/browse_thread/thread/93a8a36b1b6e9765/bac564d187c82e0d?lnk=raot
 - http://jsfiddle.net/gh/get/jQuery/1.7.1/msgilligan/fiddles/tree/master/angular-hashdemo/
+
+## Discussion (Angular with Rails 3.1 and coffeescript)
+- https://groups.google.com/forum/#!topic/angular/w7rvRjDow54
 
 Auth in angular:
 - http://www.espeo.pl/2012/02/26/authentication-in-angularjs-application

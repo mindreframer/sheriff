@@ -100,15 +100,16 @@ and call then in your templates
 
 <%= controller %>::update = (object)->
     object.$save({},
-      (e)->
+      (e)=>
         console.log 'save was ok'
         console.log(e)
-      (e)->
+        #@goBack()
+      (e)=>
         console.log 'an error accured while saving!'
         console.log(e)
     )
-## helper methods for view
 
+## helper methods for view
 <%= controller %>::completeUrl= (params)->
     "#/<%= models.downcase %>?#{@buildUrl(params)}"
 
@@ -143,7 +144,7 @@ Sheriff.controllers.<%= models %>Controller.$inject = ['$xhr', '$routeParams', '
 ## here custom extensions for controllers
 Sheriff.controllers.AlertsController::edit = ()->
   @currentObject = Sheriff.models.Alerts.get( id:@$routeParams.id )
-  @report_id =    @currentObject.report_id
+  @report_id     = @currentObject.report_id
   @currentAction = 'edit'
 
 Sheriff.controllers.DeputiesController::edit = ()->
