@@ -101,15 +101,15 @@ and call then in your templates
     object ?= Sheriff.models.<%= models %>.get(id: currentId)
 
 <%= controller %>::update = (object)->
-    @log "UPDATING <%= model %>:#{object.id}"
+    @log "updating <%= model %>:#{object.id}"
     object.$save({},
       (e)=>
-        @log 'save was ok'
+        @log "saved <%= model %>:#{object.id}"
         @log(e)
         @goBack()
       (e)=>
-        @log 'an error accured while saving!'
-        @log(e)
+        @error "Errors saving <%= model %>:#{object.id}"
+        @log(arguments)
     )
 
 ## helper methods for view
@@ -138,14 +138,21 @@ and call then in your templates
 <%= controller %>::goBack = ()->
     window.history.back()
 
+## for debugging
 
-<%= controller %>::log = (msg)->
+<%= controller %>::error = (msg)->
+    @log(msg, 'error')
+
+<%= controller %>::warn = (msg)->
+    @log(msg, 'warn')
+
+<%= controller %>::log = (msg, method='log')->
     return unless Sheriff.enableLogging
     if angular.isString(msg)
-      console.log "#{@__name}: #{msg}"
+      console[method] "#{@__name}: #{msg}"
     else
-      console.log "#{@__name}: *********** "
-      console.log msg
+      console[method] "#{@__name}: *********** "
+      console[method] msg
 
 ## initialize the controller with needed services
 Sheriff.controllers.<%= models %>Controller.$inject = ['$xhr', '$routeParams', '$location', 'models'];
