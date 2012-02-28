@@ -57,13 +57,15 @@ and call then in your templates
   self.$location    = $location
   self.$routeParams = $routeParams
   self.queryParam   = ""
+  # for debugging
+  self.__name       = '<%= "#{models.humanize}Controller" %>'
 
   # defaults for objects
   self.currentAction = null
   self.currentObject = null
   self.perPage       = <%= model_config[:per_page] %>
   @<%= models.downcase %> = null
-  console.log("initializing <%= models %>Controller")
+  @log("initializing...")
 
 
   if ($location.hash)
@@ -99,14 +101,15 @@ and call then in your templates
     object ?= Sheriff.models.<%= models %>.get(id: currentId)
 
 <%= controller %>::update = (object)->
+    @log "UPDATING <%= model %>:#{object.id}"
     object.$save({},
       (e)=>
-        console.log 'save was ok'
-        console.log(e)
-        #@goBack()
+        @log 'save was ok'
+        @log(e)
+        @goBack()
       (e)=>
-        console.log 'an error accured while saving!'
-        console.log(e)
+        @log 'an error accured while saving!'
+        @log(e)
     )
 
 ## helper methods for view
@@ -135,6 +138,15 @@ and call then in your templates
 <%= controller %>::goBack = ()->
     window.history.back()
 
+
+<%= controller %>::log = (msg)->
+    return unless Sheriff.enableLogging
+    if angular.isString(msg)
+      console.log "#{@__name}: #{msg}"
+    else
+      console.log "#{@__name}: *********** "
+      console.log msg
+
 ## initialize the controller with needed services
 Sheriff.controllers.<%= models %>Controller.$inject = ['$xhr', '$routeParams', '$location', 'models'];
 
@@ -142,37 +154,13 @@ Sheriff.controllers.<%= models %>Controller.$inject = ['$xhr', '$routeParams', '
 
 
 ## here custom extensions for controllers
-
-
-
-
-Sheriff.controllers.AlertsController::index = ()->
-    @page = parseInt(@$routeParams.page)
-    @page = 1 if isNaN(@page)
-    @currentAction = 'index'
-
-    ## load the inital json
-    Sheriff.models.Alerts.index({page: @page, per_page: @perPage}, (response)=>
-      @alerts = TAFFY(response)
-      console.log "TEST"
-    )
-
-
+# Sheriff.controllers.DeputiesController::update = (object)->
+#   console.log "KINDA updating #{object.id}"
+#   @goBack()
 
 Sheriff.controllers.AlertsController::edit = ()->
   Sheriff.models.Alerts.get( id:@$routeParams.id , (response)=>
-    console.log response
+    @log response
     @currentObject = response
-    # Sheriff.models.Reports.get( id: @currentObject.report_id, (response2)=>
-    #   console.log response2
-    #   @report = response2
-    #   @deputy = Sheriff.models.Deputies.get( id: @report.deputy_id)
-    # )
   )
-  @currentAction = 'edit'
-
-
-Sheriff.controllers.DeputiesController::edit = ()->
-  console.log('custom edit for deputies!')
-  @currentObject = Sheriff.models.Deputies.get( id:@$routeParams.id )
   @currentAction = 'edit'
