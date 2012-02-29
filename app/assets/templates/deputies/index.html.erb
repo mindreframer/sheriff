@@ -1,11 +1,7 @@
-
 <input type="search" results="0" placeholder="deputy search..." accesskey="s" autofocus="autofocus" name="" ng:model="queryParam" />
 <div class='clearer'></div>
 
-<div class="row">
-  <div class="span7"><h2>Deputies</h2></div>
-  <div class="span2"><%= partial 'shared/pagination' %></div>
-</div>
+<%= partial 'shared/header_pagination' %>
 
 <table class='sharp'>
   <tr>
@@ -27,9 +23,7 @@
   </tr>
 </table>
 
-<div class="row" style='margin-top:-12px;'>
-  <div class="offset7 span2"><%= partial 'shared/pagination' %></div>
-</div>
+<%= partial 'shared/footer_pagination' %>
 
 <pre>
 Route: {{$route.current.$route.template}}<br>
