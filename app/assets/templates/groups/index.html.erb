@@ -2,16 +2,17 @@
 
 <table class='sharp'>
   <tr>
-    <th>ID</th>
-    <th>Full Name</th>
+    <th>Group</th>
+    <th>Sub-Groups</th>
   </tr>
   <tr ng:repeat="group in groups().get()">
-    <td>{{group.id}}</td>
-    <td>{{group.full_name}}</td>
+    <td style='width:100px'>{{group.name}}</td>
     <td>
-      <div class='label' ng:repeat='child in group.groups' style='margin: 5px'>
-        <a href="">{{child.name}}</a>
-      </div>
+      <ul>
+        <li ng:repeat='child in group.groups' style='margin-left: -20px; padding:2 0px; list-style-type:none;'>
+          <a href="" class='' >{{child.name}}</a>
+        </li>
+      </ul>
     </td>
   </tr>
 
