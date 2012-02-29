@@ -13,4 +13,9 @@ class GroupsController < RestController
   def add_conditions
     params[:conditions] = params[:only_errors] ? "current_error_level > 0" : nil
   end
+
+  def collection
+    @collection ||= resource_class.level1.page(params[:page]).per(params[:per_page].presence || 10).
+    includes(:children)
+  end
 end
