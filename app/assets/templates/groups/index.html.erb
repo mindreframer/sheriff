@@ -10,7 +10,12 @@
   </tr>
   <tr ng:repeat="group in groups().get()">
     <td>{{group.id}}</td>
-    <td class='max_width_200'>{{group.full_name}}</td>
+    <td>{{group.full_name}}</td>
+    <td>
+      <div class='label' ng:repeat='child in group.groups' style='margin: 5px'>
+        <a href="">{{child.name}}</a>
+      </div>
+    </td>
   </tr>
 
 </table>
