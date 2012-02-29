@@ -1,8 +1,8 @@
 object @resource
 
-common_attributes = [:id, :full_name]
+common_attributes = ['id', 'name', 'current_error_level']
 
 attributes *common_attributes
-child :children do
-  attributes *common_attributes
+node :groups do |m|
+  m.children.map{|c| c.attributes.slice(*common_attributes) }
 end
