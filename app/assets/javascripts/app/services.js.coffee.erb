@@ -41,20 +41,24 @@ angular.service('models', (<%= plural_models.join(',')  %>)->
 )
 
 
-anglular.service('routes', ()=>
-
+angular.service('routes',  ()->
+  self = @
   <% plural_models.each do |m| %>
-  @<%= m.downcase %>CompleteUrl = (params)->
+  self.<%= m.downcase %>CompleteUrl = (params)->
     "#/<%= m.downcase %>?#{angular.toKeyValue(params)}"
 
-  @<%= m.downcase %>IndexUrl = ()=>
-    @<%= m.downcase %>CompleteUrl()
-  @<%= m.downcase %>EditUrl = (object)=>
-    @<%= m.downcase %>CompleteUrl(id: object.id, action: 'edit')
+  self.<%= m.downcase %>IndexUrl = ()->
+    self.<%= m.downcase %>CompleteUrl()
 
-  @<%= m.downcase %>ShowUrl = (object)=>
+  self.<%= m.downcase %>EditUrl = (object)->
+    self.<%= m.downcase %>CompleteUrl(id: object.id, action: 'edit')
+
+  self.<%= m.downcase %>ShowUrl = (object)->
     @<%= m.downcase %>CompleteUrl(id: object.id, action: 'show')
 
+  self.<%= m.downcase %>DestroyUrl = (object)->
+    self.<%= m.downcase %>CompleteUrl(id: object.id, action: 'destroy')
+
   <% end %>
-  result
+  self
 )

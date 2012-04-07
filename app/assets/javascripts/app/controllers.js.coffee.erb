@@ -45,7 +45,10 @@ and call then in your templates
   <% model  = model_config[:model]  %>
   <% models = model.pluralize %>
   <% controller = "Sheriff.controllers.#{models.humanize}Controller" %>
-<%= controller %>= ($xhr, $routeParams, $location, models)->
+
+## initialize the controller with needed services
+
+<%= controller %>= ($xhr, $routeParams, $location, models, routes)->
   self = @
   ## expose instances for better debugging in console
   Sheriff.<%= models.downcase  %>Controller = self
@@ -56,6 +59,7 @@ and call then in your templates
   self.$xhr         = $xhr
   self.$location    = $location
   self.$routeParams = $routeParams
+  self.routes       = routes
   self.queryParam   = ""
   # for debugging
   self.__name       = '<%= "#{models.humanize}Controller" %>'
@@ -78,6 +82,8 @@ and call then in your templates
 
   ## return self, needs to be last
   self
+
+<%= controller %>.$inject = ['$xhr', '$routeParams', '$location', 'models', 'routes'];
 
 <%= controller %>::index = ()->
     @log "index"
@@ -158,9 +164,6 @@ and call then in your templates
     else
       console[method] "#{@__name}: *********** "
       console[method] msg
-
-## initialize the controller with needed services
-Sheriff.controllers.<%= models %>Controller.$inject = ['$xhr', '$routeParams', '$location', 'models'];
 
 <% end %>
 

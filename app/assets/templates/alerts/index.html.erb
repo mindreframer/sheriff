@@ -18,8 +18,8 @@
       {{alert.message}}
     </td>
     <td>
-      <a ng:href='{{editUrl(alert)}}' class='btn btn-mini'>Edit</a> &nbsp;
-      <a ng:href='{{destroyUrl(alert)}}' class='btn btn-mini btn-danger'>X</a>
+      <a ng:href='{{routes.alertsEditUrl(alert)}}' class='btn btn-mini'>Edit</a> &nbsp;
+      <a ng:href='{{routes.alertsDestroyUrl(alert)}}' class='btn btn-mini btn-danger'>X</a>
     </td>
   </tr>
 </table>
