@@ -123,29 +123,6 @@ and call then in your templates
         @log(arguments)
     )
 
-## helper methods for view
-<%= controller %>::completeUrl= (params)->
-    "#/<%= models.downcase %>?#{@buildUrl(params)}"
-
-<%= controller %>::buildUrl = (params)->
-    angular.toKeyValue(params)
-
-<%= controller %>::prevUrl = ()->
-    params      = angular.copy(@$routeParams)
-    params.page = @page - 1
-    @completeUrl(params)
-
-<%= controller %>::nextUrl = ()->
-    params      = angular.copy(@$routeParams)
-    params.page = @page + 1
-    @completeUrl(params)
-
-<%= controller %>::editUrl = (object)->
-    @completeUrl(id: object.id, action: 'edit')
-
-<%= controller %>::destroyUrl = (object)->
-    @completeUrl(id: object.id, action: 'destroy')
-
 <%= controller %>::goBack = ()->
     window.history.back()
 
