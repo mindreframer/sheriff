@@ -41,7 +41,7 @@ angular.service('models', (<%= plural_models.join(',')  %>)->
 )
 
 
-angular.service('routes',  ()->
+angular.service('routes',  ($routeParams)->
   self = @
   <% plural_models.each do |m| %>
   self.<%= m.downcase %>CompleteUrl = (params)->
@@ -58,6 +58,17 @@ angular.service('routes',  ()->
 
   self.<%= m.downcase %>DestroyUrl = (object)->
     self.<%= m.downcase %>CompleteUrl(id: object.id, action: 'destroy')
+
+  self.<%= m.downcase %>NextUrl = ()->
+    params      = angular.copy($routeParams)
+    params.page = parseInt(params.page) + 1
+    self.<%= m.downcase %>CompleteUrl(params)
+
+  self.<%= m.downcase %>PrevUrl = ()->
+    params      = angular.copy($routeParams)
+    params.page = parseInt(params.page) - 1
+    self.<%= m.downcase %>CompleteUrl(params)
+
 
   <% end %>
   self
