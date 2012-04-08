@@ -61,11 +61,13 @@ angular.service('routes',  ($routeParams)->
 
   self.<%= m.downcase %>NextUrl = ()->
     params      = angular.copy($routeParams)
+    params.page ?= 1
     params.page = parseInt(params.page) + 1
     self.<%= m.downcase %>CompleteUrl(params)
 
   self.<%= m.downcase %>PrevUrl = ()->
     params      = angular.copy($routeParams)
+    params.page ?= 1
     params.page = parseInt(params.page) - 1
     self.<%= m.downcase %>CompleteUrl(params)
 
