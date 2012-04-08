@@ -1,7 +1,7 @@
 <input type="search" results="0" placeholder="deputy search..." accesskey="s" autofocus="autofocus" name="" ng:model="queryParam" />
 <div class='clearer'></div>
 
-<%= partial 'shared/header_pagination' %>
+<%= partial 'shared/header_pagination', {:model => self.logical_path.split('/').first } %>
 
 <table class='sharp'>
   <tr>
@@ -23,7 +23,7 @@
   </tr>
 </table>
 
-<%= partial 'shared/footer_pagination' %>
+<%= partial 'shared/footer_pagination', {:model => self.logical_path.split('/').first } %>
 
 <pre>
 Route: {{$route.current.$route.template}}<br>

@@ -1,4 +1,4 @@
-<%= partial 'shared/header_pagination' %>
+<%= partial 'shared/header_pagination', {:model => self.logical_path.split('/').first } %>
 
 <table class='sharp'>
   <tr>
@@ -12,4 +12,4 @@
 
 </table>
 
-<%= partial 'shared/footer_pagination' %>
+<%= partial 'shared/footer_pagination', {:model => self.logical_path.split('/').first } %>

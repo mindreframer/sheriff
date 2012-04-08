@@ -1,4 +1,5 @@
 # is included in Rails.application.assets.context_class.class_eval
+
 module SprocketHelper
   POSSIBLE_FORMATS = ["html", 'erb']
   ALL_PERMUTATIONS = POSSIBLE_FORMATS.permutation.to_a + POSSIBLE_FORMATS.map{|x|[x]}
@@ -9,6 +10,7 @@ module SprocketHelper
     # prepend basename with underscore
     template = File.join(File.dirname(template.to_s), '_' + File.basename(template.to_s))
     # render
+    # Rails.logger.info "rendering #{template} with #{locals.inspect}"
     erb (template, {}, locals)
   end
 

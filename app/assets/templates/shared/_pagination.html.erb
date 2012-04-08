@@ -1,7 +1,8 @@
+<% models = locals[:model] %>
 <div style='padding:5px; margin:5px; border-bottom: solid 1px #acacac; border-top: solid 1px #acacac;' >
-  <a href="{{prevUrl()}}" class='btn btn-mini'>Prev</a>
+  <a href="{{<%= models %>PrevUrl(page)}}" class='btn btn-mini'>Prev</a>
   &nbsp;
   <strong>{{page}}</strong>
   &nbsp;
-  <a href="{{nextUrl()}}" class='btn btn-mini'>Next</a>
+  <a href="{{<%= models %>NextUrl(page)}}" class='btn btn-mini'>Next</a>
 </div>
