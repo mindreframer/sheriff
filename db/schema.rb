@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110919104708) do
+ActiveRecord::Schema.define(:version => 20120412095949) do
 
   create_table "alerts", :force => true do |t|
     t.integer  "error_level",     :null => false
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20110919104708) do
     t.datetime "updated_at"
     t.datetime "reported_at",                        :null => false
     t.integer  "current_error_level", :default => 0, :null => false
+    t.text     "description"
   end
 
   add_index "reports", ["deputy_id"], :name => "index_reports_on_deputy_id"
