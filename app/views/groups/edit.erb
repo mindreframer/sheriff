@@ -16,8 +16,15 @@
           <i class='icon-question-sign'></i>
     </a>
   <% end %>
-
 <% end %>
+
+<hr>
+<div class="row">
+  <div class=" span3">
+    <a class="btn btn-primary" data-toggle="modal" href="#groupForm" >Edit Group</a>
+  </div>
+</div>
+
 <h3>Is running on following Deputies: </h3>
 <%= form_for Report.new, :url => '/reports/batch_validate' do |f| %>
   <table class="sharp">
@@ -43,3 +50,16 @@
   <%= check_box_with_label 'overwrite', true, true, 'Overwrite', {:class => 'checkbox inline'} %> <%= nbsp(4) %>
   <%= submit_tag 'Add validations', :class => 'btn btn-primary' %>
 <% end %>
+
+
+<div id='groupForm' class='modal fade well'>
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>Edit Group</h3>
+  </div>
+  <%= form_for @group, :html => {:class => 'form-inline'} do |f| %>
+    <label>Description</label><%= f.text_area :description, :size => '40x4' %>
+    <%= f.submit 'Save', :class => 'btn btn-primary' %>
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
+  <% end %>
+</div>
