@@ -9,7 +9,10 @@
 
     <%= link_to_edit report, :text => 'Change Validations', :class => 'btn btn-mini' %><br>
     <% if report.validations.size > 0 %>
-      <span style='font-size:10px;font-weight: bold;'><%= human_validation_display(report) %></span>
+      <span class='small_bold'><%= human_validation_display(report) %></span>
+    <% end %>
+    <% if report.description %>
+      <span class='small_bold'> <%= report.description %></span>
     <% end %>
   </td>
   <% unless hide_group %>

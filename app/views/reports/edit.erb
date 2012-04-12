@@ -11,6 +11,7 @@ in group: <%= link_to_object @report.group %>
 <div class="row">
   <div class=" span3">
     <a class="btn btn-primary" data-toggle="modal" href="#validationForm" >Edit Validations</a>
+    <a class="btn btn-primary" data-toggle="modal" href="#reportForm" >Edit Report</a>
   </div>
 </div>
 
@@ -77,6 +78,19 @@ in group: <%= link_to_object @report.group %>
   <%= form_for @report do |f| %>
     <%= render 'validation_form', :f => f %>
     <%= submit_tag 'Save', :class => 'btn btn-primary' %>
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
+  <% end %>
+</div>
+
+
+<div id='reportForm' class='modal fade well'>
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>Edit Report</h3>
+  </div>
+  <%= form_for @report, :html => {:class => 'form-inline'} do |f| %>
+    <label>Description</label><%= f.text_area :description, :size => '40x4' %>
+    <%= f.submit 'Save', :class => 'btn btn-primary' %>
     <a href="#" class="btn" data-dismiss="modal">Close</a>
   <% end %>
 </div>
