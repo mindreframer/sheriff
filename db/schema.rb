@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120412095949) do
+ActiveRecord::Schema.define(:version => 20120412105737) do
 
   create_table "alerts", :force => true do |t|
     t.integer  "error_level",     :null => false
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20120412095949) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "current_error_level", :default => 0, :null => false
+    t.text     "description"
   end
 
   add_index "groups", ["group_id", "name"], :name => "index_groups_on_group_id_and_name", :unique => true
