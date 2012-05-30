@@ -36,6 +36,7 @@ class Validation < ActiveRecord::Base
 
   def validation_failed!(message)
     return if ignored?
+    report_to_fyrehosed(message)
     if error_level != 0
       update_attributes!(:current_error_level => error_level)
       Alert.create(:message => message, :error_level => error_level, :validation => self, :report => report)
@@ -51,4 +52,23 @@ class Validation < ActiveRecord::Base
   def adjust_current_error_level
     self.current_error_level = error_level if error_level_changed? and current_error_level != 0
   end
+
+  def report_to_fyrehosed(msg)
+    return true unless CFG[:report_to_fyrehose]
+
+    pub = if error_level == 0
+      { :token => "sherrif.#{self.report.group.full_name}", :type => "resolved" }
+    else
+      { :token => "sherrif.#{self.report.group.full_name}", :type => "issue", :message => msg, :priority => "high" }
+    end
+
+    pub.merge!(:channel => CFG[:report_to_fyrehose_channel])
+
+    sock = TCPSocket.new(*CFG[:report_to_fyrehose].split(":"))
+    sock.write(pub.to_json + "\n")
+    sock.close
+  rescue Exception => e
+    puts "cant report to fyrehose: #{e.to_s}"
+  end
+
 end
