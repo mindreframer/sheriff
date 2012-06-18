@@ -43,7 +43,7 @@ class Group < ActiveRecord::Base
 
     pub = {
       :token => "sherrif.#{full_name}",
-      :channel => CFG[:report_to_fyrehose],
+      :channel => CFG[:report_to_fyrehose_channel],
       :type => "resolved"
     }
 

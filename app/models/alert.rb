@@ -41,7 +41,7 @@ class Alert < ActiveRecord::Base
 
     pub = {
       :token => "sherrif.#{self.report.group.full_name}",
-      :channel => CFG[:report_to_fyrehose],
+      :channel => CFG[:report_to_fyrehose_channel],
       :type => "issue",
       :message => msg,
       :priority => prio
