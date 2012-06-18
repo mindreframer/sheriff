@@ -27,15 +27,25 @@ class Alert < ActiveRecord::Base
 
   def report_to_fyrehose
     return true unless CFG[:report_to_fyrehose]
+    return if error_level < 1
+
     msg = "#{report.full_name} - #{message}"
 
-    pub = if error_level == 0
-      { :token => "sherrif.#{self.report.group.full_name}", :type => "resolved" }
-    else
-      { :token => "sherrif.#{self.report.group.full_name}", :type => "issue", :message => msg, :priority => "high" }
+    prio = if error_level == 1
+      "low"
+    elsif error_level == 2
+      "high"
+    elsif error_level == 3
+      "doom"
     end
 
-    pub.merge!(:channel => CFG[:report_to_fyrehose_channel])
+    pub = {
+      :token => "sherrif.#{self.report.group.full_name}",
+      :channel => CFG[:report_to_fyrehose],
+      :type => "issue",
+      :message => msg,
+      :priority => prio
+    }
 
     sock = UDPSocket.new
     sock.connect(*CFG[:report_to_fyrehose].split(":"))
