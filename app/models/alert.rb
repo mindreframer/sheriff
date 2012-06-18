@@ -29,22 +29,21 @@ class Alert < ActiveRecord::Base
     return true unless CFG[:report_to_fyrehose]
     return if error_level < 1
 
-    msg = "#{report.full_name} - #{message}"
-
-    prio = if error_level == 1
-      "low"
-    elsif error_level == 2
-      "high"
+    prio = if error_level == 2
+      "[CRITICAL] "
     elsif error_level == 3
-      "doom"
+      "[DOOM] "
+    else
+      ""
     end
+
+    msg = "#{prio}#{report.full_name} - #{message}"
 
     pub = {
       :token => "sherrif.#{self.report.group.full_name}",
       :channel => CFG[:report_to_fyrehose_channel],
       :type => "issue",
-      :message => msg,
-      :priority => prio
+      :message => msg
     }
 
     sock = UDPSocket.new
