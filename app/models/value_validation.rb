@@ -14,10 +14,15 @@ class ValueValidation < Validation
   end
 
   def check!
+    report_value = report.value
+    check_agains_value(report_value)
+  end
+
+  def check_agains_value(report_value)
     matches = case value
-    when Regexp then report.value.to_s =~ value
-    when Array, Range then value.include?(report.value)
-    else report.value == value
+    when Regexp then report_value.to_s =~ value
+    when Array, Range then value.include?(report_value)
+    else report_value == value
     end
 
     if matches
