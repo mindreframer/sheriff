@@ -14,6 +14,7 @@ gem 'jquery-rails'
 gem 'key_value', :require => false
 
 gem "therubyracer", :require => false
+gem 'libv8', '~> 3.11.8'
 gem 'sass-rails', "~> 3.2.1", :require => false
 gem 'uglifier', :require => false
 gem 'coffee-script', '2.2.0', :require => false
@@ -28,6 +29,6 @@ group :development do
 end
 
 group :test do
-  gem 'factory_girl', :git => 'git://github.com/thoughtbot/factory_girl.git'
+  gem 'factory_girl', :git => 'git://github.com/thoughtbot/factory_girl.git', :ref => '09e1cead5fc5239060d0a93ec045bbcc6fd99953'
   gem 'rspec-rails', '>=2'
 end
