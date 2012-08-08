@@ -8,7 +8,7 @@ describe ValueValidation do
       @validation = Factory(:value_validation, :value => 1, :report => Factory(:report, :value => 2))
     end
 
-    it "warns when value does not match" do
+    it "creates alert when value does not match" do
       lambda{
         @validation.check!
       }.should change(Alert, :count).by(+1)
@@ -17,59 +17,56 @@ describe ValueValidation do
       alert.report.should == @validation.report
       alert.error_level.should == @validation.error_level
     end
+  end
 
-    it "does warns when value matches" do
-      @validation.value = @validation.report.value
-      lambda{
-        @validation.check!
-      }.should_not change(Alert, :count)
+  describe :check_against_value do
+    before do
+      @validation = Factory.build(:value_validation, :value => 1)
+    end
+
+    it "does not warn when value matches" do
+      @validation.value = 1
+      @validation.check_against_value(1).should == true
     end
 
     describe 'range' do
       it "warns when value does not match" do
         @validation.value = 1..1
-        lambda{
-          @validation.check!
-        }.should change(Alert, :count).by(+1)
+        @validation.check_against_value(2).should be_false
       end
 
-      it "does warns when value matches" do
+      it "does not warn when value matches" do
         @validation.value = 1..2
-        lambda{
-          @validation.check!
-        }.should_not change(Alert, :count)
+        @validation.check_against_value(2).should be_true
+      end
+
+      it "does not warn for negative integers, if in range" do
+        @validation.value = -1..2
+        @validation.check_against_value('-1').should be_true
       end
     end
 
     describe 'array' do
       it "warns when value does not match" do
         @validation.value = [1,3]
-        lambda{
-          @validation.check!
-        }.should change(Alert, :count).by(+1)
+        @validation.check_against_value(2).should be_false
       end
 
       it "does warns when value matches" do
         @validation.value = [1,2]
-        lambda{
-          @validation.check!
-        }.should_not change(Alert, :count)
+        @validation.check_against_value(2).should be_true
       end
     end
 
     describe 'regex' do
       it "warns when value does not match" do
         @validation.value = /^1$/
-        lambda{
-          @validation.check!
-        }.should change(Alert, :count).by(+1)
+        @validation.check_against_value(2).should be_false
       end
 
       it "does warns when value matches" do
         @validation.value = /^2$/
-        lambda{
-          @validation.check!
-        }.should_not change(Alert, :count)
+        @validation.check_against_value(2).should be_true
       end
     end
   end

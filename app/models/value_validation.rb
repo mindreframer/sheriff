@@ -15,20 +15,26 @@ class ValueValidation < Validation
 
   def check!
     report_value = report.value
-    check_agains_value(report_value)
+    result = check_against_value(report_value)
+    if result
+      validation_passed!
+    else
+      validation_failed! "Value did not match #{report.value.inspect} <-> #{value.inspect}"
+    end
   end
 
-  def check_agains_value(report_value)
+  def check_against_value(report_value)
+    report_value = convert_to_most_fitting_type(report_value)
     matches = case value
     when Regexp then report_value.to_s =~ value
     when Array, Range then value.include?(report_value)
     else report_value == value
     end
+  end
 
-    if matches
-      validation_passed!
-    else
-      validation_failed! "Value did not match #{report.value.inspect} <-> #{value.inspect}"
+  def convert_to_most_fitting_type(report_value)
+    if report_value.to_s == report_value.to_i.to_s
+      return report_value.to_i
     end
   end
 end
