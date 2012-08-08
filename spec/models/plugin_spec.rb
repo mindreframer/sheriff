@@ -5,7 +5,12 @@ describe Plugin do
     it "warns on invalid syntax" do
       plugin = Factory.build(:plugin, :code => '<..asdsad<<<')
       plugin.save.should == false
-      plugin.errors.full_messages.join('').should include("compile error")
+      ruby_18 do
+        plugin.errors.full_messages.join('').should include("compile error")
+      end
+      ruby_19 do
+        plugin.errors.full_messages.join('').should include("syntax")
+      end
     end
 
     it "accepts correct syntax" do
