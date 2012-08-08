@@ -26,9 +26,7 @@ class Alert < ActiveRecord::Base
   end
 
   def report_to_fyrehose
-    return true unless CFG[:report_to_fyrehose]
     return if error_level < 1
-
     prio = if error_level == 2
       "[CRITICAL] "
     elsif error_level == 3
@@ -37,21 +35,9 @@ class Alert < ActiveRecord::Base
       ""
     end
 
-    msg = "#{prio}#{report.full_name} - #{message}"
-
-    pub = {
-      :token => "sherrif.#{self.report.group.full_name}",
-      :channel => CFG[:report_to_fyrehose_channel],
-      :type => "issue",
-      :message => msg
-    }
-
-    sock = UDPSocket.new
-    sock.connect(*CFG[:report_to_fyrehose].split(":"))
-    sock.write(pub.to_json + "\n")
-    sock.close
-  rescue Exception => e
-    puts "cant report to fyrehose: #{e.to_s}"
+    FyrehoseReporter.report(
+      :token => "sherrif.#{report.group.full_name}",
+      :msg   => "#{prio}#{report.full_name} - #{message}"
+    )
   end
-
 end
