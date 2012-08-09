@@ -13,8 +13,6 @@ gem 'ar_serialized_array', '>=0.3.0'
 gem 'jquery-rails'
 gem 'key_value', :require => false
 
-gem "therubyracer", :require => false
-gem 'libv8', '~> 3.11.8'
 gem 'sass-rails', "~> 3.2.1", :require => false
 gem 'uglifier', :require => false
 gem 'coffee-script', '2.2.0', :require => false
@@ -23,6 +21,8 @@ gem "twitter-bootstrap-rails", :git => 'git://github.com/seyhunak/twitter-bootst
 gem 'ace-rails-ap'
 
 group :development do
+  gem "therubyracer", :require => false
+  gem 'libv8', '~> 3.11.8'
   gem 'capistrano', :require => false
   gem 'capistrano-ext', :require => false
   gem 'shotgun', :require => false
