@@ -41,7 +41,7 @@ describe ValueValidation do
       end
 
       it "does not warn for negative integers, if in range" do
-        @validation.value = -1..2
+        @validation.value = -2..2
         @validation.check_against_value('-1').should be_true
       end
     end
