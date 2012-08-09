@@ -17,12 +17,12 @@ gem 'sass-rails', "~> 3.2.1", :require => false
 gem 'uglifier', :require => false
 gem 'coffee-script', '2.2.0', :require => false
 gem 'ace-rails-ap'
+gem "twitter-bootstrap-rails", :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem "therubyracer", :require => false
 
 
 group :development do
-  gem "twitter-bootstrap-rails", :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
-  gem "therubyracer", :require => false
-  gem 'libv8', '~> 3.11.8', :require => false
+  #gem 'libv8', '~> 3.11.8', :require => false
   gem 'capistrano', :require => false
   gem 'capistrano-ext', :require => false
   gem 'shotgun', :require => false
