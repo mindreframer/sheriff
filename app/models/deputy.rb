@@ -51,4 +51,17 @@ class Deputy < ActiveRecord::Base
     ip = (request.params[:forced_host] ? UNKNOWN_ADDRESS : request.ip)
     [ip, remote_host]
   end
+
+  def self.move_settings_from_to(old_ip, new_ip)
+    old_deputy = Deputy.find_by_address(old_ip)
+    new_deputy = Deputy.find_by_address(new_ip)
+
+    ### reports
+    reports = old_deputy.reports
+    reports.map{|r| r.update_attributes(:deputy_id => new_deputy.id)}
+
+    ### plugins
+    plugins = old_deputy.deputy_plugins
+    plugins.map{|r| r.update_attributes(:deputy_id => new_deputy.id)}
+  end
 end
