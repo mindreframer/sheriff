@@ -1,6 +1,7 @@
-role :app, "192.168.2.35"
-role :web, "192.168.2.35"
-role :resque_worker, "192.168.2.35"
-role :db, "192.168.2.35", :primary=>true
+server_ip = '10.10.40.60'
+role :app, server_ip
+role :web, server_ip
+role :resque_worker, server_ip
+role :db, server_ip, :primary=>true
 
 ssh_options[:keys] = "~/.ssh/deploy_id_rsa"
