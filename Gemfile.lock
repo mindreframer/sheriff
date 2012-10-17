@@ -199,7 +199,7 @@ DEPENDENCIES
   SystemTimer (>= 1.2.3)
   ace-rails-ap
   ar_serialized_array (>= 0.3.0)
-  capistrano
+  capistrano (= 2.12.0)
   capistrano-ext
   coffee-script (= 2.2.0)
   factory_girl!
