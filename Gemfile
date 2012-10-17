@@ -21,7 +21,7 @@ gem "twitter-bootstrap-rails", :git => 'git://github.com/seyhunak/twitter-bootst
 
 
 group :development do
-  gem 'capistrano', :require => false
+  gem 'capistrano', '2.12.0', :require => false
   gem 'capistrano-ext', :require => false
   gem 'shotgun', :require => false
 end

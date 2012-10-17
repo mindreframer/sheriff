@@ -35,7 +35,7 @@ namespace :deploy do
   task :assets do
     run "cd #{current_release} && RAILS_ENV=#{stage} bundle exec rake assets:precompile"
   end
-  before "deploy:symlink", "deploy:assets"
+  before "deploy:create_symlink", "deploy:assets"
 
   desc "Copy config files to config/"
   task :copy_config_files, :roles => [:app, :db] do
