@@ -71,7 +71,7 @@ namespace :resque do
       start
     end
 
-    after "deploy:symlink", "resque:worker:restart"
+    after "deploy:create_symlink", "resque:worker:restart"
   end
 end
 
