@@ -5,4 +5,5 @@ else
   'development'
 end
 
+puts "running sheriff witn #{env}"
 exec "./script/rails c #{ARGV[0] || env}"
