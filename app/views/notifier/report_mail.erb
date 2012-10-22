@@ -10,10 +10,11 @@
 
     <% grouped_alerts.each do |report, alerts|  %>
       <p>
-        <h3><%= report.full_name %></h3>
+        <h3> <%= link_to(report.full_name, "#{CFG[:domain]}/reports/#{report.id}" ) %></h3>
         <% alerts.each do |alert| %>
           <p>
-            <%= alert.created_at.to_s %> (<%= time_ago(alert.created_at) %>)
+            <% time_link = "#{alert.created_at.to_s(:db)} (#{time_ago(alert.created_at)})" %>
+            <%= time_link %>
             <%= alert.message.html_safe %>
           </p>
         <% end %>
