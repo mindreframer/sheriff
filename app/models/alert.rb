@@ -22,7 +22,7 @@ class Alert < ActiveRecord::Base
   end
 
   def send_mail
-    Notifier.alert(self).deliver
+    SheriffMailer.alert(self).deliver
   end
 
   def report_to_fyrehose
@@ -45,7 +45,7 @@ class Alert < ActiveRecord::Base
     timeframe ||= 30.minutes
     alerts = Alert.find(:all, :conditions => ["created_at >= ?", Time.now.utc - timeframe ])
     if alerts.size > 0
-      Notifier.report_mail(alerts, timeframe).deliver
+      SheriffMailer.report_mail(alerts, timeframe).deliver
     else
       puts "no errors happened in #{timeframe/60} minutes"
     end
