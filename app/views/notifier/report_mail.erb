@@ -5,7 +5,7 @@
   </head>
   <body>
 
-    <%= grouped_alerts = @alerts.group_by{|x| x.report} %>
+    <% grouped_alerts = @alerts.group_by{|x| x.report} %>
     <h1><%= @alerts.size %> errors happened in <%= @timeframe / 60.0 %> minutes</h1>
 
     <% grouped_alerts.each do |report, alerts|  %>

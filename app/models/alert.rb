@@ -44,6 +44,10 @@ class Alert < ActiveRecord::Base
   def self.generate_alert_report(timeframe=nil)
     timeframe ||= 30.minutes
     alerts = Alert.find(:all, :conditions => ["created_at >= ?", Time.now.utc - timeframe ])
-    Notifier.report_mail(alerts, timeframe).deliver
+    if alerts.size > 0
+      Notifier.report_mail(alerts, timeframe).deliver
+    else
+      puts "no errors happened in #{timeframe/60} minutes"
+    end
   end
 end
