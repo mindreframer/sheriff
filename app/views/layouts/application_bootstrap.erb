@@ -14,7 +14,7 @@
 
 
 <div class="container" style='margin-top:40px;'>
-  <% unless Boolean(Settings['run_cron']) %>
+  <% unless Settings['run_cron'].to_bool %>
  <div class="row">
    <div class="span12">
     <h3 style='text-weight:bold; color:red;text-align:center;'>CRON DISABLED! <small>(no emails are sent at the moment!)</small></h3>
