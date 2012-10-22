@@ -4,12 +4,17 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
+
+    <%= grouped_alerts = @alerts.group_by{|x| x.report} %>
     <h1><%= @alerts.size %> errors happened in <%= @timeframe / 60.0 %> minutes</h1>
 
-    <% @alerts.each do |alert|  %>
+    <% grouped_alerts.each do |report, alerts|  %>
       <p>
-        <h3><%= alert.report.full_name %></h3>
-        <%= alert.message.html_safe %></p>
+        <h3><%= report.full_name %></h3>
+        <% alerts.each do |alert| %>
+          <p><%= alert.message.html_safe %></p>
+        <% end %>
+      </p>
     <% end %>
   </body>
 </html>
