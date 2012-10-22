@@ -11,7 +11,7 @@ class Reporter
 
   def self.multi_notification(alerts, timeframe)
     if alerts.size > 0
-      SheriffMailer.report_mail(alerts, timeframe).deliver
+      Reporter.send_multi_mail(alerts, timeframe)
     else
       "no errors happened in #{timeframe/60} minutes"
     end
@@ -19,6 +19,10 @@ class Reporter
 
   def self.send_mail(alert)
     SheriffMailer.alert(alert).deliver
+  end
+
+  def self.send_multi_mail(alerts, timeframe)
+    SheriffMailer.report_mail(alerts, timeframe).deliver
   end
 
   def self.send_sms(alert)
