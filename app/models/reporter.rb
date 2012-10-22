@@ -13,7 +13,7 @@ class Reporter
     if alerts.size > 0
       SheriffMailer.report_mail(alerts, timeframe).deliver
     else
-      puts "no errors happened in #{timeframe/60} minutes"
+      "no errors happened in #{timeframe/60} minutes"
     end
   end
 
