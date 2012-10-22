@@ -11,7 +11,6 @@ class Alert < ActiveRecord::Base
     self.validation_type = validation.class.to_s
   end
 
-
   def report_to_fyrehose
     ReporterFyrehose.send_alert(self)
   end
