@@ -35,7 +35,7 @@ class Alert < ActiveRecord::Base
       ""
     end
 
-    FyrehoseReporter.report(
+    ReporterFyrehose.report(
       :token => "sherrif.#{report.group.full_name}",
       :msg   => "#{prio}#{report.full_name} - #{message}"
     )

@@ -1,4 +1,4 @@
-class FyrehoseReporter
+class ReporterFyrehose
   # options:
   # - msg
   # - token
