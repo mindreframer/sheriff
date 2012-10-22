@@ -4,10 +4,9 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
+    <h1><%= @subject </h1>
 
     <% grouped_alerts = @alerts.group_by{|x| x.report} %>
-    <h1><%= @alerts.size %> errors happened in <%= @timeframe / 60.0 %> minutes</h1>
-
     <% grouped_alerts.each do |report, alerts|  %>
       <p>
         <h3> <%= link_to(report.full_name, "#{CFG[:domain]}/reports/#{report.id}" ) %></h3>
