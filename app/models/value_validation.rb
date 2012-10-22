@@ -36,5 +36,6 @@ class ValueValidation < Validation
     if report_value.to_s == report_value.to_i.to_s
       return report_value.to_i
     end
+    report_value
   end
 end
