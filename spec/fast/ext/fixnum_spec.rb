@@ -1,4 +1,5 @@
-require 'spec/spec_helper'
+require './spec/spec_helper_fast'
+require './lib/ext/fixnum'
 
 describe Fixnum do
   describe :to_hms do

@@ -1,4 +1,6 @@
-require 'spec/spec_helper'
+require './spec/spec_helper_fast'
+require './lib/ext/time'
+
 
 describe Time do
   describe :seconds_after_midnight do
