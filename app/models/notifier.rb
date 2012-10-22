@@ -16,4 +16,10 @@ class Notifier < ActionMailer::Base
     mail :subject => "Sheriff Error -- #{alert.report.full_name}",
          :body    => "#{alert.message}\n#{Time.current.to_s(:db)} UTC\n#{CFG[:domain]}/reports/#{alert.report_id}"
   end
+
+  def report_mail(alerts, timeframe)
+    @alerts    = alerts
+    @timeframe = timeframe
+    mail :subject => "#{@alerts.size} errors happened in #{@timeframe / 60.0} minutes"
+  end
 end

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><%= @alerts.size %> errors happened in <%= @timeframe / 60.0 %> minutes</h1>
+
+    <% @alerts.each do |alert|  %>
+      <p>
+        <h3><%= alert.report.full_name %></h3>
+        <%= alert.message.html_safe %></p>
+    <% end %>
+  </body>
+</html>

@@ -1,8 +1,8 @@
 class Alert < ActiveRecord::Base
   belongs_to :validation, :polymorphic => true
   belongs_to :report
-  after_create :send_notification
-  after_create :report_to_fyrehose
+  # after_create :send_notification
+  # after_create :report_to_fyrehose
   before_create :adjust_validation_type
 
   protected
@@ -39,5 +39,11 @@ class Alert < ActiveRecord::Base
       :token => "sherrif.#{report.group.full_name}",
       :msg   => "#{prio}#{report.full_name} - #{message}"
     )
+  end
+
+  def self.generate_alert_report(timeframe=nil)
+    timeframe ||= 30.minutes
+    alerts = Alert.find(:all, :conditions => ["created_at >= ?", Time.now.utc - timeframe ])
+    Notifier.report_mail(alerts, timeframe).deliver
   end
 end
