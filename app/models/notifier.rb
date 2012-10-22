@@ -1,4 +1,5 @@
 class Notifier < ActionMailer::Base
+  helper :application
   default :from => "sheriff@dawanda.com"
   default :to   => CFG[:email_recipients].split(',')
 
