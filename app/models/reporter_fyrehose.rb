@@ -19,4 +19,25 @@ class ReporterFyrehose
   rescue Exception => e
     puts "cant report to fyrehose: #{e.to_s}"
   end
+
+
+  def self.send_alert(alert)
+    return if alert.error_level < 1
+    prio = alert_prio(alert)
+
+    ReporterFyrehose.report(
+      :token => "sherrif.#{alert.report.group.full_name}",
+      :msg   => "#{prio} #{alert.report.full_name} - #{alert.message}"
+    )
+  end
+
+  def self.alert_prio(alert)
+    if alert.error_level == 2
+      "[CRITICAL]"
+    elsif alert.error_level == 3
+      "[DOOM]"
+    else
+      ""
+    end
+  end
 end
