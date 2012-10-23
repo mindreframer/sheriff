@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
     hash.delete :interval_unit
   end
 
+protected
   def authenticate
     if CFG[:user].present? and CFG[:password].present?
       authenticate_or_request_with_http_basic do |id, password|
