@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   layout 'group_sidebar'
   helper :all
-  before_filter :authenticate if Rails.env == :production
+  before_filter :authenticate if Rails.env.to_s == "production"
 
   def convert_interval(hash)
     return unless hash
