@@ -21,7 +21,7 @@ class SheriffMailer < ActionMailer::Base
   def report_mail(alerts, timeframe)
     @alerts    = alerts
     @timeframe = timeframe
-    @subject   = "Sheriff Report: #{@alerts.size} errors happened in #{(@timeframe / 60).to_i} minutes"
+    @subject   = "Sheriff Report: #{@alerts.size} error(s) happened in #{(@timeframe / 60).to_i} minute(s)"
     mail :subject => @subject
   end
 end
