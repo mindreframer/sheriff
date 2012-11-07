@@ -36,6 +36,9 @@ $purple:                #7a43b6;
   font-weight: bold;
 }
 
+small{
+  font-size:10px;
+}
 
 .error_level_0, .error_level_0 td{background: white;}
 .error_level_1, .error_level_1 td, #sidebar ul.navigation .error_level_1{background: lighten($yellow, 30%);}

@@ -19,7 +19,7 @@
     <td><%= link_to_object report.group %></td>
   <% end %>
   <% unless hide_deputy %>
-    <td><%= link_to_object report.deputy %></td>
+    <td><%= link_to_object report.deputy %>  <br/> <small>(<%= report.deputy.address %>)</small></td>
   <% end %>
   <td class='max_width_200'><%= report.value %></td>
   <td><%= detailed_time report.reported_at %></td>
