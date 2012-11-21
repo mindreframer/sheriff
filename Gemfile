@@ -24,6 +24,7 @@ group :development do
   gem 'capistrano', '2.12.0', :require => false
   gem 'capistrano-ext', :require => false
   gem 'shotgun', :require => false
+  gem 'thin'
 end
 
 group :test do
