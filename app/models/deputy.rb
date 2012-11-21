@@ -47,9 +47,16 @@ class Deputy < ActiveRecord::Base
   end
 
   def self.extract_address_and_name(request)
-    remote_host =  request.params[:hostname].presence || request.remote_host.presence || UNKNOWN_HOST
-    ip = (request.params[:forced_host] ? UNKNOWN_ADDRESS : request.ip)
-    [ip, remote_host]
+    [extract_ip(request), extract_host(request)]
+  end
+
+  def self.extract_host(request)
+    request.params[:hostname].presence || request.remote_host.presence || UNKNOWN_HOST
+  end
+
+  def self.extract_ip(request)
+    request.params[:ip].presence ||
+      (request.params[:forced_host] ? UNKNOWN_ADDRESS : request.ip)
   end
 
   def self.move_settings_from_to(old_ip, new_ip)
