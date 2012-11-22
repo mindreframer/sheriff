@@ -31,4 +31,5 @@ Sheriff::Application.routes.draw do
 
   match "/notify", :to => "reports#create"
   match "/resque" => ResqueWeb, :anchor => false if CFG[:resque]
+  match '/health', :to => "alerts#health"
 end
