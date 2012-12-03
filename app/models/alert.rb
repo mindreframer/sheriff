@@ -17,7 +17,8 @@ class Alert < ActiveRecord::Base
 
   def self.generate_alert_report(timeframe=nil)
     timeframe ||= 30.minutes
-    alerts = Alert.find(:all, :conditions => ["created_at >= ?", Time.now.utc - timeframe ])
+    alerts = Alert.find(:all,
+        :conditions => ["created_at >= ? AND error_level > 1", Time.now.utc - timeframe ])
     Reporter.multi_notification(alerts, timeframe)
   end
 end
