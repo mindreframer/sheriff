@@ -9,6 +9,10 @@ ENV["RAILS_ENV"] ||= 'test'
 $LOAD_PATH << '.'
 
 
+require 'active_support'
+require 'active_support/dependencies'
+relative_load_paths = %w[app/models lib]
+ActiveSupport::Dependencies.autoload_paths += relative_load_paths
 
 RSpec.configure do |config|
   config.mock_with :rspec
@@ -23,6 +27,7 @@ module TestHelper
     ActiveRecord::Base.establish_connection :adapter =>  "sqlite3", :database => ":memory:"
 
     require 'app/models/settings.rb'
+    require 'app/models/deputy.rb'
     require 'key_value'
 
     (models = ::ObjectSpace.each_object(::Class).select do |c|
