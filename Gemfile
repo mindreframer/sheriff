@@ -13,21 +13,20 @@ gem 'hoptoad_notifier', :require => false
 gem 'newrelic_rpm', '>=3', :require => false
 
 
-
-
+# view stuff
+gem 'dynamic_form'
+gem 'kaminari'
 gem 'jquery-rails'
 gem 'sass-rails', "~> 3.2.1", :require => false
 gem 'uglifier', :require => false
 gem 'coffee-script', '2.2.0', :require => false
 gem 'ace-rails-ap'
 gem "twitter-bootstrap-rails", :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :ref => 'c248bbd4c19936a9624f19fa6fa91ca5c9617315'
-gem 'dynamic_form'
-gem 'kaminari'
+
 
 # queue
 gem 'resque', :require => false
 gem 'resque-multi-job-forks', :git => "git://github.com/stulentsev/resque-multi-job-forks.git"
-
 
 
 group :development do
