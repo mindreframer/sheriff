@@ -21,6 +21,7 @@ module Sheriff
     end
 
     config.autoload_paths << "lib"
+    config.autoload_paths << "app/actions"
     config.encoding = "utf-8"
     config.filter_parameters += [:password]
     config.consider_all_requests_local = true
