@@ -31,6 +31,7 @@ module TestHelper
 
     require 'app/models/settings.rb'
     require 'app/models/deputy.rb'
+    require 'app/models/group.rb'
     require 'key_value'
 
     (models = ::ObjectSpace.each_object(::Class).select do |c|

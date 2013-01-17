@@ -1,4 +1,15 @@
 class Alert < ActiveRecord::Base
+
+  # inline schema
+  col :error_level,     :type => :integer, :null => false
+  col :message,         :type => :string,  :null => false
+  col :validation_id,   :type => :integer, :null => false
+  col :validation_type, :type => :string,  :null => false
+  col :report_id,       :type => :integer, :null => false
+  col :created_at,      :type => :datetime
+  col :updated_at,      :type => :datetime
+
+
   belongs_to :validation, :polymorphic => true
   belongs_to :report
   # after_create :send_notification

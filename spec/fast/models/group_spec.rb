@@ -1,4 +1,4 @@
-require 'spec/spec_helper'
+require 'spec/spec_helper_fast'
 
 describe Group do
   describe :find_or_create_for_level1 do

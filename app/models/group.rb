@@ -1,6 +1,14 @@
 class Group < ActiveRecord::Base
   include ErrorLevelPropagation
 
+  # inline schema
+  col :name,         :type => :string, :null => false
+  col :group_id,     :type => :integer
+  col :created_at,   :type => :datetime
+  col :updated_at,   :type => :datetime
+  col :description,  :type => :text
+  col :current_error_level, :type => :integer, :default => 0, :null => false
+
   belongs_to :group
   has_many :children, :class_name => 'Group', :order => 'name asc', :dependent => :destroy
   has_many :reports, :dependent => :destroy
