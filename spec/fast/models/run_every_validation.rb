@@ -1,4 +1,4 @@
-require 'spec/spec_helper'
+require 'spec/spec_helper_fast'
 
 describe RunEveryValidation do
   describe :check! do
@@ -61,7 +61,7 @@ describe RunEveryValidation do
     end
 
     it "is 5% of interval" do
-      RunEveryValidation.new(:interval => 20*10.minute).buffer.should == 10.minutes 
+      RunEveryValidation.new(:interval => 20*10.minute).buffer.should == 10.minutes
     end
   end
 end
