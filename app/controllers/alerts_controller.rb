@@ -1,7 +1,6 @@
 class AlertsController < RestController
   hacky_respond_to :html, :xml, :json
 
-
   def health
     render :text => 'OK'
   end

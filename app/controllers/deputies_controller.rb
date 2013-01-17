@@ -10,7 +10,7 @@ private
   def collection
     default_oder = ActiveRecord::Base.connection.class.concat_sql("COALESCE(human_name,'')", "name")
     params[:order] ||= default_oder
-    @collection ||= resource_class.page(params[:page]).per(params[:per_page].presence || 40).order(params[:order])
+    @collection    ||= resource_class.page(params[:page]).per(params[:per_page].presence || 40).order(params[:order])
   end
 
   def my_actions
