@@ -1,6 +1,17 @@
 class Deputy < ActiveRecord::Base
   include ErrorLevelPropagation
 
+  # inline schema
+  col "name",                :null => false
+  col "address",             :null => false
+  col "created_at",          :type => :datetime
+  col "updated_at",          :type => :datetime
+  col "last_report_at",      :type => :datetime
+  col "current_error_level", :type => :integer, :default => 0, :null => false
+  col "human_name"
+  col "disabled_until",      :type => :datetime
+
+
   has_many :reports, :dependent => :destroy
   has_many :deputy_plugins, :dependent => :destroy
   accepts_nested_attributes_for :deputy_plugins

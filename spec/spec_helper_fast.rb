@@ -14,6 +14,9 @@ require 'active_support/dependencies'
 relative_load_paths = %w[app/models lib]
 ActiveSupport::Dependencies.autoload_paths += relative_load_paths
 
+require 'factory_girl'
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
+
 RSpec.configure do |config|
   config.mock_with :rspec
 end
