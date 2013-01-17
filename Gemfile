@@ -13,7 +13,7 @@ gem 'ar_serialized_array', '>=0.3.0'
 gem 'jquery-rails'
 gem 'key_value', :require => false
 gem 'active_record_inline_schema'
-gem 'resque-multi-job-forks'
+gem 'resque-multi-job-forks', :git => "git://github.com/stulentsev/resque-multi-job-forks.git"
 
 
 gem 'sass-rails', "~> 3.2.1", :require => false
