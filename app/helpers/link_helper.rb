@@ -12,7 +12,7 @@ module LinkHelper
     return options[:name] if options[:name]
     case object
     when Group, Deputy, Report then object.full_name
-    when Plugin, Summary then object.name
+    when Plugin then object.name
     else "No name found"
     end
   end

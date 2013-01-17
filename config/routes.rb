@@ -7,7 +7,6 @@ Sheriff::Application.routes.draw do
     end
   end
   resources :groups
-  resources :summaries
   resources :reports do
     collection do
       post :batch_validate

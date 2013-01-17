@@ -18,7 +18,7 @@
     <% end %>
     <div id="main-navigation">
       <ul class="wat-cf">
-        <% %w(Alert Group Report Deputy Plugin Summary Settings).each do |type| %>
+        <% %w(Alert Group Report Deputy Plugin Settings).each do |type| %>
           <% is_active = (type.downcase == params[:controller]) %>
           <li class="<%= is_active ? 'active' : '' %>"><%= link_to type.pluralize, '/' + type.pluralize.downcase %></li>
         <% end %>

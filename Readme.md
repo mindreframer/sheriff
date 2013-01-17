@@ -56,9 +56,6 @@ Plugins are executed via `deputy --run-plugins`. deputy queries sheriff for plug
     #/etc/deputy.yml
     sheriff_url: localhost:3000
 
-### Summaries
-With summaries you can aggregate multiple reports, to e.g. compare responses.
-
 ### Resque
 To keep Sheriff responsive, report processing should be queued in [Resque](https://github.com/defunkt/resque).<br/>
 Install redis on localhost and set `resque: true` in config.yml<br/>
