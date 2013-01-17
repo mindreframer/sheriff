@@ -2,7 +2,7 @@ require 'spec/spec_helper_fast'
 
 describe Settings do
   before do
-    Settings::ALLOWED_KEYS = %w(foo)
+    suppress_warnings{Settings::ALLOWED_KEYS = %w(foo)}
   end
 
   describe :[]= do

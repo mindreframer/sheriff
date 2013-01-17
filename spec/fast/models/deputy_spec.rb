@@ -7,7 +7,7 @@ class FakeRequest
   attr_accessor :ip
   def initialize(options={})
     options.each do |k,v|
-      self.send (:"#{k}=", v)
+      self.send(:"#{k}=", v)
     end
   end
 end
