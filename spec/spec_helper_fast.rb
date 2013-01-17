@@ -21,7 +21,6 @@ RSpec.configure do |config|
   config.mock_with :rspec
 end
 
-
 module TestHelper
   def self.require_models
     return if @required
@@ -29,9 +28,9 @@ module TestHelper
     TestHelper.require_ext
     ActiveRecord::Base.establish_connection :adapter =>  "sqlite3", :database => ":memory:"
 
-    require 'app/models/settings.rb'
     require 'app/models/deputy.rb'
     require 'app/models/group.rb'
+    require 'app/models/settings.rb'
     require 'key_value'
 
     (models = ::ObjectSpace.each_object(::Class).select do |c|

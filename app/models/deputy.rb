@@ -4,12 +4,11 @@ class Deputy < ActiveRecord::Base
   # inline schema
   col "name",                :null => false
   col "address",             :null => false
-  col "created_at",          :type => :datetime
-  col "updated_at",          :type => :datetime
   col "last_report_at",      :type => :datetime
   col "current_error_level", :type => :integer, :default => 0, :null => false
   col "human_name"
   col "disabled_until",      :type => :datetime
+  col_timestamps
 
 
   has_many :reports, :dependent => :destroy
