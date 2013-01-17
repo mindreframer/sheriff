@@ -27,7 +27,6 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
-    SystemTimer (1.2.3)
     ace-rails-ap (0.0.2)
     actionmailer (3.2.1)
       actionpack (= 3.2.1)
@@ -215,7 +214,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  SystemTimer (>= 1.2.3)
   ace-rails-ap
   active_record_inline_schema
   ar_serialized_array (>= 0.3.0)

@@ -3,25 +3,32 @@ source 'http://rubygems.org'
 gem 'rails', '3.2.1'
 gem 'mysql2', '>=0.3'
 gem 'json'
-gem 'kaminari'
+
+gem 'active_record_inline_schema'
 gem 'inherited_resources'
+
+# if you want to profile/check errors
 gem 'hoptoad_notifier', :require => false
 gem 'newrelic_rpm', '>=3', :require => false
-gem 'resque', :require => false
-gem 'SystemTimer', '>=1.2.3', :require => 'system_timer', :platforms => :ruby_18
+
 gem 'ar_serialized_array', '>=0.3.0'
-gem 'jquery-rails'
+
 gem 'key_value', :require => false
-gem 'active_record_inline_schema'
-gem 'resque-multi-job-forks', :git => "git://github.com/stulentsev/resque-multi-job-forks.git"
 
 
+
+gem 'jquery-rails'
 gem 'sass-rails', "~> 3.2.1", :require => false
 gem 'uglifier', :require => false
 gem 'coffee-script', '2.2.0', :require => false
 gem 'ace-rails-ap'
 gem "twitter-bootstrap-rails", :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :ref => 'c248bbd4c19936a9624f19fa6fa91ca5c9617315'
 gem 'dynamic_form'
+gem 'kaminari'
+
+# queue
+gem 'resque', :require => false
+gem 'resque-multi-job-forks', :git => "git://github.com/stulentsev/resque-multi-job-forks.git"
 
 
 
