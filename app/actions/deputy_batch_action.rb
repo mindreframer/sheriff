@@ -1,8 +1,4 @@
-class DeputyBatchAction
-  attr_reader :params
-  def initialize(params)
-    @params = params
-  end
+class DeputyBatchAction < BaseAction
 
   def perform
     convert_interval params[:deputy_plugin]
