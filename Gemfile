@@ -20,6 +20,7 @@ gem 'ace-rails-ap'
 gem "twitter-bootstrap-rails", :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :ref => 'c248bbd4c19936a9624f19fa6fa91ca5c9617315'
 
 
+gem 'active_record_inline_schema'
 group :development do
   gem 'capistrano', '2.12.0', :require => false
   gem 'capistrano-ext', :require => false
@@ -30,4 +31,5 @@ end
 group :test do
   gem 'factory_girl', :git => 'git://github.com/thoughtbot/factory_girl.git', :ref => '09e1cead5fc5239060d0a93ec045bbcc6fd99953'
   gem 'rspec-rails', '>=2'
+  gem 'sqlite3'
 end
