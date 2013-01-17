@@ -30,6 +30,7 @@ module TestHelper
 
     require 'app/models/deputy.rb'
     require 'app/models/group.rb'
+    require 'app/models/plugin.rb'
     require 'app/models/settings.rb'
     require 'key_value'
 

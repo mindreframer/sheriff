@@ -7,6 +7,12 @@ class Plugin < ActiveRecord::Base
     end
   Ruby
 
+  col :name,  :type => :string, :null => false
+  col :url,   :type => :string
+  col :code,  :type => :text, :null => false
+  col_timestamps
+
+
   has_many :deputies, :class_name => 'DeputyPlugin'
   has_many :deputy_plugins, :dependent => :destroy
 
