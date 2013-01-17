@@ -31,6 +31,7 @@ module TestHelper
     models = %w[
       alert
       deputy
+      deputy_plugin
       group
       historic_value
       plugin

@@ -1,6 +1,11 @@
 class DeputyPlugin < ActiveRecord::Base
   include IntervalAccessors
 
+  col :plugin_id, :type => :integer,  :null => false
+  col :deputy_id, :type => :integer,  :null => false
+  col :interval,  :type => :integer,  :null => false
+  col_timestamps
+
   validates_numericality_of :interval, :greater_than => 0
   validates_presence_of :plugin_id, :deputy_id
 
