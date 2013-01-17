@@ -4,15 +4,6 @@ class ApplicationController < ActionController::Base
   helper :all
   before_filter :authenticate if Rails.env.to_s == "production"
 
-  def convert_interval(hash)
-    return unless hash
-    if hash[:interval_unit].present?
-      hash[:interval] = hash[:interval_value].to_i * hash[:interval_unit].to_i
-    end
-    hash.delete :interval_value
-    hash.delete :interval_unit
-  end
-
 protected
   def authenticate
     if CFG[:user].present? and CFG[:password].present?
