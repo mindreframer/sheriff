@@ -14,7 +14,6 @@ class KeyValue < ActiveRecord::Base
   col :value, :type => :text
   add_index :key
 end
-KeyValue.auto_upgrade!
 
 class Settings
   ALLOWED_KEYS = %w(notifications send_sms run_cron)

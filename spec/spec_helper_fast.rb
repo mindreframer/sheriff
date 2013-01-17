@@ -17,6 +17,7 @@ end
 
 module TestHelper
   def self.require_models
+    return if @required
     require 'active_record_inline_schema'
     TestHelper.require_ext
     ActiveRecord::Base.establish_connection :adapter =>  "sqlite3", :database => ":memory:"
@@ -24,12 +25,15 @@ module TestHelper
     require 'app/models/settings.rb'
     require 'key_value'
 
-    models = ::ObjectSpace.each_object(::Class).select do |c|
+    (models = ::ObjectSpace.each_object(::Class).select do |c|
       c.ancestors.include?(ActiveRecord::Base)
+    end - [ActiveRecord::Base])
+
+    models.each do |m|
+      puts m
+      m.auto_upgrade!
     end
-    # models.each do |m|
-    #   m.auto_upgrade!
-    # end
+    @required = true
   end
 
 
@@ -39,3 +43,4 @@ module TestHelper
     end
   end
 end
+TestHelper.require_models

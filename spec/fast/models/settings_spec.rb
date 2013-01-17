@@ -1,5 +1,4 @@
 require 'spec/spec_helper_fast'
-TestHelper.require_models
 
 describe Settings do
   before do
