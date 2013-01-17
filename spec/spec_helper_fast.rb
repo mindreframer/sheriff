@@ -46,12 +46,10 @@ module TestHelper
     end - [ActiveRecord::Base])
 
     models.each do |m|
-      puts m
       m.auto_upgrade!
     end
     @required = true
   end
-
 
   def self.require_ext
     Dir["./lib/ext/**/*.rb"].each do |file|
