@@ -6,14 +6,12 @@ gem 'json'
 
 gem 'active_record_inline_schema'
 gem 'inherited_resources'
+gem 'key_value', :require => false
 
 # if you want to profile/check errors
 gem 'hoptoad_notifier', :require => false
 gem 'newrelic_rpm', '>=3', :require => false
 
-gem 'ar_serialized_array', '>=0.3.0'
-
-gem 'key_value', :require => false
 
 
 

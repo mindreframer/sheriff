@@ -58,8 +58,6 @@ GEM
     activesupport (3.2.1)
       i18n (~> 0.6)
       multi_json (~> 1.0)
-    ar_serialized_array (0.3.0)
-      activerecord
     arel (3.0.2)
     builder (3.0.0)
     capistrano (2.12.0)
@@ -216,7 +214,6 @@ PLATFORMS
 DEPENDENCIES
   ace-rails-ap
   active_record_inline_schema
-  ar_serialized_array (>= 0.3.0)
   capistrano (= 2.12.0)
   capistrano-ext
   coffee-script (= 2.2.0)
