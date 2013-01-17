@@ -1,4 +1,20 @@
 class Validation < ActiveRecord::Base
+
+  # inline schema
+  col :start_seconds,       :type => :integer, :default => 0,     :null => false
+  col :end_seconds,         :type => :integer, :default => 0,     :null => false
+  col :error_level,         :type => :integer, :null => false
+  col :current_error_level, :type => :integer, :default => 0,     :null => false
+  col :report_id,           :type => :integer, :null => false
+  col :interval,            :type => :integer, :default => 0,     :null => false
+  col :type,                :type => :string, :null => false
+  col :value,               :type => :string
+  col :only_run_once,       :type => :boolean, :default => false, :null => false
+  col :ignore_start,        :type => :string
+  col :ignore_end,          :type => :string
+  col_timestamps
+
+
   include ErrorLevelPropagation
   ERROR_LEVELS = {0 => 'Ignore', 1 => 'Log', 2 => 'Email', 3 => 'Sms'}
   before_update :adjust_current_error_level

@@ -2,6 +2,17 @@ class Report < ActiveRecord::Base
   include ErrorLevelPropagation
   include SerializedValue
 
+  # inline schema
+  col :group_id,            :type => :integer, :null => false
+  col :deputy_id,           :type => :integer, :null => false
+  col :value,               :type => :string,  :null => false
+  col :config,              :type => :string
+  col :reported_at,         :type => :datetime,:null => false
+  col :current_error_level, :type => :integer, :default => 0, :null => false
+  col :description,         :type => :text
+  col_timestamps
+
+
   belongs_to :group
   belongs_to :deputy
 

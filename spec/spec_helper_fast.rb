@@ -28,10 +28,17 @@ module TestHelper
     TestHelper.require_ext
     ActiveRecord::Base.establish_connection :adapter =>  "sqlite3", :database => ":memory:"
 
-    require 'app/models/deputy.rb'
-    require 'app/models/group.rb'
-    require 'app/models/plugin.rb'
-    require 'app/models/settings.rb'
+    models = %w[
+      alert
+      deputy
+      group
+      historic_value
+      plugin
+      report
+      settings
+      validation
+    ]
+    models.each { |e| require "app/models/#{e}" }
     require 'key_value'
 
     (models = ::ObjectSpace.each_object(::Class).select do |c|
