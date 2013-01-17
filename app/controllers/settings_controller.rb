@@ -18,6 +18,7 @@ class SettingsController < ApplicationController
     redirect_to :action => :index
   end
 
+private
   def my_actions
     @my_action ||= SettingsActions.new(params)
   end

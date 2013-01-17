@@ -11,9 +11,14 @@ class PluginsController < RestController
   index! do |format|
     format.html{render 'index'}
     format.rb do
-      action = PluginsForDeputyAction.new(params, request)
-      render :text => action.perform
+      render :text => my_actions.list_plugins_for_deputy(request)
     end
+  end
+
+private
+
+  def my_actions
+    @my_actions||= PluginActions.new(params)
   end
 
   def collection

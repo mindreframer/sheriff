@@ -1,29 +1,30 @@
 class ReportsController < RestController
   def create
-    action = ReportActions.new(params)
-    action.create_report(request)
+    my_actions.create_report(request)
     render :text => 'OK'
   end
 
   def batch_validate
-    action = ReportActions.new(params)
-    action.validate_reports
+    my_actions.validate_reports
     redirect_back_or_default '/reports'
   end
 
   def update
-    action = ReportActions.new(params)
-    action.update_report
+    my_actions.update_report
     super
   end
 
   def clear_alerts
-    action = ReportActions.new(params)
-    action.clear_alerts
+    my_actions.clear_alerts
     redirect_back_or_default '/reports'
   end
 
-  private
+private
+
+  def my_actions
+    @my_action ||= ReportActions.new(params)
+  end
+
   def collection
     params[:order] ||= 'id desc'
     @collection ||= Report.page(params[:page]).per(50).order(params[:order]).includes([{:group => :group}, :deputy, :validations])

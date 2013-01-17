@@ -21,6 +21,7 @@ class ReportActions < BaseAction
     Report.delayed_report(value, params[:group].to_s.split('.',2), {:name => name, :address => address})
   end
 
+  # this is just to clear the params.. delegates to super after it...
   def update_report
     prepare_params
   end
