@@ -9,7 +9,7 @@ describe DeputyActions do
 
   describe :create_plugins_for_deputies do
     it "adds plugins to all" do
-      plugin = Factory(:plugin)
+      plugin   = Factory(:plugin)
       deputies = [Factory(:deputy), Factory(:deputy)]
       params = {
         :ids => deputies.map(&:id),
