@@ -11,7 +11,7 @@ $LOAD_PATH << '.'
 
 require 'active_support'
 require 'active_support/dependencies'
-relative_load_paths = %w[app/models lib]
+relative_load_paths = %w[app/models app/actions lib]
 ActiveSupport::Dependencies.autoload_paths += relative_load_paths
 
 require 'factory_girl'
