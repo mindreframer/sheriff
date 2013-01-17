@@ -1,14 +1,3 @@
-=begin
-  Schema of settings:
-
-  > Settings.all #==>
-  {
-    "notifications"=>[
-      {"name"=>"Name", "mail"=>"me@example.com", "phone_number"=>"01234339922"}
-    ]
-  }
-=end
-
 class KeyValue < ActiveRecord::Base
   col :key
   col :value, :type => :text
