@@ -19,6 +19,7 @@ gem 'coffee-script', '2.2.0', :require => false
 gem 'ace-rails-ap'
 gem "twitter-bootstrap-rails", :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :ref => 'c248bbd4c19936a9624f19fa6fa91ca5c9617315'
 gem 'dynamic_form'
+gem 'resque-multi-job-forks'
 
 
 gem 'active_record_inline_schema'
