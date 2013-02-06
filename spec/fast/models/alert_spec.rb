@@ -12,7 +12,7 @@ describe Alert do
     @alerts = [Alert.new(:message => "alert")]
   end
   describe :generate_alert_report do
-    it "creates finds right alerts" do
+    it "calls alert.find" do
       Alert.should_receive(:find).and_return([])
       Alert.generate_alert_report()
     end
