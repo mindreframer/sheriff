@@ -31,5 +31,8 @@ class Alert < ActiveRecord::Base
     alerts = Alert.find(:all,
         :conditions => ["created_at >= ? AND error_level > 1", Time.now.utc - timeframe ])
     Reporter.multi_notification(alerts, timeframe)
+    if (sms_alerts = alerts.select{|x| x.error_level == 3}).size > 0
+      sms_alerts.map{ |sms_alert| Reporter.send_sms(sms_alert) }
+    end
   end
 end
