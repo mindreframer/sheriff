@@ -1,2 +1,10 @@
-#!/usr/bin/env bash
-rspec spec/fast
+#!/usr/bin/env ruby
+
+# so you can pass some filename to runner
+if ARGV[0]
+  files  = Dir["spec/fast/**/**_spec.rb"]
+  to_run = files.grep(%r[#{ARGV[0]}])
+  cmd    = "rspec #{to_run.join(' ')}"
+  exec(cmd)
+end
+exec("rspec spec/fast")
