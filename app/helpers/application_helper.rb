@@ -74,7 +74,8 @@ module ApplicationHelper
         "<span #{error_attribute @resource}>#{name_for_object @resource}</span> #{button_to_delete @resource, :text => 'x'}"
       end
     elsif @collection
-      "#{resource_class.to_s.pluralize} (#{resource_class.count})"
+      count = resource_class.respond_to?(:visible) ? resource_class.visible.count : resource_class.count
+      "#{resource_class.to_s.pluralize} (#{count})"
     end
     raw text
   end
