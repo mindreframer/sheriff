@@ -42,13 +42,14 @@ module TestHelper
     models.each { |e| require "app/models/#{e}" }
     require 'key_value'
 
-    (models = ::ObjectSpace.each_object(::Class).select do |c|
-      c.ancestors.include?(ActiveRecord::Base)
-    end - [ActiveRecord::Base])
+    ActiveRecord::Base.migrate_all
+    # (models = ::ObjectSpace.each_object(::Class).select do |c|
+    #   c.ancestors.include?(ActiveRecord::Base)
+    # end - [ActiveRecord::Base])
 
-    models.each do |m|
-      m.auto_upgrade!
-    end
+    # models.each do |m|
+    #   m.auto_upgrade!
+    # end
     @required = true
   end
 
