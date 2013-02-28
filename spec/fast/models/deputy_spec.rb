@@ -82,7 +82,7 @@ describe Deputy do
     it "sets deleted_at" do
       @deputy.deleted_at.should == nil
       @deputy.delete
-      @deputy.deleted_at.should_not == nil
+      @deputy.reload.deleted_at.should_not == nil
     end
 
     it "deletes deputy plugins" do

@@ -25,6 +25,10 @@ class Deputy < ActiveRecord::Base
   UNKNOWN_HOST = 'unknown_host'
   UNKNOWN_ADDRESS = 'unknown_address'
 
+  def self.visible
+    self.where(:deleted_at => nil)
+  end
+
   def full_name
     "#{human_name.presence || name}"
   end
@@ -87,7 +91,7 @@ class Deputy < ActiveRecord::Base
 
   def delete
     # set deleted_at for self
-    self.deleted_at = Time.now.utc
+    self.update_attributes(:deleted_at => Time.current)
     self.deputy_plugins.map(&:delete)
     self.reports.map(&:delete)
   end
