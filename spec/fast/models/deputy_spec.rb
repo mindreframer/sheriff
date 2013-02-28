@@ -74,13 +74,29 @@ describe Deputy do
 
   describe :delete do
     before do
-      @deputy = Factory(:deputy)
-
+      @deputy        = Factory(:deputy)
+      @deputy_plugin = Factory(:deputy_plugin, :deputy => @deputy)
+      @report        = Factory(:report, :deputy => @deputy)
+      @deputy.reload
     end
     it "sets deleted_at" do
       @deputy.deleted_at.should == nil
       @deputy.delete
       @deputy.deleted_at.should_not == nil
+    end
+
+    it "deletes deputy plugins" do
+      @deputy.deputy_plugins.should == [@deputy_plugin]
+      dp = @deputy.deputy_plugins.first
+      dp.should_receive(:delete)
+      @deputy.delete
+    end
+
+    it "deletes deputy reports" do
+      @deputy.reports.should == [@report]
+      report = @deputy.reports.first
+      report.should_receive(:delete)
+      @deputy.delete
     end
 
   end

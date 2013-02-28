@@ -86,8 +86,7 @@ class Deputy < ActiveRecord::Base
   def delete
     # set deleted_at for self
     self.deleted_at = Time.now.utc
-    # set deleted_at for deputy_plugins
-    # set deleted_at for deputy_reports
-
+    self.deputy_plugins.map(&:delete)
+    self.reports.map(&:delete)
   end
 end

@@ -1,9 +1,10 @@
 class DeputyPlugin < ActiveRecord::Base
   include IntervalAccessors
 
-  col :plugin_id, :type => :integer,  :null => false
-  col :deputy_id, :type => :integer,  :null => false
-  col :interval,  :type => :integer,  :null => false
+  col :plugin_id,  :type => :integer,  :null => false
+  col :deputy_id,  :type => :integer,  :null => false
+  col :interval,   :type => :integer,  :null => false
+  col :deleted_at, :type => :timestamp
   col_timestamps
 
   validates_numericality_of :interval, :greater_than => 0
@@ -18,6 +19,10 @@ class DeputyPlugin < ActiveRecord::Base
 
   def plugin_name=(x)
     self.plugin = Plugin.find_by_name(x)
+  end
+
+  def delete
+    self.update_attributes(:deleted_at => Time.current)
   end
 
   def code_for_deputy
