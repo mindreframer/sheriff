@@ -13,6 +13,10 @@ class DeputyPlugin < ActiveRecord::Base
   belongs_to :deputy
   belongs_to :plugin
 
+  def self.visible
+    self.where(:deleted_at => nil)
+  end
+
   def plugin_name
     plugin.try(:name)
   end
