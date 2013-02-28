@@ -11,6 +11,8 @@ class Deputy < ActiveRecord::Base
   col "deleted_at",          :type => :datetime
   col_timestamps
 
+  add_index [:address], :unique => true
+
 
   has_many :reports, :dependent => :destroy
   has_many :deputy_plugins, :dependent => :destroy

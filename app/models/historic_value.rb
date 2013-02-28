@@ -7,5 +7,7 @@ class HistoricValue < ActiveRecord::Base
   col :reported_at,         :type => :datetime, :null => false
   col :current_error_level, :type => :integer, :default => 0, :null => false
 
+  add_index [:report_id]
+
   belongs_to :report
 end

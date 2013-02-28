@@ -13,6 +13,9 @@ class Report < ActiveRecord::Base
   col :deleted_at,          :type => :datetime
   col_timestamps
 
+  add_index [:deputy_id]
+  add_index [:group_id, :deputy_id], :unique => true
+
 
   belongs_to :group
   belongs_to :deputy

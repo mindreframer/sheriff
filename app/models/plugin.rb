@@ -12,6 +12,9 @@ class Plugin < ActiveRecord::Base
   col :code,  :type => :text, :null => false
   col_timestamps
 
+  add_index [:name], :unique => true
+
+
 
   has_many :deputies, :class_name => 'DeputyPlugin'
   has_many :deputy_plugins, :dependent => :destroy

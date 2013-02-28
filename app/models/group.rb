@@ -9,6 +9,9 @@ class Group < ActiveRecord::Base
   col :description,  :type => :text
   col :current_error_level, :type => :integer, :default => 0, :null => false
 
+  add_index [:group_id, :name], :unique => true
+  add_index [:name, :group_id], :unique => true
+
   belongs_to :group
   has_many :children, :class_name => 'Group', :order => 'name asc', :dependent => :destroy
   has_many :reports, :dependent => :destroy
