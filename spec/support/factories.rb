@@ -57,3 +57,10 @@ Factory.define(:deputy_plugin) do |f|
   f.association :plugin
   f.association :deputy
 end
+
+Factory.define(:historic_value) do |f|
+  f.association :report
+  f.value rand(1111)
+  f.reported_at Time.current
+  f.current_error_level 1
+end

@@ -12,6 +12,7 @@ class Validation < ActiveRecord::Base
   col :only_run_once,       :type => :boolean, :default => false, :null => false
   col :ignore_start,        :type => :string
   col :ignore_end,          :type => :string
+  col :deleted_at,          :type => :timestamp
   col_timestamps
 
 
@@ -46,6 +47,10 @@ class Validation < ActiveRecord::Base
 
   def human_error_level
     ERROR_LEVELS[error_level]
+  end
+
+  def delete
+    update_attributes(:deleted_at => Time.now.utc)
   end
 
   protected

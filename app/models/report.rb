@@ -10,6 +10,7 @@ class Report < ActiveRecord::Base
   col :reported_at,         :type => :datetime,:null => false
   col :current_error_level, :type => :integer, :default => 0, :null => false
   col :description,         :type => :text
+  col :deleted_at,          :type => :datetime
   col_timestamps
 
 
@@ -35,6 +36,16 @@ class Report < ActiveRecord::Base
   # try to find the plugin that reported
   def deputy_plugin
     DeputyPlugin.first(:conditions => {:deputy_id => deputy_id, 'plugins.name' => group.try(:group).try(:name)}, :joins => :plugin)
+  end
+
+  def delete
+    # remove historic values
+    # remove alerts
+    # delete validatios
+    self.update_attributes({:deleted_at => Time.now.utc})
+    self.historic_values.map{|x| x.destroy}
+    self.alerts.map{|x| x.destroy}
+    self.validations.map{|x| x.delete}
   end
 
   def self.delayed_report(*args)

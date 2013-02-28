@@ -140,4 +140,39 @@ describe Report do
       historic.reported_at.to_s.should == report.reported_at.to_s
     end
   end
+
+  describe :delete do
+    before do
+      @report         = Factory(:report)
+      @alert          = Factory(:alert, :report => @report)
+      @validation     = Factory(:value_validation, :report => @report)
+      @historic_value = Factory(:historic_value, :report => @report)
+      @report.reload
+    end
+
+    it "sets deleted_at" do
+      @report.deleted_at.should == nil
+      @report.delete
+      @report.deleted_at.should_not == nil
+    end
+
+    it "removes alerts" do
+      @report.alerts.should == [@alert]
+      @report.delete
+      lambda{ @alert.reload}.should raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it "removes historic values" do
+      @report.historic_values.should == [@historic_value]
+      @report.delete
+      lambda{ @historic_value.reload}.should raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it "calls deleted for validations" do
+      @report.validations.should == [@validation]
+      validation = @report.validations.first
+      validation.should_receive(:delete)
+      @report.delete
+    end
+  end
 end
