@@ -28,6 +28,10 @@ class Report < ActiveRecord::Base
 
   validates_uniqueness_of :group_id, :scope => :deputy_id
 
+  def self.visible
+    where(:deleted_at => nil)
+  end
+
   def full_name
     "#{(group||Group.new).full_name} @ #{(deputy|| Deputy.new).full_name}"
   end

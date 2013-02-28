@@ -27,6 +27,7 @@ private
 
   def collection
     params[:order] ||= 'id desc'
-    @collection ||= Report.page(params[:page]).per(50).order(params[:order]).includes([{:group => :group}, :deputy, :validations])
+    scope = resource_class.visible
+    @collection ||= scope.page(params[:page]).per(50).order(params[:order]).includes([{:group => :group}, :deputy, :validations])
   end
 end
