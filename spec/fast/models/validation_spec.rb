@@ -117,5 +117,14 @@ describe Validation do
         end
       end
     end
+
+    describe :delete do
+      it "sets the timestamp" do
+        validation = Factory(:value_validation)
+        validation.deleted_at.should == nil
+        validation.delete
+        validation.deleted_at.should_not == nil
+      end
+    end
   end
 end
