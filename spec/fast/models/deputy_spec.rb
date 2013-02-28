@@ -71,4 +71,17 @@ describe Deputy do
       end
     end
   end
+
+  describe :delete do
+    before do
+      @deputy = Factory(:deputy)
+
+    end
+    it "sets deleted_at" do
+      @deputy.deleted_at.should == nil
+      @deputy.delete
+      @deputy.deleted_at.should_not == nil
+    end
+
+  end
 end

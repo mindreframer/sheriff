@@ -8,6 +8,7 @@ class Deputy < ActiveRecord::Base
   col "current_error_level", :type => :integer, :default => 0, :null => false
   col "human_name"
   col "disabled_until",      :type => :datetime
+  col "deleted_at",          :type => :datetime
   col_timestamps
 
 
@@ -80,5 +81,13 @@ class Deputy < ActiveRecord::Base
     ### plugins
     plugins = old_deputy.deputy_plugins
     plugins.map{|r| r.update_attributes(:deputy_id => new_deputy.id)}
+  end
+
+  def delete
+    # set deleted_at for self
+    self.deleted_at = Time.now.utc
+    # set deleted_at for deputy_plugins
+    # set deleted_at for deputy_reports
+
   end
 end
