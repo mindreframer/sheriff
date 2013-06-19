@@ -1,9 +1,9 @@
 Factory.define(:group) do |f|
-  f.name{rand(1000000)}
+  f.sequence(:name){|n| "group-#{n}"}
 end
 
 Factory.define(:group_l2, :class => 'Group') do |f|
-  f.name{rand(1000000)}
+  f.sequence(:name){|n| "group2-#{n}"}
   f.association :group
 end
 
@@ -14,9 +14,10 @@ Factory.define(:report) do |f|
   f.value '123'
 end
 
+
 Factory.define(:deputy) do |f|
-  f.name{"c#{rand(1111111)}.dawanda.com"}
-  f.address{"192.#{rand(255)}.#{rand(255)}.#{rand(255)}"}
+  f.sequence(:name) {|n| "host#{n}.dawanda.com" }
+  f.sequence(:address) {|n| "192.#{n}.#{rand(255)}.#{rand(255)}"}
 end
 
 Factory.define(:value_validation) do |f|
@@ -49,7 +50,7 @@ end
 
 Factory.define(:plugin) do |f|
   f.code "class Bla < Scout::Plugin;def build_report;puts 'fooo';end;end"
-  f.name{ "useless plugin #{rand(111111111)}" }
+  f.sequence(:name){|n| "useless plugin #{n}#{rand(111111)}"}
 end
 
 Factory.define(:deputy_plugin) do |f|
