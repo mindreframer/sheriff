@@ -1,4 +1,4 @@
-require 'spec/spec_helper_fast'
+require './spec/spec_helper_fast'
 
 describe SerializedValue do
   describe 'convert_value_from_params' do

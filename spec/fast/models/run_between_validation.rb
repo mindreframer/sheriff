@@ -1,4 +1,4 @@
-require 'spec/spec_helper_fast'
+require './spec/spec_helper_fast'
 
 describe RunBetweenValidation do
   describe :check! do

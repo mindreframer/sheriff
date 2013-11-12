@@ -1,4 +1,4 @@
-require 'spec/spec_helper_fast'
+require './spec/spec_helper_fast'
 
 describe ValueValidation do
   describe :check! do
